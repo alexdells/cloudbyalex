@@ -99,6 +99,132 @@
     main.hero,
     .about,
 
+
+    .tools-section{
+      padding:24px 0 72px;
+      position:relative;
+      z-index:2;
+    }
+    .tools-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:24px;
+      margin-bottom:22px;
+    }
+    .tools-kicker{
+      display:block;
+      color:var(--cyan);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .tools-title{
+      margin:0;
+      font-size:clamp(30px,4vw,48px);
+      letter-spacing:-.045em;
+      line-height:1;
+    }
+    .tools-copy{
+      max-width:560px;
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+    }
+    .tool-card{
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:center;
+      gap:30px;
+      padding:30px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(circle at 8% 25%,rgba(101,223,255,.10),transparent 30%),
+        radial-gradient(circle at 92% 0%,rgba(195,108,255,.10),transparent 28%),
+        linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+      box-shadow:0 28px 70px rgba(0,0,0,.20);
+      backdrop-filter:blur(16px);
+    }
+    .tool-card::after{
+      content:"";
+      position:absolute;
+      width:300px;height:300px;border-radius:50%;
+      right:-170px;bottom:-200px;
+      border:1px solid rgba(101,223,255,.12);
+      box-shadow:0 0 0 46px rgba(195,108,255,.025),0 0 0 92px rgba(101,223,255,.018);
+      pointer-events:none;
+    }
+    .tool-card-main{
+      display:flex;
+      align-items:flex-start;
+      gap:18px;
+      min-width:0;
+    }
+    .tool-icon{
+      width:58px;height:58px;flex:0 0 auto;
+      border-radius:18px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,rgba(101,223,255,.15),rgba(195,108,255,.14));
+      border:1px solid rgba(255,255,255,.11);
+    }
+    .tool-icon svg{width:29px;height:29px;stroke:#eafcff}
+    .tool-name{
+      margin:0 0 7px;
+      font-size:22px;
+      letter-spacing:-.025em;
+    }
+    .tool-description{
+      margin:0;
+      color:var(--muted);
+      max-width:680px;
+      line-height:1.65;
+      font-size:14px;
+    }
+    .tool-badges{
+      display:flex;flex-wrap:wrap;gap:8px;
+      margin-top:16px;
+    }
+    .tool-badge{
+      padding:7px 10px;
+      border-radius:999px;
+      color:#bec8de;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.08);
+      font-size:11px;
+      font-weight:750;
+    }
+    .launch-tool{
+      position:relative;
+      z-index:1;
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:14px 18px;
+      border-radius:15px;
+      background:linear-gradient(135deg,#c8f9ff,#bec5ff 56%,#e3b8ff);
+      color:#07101a;
+      font-size:13px;
+      font-weight:900;
+      box-shadow:0 18px 40px rgba(101,223,255,.10);
+      transition:transform .2s ease,box-shadow .2s ease;
+    }
+    .launch-tool:hover{transform:translateY(-2px);box-shadow:0 22px 44px rgba(101,223,255,.15)}
+    .launch-tool svg{width:16px;height:16px;stroke:currentColor}
+    @media(max-width:760px){
+      .tools-section{padding:8px 0 56px}
+      .tool-card{grid-template-columns:1fr;padding:23px}
+      .tool-card-main{align-items:flex-start}
+      .launch-tool{width:100%;justify-content:center}
+      .tools-head{align-items:flex-start;flex-direction:column}
+    }
+
     .support-section{
       padding:18px 0 72px;
       position:relative;
@@ -601,6 +727,7 @@ reliability    infrastructure</div>
 
       <div class="nav-links">
         <a href="#about">About</a>
+        <a href="#tools">Tools</a>
         <a href="https://github.com/alexdells" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/alexander-chertov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <span class="pill">Cloud • DevOps</span>
@@ -618,14 +745,7 @@ reliability    infrastructure</div>
       </p>
 
       <div class="cta-row">
-        <a
-  class="btn primary"
-  href="https://mail.google.com/mail/?view=cm&fs=1&to=alexdellsone%40gmail.com&su=CloudByAlex%20Contact"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  Let's Connect
-</a>
+        <a class="btn primary" href="https://mail.google.com/mail/?view=cm&fs=1&to=alexdellsone%40gmail.com&su=CloudByAlex%20Contact" target="_blank" rel="noopener noreferrer">Let's Connect</a>
         <a class="btn secondary" href="#">Download Resume</a>
       </div>
 
@@ -694,6 +814,45 @@ reliability    infrastructure</div>
     </div>
   </section>
 
+
+
+  <section id="tools" class="tools-section wrap">
+    <div class="tools-head">
+      <div>
+        <span class="tools-kicker">CloudByAlex Labs</span>
+        <h2 class="tools-title">DevOps tools, built to be useful.</h2>
+        <p class="tools-copy">Small, privacy-first utilities for cloud engineers. The first tool scans GitHub Actions workflows for common CI/CD security risks directly in your browser.</p>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-card-main">
+        <div class="tool-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 5 6v5c0 4.6 2.8 8.2 7 10 4.2-1.8 7-5.4 7-10V6l-7-3Z"/>
+            <path d="m9.5 12 1.6 1.6 3.7-4"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="tool-name">DevOps Doctor</h3>
+          <p class="tool-description">Scan a GitHub Actions workflow for broad permissions, unpinned actions, risky shell patterns, secret exposure and other CI/CD security issues.</p>
+          <div class="tool-badges">
+            <span class="tool-badge">100% client-side</span>
+            <span class="tool-badge">No uploads</span>
+            <span class="tool-badge">GitHub Actions</span>
+            <span class="tool-badge">Free & open-source ready</span>
+          </div>
+        </div>
+      </div>
+
+      <a class="launch-tool" href="tools/devops-doctor/">
+        Launch Tool
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+  </section>
 
   <section class="support-section wrap" aria-label="Support Cloud by Alex">
     <div class="support-card">

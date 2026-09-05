@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DevOps Doctor — CloudByAlex</title>
+  <meta name="description" content="Free browser-based GitHub Actions security scanner by CloudByAlex. Your workflow never leaves your device.">
+  <style>
+    :root{
+      --bg:#070812;--bg2:#0c1020;--text:#f4f7ff;--muted:#9da8c3;
+      --cyan:#65dfff;--violet:#c36cff;--green:#69edb5;--yellow:#ffd36b;
+      --red:#ff7088;--line:rgba(255,255,255,.09);--glass:rgba(255,255,255,.05);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;min-height:100vh;color:var(--text);
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%,rgba(101,223,255,.11),transparent 24%),
+        radial-gradient(circle at 88% 5%,rgba(195,108,255,.12),transparent 22%),
+        linear-gradient(180deg,#06070f,#090b16 45%,#070812);
+    }
+    body::before{
+      content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+      background-size:52px 52px;
+      mask-image:linear-gradient(to bottom,#000,transparent 94%);
+    }
+    a{color:inherit;text-decoration:none}
+    button,input,textarea{font:inherit}
+    .wrap{width:min(1240px,calc(100% - 34px));margin:auto}
+    nav{
+      position:sticky;top:0;z-index:20;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      background:rgba(7,8,18,.75);backdrop-filter:blur(18px);
+    }
+    .nav-inner{height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:-.02em}
+    .brand-icon{
+      width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+      background:linear-gradient(135deg,rgba(101,223,255,.16),rgba(195,108,255,.14));
+      border:1px solid var(--line);
+    }
+    .brand-icon svg{width:20px;height:20px;stroke:var(--cyan)}
+    .back{
+      display:inline-flex;align-items:center;gap:8px;
+      color:#bac4d9;font-size:13px;font-weight:750;
+      padding:9px 12px;border:1px solid var(--line);border-radius:12px;
+      background:rgba(255,255,255,.035);
+    }
+    .hero{padding:64px 0 32px;text-align:center}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 11px;border-radius:999px;border:1px solid rgba(101,223,255,.17);
+      background:rgba(101,223,255,.055);color:#bfefff;
+      font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;
+    }
+    .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 16px var(--green)}
+    h1{
+      margin:20px auto 14px;max-width:900px;
+      font-size:clamp(42px,7vw,78px);line-height:.98;letter-spacing:-.055em;
+    }
+    .grad{
+      background:linear-gradient(90deg,var(--cyan),#aab8ff 52%,#e0a5ff);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .lead{max-width:760px;margin:0 auto;color:var(--muted);line-height:1.7;font-size:15px}
+    .privacy{
+      margin:20px auto 0;display:inline-flex;align-items:center;gap:8px;
+      color:#b9c4d8;font-size:12px;padding:9px 12px;border-radius:999px;
+      background:rgba(255,255,255,.035);border:1px solid var(--line);
+    }
+    .privacy svg{width:15px;height:15px;stroke:var(--green)}
+    .workspace{
+      display:grid;grid-template-columns:minmax(0,1.08fr) minmax(380px,.92fr);
+      gap:18px;padding:28px 0 70px;align-items:start;
+    }
+    .panel{
+      border:1px solid var(--line);border-radius:24px;
+      background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.025));
+      box-shadow:0 28px 70px rgba(0,0,0,.20);overflow:hidden;
+    }
+    .panel-head{
+      padding:17px 18px;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+    }
+    .panel-title{font-weight:850;font-size:14px}
+    .panel-sub{color:var(--muted);font-size:11px;margin-top:4px}
+    .editor-actions,.result-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .mini-btn,.file-btn{
+      border:1px solid var(--line);background:rgba(255,255,255,.04);color:#cad3e5;
+      border-radius:10px;padding:8px 10px;font-size:11px;font-weight:780;cursor:pointer;
+      transition:.18s ease;
+    }
+    .mini-btn:hover,.file-btn:hover{background:rgba(255,255,255,.075);transform:translateY(-1px)}
+    #fileInput{display:none}
+    .editor-shell{padding:0}
+    textarea{
+      display:block;width:100%;height:540px;resize:vertical;border:0;outline:0;
+      padding:20px;background:#080b14;color:#d9e7ff;
+      font:12.5px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      tab-size:2;
+    }
+    .editor-footer{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      padding:13px 16px;border-top:1px solid var(--line);background:rgba(255,255,255,.018);
+    }
+    .hint{font-size:11px;color:#7f8ca7}
+    .scan-btn{
+      border:0;cursor:pointer;color:#061019;font-weight:900;font-size:13px;
+      padding:12px 17px;border-radius:12px;
+      background:linear-gradient(135deg,#c9faff,#bdc5ff 56%,#e6b8ff);
+      box-shadow:0 15px 34px rgba(101,223,255,.10);
+      transition:.2s ease;
+    }
+    .scan-btn:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(101,223,255,.16)}
+    .score-wrap{
+      padding:22px 20px 18px;display:grid;grid-template-columns:116px 1fr;gap:18px;align-items:center;
+      border-bottom:1px solid var(--line);
+    }
+    .score-ring{
+      --score:0;
+      width:108px;height:108px;border-radius:50%;display:grid;place-items:center;
+      background:conic-gradient(var(--cyan) calc(var(--score)*1%),rgba(255,255,255,.07) 0);
+      position:relative;
+    }
+    .score-ring::after{
+      content:"";position:absolute;inset:9px;border-radius:50%;
+      background:#0b0d17;border:1px solid rgba(255,255,255,.055);
+    }
+    .score-number{position:relative;z-index:1;text-align:center}
+    .score-number strong{display:block;font-size:31px;line-height:1;letter-spacing:-.04em}
+    .score-number span{display:block;color:#8190aa;font-size:10px;margin-top:4px}
+    .score-meta h2{margin:0;font-size:21px;letter-spacing:-.03em}
+    .score-meta p{margin:7px 0 0;color:var(--muted);font-size:12px;line-height:1.55}
+    .counts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px}
+    .count{padding:9px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.025)}
+    .count strong{display:block;font-size:16px}
+    .count span{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#8996af}
+    .findings{padding:14px;max-height:570px;overflow:auto}
+    .empty{
+      text-align:center;padding:64px 24px;color:#8290aa;font-size:13px;line-height:1.65;
+    }
+    .empty svg{width:38px;height:38px;stroke:#65718b;margin-bottom:12px}
+    .finding{
+      padding:14px 14px 13px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(255,255,255,.025);margin-bottom:9px;
+    }
+    .finding-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .finding-title{font-weight:820;font-size:13px;line-height:1.4}
+    .sev{
+      flex:0 0 auto;border-radius:999px;padding:5px 7px;font-size:8px;font-weight:950;
+      letter-spacing:.09em;text-transform:uppercase;border:1px solid currentColor;
+    }
+    .sev.critical{color:var(--red);background:rgba(255,112,136,.06)}
+    .sev.warning{color:var(--yellow);background:rgba(255,211,107,.055)}
+    .sev.passed{color:var(--green);background:rgba(105,237,181,.05)}
+    .finding p{margin:8px 0 0;color:#99a6be;font-size:11.5px;line-height:1.6}
+    .recommend{
+      margin-top:9px;padding:9px 10px;border-radius:10px;
+      background:rgba(101,223,255,.045);color:#b7c8de;font-size:10.5px;line-height:1.55;
+      border:1px solid rgba(101,223,255,.09);
+    }
+    .line{color:#71809a;font-size:9px;font-weight:800;margin-left:7px}
+    .footer-note{
+      width:min(900px,calc(100% - 34px));margin:0 auto 50px;text-align:center;
+      color:#71809b;font-size:11px;line-height:1.7;
+    }
+    .footer-note strong{color:#a8b6ce}
+    @media(max-width:940px){
+      .workspace{grid-template-columns:1fr}
+      textarea{height:470px}
+      .findings{max-height:none}
+    }
+    @media(max-width:560px){
+      .wrap{width:min(100% - 22px,1240px)}
+      .hero{padding:44px 0 20px}
+      h1{font-size:44px}
+      .panel-head{align-items:flex-start;flex-direction:column}
+      .score-wrap{grid-template-columns:92px 1fr}
+      .score-ring{width:88px;height:88px}
+      .score-ring::after{inset:8px}
+      .score-number strong{font-size:25px}
+      .counts{gap:5px}
+      textarea{height:430px;padding:15px;font-size:11.5px}
+      .editor-footer{align-items:flex-start;flex-direction:column}
+      .scan-btn{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../">
+        <span class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17h10a4 4 0 0 0 .5-8A6 6 0 0 0 6.2 10 3.5 3.5 0 0 0 7 17Z"/>
+          </svg>
+        </span>
+        <span>cloudbyalex</span>
+      </a>
+      <a class="back" href="../../">← Back to portfolio</a>
+    </div>
+  </nav>
+
+  <header class="hero wrap">
+    <div class="eyebrow"><span class="pulse"></span> CloudByAlex Labs · v1</div>
+    <h1><span class="grad">DevOps Doctor</span><br>GitHub Actions Scanner</h1>
+    <p class="lead">Paste a workflow and get an instant security review for common CI/CD risks: excessive permissions, unpinned actions, risky shell commands, secret exposure and more.</p>
+    <div class="privacy">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      Runs locally in your browser · Your workflow is never uploaded
+    </div>
+  </header>
+
+  <main class="wrap workspace">
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Workflow YAML</div>
+          <div class="panel-sub">Paste .github/workflows/*.yml or open a local file</div>
+        </div>
+        <div class="editor-actions">
+          <label class="file-btn" for="fileInput">Open YAML</label>
+          <input id="fileInput" type="file" accept=".yml,.yaml,text/yaml,text/plain">
+          <button class="mini-btn" id="sampleBtn" type="button">Load risky sample</button>
+          <button class="mini-btn" id="secureBtn" type="button">Secure sample</button>
+          <button class="mini-btn" id="clearBtn" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div class="editor-shell">
+        <textarea id="yamlInput" spellcheck="false" aria-label="GitHub Actions workflow YAML" placeholder="name: CI&#10;&#10;on: [push]&#10;&#10;jobs:&#10;  build:&#10;    runs-on: ubuntu-latest&#10;    steps:&#10;      - uses: actions/checkout@v4"></textarea>
+      </div>
+
+      <div class="editor-footer">
+        <div class="hint"><span id="lineCount">0 lines</span> · Static heuristic scan — no code is executed.</div>
+        <button class="scan-btn" id="scanBtn" type="button">Scan Workflow →</button>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Security Review</div>
+          <div class="panel-sub">Prioritized findings and practical remediation</div>
+        </div>
+        <div class="result-actions">
+          <button class="mini-btn" id="copyBtn" type="button">Copy report</button>
+          <button class="mini-btn" id="downloadBtn" type="button">Download</button>
+        </div>
+      </div>
+
+      <div class="score-wrap">
+        <div class="score-ring" id="scoreRing">
+          <div class="score-number"><strong id="score">—</strong><span>SECURITY</span></div>
+        </div>
+        <div class="score-meta">
+          <h2 id="scoreLabel">Ready to scan</h2>
+          <p id="scoreText">Paste a GitHub Actions workflow and run the scanner.</p>
+          <div class="counts">
+            <div class="count"><strong id="criticalCount">0</strong><span>Critical</span></div>
+            <div class="count"><strong id="warningCount">0</strong><span>Warnings</span></div>
+            <div class="count"><strong id="passedCount">0</strong><span>Passed</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="findings" id="findings">
+        <div class="empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.6 2.8 8.2 7 10 4.2-1.8 7-5.4 7-10V6l-7-3Z"/><path d="M9 12h6"/></svg>
+          No workflow scanned yet.<br>Try the risky sample to see DevOps Doctor in action.
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <div class="footer-note">
+    <strong>DevOps Doctor v1</strong> uses static heuristic checks and is not a replacement for GitHub Advanced Security, CodeQL, StepSecurity, actionlint or a full security review.
+  </div>
+
+<script>
+(() => {
+  const input = document.getElementById('yamlInput');
+  const findingsEl = document.getElementById('findings');
+  const scoreEl = document.getElementById('score');
+  const scoreRing = document.getElementById('scoreRing');
+  const scoreLabel = document.getElementById('scoreLabel');
+  const scoreText = document.getElementById('scoreText');
+  const criticalCount = document.getElementById('criticalCount');
+  const warningCount = document.getElementById('warningCount');
+  const passedCount = document.getElementById('passedCount');
+  const lineCount = document.getElementById('lineCount');
+  let lastReport = null;
+
+  const riskySample = `name: Deploy
+
+on:
+  pull_request_target:
+  workflow_dispatch:
+
+permissions: write-all
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build from PR input
+        run: echo "\${{ github.event.pull_request.title }}"
+      - name: Print secret
+        run: echo "\${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+      - name: Install helper
+        run: curl -s https://example.com/install.sh | bash
+      - uses: some-org/some-action@main
+      - name: Continue anyway
+        continue-on-error: true
+        run: ./deploy.sh
+    secrets: inherit
+`;
+
+  const secureSample = `name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-\${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      # Pin third-party actions to a reviewed full commit SHA in production.
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Test
+        run: |
+          npm ci
+          npm test
+`;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function lineNumber(lines, regex) {
+    const i = lines.findIndex(l => regex.test(l));
+    return i >= 0 ? i + 1 : null;
+  }
+
+  function finding(severity, title, description, recommendation, line, deduction=0) {
+    return { severity, title, description, recommendation, line, deduction };
+  }
+
+  function scan(text) {
+    const lines = text.split(/\r?\n/);
+    const results = [];
+    let score = 100;
+
+    if (!text.trim()) return {score:0, results:[finding('warning','No workflow provided','Paste a GitHub Actions YAML workflow before scanning.','Open a .yml/.yaml file or use one of the sample buttons.',null,0)]};
+
+    const hasJobs = /^\s*jobs\s*:/m.test(text);
+    const hasOn = /^\s*on\s*:/m.test(text) || /^\s*on\s*:\s*\[/m.test(text);
+    if (!hasJobs || !hasOn) {
+      results.push(finding('warning','Workflow structure looks incomplete','DevOps Doctor could not find both `on:` and `jobs:` keys.','Make sure you pasted the complete GitHub Actions workflow.',null,7));
+      score -= 7;
+    } else {
+      results.push(finding('passed','Workflow structure detected','Found the main GitHub Actions workflow sections.','No action needed.',null,0));
+    }
+
+    // Broad permissions
+    if (/^\s*permissions\s*:\s*write-all\s*$/mi.test(text)) {
+      const ln = lineNumber(lines,/^\s*permissions\s*:\s*write-all\s*$/i);
+      results.push(finding('critical','Broad `write-all` permissions','The workflow grants write access to every available GitHub token scope.','Replace `write-all` with explicit least-privilege permissions, often starting with `contents: read`.',ln,25));
+      score -= 25;
+    } else if (!/^\s*permissions\s*:/mi.test(text)) {
+      results.push(finding('warning','No explicit token permissions','The workflow relies on repository or organization defaults for `GITHUB_TOKEN`.','Add an explicit top-level `permissions:` block and grant only what each workflow needs.',null,8));
+      score -= 8;
+    } else if (/^\s*permissions\s*:\s*read-all\s*$/mi.test(text) || /permissions\s*:\s*\n(?:\s{2,}.*\n)*?\s{2,}contents\s*:\s*read/mi.test(text)) {
+      results.push(finding('passed','Explicit token permissions','The workflow declares restricted GitHub token permissions.','Keep permissions minimal and move write scopes to individual jobs when possible.',lineNumber(lines,/^\s*permissions\s*:/i),0));
+    } else {
+      results.push(finding('passed','Permissions block present','The workflow explicitly declares token permissions.','Review each write permission and keep only required scopes.',lineNumber(lines,/^\s*permissions\s*:/i),0));
+    }
+
+    // pull_request_target
+    if (/^\s*pull_request_target\s*:/mi.test(text)) {
+      const ln = lineNumber(lines,/^\s*pull_request_target\s*:/i);
+      const checkout = /actions\/checkout@/i.test(text);
+      results.push(finding(checkout ? 'critical' : 'warning',
+        '`pull_request_target` requires extra care',
+        checkout ? 'The workflow uses `pull_request_target` and checks out code. This can expose privileged tokens or secrets to untrusted pull-request content.' : '`pull_request_target` runs in the base repository context and can have elevated access.',
+        'Avoid checking out or executing untrusted PR code in privileged `pull_request_target` workflows. Prefer `pull_request` where possible.',
+        ln, checkout ? 18 : 10));
+      score -= checkout ? 18 : 10;
+    }
+
+    // Unpinned actions
+    const uses = [];
+    lines.forEach((line, idx) => {
+      const m = line.match(/^\s*-\s*uses\s*:\s*([^\s#]+)\s*/i);
+      if (!m) return;
+      const ref = m[1];
+      if (ref.startsWith('./') || ref.startsWith('docker://')) return;
+      const at = ref.lastIndexOf('@');
+      const version = at >= 0 ? ref.slice(at + 1) : '';
+      const pinned = /^[0-9a-f]{40}$/i.test(version);
+      uses.push({ref,line:idx+1,pinned});
+    });
+    const unpinned = uses.filter(x => !x.pinned);
+    if (unpinned.length) {
+      const unique = [...new Map(unpinned.map(x => [x.ref,x])).values()];
+      const deduction = Math.min(16, unique.length * 4);
+      results.push(finding('warning',
+        `${unique.length} action${unique.length === 1 ? '' : 's'} not pinned to a commit SHA`,
+        unique.slice(0,4).map(x => x.ref).join(', ') + (unique.length > 4 ? '…' : ''),
+        'For stronger supply-chain protection, pin third-party actions to reviewed 40-character commit SHAs. Dependabot can help keep pins updated.',
+        unique[0].line,deduction));
+      score -= deduction;
+    } else if (uses.length) {
+      results.push(finding('passed','Actions are pinned','All external actions found by the scanner use full commit SHAs.','Keep automated dependency updates enabled for pinned actions.',null,0));
+    }
+
+    // Checkout credentials
+    const checkoutIndexes = [];
+    lines.forEach((line,idx) => { if (/uses\s*:\s*actions\/checkout@/i.test(line)) checkoutIndexes.push(idx); });
+    if (checkoutIndexes.length) {
+      let safeCheckout = true;
+      checkoutIndexes.forEach(idx => {
+        const block = lines.slice(idx, Math.min(lines.length, idx+8)).join('\n');
+        if (!/persist-credentials\s*:\s*false/i.test(block)) safeCheckout = false;
+      });
+      if (!safeCheckout) {
+        results.push(finding('warning','Checkout may persist Git credentials','`actions/checkout` stores the auth token in the local git config by default.','If later steps do not need authenticated git operations, set `persist-credentials: false`.',checkoutIndexes[0]+1,5));
+        score -= 5;
+      } else {
+        results.push(finding('passed','Checkout credentials hardened','Checkout is configured not to persist GitHub credentials.','No action needed.',checkoutIndexes[0]+1,0));
+      }
+    }
+
+    // self-hosted
+    if (/runs-on\s*:\s*(?:\[[^\]]*self-hosted[^\]]*\]|self-hosted)/i.test(text)) {
+      const ln = lineNumber(lines,/runs-on\s*:\s*(?:\[[^\]]*self-hosted[^\]]*\]|self-hosted)/i);
+      results.push(finding('warning','Self-hosted runner detected','Self-hosted runners can retain state and may be exposed to untrusted workflow code.','Use ephemeral/isolated runners and avoid untrusted pull-request workloads on persistent self-hosted runners.',ln,7));
+      score -= 7;
+    }
+
+    // Secret exposure in risky commands
+    const secretRisk = [];
+    lines.forEach((line,idx) => {
+      if (/\b(echo|printf|cat|set\s+-x)\b.*\$\{\{\s*secrets\./i.test(line)) secretRisk.push(idx+1);
+    });
+    if (secretRisk.length) {
+      results.push(finding('critical','Possible secret exposure in logs','A secret expression appears in a command that may print data to workflow logs.','Never echo secrets. Pass them through scoped environment variables only to the command that needs them.',secretRisk[0],20));
+      score -= 20;
+    }
+
+    // Expression injection inside run
+    const injectionLines = [];
+    lines.forEach((line,idx) => {
+      if (/\brun\s*:.*\$\{\{\s*github\.event\./i.test(line) ||
+          (/^\s+.*\$\{\{\s*github\.event\./i.test(line) && lines.slice(Math.max(0,idx-3),idx).some(l => /\brun\s*:\s*\|?\s*$/i.test(l)))) {
+        injectionLines.push(idx+1);
+      }
+    });
+    if (injectionLines.length) {
+      results.push(finding('critical','Potential script injection','Untrusted event data is interpolated directly into a shell command.','Assign event values to an environment variable first, then reference the shell variable with proper quoting.',injectionLines[0],15));
+      score -= 15;
+    }
+
+    // Pipe to shell
+    const pipeLines = [];
+    lines.forEach((line,idx) => {
+      if (/(curl|wget).*(\|\s*(bash|sh)\b)/i.test(line)) pipeLines.push(idx+1);
+    });
+    if (pipeLines.length) {
+      results.push(finding('critical','Remote script piped directly to shell','Downloading a script and immediately executing it trusts remote content at runtime.','Download a version-pinned artifact, verify its checksum/signature, then execute it separately.',pipeLines[0],18));
+      score -= 18;
+    }
+
+    // secrets inherit
+    if (/^\s*secrets\s*:\s*inherit\s*$/mi.test(text)) {
+      const ln = lineNumber(lines,/^\s*secrets\s*:\s*inherit\s*$/i);
+      results.push(finding('warning','Reusable workflow inherits all caller secrets','`secrets: inherit` can expose more credentials than the called workflow actually needs.','Pass individual named secrets explicitly wherever practical.',ln,8));
+      score -= 8;
+    }
+
+    // continue-on-error
+    if (/continue-on-error\s*:\s*true/i.test(text)) {
+      const ln = lineNumber(lines,/continue-on-error\s*:\s*true/i);
+      results.push(finding('warning','Failure is explicitly ignored','`continue-on-error: true` can hide a failed validation or deployment step.','Use it only for truly optional steps and surface the failure in a later check.',ln,4));
+      score -= 4;
+    }
+
+    // Timeout
+    if (!/timeout-minutes\s*:/i.test(text)) {
+      results.push(finding('warning','No job timeout detected','A stuck command can consume runner time until GitHub applies its platform limit.','Set `timeout-minutes` on jobs based on expected runtime.',null,3));
+      score -= 3;
+    } else {
+      results.push(finding('passed','Job timeout configured','At least one explicit `timeout-minutes` setting was detected.','Keep limits realistic for each job.',lineNumber(lines,/timeout-minutes\s*:/i),0));
+    }
+
+    // Concurrency
+    if (/^\s*concurrency\s*:/mi.test(text)) {
+      results.push(finding('passed','Concurrency control detected','The workflow defines a concurrency policy that can reduce overlapping runs.','For deployment workflows, consider `cancel-in-progress` behavior carefully.',lineNumber(lines,/^\s*concurrency\s*:/i),0));
+    }
+
+    // Deduplicate
+    const deduped = [...new Map(results.map(r => [r.severity + '|' + r.title, r])).values()];
+    return { score: Math.max(0, Math.min(100, score)), results: deduped };
+  }
+
+  function render(report) {
+    lastReport = report;
+    const results = report.results;
+    const crit = results.filter(r => r.severity === 'critical').length;
+    const warn = results.filter(r => r.severity === 'warning').length;
+    const pass = results.filter(r => r.severity === 'passed').length;
+
+    scoreEl.textContent = report.score;
+    scoreRing.style.setProperty('--score', report.score);
+    criticalCount.textContent = crit;
+    warningCount.textContent = warn;
+    passedCount.textContent = pass;
+
+    let label = 'Needs attention', text = 'Review the highest-severity findings first.';
+    if (report.score >= 90) { label = 'Strong workflow'; text = 'Good baseline. Review remaining warnings before production use.'; }
+    else if (report.score >= 75) { label = 'Good baseline'; text = 'A few improvements can make this workflow substantially safer.'; }
+    else if (report.score >= 50) { label = 'Security gaps found'; text = 'Several CI/CD security controls should be tightened.'; }
+    else { label = 'High-risk workflow'; text = 'Critical patterns were detected. Address them before using this workflow with sensitive permissions or secrets.'; }
+    scoreLabel.textContent = label;
+    scoreText.textContent = text;
+
+    const order = {critical:0, warning:1, passed:2};
+    results.sort((a,b) => order[a.severity] - order[b.severity]);
+
+    findingsEl.innerHTML = results.map(r => `
+      <article class="finding">
+        <div class="finding-top">
+          <div class="finding-title">${esc(r.title)}${r.line ? `<span class="line">LINE ${r.line}</span>` : ''}</div>
+          <span class="sev ${r.severity}">${r.severity}</span>
+        </div>
+        <p>${esc(r.description)}</p>
+        <div class="recommend"><strong>Recommendation:</strong> ${esc(r.recommendation)}</div>
+      </article>
+    `).join('');
+  }
+
+  function reportText() {
+    if (!lastReport) return 'CloudByAlex DevOps Doctor — no scan has been run.';
+    const lines = [
+      'CloudByAlex DevOps Doctor — GitHub Actions Security Report',
+      `Score: ${lastReport.score}/100`,
+      ''
+    ];
+    lastReport.results.forEach(r => {
+      lines.push(`[${r.severity.toUpperCase()}] ${r.title}${r.line ? ` (line ${r.line})` : ''}`);
+      lines.push(r.description);
+      lines.push(`Recommendation: ${r.recommendation}`);
+      lines.push('');
+    });
+    lines.push('Generated locally in the browser. Static heuristic scan; manual review is still recommended.');
+    return lines.join('\n');
+  }
+
+  function updateLines() {
+    const n = input.value ? input.value.split(/\r?\n/).length : 0;
+    lineCount.textContent = `${n} line${n === 1 ? '' : 's'}`;
+  }
+
+  document.getElementById('scanBtn').addEventListener('click', () => render(scan(input.value)));
+  document.getElementById('sampleBtn').addEventListener('click', () => { input.value = riskySample; updateLines(); render(scan(input.value)); });
+  document.getElementById('secureBtn').addEventListener('click', () => { input.value = secureSample; updateLines(); render(scan(input.value)); });
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    input.value=''; updateLines(); lastReport=null;
+    scoreEl.textContent='—'; scoreRing.style.setProperty('--score',0);
+    scoreLabel.textContent='Ready to scan'; scoreText.textContent='Paste a GitHub Actions workflow and run the scanner.';
+    criticalCount.textContent='0'; warningCount.textContent='0'; passedCount.textContent='0';
+    findingsEl.innerHTML='<div class="empty">No workflow scanned yet.<br>Try the risky sample to see DevOps Doctor in action.</div>';
+  });
+  input.addEventListener('input', updateLines);
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const s=input.selectionStart, en=input.selectionEnd;
+      input.value=input.value.slice(0,s)+'  '+input.value.slice(en);
+      input.selectionStart=input.selectionEnd=s+2;
+      updateLines();
+    }
+  });
+
+  document.getElementById('fileInput').addEventListener('change', e => {
+    const file=e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader=new FileReader();
+    reader.onload=() => { input.value=String(reader.result || ''); updateLines(); render(scan(input.value)); };
+    reader.readAsText(file);
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', async () => {
+    const btn=document.getElementById('copyBtn');
+    try {
+      await navigator.clipboard.writeText(reportText());
+      const old=btn.textContent;btn.textContent='Copied ✓';setTimeout(()=>btn.textContent=old,1300);
+    } catch {
+      alert('Copy is blocked by this browser. Run a scan, then use Download instead.');
+    }
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    const blob=new Blob([reportText()],{type:'text/plain;charset=utf-8'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='cloudbyalex-devops-doctor-report.txt';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  });
+
+  updateLines();
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
