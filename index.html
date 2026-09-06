@@ -139,6 +139,43 @@
       }
     }
 
+
+    .nav-random-shortcut{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:8px 11px;
+      border-radius:12px;
+      border:1px solid rgba(255,211,107,.18);
+      background:linear-gradient(135deg,rgba(255,211,107,.08),rgba(195,108,255,.055));
+      color:#fff2c9 !important;
+      font-size:12px;
+      font-weight:820;
+      box-shadow:0 8px 22px rgba(255,211,107,.045);
+      transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease;
+    }
+    .nav-random-shortcut:hover{
+      transform:translateY(-1px);
+      background:linear-gradient(135deg,rgba(255,211,107,.13),rgba(195,108,255,.08));
+      border-color:rgba(255,211,107,.30);
+      box-shadow:0 10px 26px rgba(255,211,107,.08);
+    }
+    .nav-random-shortcut svg{
+      width:14px;
+      height:14px;
+      stroke:currentColor;
+      flex:0 0 auto;
+    }
+    @media(max-width:760px){
+      .nav-random-shortcut{
+        padding:8px 9px;
+        font-size:11px;
+      }
+      .nav-random-shortcut .random-nav-label{
+        display:none;
+      }
+    }
+
     .tools-section{
       padding:24px 0 72px;
       position:relative;
@@ -774,6 +811,13 @@ reliability    infrastructure</div>
             <path d="M12 3a15 15 0 0 0 0 18"/>
           </svg>
           <span class="ip-nav-label">What Is My IP?</span>
+        </a>
+
+        <a class="nav-random-shortcut" href="tools/random/" aria-label="Open Random Lab">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m13 2-2 8h6l-8 12 2-9H5l8-11Z"/>
+          </svg>
+          <span class="random-nav-label">Random Lab</span>
         </a>
         <a href="#about">About</a>
         <a href="#tools">Tools</a>
