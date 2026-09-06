@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>What Is My IP Address? Free IP Checker | CloudByAlex</title>
-  <meta name="description" content="Check both your public IPv4 and IPv6 addresses, approximate location, ISP, browser, operating system, device and network details instantly.">
+  <title>What Is My IP? Check IPv4 & IPv6 Address | CloudByAlex</title>
+  <meta name="description" content="Check your public IPv4 and IPv6 addresses, approximate location, ISP, browser and device details. Free instant IP checker with IPv4 vs IPv6 explanations.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://cloudbyalex.com/tools/my-ip/">
   <script type="application/ld+json">
@@ -47,6 +47,108 @@
     .detail-label{color:#7f8da8;font-size:10px;font-weight:850;letter-spacing:.09em;text-transform:uppercase}.detail-value{margin-top:10px;font-size:16px;font-weight:820;line-height:1.35;word-break:break-word}.detail-small{margin-top:5px;color:#71809a;font-size:10px}
     .insights{display:grid;grid-template-columns:1fr 1fr;gap:13px}.insight{padding:21px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.028)}.insight h3{margin:0 0 12px;font-size:16px}.insight ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}.insight li{color:#9ba9c1;font-size:12px;line-height:1.55}
     .privacy{margin-top:13px;padding:18px 20px;border-radius:18px;border:1px solid rgba(101,223,255,.12);background:rgba(101,223,255,.035);color:#8fa0ba;font-size:11px;line-height:1.65}.privacy strong{color:#eaf5ff}
+
+    .learn-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:13px;
+    }
+    .learn-card{
+      padding:22px;
+      border-radius:20px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.038),rgba(255,255,255,.018));
+    }
+    .learn-card h3{
+      margin:0 0 10px;
+      font-size:17px;
+      letter-spacing:-.022em;
+    }
+    .learn-card p{
+      margin:0;
+      color:#95a3bc;
+      font-size:12px;
+      line-height:1.75;
+    }
+    .learn-card p + p{margin-top:10px}
+    .compare-table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.022);
+      font-size:12px;
+    }
+    .compare-table th,
+    .compare-table td{
+      padding:14px 15px;
+      text-align:left;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+    }
+    .compare-table th{
+      color:#dce9fb;
+      font-size:11px;
+      letter-spacing:.04em;
+      background:rgba(255,255,255,.025);
+    }
+    .compare-table td{
+      color:#93a1ba;
+      line-height:1.55;
+    }
+    .compare-table tr:last-child td{border-bottom:0}
+    .howto-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+    .howto{
+      padding:19px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.024);
+    }
+    .howto span{
+      display:inline-flex;
+      width:30px;
+      height:30px;
+      align-items:center;
+      justify-content:center;
+      border-radius:9px;
+      margin-bottom:12px;
+      background:linear-gradient(135deg,rgba(101,223,255,.10),rgba(195,108,255,.08));
+      border:1px solid rgba(255,255,255,.075);
+      font-size:15px;
+    }
+    .howto h3{
+      margin:0 0 7px;
+      font-size:15px;
+      letter-spacing:-.018em;
+    }
+    .howto p{
+      margin:0;
+      color:#8f9db6;
+      font-size:11.5px;
+      line-height:1.7;
+    }
+    .internal-link{
+      color:#c9f5ff;
+      text-decoration:underline;
+      text-decoration-color:rgba(101,223,255,.35);
+      text-underline-offset:3px;
+    }
+    @media(max-width:800px){
+      .learn-grid{grid-template-columns:1fr}
+      .howto-grid{grid-template-columns:1fr}
+      .compare-table{
+        display:block;
+        overflow-x:auto;
+        white-space:normal;
+      }
+    }
+
     details{border-bottom:1px solid var(--line)}summary{cursor:pointer;list-style:none;padding:18px 2px;font-size:14px;font-weight:820}details p{margin:-4px 0 18px;color:#8f9db6;font-size:12px;line-height:1.75;max-width:880px}
     footer{margin-top:54px;padding:26px 0 40px;border-top:1px solid rgba(255,255,255,.055);text-align:center;color:#71809a;font-size:11px}
     .loading{opacity:.65}.error{color:#ff9aac}
@@ -113,12 +215,139 @@
       <div class="privacy"><strong>Transparent by design.</strong> This tool does not submit your connection details to a CloudByAlex backend. IPv4 and IPv6 are checked directly in your browser using ipify; approximate geolocation is requested from ipapi.co. Cloudflare Web Analytics is also enabled on this website for aggregate traffic analytics.</div>
     </section>
 
+
+    <section aria-labelledby="ip-guide-title">
+      <div class="section-head">
+        <span class="kicker">IP address guide</span>
+        <h2 id="ip-guide-title">IPv4, IPv6 and your public IP explained</h2>
+        <p>Quick answers to the questions people most often have after checking their public IP address.</p>
+      </div>
+
+      <div class="learn-grid">
+        <article class="learn-card">
+          <h3>What is my IPv4 address?</h3>
+          <p>Your public IPv4 address is the traditional internet address used by many websites, apps and home networks. It usually looks like four groups of numbers separated by dots, for example <strong>73.44.120.18</strong>.</p>
+          <p>Because the number of IPv4 addresses is limited, many internet providers use technologies such as NAT or carrier-grade NAT. That means several devices — and sometimes several customers — can share public IPv4 infrastructure.</p>
+        </article>
+
+        <article class="learn-card">
+          <h3>What is my IPv6 address?</h3>
+          <p>IPv6 is the newer internet addressing system. An IPv6 address is much longer and contains hexadecimal characters separated by colons, for example <strong>2601:abcd:1234::1</strong>.</p>
+          <p>IPv6 was designed to provide a vastly larger address space and reduce the pressure caused by IPv4 exhaustion. Many modern mobile, cable and fiber networks support both IPv4 and IPv6 at the same time.</p>
+        </article>
+
+        <article class="learn-card">
+          <h3>Why do I have both IPv4 and IPv6?</h3>
+          <p>If this tool shows both addresses, your connection is probably <strong>dual-stack</strong>. That simply means your network can communicate using either protocol. A website or app may choose IPv6 when it is available and fall back to IPv4 when necessary.</p>
+          <p>This is normal and increasingly common. Your IPv4 and IPv6 addresses do not need to look related because they come from completely different addressing systems.</p>
+        </article>
+
+        <article class="learn-card">
+          <h3>Why is one of my IP addresses unavailable?</h3>
+          <p>Some networks provide only IPv4, while others may prefer IPv6 or use translation technologies behind the scenes. VPNs, mobile carriers, corporate networks and some routers can also change which protocol is visible to websites.</p>
+          <p>If IPv4 or IPv6 shows as unavailable here, it does not automatically mean your internet connection is broken. It usually means that protocol is not directly reachable from your current browser connection.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="ipv4-vs-ipv6-title">
+      <div class="section-head">
+        <span class="kicker">IPv4 vs IPv6</span>
+        <h2 id="ipv4-vs-ipv6-title">What is the difference between IPv4 and IPv6?</h2>
+      </div>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>IPv4</th>
+            <th>IPv6</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Typical format</td>
+            <td>192.0.2.25</td>
+            <td>2001:db8::25</td>
+          </tr>
+          <tr>
+            <td>Address size</td>
+            <td>32-bit</td>
+            <td>128-bit</td>
+          </tr>
+          <tr>
+            <td>Common today?</td>
+            <td>Yes — still extremely common</td>
+            <td>Yes — increasingly common on modern networks</td>
+          </tr>
+          <tr>
+            <td>Can both work together?</td>
+            <td colspan="2">Yes. A dual-stack connection can use IPv4 and IPv6 at the same time.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section aria-labelledby="find-ip-title">
+      <div class="section-head">
+        <span class="kicker">How to check</span>
+        <h2 id="find-ip-title">How to find your IP address on common devices</h2>
+        <p>The address shown at the top of this page is your public internet IP. Your device also has a local/private address inside your home or office network.</p>
+      </div>
+
+      <div class="howto-grid">
+        <article class="howto">
+          <span>⊞</span>
+          <h3>Windows</h3>
+          <p>For your local IP, open Command Prompt and run <strong>ipconfig</strong>. Look for “IPv4 Address” or “IPv6 Address” under the active network adapter. For your public IP, use the checker at the top of this page.</p>
+        </article>
+
+        <article class="howto">
+          <span></span>
+          <h3>iPhone / iPad</h3>
+          <p>For your local Wi-Fi address, open <strong>Settings → Wi-Fi → tap the ⓘ icon</strong> next to the connected network. Your public IP is the address websites see and is displayed at the top of this page.</p>
+        </article>
+
+        <article class="howto">
+          <span>◆</span>
+          <h3>Android</h3>
+          <p>Local IP information is usually under <strong>Settings → Network & internet → Wi-Fi → connected network</strong>. Menu names vary by manufacturer. Your public IP is shown by this page.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="vpn-ip-title">
+      <div class="section-head">
+        <span class="kicker">VPN & privacy</span>
+        <h2 id="vpn-ip-title">Does a VPN change my public IP address?</h2>
+      </div>
+
+      <div class="learn-grid">
+        <article class="learn-card">
+          <h3>Usually, yes</h3>
+          <p>When a VPN is active, your internet traffic is normally routed through the VPN provider's server. Websites then see the VPN server's public IP instead of the public IP assigned by your normal internet provider.</p>
+          <p>This is why checking your IP before and after connecting to a VPN is a quick way to confirm that your visible public address changed.</p>
+        </article>
+
+        <article class="learn-card">
+          <h3>An IP address is not your exact location</h3>
+          <p>IP geolocation can often estimate a country, region or city, but it is not GPS. The result may reflect your ISP's infrastructure, a nearby city, a mobile gateway or a VPN server.</p>
+          <p>If you're troubleshooting a network or CI/CD environment, you may also like the <a class="internal-link" href="../devops-doctor/">CloudByAlex DevOps Doctor</a>.</p>
+        </article>
+      </div>
+    </section>
+
+
     <section>
       <div class="section-head"><span class="kicker">Quick answers</span><h2>IP address FAQ</h2></div>
       <details><summary>What is my public IP address?</summary><p>Your public IP is the internet-facing address used by your connection when communicating with websites and online services.</p></details>
       <details><summary>Why does my IP address change?</summary><p>Many internet providers use dynamic IP addresses. Your address can change after reconnecting, changing networks, replacing equipment or because of provider network changes.</p></details>
       <details><summary>Is the city shown here my exact location?</summary><p>No. IP geolocation is only an estimate and can point to a nearby city or an ISP network location rather than your exact physical position.</p></details>
       <details><summary>How can I change the IP websites see?</summary><p>Switching networks changes your public connection. A VPN can also route traffic through another server, so websites generally see the VPN server's public IP.</p></details>
+
+      <details><summary>Is my public IP the same as my local IP?</summary><p>No. Your public IP is the address visible to internet services. A local or private IP identifies a device inside your home, office or Wi-Fi network and often looks like 192.168.x.x, 10.x.x.x or another private range.</p></details>
+      <details><summary>Can two devices have the same public IP?</summary><p>Yes. Devices connected through the same home router commonly share one public IPv4 address. Internet providers can also use carrier-grade NAT, which can result in multiple customers sharing public IPv4 infrastructure.</p></details>
+      <details><summary>Why does a website show a different IP than my router?</summary><p>Your router may display a local, WAN, translated or provider-assigned address that differs from what websites see. VPNs, carrier-grade NAT, proxies and IPv4/IPv6 translation can also cause the visible addresses to differ.</p></details>
     </section>
   </main>
 
