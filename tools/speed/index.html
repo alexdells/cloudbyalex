@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Internet Speed Test — Download, Upload & Ping | CloudByAlex</title>
+  <meta name="description" content="Free browser-based internet speed test. Check approximate download speed, upload speed and ping to Cloudflare's edge network in seconds.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://cloudbyalex.com/tools/speed/">
+  <style>
+    :root{--bg:#070812;--text:#f5f7ff;--muted:#96a5be;--cyan:#65dfff;--green:#69edb5;--violet:#c36cff;--yellow:#ffd36b;--line:rgba(255,255,255,.09)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:
+      radial-gradient(circle at 14% 4%,rgba(105,237,181,.10),transparent 24%),
+      radial-gradient(circle at 86% 3%,rgba(101,223,255,.11),transparent 24%),
+      radial-gradient(circle at 50% 62%,rgba(195,108,255,.035),transparent 28%),
+      linear-gradient(180deg,#060710,#090b16 48%,#070812)}
+    body:before{content:"";position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(to bottom,#000,transparent 94%)}
+    a{color:inherit;text-decoration:none}button{font:inherit}
+    .wrap{width:min(1080px,calc(100% - 34px));margin:auto}
+    nav{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.055);background:rgba(7,8,18,.76);backdrop-filter:blur(18px)}
+    .nav-inner{height:70px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:850;letter-spacing:-.02em}.back{padding:9px 12px;border:1px solid var(--line);border-radius:12px;color:#bec9dc;background:rgba(255,255,255,.035);font-size:13px;font-weight:750}
+    .hero{text-align:center;padding:56px 0 22px}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 11px;border-radius:999px;border:1px solid rgba(105,237,181,.17);background:rgba(105,237,181,.05);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#d8ffec}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 15px var(--green)}
+    h1{margin:18px auto 12px;font-size:clamp(44px,7vw,76px);line-height:.98;letter-spacing:-.055em}
+    .grad{background:linear-gradient(90deg,var(--green),var(--cyan) 55%,#c7baff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{max-width:720px;margin:auto;color:var(--muted);font-size:15px;line-height:1.72}
+
+    .tester{margin:28px auto 70px;padding:1px;border-radius:30px;background:linear-gradient(120deg,rgba(105,237,181,.30),rgba(255,255,255,.06) 38%,rgba(101,223,255,.23));box-shadow:0 30px 90px rgba(0,0,0,.28)}
+    .card{border-radius:29px;background:radial-gradient(circle at 0 0,rgba(105,237,181,.07),transparent 30%),radial-gradient(circle at 100% 0,rgba(101,223,255,.07),transparent 28%),rgba(10,13,24,.97);padding:28px}
+    .gauge-wrap{display:grid;place-items:center;padding:12px 0 23px}
+    .gauge{--p:0;width:240px;height:240px;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(from 225deg,var(--green) 0 calc(var(--p)*.75%),rgba(255,255,255,.07) 0 75%,transparent 75% 100%);transform:rotate(0deg)}
+    .gauge:after{content:"";position:absolute;inset:15px;border-radius:50%;background:#0a0d17;border:1px solid rgba(255,255,255,.055)}
+    .gauge-inner{position:relative;z-index:1;text-align:center}
+    .gauge-value{font-size:55px;font-weight:900;letter-spacing:-.06em;line-height:1}.gauge-unit{font-size:11px;color:#8290a8;margin-top:6px;text-transform:uppercase;letter-spacing:.1em;font-weight:850}
+    .phase{font-size:10px;color:#a9b6ca;margin-bottom:7px;text-transform:uppercase;letter-spacing:.11em;font-weight:850}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+    .metric{padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025);text-align:center}
+    .metric-label{font-size:9px;color:#7f8ca5;text-transform:uppercase;letter-spacing:.1em;font-weight:850}
+    .metric-value{font-size:26px;font-weight:900;letter-spacing:-.04em;margin-top:7px}.metric-unit{font-size:9px;color:#738099;margin-top:3px}
+    .start{display:block;width:min(420px,100%);margin:22px auto 0;border:0;cursor:pointer;padding:15px;border-radius:14px;background:linear-gradient(135deg,#c9ffe3,#bcecff 57%,#d8c6ff);color:#061019;font-weight:900;box-shadow:0 18px 40px rgba(105,237,181,.09);transition:.2s}
+    .start:hover{transform:translateY(-1px)}.start:disabled{opacity:.55;cursor:not-allowed;transform:none}
+    .progress{height:5px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:18px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--cyan));transition:width .25s ease}
+    .status{margin-top:12px;text-align:center;color:#8492aa;font-size:10px;line-height:1.55}
+    .quality{margin-top:16px;padding:14px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.022);display:none;text-align:center}
+    .quality strong{display:block;font-size:14px;margin-bottom:4px}.quality span{font-size:10px;color:#8492a8}
+
+    .info{padding:0 0 70px}.info h2{font-size:30px;margin:0 0 15px;letter-spacing:-.035em}
+    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.info-card{padding:20px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.024)}.info-card h3{margin:0 0 8px;font-size:15px}.info-card p{margin:0;color:#91a0b9;font-size:11.5px;line-height:1.72}
+    footer{padding:26px 0 40px;border-top:1px solid rgba(255,255,255,.055);text-align:center;color:#71809a;font-size:11px}
+    @media(max-width:650px){.wrap{width:min(100% - 22px,1080px)}.metrics{grid-template-columns:1fr}.gauge{width:205px;height:205px}.info-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<nav><div class="wrap nav-inner"><a class="brand" href="../../">☁ cloudbyalex</a><a class="back" href="../../#tools">← Back to tools</a></div></nav>
+
+<header class="hero wrap">
+  <div class="eyebrow"><span class="dot"></span> Quick internet test</div>
+  <h1>How fast is <span class="grad">your internet?</span></h1>
+  <p class="lead">Run a quick browser-based test for download speed, upload speed and ping to Cloudflare's edge network.</p>
+</header>
+
+<main class="wrap">
+  <section class="tester"><div class="card">
+    <div class="gauge-wrap">
+      <div class="gauge" id="gauge">
+        <div class="gauge-inner">
+          <div class="phase" id="phase">Ready</div>
+          <div class="gauge-value" id="gaugeValue">0</div>
+          <div class="gauge-unit" id="gaugeUnit">Mbps</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Download</div><div class="metric-value" id="download">—</div><div class="metric-unit">Mbps</div></div>
+      <div class="metric"><div class="metric-label">Upload</div><div class="metric-value" id="upload">—</div><div class="metric-unit">Mbps</div></div>
+      <div class="metric"><div class="metric-label">Ping</div><div class="metric-value" id="ping">—</div><div class="metric-unit">ms</div></div>
+    </div>
+
+    <button class="start" id="startBtn" type="button">Start Speed Test →</button>
+    <div class="progress"><span id="progressBar"></span></div>
+    <div class="status" id="status">The test uses a small amount of data and usually finishes in a few seconds.</div>
+    <div class="quality" id="quality"><strong id="qualityTitle"></strong><span id="qualityText"></span></div>
+  </div></section>
+
+  <section class="info">
+    <h2>What the numbers mean</h2>
+    <div class="info-grid">
+      <article class="info-card"><h3>↓ Download speed</h3><p>How quickly data reaches your device. Higher download speed helps with streaming, large downloads and loading media-heavy pages.</p></article>
+      <article class="info-card"><h3>↑ Upload speed</h3><p>How quickly your device can send data. Upload matters for video calls, cloud backups and sending large files.</p></article>
+      <article class="info-card"><h3>↔ Ping / latency</h3><p>The round-trip response time to the Cloudflare edge. Lower latency generally feels more responsive for gaming, calls and interactive apps.</p></article>
+      <article class="info-card"><h3>Why results can vary</h3><p>Wi-Fi signal, VPNs, device load, browser limits and nearby network traffic can all change the result. Treat this as a quick estimate, not a certified ISP benchmark.</p></article>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">CloudByAlex Tools · Your speed test runs directly from your browser.</div></footer>
+
+<script>
+(() => {
+  const ENDPOINT = "https://cloudbyalex-random.alexdellsone.workers.dev";
+  const $ = id => document.getElementById(id);
+  const gauge = $("gauge");
+  let running = false;
+
+  function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+  function median(arr){const a=[...arr].sort((x,y)=>x-y);const m=Math.floor(a.length/2);return a.length%2?a[m]:(a[m-1]+a[m])/2;}
+  function mbps(bytes,ms){return (bytes*8)/(ms/1000)/1_000_000;}
+  function showGauge(value,unit,phase){
+    $("gaugeValue").textContent=Number.isFinite(value)?(value>=100?Math.round(value):value.toFixed(value>=10?1:2)):"0";
+    $("gaugeUnit").textContent=unit;
+    $("phase").textContent=phase;
+    const normalized=unit==="ms" ? Math.max(0,100-Math.min(value,100)) : Math.min(value,100);
+    gauge.style.setProperty("--p",normalized);
+  }
+  async function timedFetch(url,options={}){
+    const t0=performance.now();
+    const r=await fetch(url,{...options,cache:"no-store"});
+    const buf=await r.arrayBuffer();
+    const t1=performance.now();
+    if(!r.ok)throw new Error("Network test endpoint returned an error.");
+    return {ms:t1-t0,bytes:buf.byteLength};
+  }
+
+  async function testPing(){
+    const samples=[];
+    for(let i=0;i<5;i++){
+      const t0=performance.now();
+      const r=await fetch(`${ENDPOINT}/speed/ping?t=${Date.now()}-${i}`,{cache:"no-store"});
+      if(!r.ok)throw new Error("Ping test failed.");
+      await r.text();
+      samples.push(performance.now()-t0);
+      showGauge(samples[samples.length-1],"ms","Testing ping");
+      $("progressBar").style.width=`${10+i*6}%`;
+      await sleep(70);
+    }
+    return median(samples);
+  }
+
+  async function testDownload(){
+    const warm=await timedFetch(`${ENDPOINT}/speed/download?bytes=500000&t=${Date.now()}`);
+    const warmMbps=mbps(warm.bytes,warm.ms);
+    const size=warmMbps>120?8_000_000:warmMbps>40?5_000_000:3_000_000;
+    const results=[];
+    for(let i=0;i<2;i++){
+      const r=await timedFetch(`${ENDPOINT}/speed/download?bytes=${size}&t=${Date.now()}-${i}`);
+      const speed=mbps(r.bytes,r.ms);
+      results.push(speed);
+      showGauge(speed,"Mbps","Testing download");
+      $("progressBar").style.width=`${45+i*15}%`;
+    }
+    return Math.max(...results);
+  }
+
+  async function testUpload(){
+    const bytes=2_000_000;
+    const payload=new Uint8Array(bytes);
+    crypto.getRandomValues(payload.subarray(0,65536));
+    for(let i=65536;i<bytes;i+=65536){
+      payload.set(payload.subarray(0,Math.min(65536,bytes-i)),i);
+    }
+    const speeds=[];
+    for(let i=0;i<2;i++){
+      const t0=performance.now();
+      const r=await fetch(`${ENDPOINT}/speed/upload?t=${Date.now()}-${i}`,{
+        method:"POST",headers:{"Content-Type":"application/octet-stream"},body:payload,cache:"no-store"
+      });
+      const t1=performance.now();
+      if(!r.ok)throw new Error("Upload test failed.");
+      await r.json();
+      const speed=mbps(bytes,t1-t0);
+      speeds.push(speed);
+      showGauge(speed,"Mbps","Testing upload");
+      $("progressBar").style.width=`${78+i*10}%`;
+    }
+    return Math.max(...speeds);
+  }
+
+  function quality(download,ping){
+    if(download>=100 && ping<40)return ["Excellent connection","Great for 4K streaming, video calls and most gaming."];
+    if(download>=40 && ping<70)return ["Very good connection","Comfortable for HD/4K streaming, work and everyday use."];
+    if(download>=15)return ["Good everyday connection","Fine for browsing, HD streaming and typical video calls."];
+    if(download>=5)return ["Basic connection","Usable for browsing and lighter streaming, but large downloads may feel slow."];
+    return ["Slow connection","You may notice delays with streaming, calls and large downloads."];
+  }
+
+  async function run(){
+    if(running)return;running=true;
+    $("startBtn").disabled=true;$("startBtn").textContent="Testing…";
+    $("download").textContent="—";$("upload").textContent="—";$("ping").textContent="—";
+    $("quality").style.display="none";$("progressBar").style.width="4%";
+    $("status").textContent="Connecting to the Cloudflare edge…";
+    try{
+      const p=await testPing();$("ping").textContent=Math.round(p);$("status").textContent="Ping complete. Measuring download…";
+      const d=await testDownload();$("download").textContent=d>=100?Math.round(d):d.toFixed(1);$("status").textContent="Download complete. Measuring upload…";
+      const u=await testUpload();$("upload").textContent=u>=100?Math.round(u):u.toFixed(1);
+      $("progressBar").style.width="100%";showGauge(d,"Mbps","Complete");
+      const [title,text]=quality(d,p);$("qualityTitle").textContent=title;$("qualityText").textContent=text;$("quality").style.display="block";
+      $("status").textContent="Test complete · measured to Cloudflare edge · results can vary between runs.";
+    }catch(e){
+      $("status").textContent=e.message||"Speed test failed. Please try again.";
+      $("progressBar").style.width="0%";$("phase").textContent="Try again";
+    }finally{
+      $("startBtn").disabled=false;$("startBtn").textContent="Run Again →";running=false;
+    }
+  }
+
+  $("startBtn").addEventListener("click",run);
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

@@ -176,6 +176,35 @@
       }
     }
 
+
+    .nav-speed-shortcut{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:8px 11px;
+      border-radius:12px;
+      border:1px solid rgba(105,237,181,.18);
+      background:linear-gradient(135deg,rgba(105,237,181,.075),rgba(101,223,255,.05));
+      color:#dfffee !important;
+      font-size:12px;
+      font-weight:820;
+      box-shadow:0 8px 22px rgba(105,237,181,.04);
+      transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease;
+    }
+    .nav-speed-shortcut:hover{
+      transform:translateY(-1px);
+      background:linear-gradient(135deg,rgba(105,237,181,.12),rgba(101,223,255,.08));
+      border-color:rgba(105,237,181,.28);
+      box-shadow:0 10px 26px rgba(105,237,181,.075);
+    }
+    .nav-speed-shortcut svg{
+      width:14px;height:14px;stroke:currentColor;flex:0 0 auto;
+    }
+    @media(max-width:760px){
+      .nav-speed-shortcut{padding:8px 9px;font-size:11px}
+      .nav-speed-shortcut .speed-nav-label{display:none}
+    }
+
     .tools-section{
       padding:24px 0 72px;
       position:relative;
@@ -819,6 +848,15 @@ reliability    infrastructure</div>
           </svg>
           <span class="random-nav-label">Random Lab</span>
         </a>
+
+        <a class="nav-speed-shortcut" href="tools/speed/" aria-label="Test my internet speed">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 17a8 8 0 1 1 16 0"/>
+            <path d="m12 13 4-4"/>
+            <path d="M6 17h12"/>
+          </svg>
+          <span class="speed-nav-label">My Speed</span>
+        </a>
         <a href="#about">About</a>
         <a href="#tools">Tools</a>
         <a href="https://github.com/alexdells" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -996,6 +1034,35 @@ reliability    infrastructure</div>
       </div>
       <a class="launch-tool" href="tools/random/">
         Open Random Lab
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+
+
+    <div class="tool-card">
+      <div class="tool-card-main">
+        <div class="tool-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 17a8 8 0 1 1 16 0"/>
+            <path d="m12 13 4-4"/>
+            <path d="M6 17h12"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="tool-name">My Speed</h3>
+          <p class="tool-description">Run a quick browser-based internet speed test for download, upload and ping to Cloudflare's edge network.</p>
+          <div class="tool-badges">
+            <span class="tool-badge">Download Mbps</span>
+            <span class="tool-badge">Upload Mbps</span>
+            <span class="tool-badge">Ping</span>
+            <span class="tool-badge">No signup</span>
+          </div>
+        </div>
+      </div>
+      <a class="launch-tool" href="tools/speed/">
+        Test My Speed
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>
         </svg>
