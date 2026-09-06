@@ -1,19 +1,20 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+
+<html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>What Is My IP? Check IPv4 & IPv6 Address | CloudByAlex</title>
-  <meta name="description" content="Check your public IPv4 and IPv6 addresses, approximate location, ISP, browser and device details. Free instant IP checker with IPv4 vs IPv6 explanations.">
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://cloudbyalex.com/ru/tools/my-ip/">
-  <link rel="alternate" hreflang="en" href="https://cloudbyalex.com/tools/my-ip/">
-  <link rel="alternate" hreflang="ru" href="https://cloudbyalex.com/ru/tools/my-ip/">
-  <link rel="alternate" hreflang="x-default" href="https://cloudbyalex.com/tools/my-ip/">
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Какой у меня IP? Проверить IPv4 и IPv6 | CloudByAlex</title>
+<meta content="Check your public IPv4 and IPv6 addresses, approximate location, ISP, browser and device details. Free instant IP checker with IPv4 vs IPv6 explanations." name="description"/>
+<meta content="index,follow" name="robots"/>
+<link href="https://cloudbyalex.com/ru/tools/my-ip/" rel="canonical"/>
+<link href="https://cloudbyalex.com/tools/my-ip/" hreflang="en" rel="alternate"/>
+<link href="https://cloudbyalex.com/ru/tools/my-ip/" hreflang="ru" rel="alternate"/>
+<link href="https://cloudbyalex.com/tools/my-ip/" hreflang="x-default" rel="alternate"/>
+<script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebApplication","name":"CloudByAlex What Is My IP?","url":"https://cloudbyalex.com/tools/my-ip/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any"}
   </script>
-  <style>
+<style>
     :root{--bg:#070812;--text:#f5f7ff;--muted:#96a4be;--cyan:#65dfff;--violet:#c36cff;--green:#69edb5;--line:rgba(255,255,255,.09)}
     *{box-sizing:border-box}html{scroll-behavior:smooth}
     body{margin:0;color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:
@@ -168,202 +169,178 @@
 <script>(()=>{try{if(localStorage.getItem("cloudbyalex-lang")==="en")location.replace("/tools/my-ip/"+location.search+location.hash)}catch(e){}})();</script>
 </head>
 <body>
-  <nav><div class="wrap nav-inner"><a class="brand" href="../../">☁ cloudbyalex</a><div class="nav-actions"><span class="lang-switch" aria-label="Language selector"><span class="globe" aria-hidden="true">🌐</span><a href="/tools/my-ip/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" href="/ru/tools/my-ip/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a class="active" href="/tools/my-ip/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a href="/ru/tools/my-ip/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a class="back" href="../../#tools">← Back to tools</a></div></div></nav>
-
-  <header class="hero wrap">
-    <div class="eyebrow"><span class="dot"></span> Free network utility</div>
-    <h1>What Is <span class="grad">My IP?</span></h1>
-    <p class="lead">See your public IP address and understand what your browser and internet connection reveal — instantly, in one clean dashboard.</p>
-  </header>
-
-  <main class="wrap">
-    <section class="ip-shell"><div class="ip-card">
-      <div class="ip-top">
-        <div style="flex:1;min-width:0">
-          <div class="ip-label">Your public IP addresses</div>
-          <div class="ip-list">
-            <div class="ip-box primary">
-              <div class="ip-label">IPv4</div>
-              <div class="ip-value loading" id="ipv4Value">Detecting…</div>
-              <div class="ip-status" id="ipv4Status">Checking IPv4 connectivity</div>
-              <button class="btn copy-small" id="copyIpv4" type="button">Copy IPv4</button>
-            </div>
-            <div class="ip-box ipv6">
-              <div class="ip-label">IPv6</div>
-              <div class="ip-value loading" id="ipv6Value">Detecting…</div>
-              <div class="ip-status" id="ipv6Status">Checking IPv6 connectivity</div>
-              <button class="btn copy-small" id="copyIpv6" type="button">Copy IPv6</button>
-            </div>
-          </div>
-          <div class="ip-sub" id="ipSub">Checking both public internet protocols.</div>
-        </div>
-        <div class="actions"><button class="btn" id="refreshBtn">Refresh</button><button class="btn primary" id="copyAll">Copy all details</button></div>
-      </div>
-      <div class="pills"><div class="pill">IPv4: <b id="ipv4Pill">—</b></div><div class="pill">IPv6: <b id="ipv6Pill">—</b></div><div class="pill">Connection: <b id="secureState">HTTPS</b></div><div class="pill">Device: <b id="devicePill">—</b></div></div>
-    </div></section>
-
-    <section>
-      <div class="section-head"><span class="kicker">Connection details</span><h2>Your internet & device at a glance</h2><p>IP-based location is approximate and may differ from your physical location.</p></div>
-      <div class="grid">
-        <article class="detail"><div class="detail-label">Approximate location</div><div class="detail-value" id="locationValue">Detecting…</div><div class="detail-small" id="locationSmall">IP-based estimate</div></article>
-        <article class="detail"><div class="detail-label">ISP / network</div><div class="detail-value" id="ispValue">Detecting…</div><div class="detail-small" id="asnValue">Network provider</div></article>
-        <article class="detail"><div class="detail-label">Timezone</div><div class="detail-value" id="timezoneValue">—</div><div class="detail-small" id="localTimeValue">Local browser time</div></article>
-        <article class="detail"><div class="detail-label">Browser</div><div class="detail-value" id="browserValue">—</div><div class="detail-small">Best-effort browser detection</div></article>
-        <article class="detail"><div class="detail-label">Operating system</div><div class="detail-value" id="osValue">—</div><div class="detail-small" id="deviceValue">Device type</div></article>
-        <article class="detail"><div class="detail-label">Screen</div><div class="detail-value" id="screenValue">—</div><div class="detail-small" id="pixelValue">Display information</div></article>
-        <article class="detail"><div class="detail-label">Language</div><div class="detail-value" id="languageValue">—</div><div class="detail-small">Browser preference</div></article>
-        <article class="detail"><div class="detail-label">Network hint</div><div class="detail-value" id="networkValue">Not reported</div><div class="detail-small" id="networkSmall">Browser Network Information API</div></article>
-        <article class="detail"><div class="detail-label">Connection security</div><div class="detail-value" id="httpsValue">Secure HTTPS</div><div class="detail-small">Transport used for this page</div></article>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-head"><span class="kicker">Privacy explained</span><h2>What can an IP address reveal?</h2></div>
-      <div class="insights">
-        <article class="insight"><h3>It can often indicate</h3><ul><li>✓ Your public-facing IP address</li><li>✓ An approximate city, region or country</li><li>✓ Your ISP or network organization</li><li>✓ A likely timezone or network region</li></ul></article>
-        <article class="insight"><h3>It does not reliably reveal</h3><ul><li>— Your exact home or apartment address</li><li>— Your name, passwords or private files</li><li>— Your precise GPS location</li><li>— A city estimate that is always physically exact</li></ul></article>
-      </div>
-      <div class="privacy"><strong>Transparent by design.</strong> This tool does not submit your connection details to a CloudByAlex backend. IPv4 and IPv6 are checked directly in your browser using ipify; approximate geolocation is requested from ipapi.co. Cloudflare Web Analytics is also enabled on this website for aggregate traffic analytics.</div>
-    </section>
-
-
-    <section aria-labelledby="ip-guide-title">
-      <div class="section-head">
-        <span class="kicker">IP address guide</span>
-        <h2 id="ip-guide-title">IPv4, IPv6 and your public IP explained</h2>
-        <p>Quick answers to the questions people most often have after checking their public IP address.</p>
-      </div>
-
-      <div class="learn-grid">
-        <article class="learn-card">
-          <h3>What is my IPv4 address?</h3>
-          <p>Your public IPv4 address is the traditional internet address used by many websites, apps and home networks. It usually looks like four groups of numbers separated by dots, for example <strong>73.44.120.18</strong>.</p>
-          <p>Because the number of IPv4 addresses is limited, many internet providers use technologies such as NAT or carrier-grade NAT. That means several devices — and sometimes several customers — can share public IPv4 infrastructure.</p>
-        </article>
-
-        <article class="learn-card">
-          <h3>What is my IPv6 address?</h3>
-          <p>IPv6 is the newer internet addressing system. An IPv6 address is much longer and contains hexadecimal characters separated by colons, for example <strong>2601:abcd:1234::1</strong>.</p>
-          <p>IPv6 was designed to provide a vastly larger address space and reduce the pressure caused by IPv4 exhaustion. Many modern mobile, cable and fiber networks support both IPv4 and IPv6 at the same time.</p>
-        </article>
-
-        <article class="learn-card">
-          <h3>Why do I have both IPv4 and IPv6?</h3>
-          <p>If this tool shows both addresses, your connection is probably <strong>dual-stack</strong>. That simply means your network can communicate using either protocol. A website or app may choose IPv6 when it is available and fall back to IPv4 when necessary.</p>
-          <p>This is normal and increasingly common. Your IPv4 and IPv6 addresses do not need to look related because they come from completely different addressing systems.</p>
-        </article>
-
-        <article class="learn-card">
-          <h3>Why is one of my IP addresses unavailable?</h3>
-          <p>Some networks provide only IPv4, while others may prefer IPv6 or use translation technologies behind the scenes. VPNs, mobile carriers, corporate networks and some routers can also change which protocol is visible to websites.</p>
-          <p>If IPv4 or IPv6 shows as unavailable here, it does not automatically mean your internet connection is broken. It usually means that protocol is not directly reachable from your current browser connection.</p>
-        </article>
-      </div>
-    </section>
-
-    <section aria-labelledby="ipv4-vs-ipv6-title">
-      <div class="section-head">
-        <span class="kicker">IPv4 vs IPv6</span>
-        <h2 id="ipv4-vs-ipv6-title">What is the difference between IPv4 and IPv6?</h2>
-      </div>
-
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Feature</th>
-            <th>IPv4</th>
-            <th>IPv6</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Typical format</td>
-            <td>192.0.2.25</td>
-            <td>2001:db8::25</td>
-          </tr>
-          <tr>
-            <td>Address size</td>
-            <td>32-bit</td>
-            <td>128-bit</td>
-          </tr>
-          <tr>
-            <td>Common today?</td>
-            <td>Yes — still extremely common</td>
-            <td>Yes — increasingly common on modern networks</td>
-          </tr>
-          <tr>
-            <td>Can both work together?</td>
-            <td colspan="2">Yes. A dual-stack connection can use IPv4 and IPv6 at the same time.</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section aria-labelledby="find-ip-title">
-      <div class="section-head">
-        <span class="kicker">How to check</span>
-        <h2 id="find-ip-title">How to find your IP address on common devices</h2>
-        <p>The address shown at the top of this page is your public internet IP. Your device also has a local/private address inside your home or office network.</p>
-      </div>
-
-      <div class="howto-grid">
-        <article class="howto">
-          <span>⊞</span>
-          <h3>Windows</h3>
-          <p>For your local IP, open Command Prompt and run <strong>ipconfig</strong>. Look for “IPv4 Address” or “IPv6 Address” under the active network adapter. For your public IP, use the checker at the top of this page.</p>
-        </article>
-
-        <article class="howto">
-          <span></span>
-          <h3>iPhone / iPad</h3>
-          <p>For your local Wi-Fi address, open <strong>Settings → Wi-Fi → tap the ⓘ icon</strong> next to the connected network. Your public IP is the address websites see and is displayed at the top of this page.</p>
-        </article>
-
-        <article class="howto">
-          <span>◆</span>
-          <h3>Android</h3>
-          <p>Local IP information is usually under <strong>Settings → Network & internet → Wi-Fi → connected network</strong>. Menu names vary by manufacturer. Your public IP is shown by this page.</p>
-        </article>
-      </div>
-    </section>
-
-    <section aria-labelledby="vpn-ip-title">
-      <div class="section-head">
-        <span class="kicker">VPN & privacy</span>
-        <h2 id="vpn-ip-title">Does a VPN change my public IP address?</h2>
-      </div>
-
-      <div class="learn-grid">
-        <article class="learn-card">
-          <h3>Usually, yes</h3>
-          <p>When a VPN is active, your internet traffic is normally routed through the VPN provider's server. Websites then see the VPN server's public IP instead of the public IP assigned by your normal internet provider.</p>
-          <p>This is why checking your IP before and after connecting to a VPN is a quick way to confirm that your visible public address changed.</p>
-        </article>
-
-        <article class="learn-card">
-          <h3>An IP address is not your exact location</h3>
-          <p>IP geolocation can often estimate a country, region or city, but it is not GPS. The result may reflect your ISP's infrastructure, a nearby city, a mobile gateway or a VPN server.</p>
-          <p>If you're troubleshooting a network or CI/CD environment, you may also like the <a class="internal-link" href="../devops-doctor/">CloudByAlex DevOps Doctor</a>.</p>
-        </article>
-      </div>
-    </section>
-
-
-    <section>
-      <div class="section-head"><span class="kicker">Quick answers</span><h2>IP address FAQ</h2></div>
-      <details><summary>What is my public IP address?</summary><p>Your public IP is the internet-facing address used by your connection when communicating with websites and online services.</p></details>
-      <details><summary>Why does my IP address change?</summary><p>Many internet providers use dynamic IP addresses. Your address can change after reconnecting, changing networks, replacing equipment or because of provider network changes.</p></details>
-      <details><summary>Is the city shown here my exact location?</summary><p>No. IP geolocation is only an estimate and can point to a nearby city or an ISP network location rather than your exact physical position.</p></details>
-      <details><summary>How can I change the IP websites see?</summary><p>Switching networks changes your public connection. A VPN can also route traffic through another server, so websites generally see the VPN server's public IP.</p></details>
-
-      <details><summary>Is my public IP the same as my local IP?</summary><p>No. Your public IP is the address visible to internet services. A local or private IP identifies a device inside your home, office or Wi-Fi network and often looks like 192.168.x.x, 10.x.x.x or another private range.</p></details>
-      <details><summary>Can two devices have the same public IP?</summary><p>Yes. Devices connected through the same home router commonly share one public IPv4 address. Internet providers can also use carrier-grade NAT, which can result in multiple customers sharing public IPv4 infrastructure.</p></details>
-      <details><summary>Why does a website show a different IP than my router?</summary><p>Your router may display a local, WAN, translated or provider-assigned address that differs from what websites see. VPNs, carrier-grade NAT, proxies and IPv4/IPv6 translation can also cause the visible addresses to differ.</p></details>
-    </section>
-  </main>
-
-  <footer><div class="wrap">CloudByAlex Tools · Simple utilities for real-world problems.</div></footer>
-
+<nav><div class="wrap nav-inner"><a class="brand" href="../../">☁ cloudbyalex</a><div class="nav-actions"><span aria-label="Language selector" class="lang-switch"><span aria-hidden="true" class="globe">🌐</span><a href="/tools/my-ip/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" class="active" href="/ru/tools/my-ip/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a href="/tools/my-ip/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" href="/ru/tools/my-ip/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a><a class="back" href="../../#tools">← Назад к инструментам</a></div></div></nav>
+<header class="hero wrap">
+<div class="eyebrow"><span class="dot"></span> Бесплатный сетевой инструмент</div>
+<h1>Какой у меня <span class="grad">IP?</span></h1>
+<p class="lead">Узнайте свой публичный IP и посмотрите, какую информацию показывает ваше интернет-соединение — быстро и на одной странице.</p>
+</header>
+<main class="wrap">
+<section class="ip-shell"><div class="ip-card">
+<div class="ip-top">
+<div style="flex:1;min-width:0">
+<div class="ip-label">Ваши публичные IP-адреса</div>
+<div class="ip-list">
+<div class="ip-box primary">
+<div class="ip-label">IPv4</div>
+<div class="ip-value loading" id="ipv4Value">Определяем…</div>
+<div class="ip-status" id="ipv4Status">Проверяем IPv4</div>
+<button class="btn copy-small" id="copyIpv4" type="button">Копировать IPv4</button>
+</div>
+<div class="ip-box ipv6">
+<div class="ip-label">IPv6</div>
+<div class="ip-value loading" id="ipv6Value">Определяем…</div>
+<div class="ip-status" id="ipv6Status">Проверяем IPv6</div>
+<button class="btn copy-small" id="copyIpv6" type="button">Копировать IPv6</button>
+</div>
+</div>
+<div class="ip-sub" id="ipSub">Проверяем IPv4 и IPv6.</div>
+</div>
+<div class="actions"><button class="btn" id="refreshBtn">Обновить</button><button class="btn primary" id="copyAll">Копировать всё</button></div>
+</div>
+<div class="pills"><div class="pill">IPv4: <b id="ipv4Pill">—</b></div><div class="pill">IPv6: <b id="ipv6Pill">—</b></div><div class="pill">Соединение: <b id="secureState">HTTPS</b></div><div class="pill">Устройство: <b id="devicePill">—</b></div></div>
+</div></section>
+<section>
+<div class="section-head"><span class="kicker">Параметры соединения</span><h2>Интернет и устройство одним взглядом</h2><p>Местоположение по IP приблизительное и может отличаться от реального.</p></div>
+<div class="grid">
+<article class="detail"><div class="detail-label">Примерное местоположение</div><div class="detail-value" id="locationValue">Определяем…</div><div class="detail-small" id="locationSmall">Оценка по IP</div></article>
+<article class="detail"><div class="detail-label">Провайдер / сеть</div><div class="detail-value" id="ispValue">Определяем…</div><div class="detail-small" id="asnValue">Сетевой провайдер</div></article>
+<article class="detail"><div class="detail-label">Часовой пояс</div><div class="detail-value" id="timezoneValue">—</div><div class="detail-small" id="localTimeValue">Локальное время браузера</div></article>
+<article class="detail"><div class="detail-label">Браузер</div><div class="detail-value" id="browserValue">—</div><div class="detail-small">Примерное определение браузера</div></article>
+<article class="detail"><div class="detail-label">Операционная система</div><div class="detail-value" id="osValue">—</div><div class="detail-small" id="deviceValue">Тип устройства</div></article>
+<article class="detail"><div class="detail-label">Экран</div><div class="detail-value" id="screenValue">—</div><div class="detail-small" id="pixelValue">Информация об экране</div></article>
+<article class="detail"><div class="detail-label">Язык</div><div class="detail-value" id="languageValue">—</div><div class="detail-small">Язык браузера</div></article>
+<article class="detail"><div class="detail-label">Параметры сети</div><div class="detail-value" id="networkValue">Не сообщается</div><div class="detail-small" id="networkSmall">Network Information API браузера</div></article>
+<article class="detail"><div class="detail-label">Безопасность соединения</div><div class="detail-value" id="httpsValue">Защищённый HTTPS</div><div class="detail-small">Протокол этой страницы</div></article>
+</div>
+</section>
+<section>
+<div class="section-head"><span class="kicker">О приватности</span><h2>Что может показать IP-адрес?</h2></div>
+<div class="insights">
+<article class="insight"><h3>Часто можно определить</h3><ul><li>✓ Ваш публичный IP-адрес</li><li>✓ Примерный город, регион или страну</li><li>✓ Провайдера или сетевую организацию</li><li>✓ Вероятный часовой пояс или регион сети</li></ul></article>
+<article class="insight"><h3>Нельзя надёжно определить</h3><ul><li>— Точный домашний адрес</li><li>— Ваше имя, пароли или личные файлы</li><li>— Точные GPS-координаты</li><li>— Город с гарантированной точностью</li></ul></article>
+</div>
+<div class="privacy"><strong>Прозрачность по умолчанию.</strong> CloudByAlex не сохраняет параметры вашего соединения. IPv4 и IPv6 проверяются прямо в браузере через ipify, приблизительная геолокация — через ipapi.co. Cloudflare Web Analytics используется для общей статистики посещений.</div>
+</section>
+<section aria-labelledby="ip-guide-title">
+<div class="section-head">
+<span class="kicker">Гид по IP-адресам</span>
+<h2 id="ip-guide-title">IPv4, IPv6 и публичный IP простыми словами</h2>
+<p>Короткие ответы на частые вопросы после проверки публичного IP.</p>
+</div>
+<div class="learn-grid">
+<article class="learn-card">
+<h3>Что такое мой IPv4-адрес?</h3>
+<p>Публичный IPv4 — традиционный интернет-адрес, который используют сайты, приложения и домашние сети. Обычно это четыре группы цифр через точки, например <strong>73.44.120.18</strong>.</p>
+<p>Количество IPv4 ограничено, поэтому провайдеры используют NAT и carrier-grade NAT. Несколько устройств, а иногда и клиентов, могут использовать общую публичную IPv4-инфраструктуру.</p>
+</article>
+<article class="learn-card">
+<h3>Что такое мой IPv6-адрес?</h3>
+<p>IPv6 — более новая система интернет-адресации. Такой адрес длиннее и содержит шестнадцатеричные символы через двоеточия, например <strong>2601:abcd:1234::1</strong>.</p>
+<p>IPv6 создан с гораздо большим адресным пространством. Многие современные мобильные, кабельные и оптоволоконные сети одновременно поддерживают IPv4 и IPv6.</p>
+</article>
+<article class="learn-card">
+<h3>Почему у меня одновременно IPv4 и IPv6?</h3>
+<p>If this tool shows both addresses, your connection is probably <strong>dual-stack</strong>. Это означает, что сеть умеет работать с обоими протоколами. Сайт может использовать IPv6, а при необходимости перейти на IPv4.</p>
+<p>Это нормально. IPv4 и IPv6 не обязаны быть похожи, потому что относятся к разным системам адресации.</p>
+</article>
+<article class="learn-card">
+<h3>Почему один из IP-адресов недоступен?</h3>
+<p>Некоторые сети предоставляют только IPv4, другие предпочитают IPv6 или используют трансляцию. VPN, мобильные операторы, корпоративные сети и роутеры тоже могут влиять на видимый протокол.</p>
+<p>Если IPv4 или IPv6 недоступен, это не означает, что интернет сломан. Обычно этот протокол просто недоступен напрямую из текущего соединения браузера.</p>
+</article>
+</div>
+</section>
+<section aria-labelledby="ipv4-vs-ipv6-title">
+<div class="section-head">
+<span class="kicker">IPv4 и IPv6</span>
+<h2 id="ipv4-vs-ipv6-title">В чём разница между IPv4 и IPv6?</h2>
+</div>
+<table class="compare-table">
+<thead>
+<tr>
+<th>Характеристика</th>
+<th>IPv4</th>
+<th>IPv6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Типичный формат</td>
+<td>192.0.2.25</td>
+<td>2001:db8::25</td>
+</tr>
+<tr>
+<td>Размер адреса</td>
+<td>32-bit</td>
+<td>128-bit</td>
+</tr>
+<tr>
+<td>Распространён сегодня?</td>
+<td>Да — по-прежнему очень распространён</td>
+<td>Да — всё чаще используется в современных сетях</td>
+</tr>
+<tr>
+<td>Могут работать одновременно?</td>
+<td colspan="2">Да. Dual-stack соединение может одновременно использовать IPv4 и IPv6.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section aria-labelledby="find-ip-title">
+<div class="section-head">
+<span class="kicker">Как проверить</span>
+<h2 id="find-ip-title">Как найти IP-адрес на популярных устройствах</h2>
+<p>Адрес вверху страницы — ваш публичный интернет-IP. Устройство также имеет локальный/private IP внутри домашней или офисной сети.</p>
+</div>
+<div class="howto-grid">
+<article class="howto">
+<span>⊞</span>
+<h3>Windows</h3>
+<p>Чтобы узнать локальный IP, откройте Command Prompt и выполните <strong>ipconfig</strong>. Найдите “IPv4 Address” или “IPv6 Address” у активного сетевого адаптера. Публичный IP показан вверху страницы.</p>
+</article>
+<article class="howto">
+<span></span>
+<h3>iPhone / iPad</h3>
+<p>Чтобы узнать локальный Wi-Fi адрес, откройте <strong>Настройки → Wi-Fi → нажмите ⓘ</strong> рядом с подключённой сетью. Публичный IP, который видят сайты, показан вверху страницы.</p>
+</article>
+<article class="howto">
+<span>◆</span>
+<h3>Android</h3>
+<p>Локальный IP обычно находится в <strong>Настройки → Сеть и интернет → Wi-Fi → подключённая сеть</strong>. Названия пунктов зависят от производителя. Публичный IP показан на этой странице.</p>
+</article>
+</div>
+</section>
+<section aria-labelledby="vpn-ip-title">
+<div class="section-head">
+<span class="kicker">VPN и приватность</span>
+<h2 id="vpn-ip-title">Меняет ли VPN мой публичный IP?</h2>
+</div>
+<div class="learn-grid">
+<article class="learn-card">
+<h3>Обычно — да</h3>
+<p>Когда VPN активен, трафик проходит через сервер VPN-провайдера. Сайты видят публичный IP VPN-сервера вместо адреса вашего обычного провайдера.</p>
+<p>Поэтому проверка IP до и после подключения VPN — простой способ убедиться, что видимый публичный адрес изменился.</p>
+</article>
+<article class="learn-card">
+<h3>IP-адрес — это не точное местоположение</h3>
+<p>Геолокация по IP может определить страну, регион или город, но это не GPS. Результат может указывать на инфраструктуру провайдера, соседний город, мобильный шлюз или VPN-сервер.</p>
+<p>Если вы диагностируете сеть или CI/CD-среду, попробуйте также <a class="internal-link" href="../devops-doctor/">CloudByAlex DevOps Doctor</a>.</p>
+</article>
+</div>
+</section>
+<section>
+<div class="section-head"><span class="kicker">Короткие ответы</span><h2>FAQ по IP-адресам</h2></div>
+<details><summary>Что такое мой публичный IP?</summary><p>Публичный IP — интернет-адрес, который ваше соединение использует для общения с сайтами и онлайн-сервисами.</p></details>
+<details><summary>Почему мой IP меняется?</summary><p>Многие провайдеры используют динамические IP. Адрес может измениться после переподключения, смены сети, оборудования или изменений у провайдера.</p></details>
+<details><summary>Город здесь — моё точное местоположение?</summary><p>Нет. Геолокация по IP — только оценка и может указывать соседний город или узел сети провайдера.</p></details>
+<details><summary>Как изменить IP, который видят сайты?</summary><p>Смена сети меняет публичное соединение. VPN может направить трафик через другой сервер, поэтому сайты обычно видят публичный IP VPN-сервера.</p></details>
+<details><summary>Публичный IP и локальный IP — одно и то же?</summary><p>Нет. Публичный IP виден интернет-сервисам. Локальный/private IP определяет устройство внутри дома, офиса или Wi-Fi сети.</p></details>
+<details><summary>Могут ли два устройства иметь один публичный IP?</summary><p>Да. Устройства за одним домашним роутером часто используют один публичный IPv4. Провайдеры также применяют carrier-grade NAT.</p></details>
+<details><summary>Почему сайт показывает другой IP, чем роутер?</summary><p>Роутер может показывать локальный, WAN или назначенный провайдером адрес, который отличается от того, что видят сайты. VPN, NAT, proxy и трансляция IPv4/IPv6 тоже могут влиять.</p></details>
+</section>
+</main>
+<footer><div class="wrap">CloudByAlex Tools · Простые инструменты для реальных задач.</div></footer>
 <script>
 (() => {
   const $ = id => document.getElementById(id);
@@ -375,7 +352,7 @@
     if((m=u.match(/Chrome\/([\d.]+)/))&&!/Edg|OPR/.test(u)) return "Google Chrome "+m[1].split(".")[0];
     if((m=u.match(/Firefox\/([\d.]+)/))) return "Mozilla Firefox "+m[1].split(".")[0];
     if((m=u.match(/Version\/([\d.]+).*Safari/))) return "Safari "+m[1].split(".")[0];
-    return "Unknown browser";
+    return "Неизвестный браузер";
   }
 
   function os(){
@@ -385,14 +362,14 @@
     if(/Android/.test(u)) return "Android";
     if(/Mac OS X/.test(u)) return "macOS";
     if(/Linux/.test(u)) return "Linux";
-    return navigator.platform||"Unknown OS";
+    return navigator.platform||"Неизвестная ОС";
   }
 
   function device(){
     const u=navigator.userAgent;
-    if(/iPad|Tablet|Android(?!.*Mobile)/i.test(u)) return "Tablet";
-    if(/Mobi|iPhone|Android/i.test(u)) return "Mobile";
-    return "Desktop";
+    if(/iPad|Tablet|Android(?!.*Mobile)/i.test(u)) return "Планшет";
+    if(/Mobi|iPhone|Android/i.test(u)) return "Телефон";
+    return "Компьютер";
   }
 
   function local(){
@@ -401,8 +378,8 @@
     $("deviceValue").textContent=device();
     $("devicePill").textContent=device();
     $("screenValue").textContent=`${screen.width} × ${screen.height}`;
-    $("pixelValue").textContent=`Device pixel ratio: ${devicePixelRatio||1}`;
-    $("languageValue").textContent=navigator.language||"Not reported";
+    $("pixelValue").textContent=`Плотность пикселей: ${devicePixelRatio||1}`;
+    $("languageValue").textContent=navigator.language||"Не сообщается";
 
     const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"Not reported";
     $("timezoneValue").textContent=tz;
@@ -413,12 +390,12 @@
       const p=[];
       if(c.effectiveType)p.push(c.effectiveType.toUpperCase());
       if(typeof c.downlink==="number")p.push(`~${c.downlink} Mbps`);
-      $("networkValue").textContent=p.join(" · ")||"Reported";
-      if(typeof c.rtt==="number")$("networkSmall").textContent=`Estimated RTT: ${c.rtt} ms`;
+      $("networkValue").textContent=p.join(" · ")||"Доступно";
+      if(typeof c.rtt==="number")$("networkSmall").textContent=`Примерный RTT: ${c.rtt} мс`;
     }
 
     const secure=location.protocol==="https:";
-    $("httpsValue").textContent=secure?"Secure HTTPS":"Not HTTPS";
+    $("httpsValue").textContent=secure?"Защищённый HTTPS":"Не HTTPS";
     $("secureState").textContent=secure?"HTTPS":"HTTP";
   }
 
@@ -442,20 +419,20 @@
     if(ip){
       valueEl.textContent=ip;
       valueEl.className="ip-value";
-      statusEl.textContent="Available on this connection";
-      pillEl.textContent="Available";
+      statusEl.textContent="Доступен в этом соединении";
+      pillEl.textContent="Доступен";
     }else{
-      valueEl.textContent="Not available";
+      valueEl.textContent="Недоступен";
       valueEl.className="ip-value";
-      statusEl.textContent=`${kind.toUpperCase()} is not available on this connection`;
-      pillEl.textContent="Unavailable";
+      statusEl.textContent=`${kind.toUpperCase()} недоступен в этом соединении`;
+      pillEl.textContent="Недоступен";
     }
   }
 
   async function loadGeo(primaryIp){
     if(!primaryIp){
-      $("locationValue").textContent="Unavailable";
-      $("ispValue").textContent="Unavailable";
+      $("locationValue").textContent="Недоступен";
+      $("ispValue").textContent="Недоступен";
       return;
     }
 
@@ -467,35 +444,35 @@
       } catch {
         d=await fetchJson("https://ipapi.co/json/",5000);
       }
-      if(d.error) throw new Error(d.reason||"Geo lookup failed");
+      if(d.error) throw new Error(d.reason||"Не удалось определить геолокацию");
       data.geo=d;
 
       const place=[d.city,d.region,d.country_name].filter(Boolean).join(", ");
-      $("locationValue").textContent=place||"Not available";
-      $("locationSmall").textContent=d.postal?`Postal area: ${d.postal} · IP-based estimate`:"IP-based estimate";
-      $("ispValue").textContent=d.org||"Not available";
-      $("asnValue").textContent=[d.asn,d.country_code].filter(Boolean).join(" · ")||"Network provider";
+      $("locationValue").textContent=place||"Недоступен";
+      $("locationSmall").textContent=d.postal?`Почтовый индекс: ${d.postal} · оценка по IP`:"Оценка по IP";
+      $("ispValue").textContent=d.org||"Недоступен";
+      $("asnValue").textContent=[d.asn,d.country_code].filter(Boolean).join(" · ")||"Сетевой провайдер";
 
       if(d.timezone){
         $("timezoneValue").textContent=d.timezone;
       }
-      $("ipSub").textContent=place?`Approximate network location: ${place}`:"Both protocol checks completed.";
+      $("ipSub").textContent=place?`Примерное сетевое местоположение: ${place}`:"Проверка обоих протоколов завершена.";
     }catch{
-      $("locationValue").textContent="Temporarily unavailable";
-      $("ispValue").textContent="Temporarily unavailable";
-      $("ipSub").textContent="IP addresses detected. Location lookup is temporarily unavailable.";
+      $("locationValue").textContent="Временно недоступно";
+      $("ispValue").textContent="Временно недоступно";
+      $("ipSub").textContent="IP-адреса определены. Геолокация временно недоступна.";
     }
   }
 
   async function load(){
     data.ipv4=null; data.ipv6=null; data.geo=null;
-    $("ipv4Value").textContent="Detecting…"; $("ipv4Value").className="ip-value loading";
-    $("ipv6Value").textContent="Detecting…"; $("ipv6Value").className="ip-value loading";
-    $("ipv4Status").textContent="Checking IPv4 connectivity";
-    $("ipv6Status").textContent="Checking IPv6 connectivity";
-    $("ipv4Pill").textContent="Checking";
-    $("ipv6Pill").textContent="Checking";
-    $("ipSub").textContent="Checking both public internet protocols.";
+    $("ipv4Value").textContent="Определяем…"; $("ipv4Value").className="ip-value loading";
+    $("ipv6Value").textContent="Определяем…"; $("ipv6Value").className="ip-value loading";
+    $("ipv4Status").textContent="Проверяем IPv4";
+    $("ipv6Status").textContent="Проверяем IPv6";
+    $("ipv4Pill").textContent="Проверяем";
+    $("ipv6Pill").textContent="Проверяем";
+    $("ipSub").textContent="Проверяем IPv4 и IPv6.";
 
     const [v4Result,v6Result]=await Promise.allSettled([
       fetchJson("https://api.ipify.org?format=json",5000),
@@ -516,15 +493,15 @@
     await loadGeo(primary);
 
     if(data.ipv4 && data.ipv6){
-      $("ipSub").textContent = $("locationValue").textContent!=="Temporarily unavailable"
-        ? `Dual-stack connection detected · IPv4 + IPv6 available`
-        : `Dual-stack connection detected · IPv4 + IPv6 available`;
+      $("ipSub").textContent = $("locationValue").textContent!=="Временно недоступно"
+        ? `Обнаружено dual-stack соединение · IPv4 + IPv6 доступны`
+        : `Обнаружено dual-stack соединение · IPv4 + IPv6 доступны`;
     }else if(data.ipv4){
-      $("ipSub").textContent="IPv4 is available; no public IPv6 was detected.";
+      $("ipSub").textContent="IPv4 доступен; публичный IPv6 не обнаружен.";
     }else if(data.ipv6){
-      $("ipSub").textContent="IPv6 is available; no public IPv4 was detected.";
+      $("ipSub").textContent="IPv6 доступен; публичный IPv4 не обнаружен.";
     }else{
-      $("ipSub").textContent="Unable to detect a public IPv4 or IPv6 address. Try Refresh.";
+      $("ipSub").textContent="Не удалось определить публичный IPv4 или IPv6. Нажмите «Обновить».";
     }
   }
 
@@ -533,10 +510,10 @@
     try{
       await navigator.clipboard.writeText(text);
       const t=btn.textContent;
-      btn.textContent="Copied ✓";
+      btn.textContent="Скопировано ✓";
       setTimeout(()=>btn.textContent=t,1200);
     }catch{
-      alert("Copy is blocked by this browser.");
+      alert("Браузер заблокировал копирование.");
     }
   }
 
@@ -544,17 +521,17 @@
   $("copyIpv6").onclick=()=>copy(data.ipv6,$("copyIpv6"));
 
   $("copyAll").onclick=()=>copy([
-    `Public IPv4: ${data.ipv4||"Not available"}`,
-    `Public IPv6: ${data.ipv6||"Not available"}`,
-    `Approx. location: ${$("locationValue").textContent}`,
-    `ISP / network: ${$("ispValue").textContent}`,
-    `Timezone: ${$("timezoneValue").textContent}`,
-    `Browser: ${$("browserValue").textContent}`,
-    `Operating system: ${$("osValue").textContent}`,
-    `Device: ${$("deviceValue").textContent}`,
-    `Screen: ${$("screenValue").textContent}`,
-    `Language: ${$("languageValue").textContent}`,
-    `Network hint: ${$("networkValue").textContent}`
+    `Public IPv4: ${data.ipv4||"Недоступен"}`,
+    `Public IPv6: ${data.ipv6||"Недоступен"}`,
+    `Примерное местоположение: ${$("locationValue").textContent}`,
+    `Провайдер / сеть: ${$("ispValue").textContent}`,
+    `Часовой пояс: ${$("timezoneValue").textContent}`,
+    `Браузер: ${$("browserValue").textContent}`,
+    `Операционная система: ${$("osValue").textContent}`,
+    `Устройство: ${$("deviceValue").textContent}`,
+    `Экран: ${$("screenValue").textContent}`,
+    `Язык: ${$("languageValue").textContent}`,
+    `Параметры сети: ${$("networkValue").textContent}`
   ].join("\n"),$("copyAll"));
 
   $("refreshBtn").onclick=load;
@@ -563,6 +540,6 @@
   load();
 })();
 </script>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics --><script data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}' src="https://static.cloudflareinsights.com/beacon.min.js" type="module"></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

@@ -1,16 +1,17 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+
+<html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Random Number Generator — Secure & Atmospheric | CloudByAlex</title>
-  <meta name="description" content="Free random number generator with secure browser randomness, dice rolls, coin flips and random list picker. Optional true atmospheric randomness powered by RANDOM.ORG.">
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://cloudbyalex.com/ru/tools/random/">
-  <link rel="alternate" hreflang="en" href="https://cloudbyalex.com/tools/random/">
-  <link rel="alternate" hreflang="ru" href="https://cloudbyalex.com/ru/tools/random/">
-  <link rel="alternate" hreflang="x-default" href="https://cloudbyalex.com/tools/random/">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Генератор случайных чисел — CloudByAlex</title>
+<meta content="Free random number generator with secure browser randomness, dice rolls, coin flips and random list picker. Optional true atmospheric randomness powered by RANDOM.ORG." name="description"/>
+<meta content="index,follow" name="robots"/>
+<link href="https://cloudbyalex.com/ru/tools/random/" rel="canonical"/>
+<link href="https://cloudbyalex.com/tools/random/" hreflang="en" rel="alternate"/>
+<link href="https://cloudbyalex.com/ru/tools/random/" hreflang="ru" rel="alternate"/>
+<link href="https://cloudbyalex.com/tools/random/" hreflang="x-default" rel="alternate"/>
+<style>
     :root{
       --bg:#070812;--text:#f5f7ff;--muted:#95a3bd;--cyan:#65dfff;--violet:#c36cff;
       --green:#69edb5;--yellow:#ffd36b;--red:#ff7890;--line:rgba(255,255,255,.09);
@@ -113,113 +114,103 @@
 <script>(()=>{try{if(localStorage.getItem("cloudbyalex-lang")==="en")location.replace("/tools/random/"+location.search+location.hash)}catch(e){}})();</script>
 </head>
 <body>
-<nav><div class="wrap nav-inner"><a class="brand" href="../../">☁ cloudbyalex</a><div class="nav-actions"><span class="lang-switch" aria-label="Language selector"><span class="globe" aria-hidden="true">🌐</span><a href="/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" href="/ru/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a class="active" href="/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a href="/ru/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a class="back" href="../../#tools">← Back to tools</a></div></div></nav>
-
+<nav><div class="wrap nav-inner"><a class="brand" href="../../">☁ cloudbyalex</a><div class="nav-actions"><span aria-label="Language selector" class="lang-switch"><span aria-hidden="true" class="globe">🌐</span><a href="/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" class="active" href="/ru/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a href="/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" href="/ru/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a><a class="back" href="../../#tools">← Назад к инструментам</a></div></div></nav>
 <header class="hero wrap">
-  <div class="eyebrow"><span class="spark"></span> CloudByAlex Random Lab</div>
-  <h1>Generate something <span class="grad">truly unpredictable.</span></h1>
-  <p class="lead">Random numbers, dice rolls, coin flips and list picks. Use cryptographically secure browser randomness now — or connect atmospheric noise from RANDOM.ORG.</p>
+<div class="eyebrow"><span class="spark"></span> CloudByAlex Random Lab</div>
+<h1>Создайте что-нибудь <span class="grad">по-настоящему случайное.</span></h1>
+<p class="lead">Случайные числа, кубик, монета и случайный выбор из списка. Используйте безопасную случайность браузера или атмосферный шум RANDOM.ORG.</p>
 </header>
-
 <main class="wrap">
-  <section class="app">
-    <div class="panel">
-      <div class="panel-head">
-        <div><div class="panel-title">Random Generator</div><div class="panel-sub">Choose a source and what you want to randomize</div></div>
-      </div>
-
-      <div class="source-tabs">
-        <button class="source-btn active" data-source="browser">
-          <strong><span class="source-dot"></span>Browser Secure</strong>
-          <span>Cryptographic randomness from Web Crypto. Works instantly.</span>
-        </button>
-        <button class="source-btn" data-source="atmospheric">
-          <strong><span class="source-dot"></span>Atmospheric Noise</strong>
-          <span>True randomness from RANDOM.ORG via Cloudflare Worker.</span>
-        </button>
-      </div>
-
-      <div class="mode-row">
-        <button class="mode active" data-mode="number">Number</button>
-        <button class="mode" data-mode="dice">Dice</button>
-        <button class="mode" data-mode="coin">Coin Flip</button>
-        <button class="mode" data-mode="picker">List Picker</button>
-      </div>
-
-      <div class="form">
-        <div class="number-fields" id="numberFields">
-          <div class="fields">
-            <div><label for="min">Minimum</label><input id="min" type="number" value="1" min="-1000000000" max="1000000000"></div>
-            <div><label for="max">Maximum</label><input id="max" type="number" value="100" min="-1000000000" max="1000000000"></div>
-            <div><label for="count">How many</label><input id="count" type="number" value="1" min="1" max="20"></div>
-          </div>
-        </div>
-
-        <div class="picker-fields" id="pickerFields">
-          <label for="pickerText">One option per line</label>
-          <textarea id="pickerText" placeholder="Pizza&#10;Sushi&#10;Tacos&#10;Burgers"></textarea>
-        </div>
-
-        <div class="quick">
-          <button type="button" data-quick="1-10">1–10</button>
-          <button type="button" data-quick="1-100">1–100</button>
-          <button type="button" data-quick="1-1000">1–1000</button>
-          <button type="button" data-quick="dice">🎲 Roll a die</button>
-          <button type="button" data-quick="coin">🪙 Flip a coin</button>
-        </div>
-
-        <button class="generate" id="generateBtn" type="button">Generate →</button>
-        <div class="source-note" id="sourceNote"><strong>Source:</strong> Browser Web Crypto (`crypto.getRandomValues`). This is cryptographically strong pseudorandomness, not atmospheric physical randomness.</div>
-      </div>
-
-      <div class="status good" id="status">Browser Secure mode is ready.</div>
-    </div>
-
-    <aside class="panel">
-      <div class="panel-head"><div><div class="panel-title">Result</div><div class="panel-sub">Fresh randomness appears here</div></div></div>
-      <div class="result">
-        <div class="result-kicker" id="resultKicker">Ready</div>
-        <div class="result-number" id="resultValue">?</div>
-        <div class="result-meta" id="resultMeta">Choose a mode and press Generate.</div>
-        <div class="result-actions">
-          <button class="mini" id="copyResult" type="button">Copy result</button>
-          <button class="mini" id="generateAgain" type="button">Generate again</button>
-        </div>
-      </div>
-      <div class="history">
-        <div class="history-title">Recent results</div>
-        <div class="history-list" id="historyList"><div class="history-item"><strong>No results yet</strong><span>—</span></div></div>
-      </div>
-    </aside>
-  </section>
-
-  <section class="learn">
-    <h2>Where does the randomness come from?</h2>
-    <div class="learn-grid">
-      <article class="learn-card">
-        <h3>⚡ Atmospheric randomness</h3>
-        <p>RANDOM.ORG generates true random values from atmospheric radio noise. Thunderstorms and other natural electrical activity contribute to that noise.</p>
-        <p>CloudByAlex connects to RANDOM.ORG through a small server-side Worker so the source can be used safely from a browser without exposing secrets.</p>
-      </article>
-      <article class="learn-card">
-        <h3>🔐 Browser secure randomness</h3>
-        <p>Modern browsers expose the Web Crypto API. Its `crypto.getRandomValues()` function is designed for cryptographic use and is much stronger than ordinary `Math.random()`.</p>
-        <p>This mode runs completely on your device and needs no network request.</p>
-      </article>
-      <article class="learn-card">
-        <h3>🎲 What can you use it for?</h3>
-        <p>Pick a giveaway winner, roll dice, flip a coin, choose a restaurant, select a random team member, generate test data or make an unbiased everyday decision.</p>
-      </article>
-      <article class="learn-card">
-        <h3>⚠️ Not for regulated gambling</h3>
-        <p>This free utility is for general-purpose randomization and experimentation. High-stakes, regulated or auditable drawings need purpose-built systems and appropriate licensing.</p>
-      </article>
-    </div>
-  </section>
+<section class="app">
+<div class="panel">
+<div class="panel-head">
+<div><div class="panel-title">Генератор случайностей</div><div class="panel-sub">Выберите источник и режим</div></div>
+</div>
+<div class="source-tabs">
+<button class="source-btn active" data-source="browser">
+<strong><span class="source-dot"></span>Безопасный браузер</strong>
+<span>Криптографическая случайность Web Crypto. Работает мгновенно.</span>
+</button>
+<button class="source-btn" data-source="atmospheric">
+<strong><span class="source-dot"></span>Атмосферный шум</strong>
+<span>Настоящая случайность RANDOM.ORG через Cloudflare Worker.</span>
+</button>
+</div>
+<div class="mode-row">
+<button class="mode active" data-mode="number">Число</button>
+<button class="mode" data-mode="dice">Кубик</button>
+<button class="mode" data-mode="coin">Монета</button>
+<button class="mode" data-mode="picker">Выбор из списка</button>
+</div>
+<div class="form">
+<div class="number-fields" id="numberFields">
+<div class="fields">
+<div><label for="min">Минимум</label><input id="min" max="1000000000" min="-1000000000" type="number" value="1"/></div>
+<div><label for="max">Максимум</label><input id="max" max="1000000000" min="-1000000000" type="number" value="100"/></div>
+<div><label for="count">Количество</label><input id="count" max="20" min="1" type="number" value="1"/></div>
+</div>
+</div>
+<div class="picker-fields" id="pickerFields">
+<label for="pickerText">По одному варианту на строку</label>
+<textarea id="pickerText" placeholder="Pizza
+Sushi
+Tacos
+Burgers"></textarea>
+</div>
+<div class="quick">
+<button data-quick="1-10" type="button">1–10</button>
+<button data-quick="1-100" type="button">1–100</button>
+<button data-quick="1-1000" type="button">1–1000</button>
+<button data-quick="dice" type="button">🎲 Бросить кубик</button>
+<button data-quick="coin" type="button">🪙 Подбросить монету</button>
+</div>
+<button class="generate" id="generateBtn" type="button">Сгенерировать →</button>
+<div class="source-note" id="sourceNote"><strong>Источник:</strong> Browser Web Crypto (`crypto.getRandomValues`). Это криптографически стойкая псевдослучайность, а не физический атмосферный шум.</div>
+</div>
+<div class="status good" id="status">Безопасный режим браузера готов.</div>
+</div>
+<aside class="panel">
+<div class="panel-head"><div><div class="panel-title">Результат</div><div class="panel-sub">Здесь появится новый случайный результат</div></div></div>
+<div class="result">
+<div class="result-kicker" id="resultKicker">Готово</div>
+<div class="result-number" id="resultValue">?</div>
+<div class="result-meta" id="resultMeta">Выберите режим и нажмите «Сгенерировать».</div>
+<div class="result-actions">
+<button class="mini" id="copyResult" type="button">Копировать результат</button>
+<button class="mini" id="generateAgain" type="button">Сгенерировать ещё раз</button>
+</div>
+</div>
+<div class="history">
+<div class="history-title">Недавние результаты</div>
+<div class="history-list" id="historyList"><div class="history-item"><strong>Результатов пока нет</strong><span>—</span></div></div>
+</div>
+</aside>
+</section>
+<section class="learn">
+<h2>Откуда берётся случайность?</h2>
+<div class="learn-grid">
+<article class="learn-card">
+<h3>⚡ Атмосферная случайность</h3>
+<p>RANDOM.ORG создаёт настоящие случайные значения на основе атмосферного радиошума. На него влияют грозы и другая естественная электрическая активность.</p>
+<p>CloudByAlex обращается к RANDOM.ORG через небольшой серверный Worker, чтобы безопасно использовать источник из браузера.</p>
+</article>
+<article class="learn-card">
+<h3>🔐 Безопасная случайность браузера</h3>
+<p>Современные браузеры используют Web Crypto API. Функция `crypto.getRandomValues()` предназначена для криптографических задач и значительно надёжнее обычного `Math.random()`.</p>
+<p>Этот режим полностью работает на вашем устройстве и не требует сетевого запроса.</p>
+</article>
+<article class="learn-card">
+<h3>🎲 Для чего это использовать?</h3>
+<p>Выберите победителя, бросьте кубик, подбросьте монету, выберите ресторан или случайного участника команды, создайте тестовые данные или примите нейтральное решение.</p>
+</article>
+<article class="learn-card">
+<h3>⚠️ Не для регулируемых азартных игр</h3>
+<p>Этот бесплатный инструмент предназначен для обычных случайных выборов и экспериментов. Для регулируемых розыгрышей нужны специализированные сертифицированные системы.</p>
+</article>
+</div>
+</section>
 </main>
-
-<footer><div class="wrap">CloudByAlex Tools · Useful utilities with transparent technology.</div></footer>
-
+<footer><div class="wrap">CloudByAlex Tools · Полезные инструменты с понятной технологией.</div></footer>
 <script>
 (() => {
   // After the Cloudflare Worker is deployed, replace the empty string below
@@ -235,7 +226,7 @@
   function secureInt(min,max){
     min = Math.ceil(min); max = Math.floor(max);
     const range = max - min + 1;
-    if(!Number.isSafeInteger(min)||!Number.isSafeInteger(max)||range<=0||range>4294967296) throw new Error("Range is too large.");
+    if(!Number.isSafeInteger(min)||!Number.isSafeInteger(max)||range<=0||range>4294967296) throw new Error("Диапазон слишком большой.");
     const maxUint = 0x100000000;
     const limit = maxUint - (maxUint % range);
     const a = new Uint32Array(1);
@@ -250,7 +241,7 @@
 
   async function atmosphericNumbers(min,max,count){
     if(!ATMOSPHERIC_ENDPOINT){
-      throw new Error("Atmospheric mode needs the Cloudflare Worker URL. Browser Secure mode works now.");
+      throw new Error("Для атмосферного режима нужен Cloudflare Worker. Безопасный режим браузера работает.");
     }
     const r = await fetch(ATMOSPHERIC_ENDPOINT,{
       method:"POST",
@@ -258,8 +249,8 @@
       body:JSON.stringify({min,max,count})
     });
     const d = await r.json().catch(()=>({}));
-    if(!r.ok) throw new Error(d.error || "Atmospheric service is temporarily unavailable.");
-    if(!Array.isArray(d.numbers)) throw new Error("Invalid atmospheric response.");
+    if(!r.ok) throw new Error(d.error || "Атмосферный сервис временно недоступен.");
+    if(!Array.isArray(d.numbers)) throw new Error("Некорректный ответ атмосферного сервиса.");
     return d.numbers;
   }
 
@@ -271,12 +262,12 @@
   function updateSource(){
     document.querySelectorAll(".source-btn").forEach(b=>b.classList.toggle("active",b.dataset.source===source));
     if(source==="browser"){
-      $("sourceNote").innerHTML="<strong>Source:</strong> Browser Web Crypto (<code>crypto.getRandomValues</code>). Cryptographically strong pseudorandomness generated locally.";
-      setStatus("Browser Secure mode is ready.","good");
+      $("sourceNote").innerHTML="<strong>Источник:</strong> Browser Web Crypto (<code>crypto.getRandomValues</code>). Криптографически стойкая псевдослучайность создаётся локально.";
+      setStatus("Безопасный режим браузера готов.","good");
     }else{
-      $("sourceNote").innerHTML="<strong>Source:</strong> RANDOM.ORG atmospheric noise through a Cloudflare Worker. Each click requests fresh physical randomness.";
-      if(ATMOSPHERIC_ENDPOINT) setStatus("Atmospheric Noise mode is ready.","good");
-      else setStatus("Atmospheric mode needs a one-time Cloudflare Worker setup. We'll connect it next.","warn");
+      $("sourceNote").innerHTML="<strong>Источник:</strong> атмосферный шум RANDOM.ORG через Cloudflare Worker. Каждый клик запрашивает новую физическую случайность.";
+      if(ATMOSPHERIC_ENDPOINT) setStatus("Режим атмосферного шума готов.","good");
+      else setStatus("Для атмосферного режима нужна настройка Cloudflare Worker.","warn");
     }
   }
 
@@ -292,36 +283,36 @@
 
   async function generate(){
     const btn=$("generateBtn");
-    btn.disabled=true; btn.textContent="Generating…";
+    btn.disabled=true; btn.textContent="Генерируем…";
     try{
       let min,max,count,values,display,kicker,meta;
 
       if(mode==="picker"){
         const options=$("pickerText").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
-        if(options.length<2) throw new Error("Enter at least two options.");
+        if(options.length<2) throw new Error("Введите минимум два варианта.");
         min=0;max=options.length-1;count=1;
         values = source==="browser" ? browserNumbers(min,max,count) : await atmosphericNumbers(min,max,count);
         display=options[values[0]];
-        kicker="Random Pick";
-        meta=`Selected from ${options.length} options · ${source==="browser"?"Browser Secure":"Atmospheric Noise"}`;
+        kicker="Случайный выбор";
+        meta=`Выбрано из ${options.length} вариантов · ${source==="browser"?"Безопасный браузер":"Атмосферный шум"}`;
       }else{
         min=Number($("min").value); max=Number($("max").value); count=Number($("count").value);
-        if(!Number.isInteger(min)||!Number.isInteger(max)||min>max) throw new Error("Check your minimum and maximum.");
-        if(!Number.isInteger(count)||count<1||count>20) throw new Error("Quantity must be between 1 and 20.");
+        if(!Number.isInteger(min)||!Number.isInteger(max)||min>max) throw new Error("Проверьте минимум и максимум.");
+        if(!Number.isInteger(count)||count<1||count>20) throw new Error("Количество должно быть от 1 до 20.");
         values = source==="browser" ? browserNumbers(min,max,count) : await atmosphericNumbers(min,max,count);
 
         if(mode==="coin"){
           display=values[0]===0 ? "HEADS" : "TAILS";
-          kicker="Coin Flip";
-          meta=source==="browser"?"Secure browser randomness":"RANDOM.ORG atmospheric noise";
+          kicker="Монета";
+          meta=source==="browser"?"Безопасная случайность браузера":"Атмосферный шум RANDOM.ORG";
         }else if(mode==="dice"){
           display=String(values[0]);
-          kicker="Dice Roll";
-          meta=`1–6 · ${source==="browser"?"Browser Secure":"Atmospheric Noise"}`;
+          kicker="Бросок кубика";
+          meta=`1–6 · ${source==="browser"?"Безопасный браузер":"Атмосферный шум"}`;
         }else{
           display=values.join(", ");
-          kicker=count===1?"Random Number":"Random Numbers";
-          meta=`Range ${min.toLocaleString()} to ${max.toLocaleString()} · ${source==="browser"?"Browser Secure":"Atmospheric Noise"}`;
+          kicker=count===1?"Случайное число":"Случайные числа";
+          meta=`Диапазон ${min.toLocaleString()}–${max.toLocaleString()} · ${source==="browser"?"Безопасный браузер":"Атмосферный шум"}`;
         }
       }
 
@@ -331,11 +322,11 @@
       $("resultKicker").textContent=kicker;
       $("resultMeta").textContent=meta;
       addHistory(display,source==="browser"?"Browser":"Atmospheric");
-      setStatus(source==="browser"?"Generated locally with Web Crypto.":"Fresh atmospheric randomness received from RANDOM.ORG.","good");
+      setStatus(source==="browser"?"Создано локально с помощью Web Crypto.":"Получена новая атмосферная случайность от RANDOM.ORG.","good");
     }catch(e){
-      setStatus(e.message||"Generation failed.","error");
+      setStatus(e.message||"Не удалось сгенерировать результат.","error");
     }finally{
-      btn.disabled=false;btn.textContent="Generate →";
+      btn.disabled=false;btn.textContent="Сгенерировать →";
     }
   }
 
@@ -365,13 +356,12 @@
   $("generateAgain").addEventListener("click",generate);
   $("copyResult").addEventListener("click",async()=>{
     if(!lastResult)return;
-    try{await navigator.clipboard.writeText(lastResult);const t=$("copyResult").textContent;$("copyResult").textContent="Copied ✓";setTimeout(()=>$("copyResult").textContent=t,1200)}catch{}
+    try{await navigator.clipboard.writeText(lastResult);const t=$("copyResult").textContent;$("copyResult").textContent="Скопировано ✓";setTimeout(()=>$("copyResult").textContent=t,1200)}catch{}
   });
 
   updateSource();updateMode();
 })();
 </script>
-
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics --><script data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}' src="https://static.cloudflareinsights.com/beacon.min.js" type="module"></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

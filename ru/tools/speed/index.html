@@ -1,16 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Тест скорости интернета — загрузка, отдача и пинг | CloudByAlex</title>
-  <meta name="description" content="Бесплатный тест скорости интернета в браузере. Проверьте загрузку, отдачу и пинг до сети Cloudflare за несколько секунд.">
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://cloudbyalex.com/ru/tools/speed/">
-  <link rel="alternate" hreflang="en" href="https://cloudbyalex.com/tools/speed/">
-  <link rel="alternate" hreflang="ru" href="https://cloudbyalex.com/ru/tools/speed/">
-  <link rel="alternate" hreflang="x-default" href="https://cloudbyalex.com/tools/speed/">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Тест скорости интернета — загрузка, отдача и пинг | CloudByAlex</title>
+<meta content="Бесплатный тест скорости интернета в браузере. Проверьте загрузку, отдачу и пинг до сети Cloudflare за несколько секунд." name="description"/>
+<meta content="index,follow" name="robots"/>
+<link href="https://cloudbyalex.com/ru/tools/speed/" rel="canonical"/>
+<link href="https://cloudbyalex.com/tools/speed/" hreflang="en" rel="alternate"/>
+<link href="https://cloudbyalex.com/ru/tools/speed/" hreflang="ru" rel="alternate"/>
+<link href="https://cloudbyalex.com/tools/speed/" hreflang="x-default" rel="alternate"/>
+<style>
     :root{--bg:#070812;--text:#f5f7ff;--muted:#96a5be;--cyan:#65dfff;--green:#69edb5;--violet:#c36cff;--yellow:#ffd36b;--line:rgba(255,255,255,.09)}
     *{box-sizing:border-box}html{scroll-behavior:smooth}
     body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:
@@ -65,51 +66,44 @@
 <script>(()=>{try{if(localStorage.getItem("cloudbyalex-lang")==="en")location.replace("/tools/speed/"+location.search+location.hash)}catch(e){}})();</script>
 </head>
 <body>
-<nav><div class="wrap nav-inner"><a class="brand" href="../../">☁ cloudbyalex</a><div class="nav-actions"><span class="lang-switch" aria-label="Language selector"><span class="globe" aria-hidden="true">🌐</span><a href="/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" href="/ru/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a class="active" href="/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a href="/ru/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a class="back" href="../../#tools">← Назад к инструментам</a></div></div></nav>
-
+<nav><div class="wrap nav-inner"><a class="brand" href="../../">☁ cloudbyalex</a><div class="nav-actions"><span aria-label="Language selector" class="lang-switch"><span aria-hidden="true" class="globe">🌐</span><a href="/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" class="active" href="/ru/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a href="/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" href="/ru/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a><a class="back" href="../../#tools">← Назад к инструментам</a></div></div></nav>
 <header class="hero wrap">
-  <div class="eyebrow"><span class="dot"></span> Быстрый тест интернета</div>
-  <h1>Какая скорость <span class="grad">вашего интернета?</span></h1>
-  <p class="lead">Быстро измерьте скорость загрузки, отдачи и пинг до ближайшей edge-сети Cloudflare прямо в браузере.</p>
+<div class="eyebrow"><span class="dot"></span> Быстрый тест интернета</div>
+<h1>Какая скорость <span class="grad">вашего интернета?</span></h1>
+<p class="lead">Быстро измерьте скорость загрузки, отдачи и пинг до ближайшей edge-сети Cloudflare прямо в браузере.</p>
 </header>
-
 <main class="wrap">
-  <section class="tester"><div class="card">
-    <div class="gauge-wrap">
-      <div class="gauge" id="gauge">
-        <div class="gauge-inner">
-          <div class="phase" id="phase">Готов</div>
-          <div class="gauge-value" id="gaugeValue">0</div>
-          <div class="gauge-unit" id="gaugeUnit">Mbps</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="metrics">
-      <div class="metric"><div class="metric-label">Загрузка</div><div class="metric-value" id="download">—</div><div class="metric-unit">Mbps</div></div>
-      <div class="metric"><div class="metric-label">Отдача</div><div class="metric-value" id="upload">—</div><div class="metric-unit">Mbps</div></div>
-      <div class="metric"><div class="metric-label">Пинг</div><div class="metric-value" id="ping">—</div><div class="metric-unit">ms</div></div>
-    </div>
-
-    <button class="start" id="startBtn" type="button">Проверить скорость →</button>
-    <div class="progress"><span id="progressBar"></span></div>
-    <div class="status" id="status">Тест использует небольшой объём трафика и обычно занимает несколько секунд.</div>
-    <div class="quality" id="quality"><strong id="qualityTitle"></strong><span id="qualityText"></span></div>
-  </div></section>
-
-  <section class="info">
-    <h2>Что означают результаты</h2>
-    <div class="info-grid">
-      <article class="info-card"><h3>↓ Скорость загрузки</h3><p>Как быстро данные приходят на устройство. Чем выше скорость, тем комфортнее стриминг, загрузка файлов и тяжёлых страниц.</p></article>
-      <article class="info-card"><h3>↑ Скорость отдачи</h3><p>Как быстро устройство отправляет данные. Это важно для видеозвонков, облачных резервных копий и больших файлов.</p></article>
-      <article class="info-card"><h3>↔ Пинг / задержка</h3><p>Время ответа туда и обратно до Cloudflare edge. Чем ниже задержка, тем отзывчивее игры, звонки и интерактивные приложения.</p></article>
-      <article class="info-card"><h3>Почему результаты могут отличаться</h3><p>На результат влияют Wi‑Fi, VPN, нагрузка устройства, ограничения браузера и текущий трафик. Это быстрый ориентировочный тест, а не сертифицированный замер провайдера.</p></article>
-    </div>
-  </section>
+<section class="tester"><div class="card">
+<div class="gauge-wrap">
+<div class="gauge" id="gauge">
+<div class="gauge-inner">
+<div class="phase" id="phase">Готов</div>
+<div class="gauge-value" id="gaugeValue">0</div>
+<div class="gauge-unit" id="gaugeUnit">Mbps</div>
+</div>
+</div>
+</div>
+<div class="metrics">
+<div class="metric"><div class="metric-label">Загрузка</div><div class="metric-value" id="download">—</div><div class="metric-unit">Mbps</div></div>
+<div class="metric"><div class="metric-label">Отдача</div><div class="metric-value" id="upload">—</div><div class="metric-unit">Mbps</div></div>
+<div class="metric"><div class="metric-label">Пинг</div><div class="metric-value" id="ping">—</div><div class="metric-unit">ms</div></div>
+</div>
+<button class="start" id="startBtn" type="button">Проверить скорость →</button>
+<div class="progress"><span id="progressBar"></span></div>
+<div class="status" id="status">Тест использует небольшой объём трафика и обычно занимает несколько секунд.</div>
+<div class="quality" id="quality"><strong id="qualityTitle"></strong><span id="qualityText"></span></div>
+</div></section>
+<section class="info">
+<h2>Что означают результаты</h2>
+<div class="info-grid">
+<article class="info-card"><h3>↓ Скорость загрузки</h3><p>Как быстро данные приходят на устройство. Чем выше скорость, тем комфортнее стриминг, загрузка файлов и тяжёлых страниц.</p></article>
+<article class="info-card"><h3>↑ Скорость отдачи</h3><p>Как быстро устройство отправляет данные. Это важно для видеозвонков, облачных резервных копий и больших файлов.</p></article>
+<article class="info-card"><h3>↔ Пинг / задержка</h3><p>Время ответа туда и обратно до Cloudflare edge. Чем ниже задержка, тем отзывчивее игры, звонки и интерактивные приложения.</p></article>
+<article class="info-card"><h3>Почему результаты могут отличаться</h3><p>На результат влияют Wi‑Fi, VPN, нагрузка устройства, ограничения браузера и текущий трафик. Это быстрый ориентировочный тест, а не сертифицированный замер провайдера.</p></article>
+</div>
+</section>
 </main>
-
 <footer><div class="wrap">CloudByAlex Tools · Тест скорости запускается прямо из вашего браузера.</div></footer>
-
 <script>
 (() => {
   const ENDPOINT = "https://cloudbyalex-random.alexdellsone.workers.dev";
@@ -222,7 +216,6 @@
   $("startBtn").addEventListener("click",run);
 })();
 </script>
-
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics --><script data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}' src="https://static.cloudflareinsights.com/beacon.min.js" type="module"></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
