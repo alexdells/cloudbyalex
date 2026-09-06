@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Internet Speed Test — Download, Upload & Ping | CloudByAlex</title>
-  <meta name="description" content="Free browser-based internet speed test. Check approximate download speed, upload speed and ping to Cloudflare's edge network in seconds.">
+  <title>Тест скорости интернета — загрузка, отдача и пинг | CloudByAlex</title>
+  <meta name="description" content="Бесплатный тест скорости интернета в браузере. Проверьте загрузку, отдачу и пинг до сети Cloudflare за несколько секунд.">
   <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://cloudbyalex.com/tools/speed/">
+  <link rel="canonical" href="https://cloudbyalex.com/ru/tools/speed/">
   <link rel="alternate" hreflang="en" href="https://cloudbyalex.com/tools/speed/">
   <link rel="alternate" hreflang="ru" href="https://cloudbyalex.com/ru/tools/speed/">
   <link rel="alternate" hreflang="x-default" href="https://cloudbyalex.com/tools/speed/">
@@ -62,15 +62,15 @@
     .nav-actions{display:flex;align-items:center;gap:10px}
 
   </style>
-<script>(()=>{try{const s=localStorage.getItem("cloudbyalex-lang");const ls=navigator.languages?.length?navigator.languages:[navigator.language||""];const r=ls.some(x=>String(x).toLowerCase().startsWith("ru"));if(s==="ru"||(!s&&r))location.replace("/ru/tools/speed/"+location.search+location.hash)}catch(e){}})();</script>
+<script>(()=>{try{if(localStorage.getItem("cloudbyalex-lang")==="en")location.replace("/tools/speed/"+location.search+location.hash)}catch(e){}})();</script>
 </head>
 <body>
-<nav><div class="wrap nav-inner"><a class="brand" href="../../">☁ cloudbyalex</a><div class="nav-actions"><span class="lang-switch" aria-label="Language selector"><span class="globe" aria-hidden="true">🌐</span><a class="active" href="/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a href="/ru/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a class="back" href="../../#tools">← Back to tools</a></div></div></nav>
+<nav><div class="wrap nav-inner"><a class="brand" href="../../">☁ cloudbyalex</a><div class="nav-actions"><span class="lang-switch" aria-label="Language selector"><span class="globe" aria-hidden="true">🌐</span><a href="/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" href="/ru/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a class="active" href="/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a href="/ru/tools/speed/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a class="back" href="../../#tools">← Назад к инструментам</a></div></div></nav>
 
 <header class="hero wrap">
-  <div class="eyebrow"><span class="dot"></span> Quick internet test</div>
-  <h1>How fast is <span class="grad">your internet?</span></h1>
-  <p class="lead">Run a quick browser-based test for download speed, upload speed and ping to Cloudflare's edge network.</p>
+  <div class="eyebrow"><span class="dot"></span> Быстрый тест интернета</div>
+  <h1>Какая скорость <span class="grad">вашего интернета?</span></h1>
+  <p class="lead">Быстро измерьте скорость загрузки, отдачи и пинг до ближайшей edge-сети Cloudflare прямо в браузере.</p>
 </header>
 
 <main class="wrap">
@@ -78,7 +78,7 @@
     <div class="gauge-wrap">
       <div class="gauge" id="gauge">
         <div class="gauge-inner">
-          <div class="phase" id="phase">Ready</div>
+          <div class="phase" id="phase">Готов</div>
           <div class="gauge-value" id="gaugeValue">0</div>
           <div class="gauge-unit" id="gaugeUnit">Mbps</div>
         </div>
@@ -86,29 +86,29 @@
     </div>
 
     <div class="metrics">
-      <div class="metric"><div class="metric-label">Download</div><div class="metric-value" id="download">—</div><div class="metric-unit">Mbps</div></div>
-      <div class="metric"><div class="metric-label">Upload</div><div class="metric-value" id="upload">—</div><div class="metric-unit">Mbps</div></div>
-      <div class="metric"><div class="metric-label">Ping</div><div class="metric-value" id="ping">—</div><div class="metric-unit">ms</div></div>
+      <div class="metric"><div class="metric-label">Загрузка</div><div class="metric-value" id="download">—</div><div class="metric-unit">Mbps</div></div>
+      <div class="metric"><div class="metric-label">Отдача</div><div class="metric-value" id="upload">—</div><div class="metric-unit">Mbps</div></div>
+      <div class="metric"><div class="metric-label">Пинг</div><div class="metric-value" id="ping">—</div><div class="metric-unit">ms</div></div>
     </div>
 
-    <button class="start" id="startBtn" type="button">Start Speed Test →</button>
+    <button class="start" id="startBtn" type="button">Проверить скорость →</button>
     <div class="progress"><span id="progressBar"></span></div>
-    <div class="status" id="status">The test uses a small amount of data and usually finishes in a few seconds.</div>
+    <div class="status" id="status">Тест использует небольшой объём трафика и обычно занимает несколько секунд.</div>
     <div class="quality" id="quality"><strong id="qualityTitle"></strong><span id="qualityText"></span></div>
   </div></section>
 
   <section class="info">
-    <h2>What the numbers mean</h2>
+    <h2>Что означают результаты</h2>
     <div class="info-grid">
-      <article class="info-card"><h3>↓ Download speed</h3><p>How quickly data reaches your device. Higher download speed helps with streaming, large downloads and loading media-heavy pages.</p></article>
-      <article class="info-card"><h3>↑ Upload speed</h3><p>How quickly your device can send data. Upload matters for video calls, cloud backups and sending large files.</p></article>
-      <article class="info-card"><h3>↔ Ping / latency</h3><p>The round-trip response time to the Cloudflare edge. Lower latency generally feels more responsive for gaming, calls and interactive apps.</p></article>
-      <article class="info-card"><h3>Why results can vary</h3><p>Wi-Fi signal, VPNs, device load, browser limits and nearby network traffic can all change the result. Treat this as a quick estimate, not a certified ISP benchmark.</p></article>
+      <article class="info-card"><h3>↓ Скорость загрузки</h3><p>Как быстро данные приходят на устройство. Чем выше скорость, тем комфортнее стриминг, загрузка файлов и тяжёлых страниц.</p></article>
+      <article class="info-card"><h3>↑ Скорость отдачи</h3><p>Как быстро устройство отправляет данные. Это важно для видеозвонков, облачных резервных копий и больших файлов.</p></article>
+      <article class="info-card"><h3>↔ Пинг / задержка</h3><p>Время ответа туда и обратно до Cloudflare edge. Чем ниже задержка, тем отзывчивее игры, звонки и интерактивные приложения.</p></article>
+      <article class="info-card"><h3>Почему результаты могут отличаться</h3><p>На результат влияют Wi‑Fi, VPN, нагрузка устройства, ограничения браузера и текущий трафик. Это быстрый ориентировочный тест, а не сертифицированный замер провайдера.</p></article>
     </div>
   </section>
 </main>
 
-<footer><div class="wrap">CloudByAlex Tools · Your speed test runs directly from your browser.</div></footer>
+<footer><div class="wrap">CloudByAlex Tools · Тест скорости запускается прямо из вашего браузера.</div></footer>
 
 <script>
 (() => {
@@ -132,7 +132,7 @@
     const r=await fetch(url,{...options,cache:"no-store"});
     const buf=await r.arrayBuffer();
     const t1=performance.now();
-    if(!r.ok)throw new Error("Network test endpoint returned an error.");
+    if(!r.ok)throw new Error("Сервер теста скорости вернул ошибку.");
     return {ms:t1-t0,bytes:buf.byteLength};
   }
 
@@ -141,10 +141,10 @@
     for(let i=0;i<5;i++){
       const t0=performance.now();
       const r=await fetch(`${ENDPOINT}/speed/ping?t=${Date.now()}-${i}`,{cache:"no-store"});
-      if(!r.ok)throw new Error("Ping test failed.");
+      if(!r.ok)throw new Error("Не удалось измерить пинг.");
       await r.text();
       samples.push(performance.now()-t0);
-      showGauge(samples[samples.length-1],"ms","Testing ping");
+      showGauge(samples[samples.length-1],"ms","Проверяем пинг");
       $("progressBar").style.width=`${10+i*6}%`;
       await sleep(70);
     }
@@ -160,7 +160,7 @@
       const r=await timedFetch(`${ENDPOINT}/speed/download?bytes=${size}&t=${Date.now()}-${i}`);
       const speed=mbps(r.bytes,r.ms);
       results.push(speed);
-      showGauge(speed,"Mbps","Testing download");
+      showGauge(speed,"Mbps","Проверяем загрузку");
       $("progressBar").style.width=`${45+i*15}%`;
     }
     return Math.max(...results);
@@ -180,42 +180,42 @@
         method:"POST",headers:{"Content-Type":"application/octet-stream"},body:payload,cache:"no-store"
       });
       const t1=performance.now();
-      if(!r.ok)throw new Error("Upload test failed.");
+      if(!r.ok)throw new Error("Не удалось измерить скорость отдачи.");
       await r.json();
       const speed=mbps(bytes,t1-t0);
       speeds.push(speed);
-      showGauge(speed,"Mbps","Testing upload");
+      showGauge(speed,"Mbps","Проверяем отдачу");
       $("progressBar").style.width=`${78+i*10}%`;
     }
     return Math.max(...speeds);
   }
 
   function quality(download,ping){
-    if(download>=100 && ping<40)return ["Excellent connection","Great for 4K streaming, video calls and most gaming."];
-    if(download>=40 && ping<70)return ["Very good connection","Comfortable for HD/4K streaming, work and everyday use."];
-    if(download>=15)return ["Good everyday connection","Fine for browsing, HD streaming and typical video calls."];
-    if(download>=5)return ["Basic connection","Usable for browsing and lighter streaming, but large downloads may feel slow."];
-    return ["Slow connection","You may notice delays with streaming, calls and large downloads."];
+    if(download>=100 && ping<40)return ["Отличное соединение","Подходит для 4K-стриминга, видеозвонков и большинства игр."];
+    if(download>=40 && ping<70)return ["Очень хорошее соединение","Комфортно для HD/4K, работы и обычного использования."];
+    if(download>=15)return ["Хорошее соединение","Подходит для сайтов, HD-видео и обычных видеозвонков."];
+    if(download>=5)return ["Базовое соединение","Для сайтов и лёгкого стриминга достаточно, но большие файлы будут загружаться медленно."];
+    return ["Медленное соединение","Возможны задержки при видео, звонках и загрузке больших файлов."];
   }
 
   async function run(){
     if(running)return;running=true;
-    $("startBtn").disabled=true;$("startBtn").textContent="Testing…";
+    $("startBtn").disabled=true;$("startBtn").textContent="Тестируем…";
     $("download").textContent="—";$("upload").textContent="—";$("ping").textContent="—";
     $("quality").style.display="none";$("progressBar").style.width="4%";
-    $("status").textContent="Connecting to the Cloudflare edge…";
+    $("status").textContent="Подключаемся к Cloudflare edge…";
     try{
-      const p=await testPing();$("ping").textContent=Math.round(p);$("status").textContent="Ping complete. Measuring download…";
-      const d=await testDownload();$("download").textContent=d>=100?Math.round(d):d.toFixed(1);$("status").textContent="Download complete. Measuring upload…";
+      const p=await testPing();$("ping").textContent=Math.round(p);$("status").textContent="Пинг готов. Измеряем загрузку…";
+      const d=await testDownload();$("download").textContent=d>=100?Math.round(d):d.toFixed(1);$("status").textContent="Загрузка готова. Измеряем отдачу…";
       const u=await testUpload();$("upload").textContent=u>=100?Math.round(u):u.toFixed(1);
-      $("progressBar").style.width="100%";showGauge(d,"Mbps","Complete");
+      $("progressBar").style.width="100%";showGauge(d,"Mbps","Готово");
       const [title,text]=quality(d,p);$("qualityTitle").textContent=title;$("qualityText").textContent=text;$("quality").style.display="block";
-      $("status").textContent="Test complete · measured to Cloudflare edge · results can vary between runs.";
+      $("status").textContent="Тест завершён · измерение до Cloudflare edge · результаты могут немного отличаться.";
     }catch(e){
-      $("status").textContent=e.message||"Speed test failed. Please try again.";
-      $("progressBar").style.width="0%";$("phase").textContent="Try again";
+      $("status").textContent=e.message||"Тест скорости не удался. Попробуйте ещё раз.";
+      $("progressBar").style.width="0%";$("phase").textContent="Повторить";
     }finally{
-      $("startBtn").disabled=false;$("startBtn").textContent="Run Again →";running=false;
+      $("startBtn").disabled=false;$("startBtn").textContent="Проверить ещё раз →";running=false;
     }
   }
 
