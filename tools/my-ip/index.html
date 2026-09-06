@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>What Is My IP Address? Free IP Checker | CloudByAlex</title>
-  <meta name="description" content="Check your public IP address, approximate location, ISP, browser, operating system, device, screen size and network details instantly.">
+  <meta name="description" content="Check both your public IPv4 and IPv6 addresses, approximate location, ISP, browser, operating system, device and network details instantly.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://cloudbyalex.com/tools/my-ip/">
   <script type="application/ld+json">
@@ -29,9 +29,16 @@
     .lead{max-width:720px;margin:auto;color:var(--muted);font-size:15px;line-height:1.75}
     .ip-shell{margin:28px 0 18px;padding:1px;border-radius:30px;background:linear-gradient(120deg,rgba(101,223,255,.34),rgba(255,255,255,.07) 38%,rgba(195,108,255,.26));box-shadow:0 30px 90px rgba(0,0,0,.28)}
     .ip-card{border-radius:29px;padding:34px;background:radial-gradient(circle at 0 0,rgba(101,223,255,.09),transparent 32%),radial-gradient(circle at 100% 0,rgba(195,108,255,.08),transparent 29%),rgba(10,13,24,.96)}
-    .ip-top{display:flex;justify-content:space-between;gap:22px;align-items:flex-start}.ip-label{color:#91a0ba;font-size:11px;font-weight:850;letter-spacing:.11em;text-transform:uppercase;margin-bottom:10px}
-    .ip-value{font:800 clamp(31px,5vw,58px)/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-.055em;word-break:break-all}
+    .ip-top{display:flex;justify-content:space-between;gap:22px;align-items:flex-start}
+    .ip-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+    .ip-box{padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.025);min-width:0}
+    .ip-box.primary{background:linear-gradient(135deg,rgba(101,223,255,.07),rgba(255,255,255,.025));border-color:rgba(101,223,255,.16)}
+    .ip-label{color:#91a0ba;font-size:10px;font-weight:850;letter-spacing:.11em;text-transform:uppercase;margin-bottom:9px}
+    .ip-value{font:800 clamp(20px,3.2vw,38px)/1.12 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-.045em;word-break:break-all}
+    .ip-box.ipv6 .ip-value{font-size:clamp(15px,2vw,24px);line-height:1.25}
+    .ip-status{margin-top:8px;color:#7686a2;font-size:10px}
     .ip-sub{margin-top:11px;color:#7f8ea9;font-size:12px}.actions{display:flex;gap:9px;flex-wrap:wrap}
+    .copy-small{margin-top:12px;padding:8px 10px;font-size:10px}
     button{font:inherit}.btn{border:1px solid var(--line);cursor:pointer;padding:11px 14px;border-radius:13px;color:#dce5f7;background:rgba(255,255,255,.045);font-size:12px;font-weight:820;transition:.18s}
     .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.075)}.btn.primary{border:0;color:#07101a;background:linear-gradient(135deg,#c7f9ff,#bdc6ff 57%,#e5b9ff)}
     .pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:25px}.pill{padding:8px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.025);color:#aebad0;font-size:11px}.pill b{color:#eff5ff}
@@ -43,8 +50,8 @@
     details{border-bottom:1px solid var(--line)}summary{cursor:pointer;list-style:none;padding:18px 2px;font-size:14px;font-weight:820}details p{margin:-4px 0 18px;color:#8f9db6;font-size:12px;line-height:1.75;max-width:880px}
     footer{margin-top:54px;padding:26px 0 40px;border-top:1px solid rgba(255,255,255,.055);text-align:center;color:#71809a;font-size:11px}
     .loading{opacity:.65}.error{color:#ff9aac}
-    @media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.ip-top{flex-direction:column}}
-    @media(max-width:620px){.wrap{width:min(100% - 22px,1160px)}.hero{padding:44px 0 20px}.grid,.insights{grid-template-columns:1fr}.ip-card{padding:23px}.actions{width:100%}.btn{flex:1}.ip-value{font-size:32px}}
+    @media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.ip-top{flex-direction:column}.ip-list{width:100%}}
+    @media(max-width:620px){.wrap{width:min(100% - 22px,1160px)}.hero{padding:44px 0 20px}.grid,.insights,.ip-list{grid-template-columns:1fr}.ip-card{padding:23px}.actions{width:100%}.btn{flex:1}.ip-value{font-size:26px}.ip-box.ipv6 .ip-value{font-size:17px}}
   </style>
 </head>
 <body>
@@ -59,10 +66,27 @@
   <main class="wrap">
     <section class="ip-shell"><div class="ip-card">
       <div class="ip-top">
-        <div><div class="ip-label">Your public IP address</div><div class="ip-value loading" id="ipValue">Detecting…</div><div class="ip-sub" id="ipSub">Checking your public internet connection.</div></div>
-        <div class="actions"><button class="btn primary" id="copyIp">Copy IP</button><button class="btn" id="refreshBtn">Refresh</button><button class="btn" id="copyAll">Copy details</button></div>
+        <div style="flex:1;min-width:0">
+          <div class="ip-label">Your public IP addresses</div>
+          <div class="ip-list">
+            <div class="ip-box primary">
+              <div class="ip-label">IPv4</div>
+              <div class="ip-value loading" id="ipv4Value">Detecting…</div>
+              <div class="ip-status" id="ipv4Status">Checking IPv4 connectivity</div>
+              <button class="btn copy-small" id="copyIpv4" type="button">Copy IPv4</button>
+            </div>
+            <div class="ip-box ipv6">
+              <div class="ip-label">IPv6</div>
+              <div class="ip-value loading" id="ipv6Value">Detecting…</div>
+              <div class="ip-status" id="ipv6Status">Checking IPv6 connectivity</div>
+              <button class="btn copy-small" id="copyIpv6" type="button">Copy IPv6</button>
+            </div>
+          </div>
+          <div class="ip-sub" id="ipSub">Checking both public internet protocols.</div>
+        </div>
+        <div class="actions"><button class="btn" id="refreshBtn">Refresh</button><button class="btn primary" id="copyAll">Copy all details</button></div>
       </div>
-      <div class="pills"><div class="pill"><b id="ipType">—</b> address</div><div class="pill">Connection: <b id="secureState">HTTPS</b></div><div class="pill">Timezone: <b id="timePill">—</b></div><div class="pill">Device: <b id="devicePill">—</b></div></div>
+      <div class="pills"><div class="pill">IPv4: <b id="ipv4Pill">—</b></div><div class="pill">IPv6: <b id="ipv6Pill">—</b></div><div class="pill">Connection: <b id="secureState">HTTPS</b></div><div class="pill">Device: <b id="devicePill">—</b></div></div>
     </div></section>
 
     <section>
@@ -86,7 +110,7 @@
         <article class="insight"><h3>It can often indicate</h3><ul><li>✓ Your public-facing IP address</li><li>✓ An approximate city, region or country</li><li>✓ Your ISP or network organization</li><li>✓ A likely timezone or network region</li></ul></article>
         <article class="insight"><h3>It does not reliably reveal</h3><ul><li>— Your exact home or apartment address</li><li>— Your name, passwords or private files</li><li>— Your precise GPS location</li><li>— A city estimate that is always physically exact</li></ul></article>
       </div>
-      <div class="privacy"><strong>Transparent by design.</strong> This tool does not submit your connection details to a CloudByAlex backend. Public IP and approximate geolocation are requested directly from ipapi.co in your browser. Cloudflare Web Analytics is also enabled on this website for aggregate traffic analytics.</div>
+      <div class="privacy"><strong>Transparent by design.</strong> This tool does not submit your connection details to a CloudByAlex backend. IPv4 and IPv6 are checked directly in your browser using ipify; approximate geolocation is requested from ipapi.co. Cloudflare Web Analytics is also enabled on this website for aggregate traffic analytics.</div>
     </section>
 
     <section>
@@ -102,37 +126,201 @@
 
 <script>
 (() => {
-  const $=id=>document.getElementById(id); let data={};
-  function browser(){const u=navigator.userAgent;let m;if((m=u.match(/Edg\/([\d.]+)/)))return"Microsoft Edge "+m[1].split(".")[0];if((m=u.match(/Chrome\/([\d.]+)/))&&!/Edg|OPR/.test(u))return"Google Chrome "+m[1].split(".")[0];if((m=u.match(/Firefox\/([\d.]+)/)))return"Mozilla Firefox "+m[1].split(".")[0];if((m=u.match(/Version\/([\d.]+).*Safari/)))return"Safari "+m[1].split(".")[0];return"Unknown browser"}
-  function os(){const u=navigator.userAgent;if(/Windows NT 10.0/.test(u))return"Windows 10 / 11";if(/iPhone|iPad|iPod/.test(u))return"iOS";if(/Android/.test(u))return"Android";if(/Mac OS X/.test(u))return"macOS";if(/Linux/.test(u))return"Linux";return navigator.platform||"Unknown OS"}
-  function device(){const u=navigator.userAgent;if(/iPad|Tablet|Android(?!.*Mobile)/i.test(u))return"Tablet";if(/Mobi|iPhone|Android/i.test(u))return"Mobile";return"Desktop"}
-  function local(){
-    $("browserValue").textContent=browser();$("osValue").textContent=os();$("deviceValue").textContent=device();$("devicePill").textContent=device();
-    $("screenValue").textContent=`${screen.width} × ${screen.height}`;$("pixelValue").textContent=`Device pixel ratio: ${devicePixelRatio||1}`;
-    $("languageValue").textContent=navigator.language||"Not reported";const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"Not reported";
-    $("timezoneValue").textContent=tz;$("timePill").textContent=tz;$("localTimeValue").textContent=new Intl.DateTimeFormat(undefined,{hour:"numeric",minute:"2-digit",timeZoneName:"short"}).format(new Date());
-    const c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;if(c){const p=[];if(c.effectiveType)p.push(c.effectiveType.toUpperCase());if(typeof c.downlink==="number")p.push(`~${c.downlink} Mbps`);$("networkValue").textContent=p.join(" · ")||"Reported";if(typeof c.rtt==="number")$("networkSmall").textContent=`Estimated RTT: ${c.rtt} ms`}
-    const secure=location.protocol==="https:";$("httpsValue").textContent=secure?"Secure HTTPS":"Not HTTPS";$("secureState").textContent=secure?"HTTPS":"HTTP"
+  const $ = id => document.getElementById(id);
+  let data = { ipv4: null, ipv6: null, geo: null };
+
+  function browser(){
+    const u=navigator.userAgent; let m;
+    if((m=u.match(/Edg\/([\d.]+)/))) return "Microsoft Edge "+m[1].split(".")[0];
+    if((m=u.match(/Chrome\/([\d.]+)/))&&!/Edg|OPR/.test(u)) return "Google Chrome "+m[1].split(".")[0];
+    if((m=u.match(/Firefox\/([\d.]+)/))) return "Mozilla Firefox "+m[1].split(".")[0];
+    if((m=u.match(/Version\/([\d.]+).*Safari/))) return "Safari "+m[1].split(".")[0];
+    return "Unknown browser";
   }
-  async function load(){
-    $("ipValue").textContent="Detecting…";$("ipValue").className="ip-value loading";
+
+  function os(){
+    const u=navigator.userAgent;
+    if(/Windows NT 10.0/.test(u)) return "Windows 10 / 11";
+    if(/iPhone|iPad|iPod/.test(u)) return "iOS";
+    if(/Android/.test(u)) return "Android";
+    if(/Mac OS X/.test(u)) return "macOS";
+    if(/Linux/.test(u)) return "Linux";
+    return navigator.platform||"Unknown OS";
+  }
+
+  function device(){
+    const u=navigator.userAgent;
+    if(/iPad|Tablet|Android(?!.*Mobile)/i.test(u)) return "Tablet";
+    if(/Mobi|iPhone|Android/i.test(u)) return "Mobile";
+    return "Desktop";
+  }
+
+  function local(){
+    $("browserValue").textContent=browser();
+    $("osValue").textContent=os();
+    $("deviceValue").textContent=device();
+    $("devicePill").textContent=device();
+    $("screenValue").textContent=`${screen.width} × ${screen.height}`;
+    $("pixelValue").textContent=`Device pixel ratio: ${devicePixelRatio||1}`;
+    $("languageValue").textContent=navigator.language||"Not reported";
+
+    const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"Not reported";
+    $("timezoneValue").textContent=tz;
+    $("localTimeValue").textContent=new Intl.DateTimeFormat(undefined,{hour:"numeric",minute:"2-digit",timeZoneName:"short"}).format(new Date());
+
+    const c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
+    if(c){
+      const p=[];
+      if(c.effectiveType)p.push(c.effectiveType.toUpperCase());
+      if(typeof c.downlink==="number")p.push(`~${c.downlink} Mbps`);
+      $("networkValue").textContent=p.join(" · ")||"Reported";
+      if(typeof c.rtt==="number")$("networkSmall").textContent=`Estimated RTT: ${c.rtt} ms`;
+    }
+
+    const secure=location.protocol==="https:";
+    $("httpsValue").textContent=secure?"Secure HTTPS":"Not HTTPS";
+    $("secureState").textContent=secure?"HTTPS":"HTTP";
+  }
+
+  async function fetchJson(url, timeoutMs=5000){
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),timeoutMs);
     try{
-      const r=await fetch("https://ipapi.co/json/",{cache:"no-store"});if(!r.ok)throw 0;const d=await r.json();if(d.error||!d.ip)throw 0;data=d;
-      $("ipValue").textContent=d.ip;$("ipValue").className="ip-value";$("ipType").textContent=d.ip.includes(":")?"IPv6":"IPv4";
-      const place=[d.city,d.region,d.country_name].filter(Boolean).join(", ");$("locationValue").textContent=place||"Not available";$("locationSmall").textContent=d.postal?`Postal area: ${d.postal} · IP-based estimate`:"IP-based estimate";
-      $("ispValue").textContent=d.org||"Not available";$("asnValue").textContent=[d.asn,d.country_code].filter(Boolean).join(" · ")||"Network provider";
-      if(d.timezone){$("timezoneValue").textContent=d.timezone;$("timePill").textContent=d.timezone}$("ipSub").textContent=place?`Approximate network location: ${place}`:"Public internet address detected."
-    }catch{
-      try{const r=await fetch("https://api64.ipify.org?format=json",{cache:"no-store"});const d=await r.json();data=d;$("ipValue").textContent=d.ip;$("ipValue").className="ip-value";$("ipType").textContent=d.ip.includes(":")?"IPv6":"IPv4";$("ipSub").textContent="IP detected. Location is temporarily unavailable.";$("locationValue").textContent="Temporarily unavailable";$("ispValue").textContent="Temporarily unavailable"}
-      catch{$("ipValue").textContent="Unable to detect";$("ipValue").className="ip-value error";$("ipSub").textContent="Lookup service could not be reached. Try Refresh."}
+      const r=await fetch(url,{cache:"no-store",signal:controller.signal});
+      if(!r.ok) throw new Error("HTTP "+r.status);
+      return await r.json();
+    } finally {
+      clearTimeout(timer);
     }
   }
-  async function copy(text,btn){try{await navigator.clipboard.writeText(text);const t=btn.textContent;btn.textContent="Copied ✓";setTimeout(()=>btn.textContent=t,1200)}catch{alert("Copy is blocked by this browser.")}}
-  $("copyIp").onclick=()=>data.ip&&copy(data.ip,$("copyIp"));
+
+  function setIpState(kind, ip){
+    const valueEl=$(kind+"Value");
+    const statusEl=$(kind+"Status");
+    const pillEl=$(kind+"Pill");
+
+    if(ip){
+      valueEl.textContent=ip;
+      valueEl.className="ip-value";
+      statusEl.textContent="Available on this connection";
+      pillEl.textContent="Available";
+    }else{
+      valueEl.textContent="Not available";
+      valueEl.className="ip-value";
+      statusEl.textContent=`${kind.toUpperCase()} is not available on this connection`;
+      pillEl.textContent="Unavailable";
+    }
+  }
+
+  async function loadGeo(primaryIp){
+    if(!primaryIp){
+      $("locationValue").textContent="Unavailable";
+      $("ispValue").textContent="Unavailable";
+      return;
+    }
+
+    try{
+      const encoded=encodeURIComponent(primaryIp);
+      let d;
+      try {
+        d=await fetchJson(`https://ipapi.co/${encoded}/json/`,5000);
+      } catch {
+        d=await fetchJson("https://ipapi.co/json/",5000);
+      }
+      if(d.error) throw new Error(d.reason||"Geo lookup failed");
+      data.geo=d;
+
+      const place=[d.city,d.region,d.country_name].filter(Boolean).join(", ");
+      $("locationValue").textContent=place||"Not available";
+      $("locationSmall").textContent=d.postal?`Postal area: ${d.postal} · IP-based estimate`:"IP-based estimate";
+      $("ispValue").textContent=d.org||"Not available";
+      $("asnValue").textContent=[d.asn,d.country_code].filter(Boolean).join(" · ")||"Network provider";
+
+      if(d.timezone){
+        $("timezoneValue").textContent=d.timezone;
+      }
+      $("ipSub").textContent=place?`Approximate network location: ${place}`:"Both protocol checks completed.";
+    }catch{
+      $("locationValue").textContent="Temporarily unavailable";
+      $("ispValue").textContent="Temporarily unavailable";
+      $("ipSub").textContent="IP addresses detected. Location lookup is temporarily unavailable.";
+    }
+  }
+
+  async function load(){
+    data.ipv4=null; data.ipv6=null; data.geo=null;
+    $("ipv4Value").textContent="Detecting…"; $("ipv4Value").className="ip-value loading";
+    $("ipv6Value").textContent="Detecting…"; $("ipv6Value").className="ip-value loading";
+    $("ipv4Status").textContent="Checking IPv4 connectivity";
+    $("ipv6Status").textContent="Checking IPv6 connectivity";
+    $("ipv4Pill").textContent="Checking";
+    $("ipv6Pill").textContent="Checking";
+    $("ipSub").textContent="Checking both public internet protocols.";
+
+    const [v4Result,v6Result]=await Promise.allSettled([
+      fetchJson("https://api.ipify.org?format=json",5000),
+      fetchJson("https://api6.ipify.org?format=json",5000)
+    ]);
+
+    if(v4Result.status==="fulfilled" && v4Result.value?.ip){
+      data.ipv4=v4Result.value.ip;
+    }
+    if(v6Result.status==="fulfilled" && v6Result.value?.ip){
+      data.ipv6=v6Result.value.ip;
+    }
+
+    setIpState("ipv4",data.ipv4);
+    setIpState("ipv6",data.ipv6);
+
+    const primary=data.ipv4||data.ipv6;
+    await loadGeo(primary);
+
+    if(data.ipv4 && data.ipv6){
+      $("ipSub").textContent = $("locationValue").textContent!=="Temporarily unavailable"
+        ? `Dual-stack connection detected · IPv4 + IPv6 available`
+        : `Dual-stack connection detected · IPv4 + IPv6 available`;
+    }else if(data.ipv4){
+      $("ipSub").textContent="IPv4 is available; no public IPv6 was detected.";
+    }else if(data.ipv6){
+      $("ipSub").textContent="IPv6 is available; no public IPv4 was detected.";
+    }else{
+      $("ipSub").textContent="Unable to detect a public IPv4 or IPv6 address. Try Refresh.";
+    }
+  }
+
+  async function copy(text,btn){
+    if(!text) return;
+    try{
+      await navigator.clipboard.writeText(text);
+      const t=btn.textContent;
+      btn.textContent="Copied ✓";
+      setTimeout(()=>btn.textContent=t,1200);
+    }catch{
+      alert("Copy is blocked by this browser.");
+    }
+  }
+
+  $("copyIpv4").onclick=()=>copy(data.ipv4,$("copyIpv4"));
+  $("copyIpv6").onclick=()=>copy(data.ipv6,$("copyIpv6"));
+
   $("copyAll").onclick=()=>copy([
-    `Public IP: ${data.ip||$("ipValue").textContent}`,`Approx. location: ${$("locationValue").textContent}`,`ISP / network: ${$("ispValue").textContent}`,`Timezone: ${$("timezoneValue").textContent}`,`Browser: ${$("browserValue").textContent}`,`Operating system: ${$("osValue").textContent}`,`Device: ${$("deviceValue").textContent}`,`Screen: ${$("screenValue").textContent}`,`Language: ${$("languageValue").textContent}`,`Network hint: ${$("networkValue").textContent}`
+    `Public IPv4: ${data.ipv4||"Not available"}`,
+    `Public IPv6: ${data.ipv6||"Not available"}`,
+    `Approx. location: ${$("locationValue").textContent}`,
+    `ISP / network: ${$("ispValue").textContent}`,
+    `Timezone: ${$("timezoneValue").textContent}`,
+    `Browser: ${$("browserValue").textContent}`,
+    `Operating system: ${$("osValue").textContent}`,
+    `Device: ${$("deviceValue").textContent}`,
+    `Screen: ${$("screenValue").textContent}`,
+    `Language: ${$("languageValue").textContent}`,
+    `Network hint: ${$("networkValue").textContent}`
   ].join("\n"),$("copyAll"));
-  $("refreshBtn").onclick=load;local();load();
+
+  $("refreshBtn").onclick=load;
+
+  local();
+  load();
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}'></script><!-- End Cloudflare Web Analytics -->
