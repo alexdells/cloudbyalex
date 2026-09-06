@@ -151,6 +151,7 @@
       box-shadow:0 28px 70px rgba(0,0,0,.20);
       backdrop-filter:blur(16px);
     }
+    .tool-card + .tool-card{margin-top:14px}
     .tool-card::after{
       content:"";
       position:absolute;
@@ -852,6 +853,36 @@ reliability    infrastructure</div>
         </svg>
       </a>
     </div>
+
+    <div class="tool-card">
+      <div class="tool-card-main">
+        <div class="tool-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M3 12h18"/>
+            <path d="M12 3a15 15 0 0 1 0 18"/>
+            <path d="M12 3a15 15 0 0 0 0 18"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="tool-name">What Is My IP?</h3>
+          <p class="tool-description">Instantly check your public IP address, approximate location, ISP, browser, operating system, device and network details — all in one clean view.</p>
+          <div class="tool-badges">
+            <span class="tool-badge">Public IP</span>
+            <span class="tool-badge">Browser & device</span>
+            <span class="tool-badge">Approx. location</span>
+            <span class="tool-badge">One-click copy</span>
+          </div>
+        </div>
+      </div>
+      <a class="launch-tool" href="tools/my-ip/">
+        Check My IP
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+
   </section>
 
   <section class="support-section wrap" aria-label="Support Cloud by Alex">
