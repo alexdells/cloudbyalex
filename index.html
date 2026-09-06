@@ -789,7 +789,24 @@
     .lang-switch .globe{padding:0 2px 0 4px;color:#99a9c2;font-size:12px}
     .nav-actions{display:flex;align-items:center;gap:10px}
 
-  </style>
+  
+    .live-status{
+      display:inline-flex;align-items:center;gap:9px;margin-top:18px;padding:9px 12px;
+      width:max-content;max-width:100%;border-radius:999px;
+      border:1px solid rgba(111,242,188,.17);background:rgba(111,242,188,.045);
+      color:#cffff0;font-size:11px;font-weight:820;letter-spacing:.015em;
+      transition:transform .18s ease,border-color .18s ease,background .18s ease;
+    }
+    .live-status:hover{transform:translateY(-1px);border-color:rgba(111,242,188,.32);background:rgba(111,242,188,.075)}
+    .live-status-dot{width:8px;height:8px;border-radius:50%;background:#6ff2bc;box-shadow:0 0 14px rgba(111,242,188,.85);flex:0 0 auto}
+    .live-status[data-state="degraded"]{border-color:rgba(255,211,107,.22);background:rgba(255,211,107,.05);color:#fff0bd}
+    .live-status[data-state="degraded"] .live-status-dot{background:#ffd36b;box-shadow:0 0 14px rgba(255,211,107,.8)}
+    .live-status[data-state="outage"]{border-color:rgba(255,104,126,.23);background:rgba(255,104,126,.05);color:#ffd5dc}
+    .live-status[data-state="outage"] .live-status-dot{background:#ff687e;box-shadow:0 0 14px rgba(255,104,126,.8)}
+    .live-status[data-state="checking"] .live-status-dot{animation:statusPulse 1.25s ease-in-out infinite}
+    @keyframes statusPulse{50%{opacity:.35;transform:scale(.75)}}
+
+</style>
 <script>(()=>{try{const s=localStorage.getItem("cloudbyalex-lang");const ls=navigator.languages?.length?navigator.languages:[navigator.language||""];const r=ls.some(x=>String(x).toLowerCase().startsWith("ru"));if(s==="ru"||(!s&&r))location.replace("/ru/"+location.search+location.hash)}catch(e){}})();</script>
 </head>
 <body>
@@ -894,6 +911,11 @@ reliability    infrastructure</div>
         <a class="btn primary" href="https://mail.google.com/mail/?view=cm&fs=1&to=alexdellsone%40gmail.com&su=CloudByAlex%20Contact" target="_blank" rel="noopener noreferrer">Let's Connect</a>
         <a class="btn secondary" href="#">Download Resume</a>
       </div>
+
+      <a class="live-status" id="liveSystemStatus" data-state="checking" href="/status/">
+        <span class="live-status-dot" aria-hidden="true"></span>
+        <span id="liveSystemStatusText">Checking system status…</span>
+      </a>
 
       <div class="micro">
         <span>AWS</span>
@@ -1123,5 +1145,18 @@ reliability    infrastructure</div>
     Cloud by Alex — DevOps • Cloud • Automation
   </footer>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+(() => {
+  const box=document.getElementById("liveSystemStatus");
+  const label=document.getElementById("liveSystemStatusText");
+  if(!box||!label)return;
+  const labels={"operational": "All Systems Operational", "degraded": "Partial Service Degradation", "outage": "Service Outage"};
+  fetch("https://cloudbyalex-status.alexdellsone.workers.dev/status",{cache:"no-store"})
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(d=>{const s=d.overall||"degraded";box.dataset.state=s;label.textContent=labels[s]||labels.degraded;})
+    .catch(()=>{box.dataset.state="degraded";label.textContent=labels.degraded;});
+})();
+</script>
+
 </body>
 </html>
