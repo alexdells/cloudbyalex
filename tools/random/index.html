@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Random Number Generator — Secure & Atmospheric | CloudByAlex</title>
+  <meta name="description" content="Free random number generator with secure browser randomness, dice rolls, coin flips and random list picker. Optional true atmospheric randomness powered by RANDOM.ORG.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://cloudbyalex.com/tools/random/">
+  <style>
+    :root{
+      --bg:#070812;--text:#f5f7ff;--muted:#95a3bd;--cyan:#65dfff;--violet:#c36cff;
+      --green:#69edb5;--yellow:#ffd36b;--red:#ff7890;--line:rgba(255,255,255,.09);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{
+      margin:0;min-height:100vh;color:var(--text);
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 12% 5%,rgba(101,223,255,.12),transparent 25%),
+        radial-gradient(circle at 88% 2%,rgba(195,108,255,.13),transparent 24%),
+        radial-gradient(circle at 50% 58%,rgba(255,211,107,.035),transparent 26%),
+        linear-gradient(180deg,#060710,#090b16 48%,#070812);
+    }
+    body:before{
+      content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+      background-size:52px 52px;
+      mask-image:linear-gradient(to bottom,#000,transparent 94%);
+    }
+    a{color:inherit;text-decoration:none} button,input,textarea,select{font:inherit}
+    .wrap{width:min(1160px,calc(100% - 34px));margin:auto}
+    nav{
+      position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.055);
+      background:rgba(7,8,18,.76);backdrop-filter:blur(18px)
+    }
+    .nav-inner{height:70px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:850;letter-spacing:-.02em}
+    .back{padding:9px 12px;border:1px solid var(--line);border-radius:12px;color:#bec9dc;background:rgba(255,255,255,.035);font-size:13px;font-weight:750}
+    .hero{text-align:center;padding:58px 0 26px}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 11px;border-radius:999px;border:1px solid rgba(101,223,255,.17);background:rgba(101,223,255,.055);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#c9f3ff}
+    .spark{width:7px;height:7px;border-radius:50%;background:var(--yellow);box-shadow:0 0 16px var(--yellow)}
+    h1{margin:18px auto 12px;font-size:clamp(44px,7vw,78px);line-height:.98;letter-spacing:-.055em}
+    .grad{background:linear-gradient(90deg,var(--cyan),#bcc6ff 50%,#e4a8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{max-width:760px;margin:auto;color:var(--muted);font-size:15px;line-height:1.75}
+
+    .app{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;padding:28px 0 72px;align-items:start}
+    .panel{border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.023));box-shadow:0 28px 70px rgba(0,0,0,.20);overflow:hidden}
+    .panel-head{padding:18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .panel-title{font-size:14px;font-weight:850}.panel-sub{font-size:10px;color:#7f8da7;margin-top:4px}
+    .source-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px}
+    .source-btn{cursor:pointer;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);color:#aab6cc;padding:13px;text-align:left;transition:.18s}
+    .source-btn strong{display:block;color:#eaf1ff;font-size:12px;margin-bottom:4px}.source-btn span{display:block;font-size:9px;line-height:1.45}
+    .source-btn.active{border-color:rgba(101,223,255,.25);background:linear-gradient(135deg,rgba(101,223,255,.09),rgba(195,108,255,.055));box-shadow:0 10px 26px rgba(101,223,255,.055)}
+    .source-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;background:#72809a}
+    .source-btn.active .source-dot{background:var(--green);box-shadow:0 0 12px var(--green)}
+    .mode-row{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 14px}
+    .mode{border:1px solid var(--line);background:rgba(255,255,255,.03);color:#a8b4ca;border-radius:999px;padding:8px 11px;font-size:10px;font-weight:800;cursor:pointer}
+    .mode.active{color:#07101a;border-color:transparent;background:linear-gradient(135deg,#c8faff,#bfc8ff 56%,#e5b9ff)}
+    .form{padding:18px;border-top:1px solid var(--line)}
+    .fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+    label{display:block;color:#7e8da7;font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+    input,textarea{width:100%;border:1px solid var(--line);outline:0;border-radius:12px;background:#090c16;color:#eef4ff;padding:12px}
+    textarea{min-height:150px;resize:vertical;line-height:1.5}
+    input:focus,textarea:focus{border-color:rgba(101,223,255,.28);box-shadow:0 0 0 3px rgba(101,223,255,.045)}
+    .picker-fields{display:none}.picker-fields.active{display:block}.number-fields.hidden{display:none}
+    .quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .quick button{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.028);color:#aab7cc;border-radius:10px;padding:8px 10px;font-size:10px}
+    .generate{width:100%;margin-top:14px;border:0;cursor:pointer;padding:14px;border-radius:14px;color:#061019;font-weight:900;background:linear-gradient(135deg,#c8faff,#bdc5ff 56%,#e6b8ff);box-shadow:0 18px 38px rgba(101,223,255,.10);transition:.2s}
+    .generate:hover{transform:translateY(-1px)}.generate:disabled{opacity:.5;cursor:not-allowed;transform:none}
+    .source-note{margin-top:11px;color:#73819a;font-size:9.5px;line-height:1.55}
+    .source-note strong{color:#aebbd0}
+
+    .result{padding:24px;text-align:center;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+    .result-kicker{font-size:9px;color:#7f8ca5;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+    .result-number{margin:11px 0 8px;font:900 clamp(52px,9vw,94px)/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-.06em;word-break:break-all;background:linear-gradient(90deg,#e8fbff,#bfe7ff 45%,#e4bcff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .result-number.small{font-size:clamp(27px,5vw,52px);line-height:1.15}
+    .result-meta{color:#8290aa;font-size:10px;line-height:1.6}
+    .result-actions{display:flex;gap:8px;margin-top:15px}
+    .mini{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.035);color:#c0cbe0;border-radius:10px;padding:8px 10px;font-size:10px}
+    .status{margin:0 14px 14px;padding:10px 11px;border:1px solid var(--line);border-radius:11px;color:#8d9bb3;font-size:9.5px;line-height:1.5;background:rgba(255,255,255,.02)}
+    .status.good{border-color:rgba(105,237,181,.13);color:#a8cdbc;background:rgba(105,237,181,.035)}
+    .status.warn{border-color:rgba(255,211,107,.13);color:#c8b98a;background:rgba(255,211,107,.035)}
+    .status.error{border-color:rgba(255,120,144,.14);color:#d6a0ab;background:rgba(255,120,144,.035)}
+
+    .history{padding:14px;border-top:1px solid var(--line)}
+    .history-title{font-size:10px;color:#8b99b2;font-weight:850;text-transform:uppercase;letter-spacing:.08em;margin-bottom:9px}
+    .history-list{display:grid;gap:7px;max-height:230px;overflow:auto}
+    .history-item{display:flex;justify-content:space-between;gap:10px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);font-size:10px}
+    .history-item strong{word-break:break-all}.history-item span{color:#738099;white-space:nowrap}
+
+    .learn{padding:0 0 70px}.learn h2{font-size:31px;letter-spacing:-.035em;margin:0 0 15px}
+    .learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .learn-card{padding:20px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.024)}
+    .learn-card h3{margin:0 0 8px;font-size:15px}.learn-card p{margin:0;color:#91a0b9;font-size:11.5px;line-height:1.72}
+    .learn-card p+p{margin-top:9px}
+    footer{padding:26px 0 40px;border-top:1px solid rgba(255,255,255,.055);text-align:center;color:#71809a;font-size:11px}
+    @media(max-width:900px){.app{grid-template-columns:1fr}.learn-grid{grid-template-columns:1fr}}
+    @media(max-width:620px){.wrap{width:min(100% - 22px,1160px)}.hero{padding:44px 0 18px}.fields{grid-template-columns:1fr}.source-tabs{grid-template-columns:1fr}.result-number{font-size:58px}}
+  </style>
+</head>
+<body>
+<nav><div class="wrap nav-inner"><a class="brand" href="../../">☁ cloudbyalex</a><a class="back" href="../../#tools">← Back to tools</a></div></nav>
+
+<header class="hero wrap">
+  <div class="eyebrow"><span class="spark"></span> CloudByAlex Random Lab</div>
+  <h1>Generate something <span class="grad">truly unpredictable.</span></h1>
+  <p class="lead">Random numbers, dice rolls, coin flips and list picks. Use cryptographically secure browser randomness now — or connect atmospheric noise from RANDOM.ORG.</p>
+</header>
+
+<main class="wrap">
+  <section class="app">
+    <div class="panel">
+      <div class="panel-head">
+        <div><div class="panel-title">Random Generator</div><div class="panel-sub">Choose a source and what you want to randomize</div></div>
+      </div>
+
+      <div class="source-tabs">
+        <button class="source-btn active" data-source="browser">
+          <strong><span class="source-dot"></span>Browser Secure</strong>
+          <span>Cryptographic randomness from Web Crypto. Works instantly.</span>
+        </button>
+        <button class="source-btn" data-source="atmospheric">
+          <strong><span class="source-dot"></span>Atmospheric Noise</strong>
+          <span>True randomness from RANDOM.ORG via Cloudflare Worker.</span>
+        </button>
+      </div>
+
+      <div class="mode-row">
+        <button class="mode active" data-mode="number">Number</button>
+        <button class="mode" data-mode="dice">Dice</button>
+        <button class="mode" data-mode="coin">Coin Flip</button>
+        <button class="mode" data-mode="picker">List Picker</button>
+      </div>
+
+      <div class="form">
+        <div class="number-fields" id="numberFields">
+          <div class="fields">
+            <div><label for="min">Minimum</label><input id="min" type="number" value="1" min="-1000000000" max="1000000000"></div>
+            <div><label for="max">Maximum</label><input id="max" type="number" value="100" min="-1000000000" max="1000000000"></div>
+            <div><label for="count">How many</label><input id="count" type="number" value="1" min="1" max="20"></div>
+          </div>
+        </div>
+
+        <div class="picker-fields" id="pickerFields">
+          <label for="pickerText">One option per line</label>
+          <textarea id="pickerText" placeholder="Pizza&#10;Sushi&#10;Tacos&#10;Burgers"></textarea>
+        </div>
+
+        <div class="quick">
+          <button type="button" data-quick="1-10">1–10</button>
+          <button type="button" data-quick="1-100">1–100</button>
+          <button type="button" data-quick="1-1000">1–1000</button>
+          <button type="button" data-quick="dice">🎲 Roll a die</button>
+          <button type="button" data-quick="coin">🪙 Flip a coin</button>
+        </div>
+
+        <button class="generate" id="generateBtn" type="button">Generate →</button>
+        <div class="source-note" id="sourceNote"><strong>Source:</strong> Browser Web Crypto (`crypto.getRandomValues`). This is cryptographically strong pseudorandomness, not atmospheric physical randomness.</div>
+      </div>
+
+      <div class="status good" id="status">Browser Secure mode is ready.</div>
+    </div>
+
+    <aside class="panel">
+      <div class="panel-head"><div><div class="panel-title">Result</div><div class="panel-sub">Fresh randomness appears here</div></div></div>
+      <div class="result">
+        <div class="result-kicker" id="resultKicker">Ready</div>
+        <div class="result-number" id="resultValue">?</div>
+        <div class="result-meta" id="resultMeta">Choose a mode and press Generate.</div>
+        <div class="result-actions">
+          <button class="mini" id="copyResult" type="button">Copy result</button>
+          <button class="mini" id="generateAgain" type="button">Generate again</button>
+        </div>
+      </div>
+      <div class="history">
+        <div class="history-title">Recent results</div>
+        <div class="history-list" id="historyList"><div class="history-item"><strong>No results yet</strong><span>—</span></div></div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="learn">
+    <h2>Where does the randomness come from?</h2>
+    <div class="learn-grid">
+      <article class="learn-card">
+        <h3>⚡ Atmospheric randomness</h3>
+        <p>RANDOM.ORG generates true random values from atmospheric radio noise. Thunderstorms and other natural electrical activity contribute to that noise.</p>
+        <p>CloudByAlex connects to RANDOM.ORG through a small server-side Worker so the source can be used safely from a browser without exposing secrets.</p>
+      </article>
+      <article class="learn-card">
+        <h3>🔐 Browser secure randomness</h3>
+        <p>Modern browsers expose the Web Crypto API. Its `crypto.getRandomValues()` function is designed for cryptographic use and is much stronger than ordinary `Math.random()`.</p>
+        <p>This mode runs completely on your device and needs no network request.</p>
+      </article>
+      <article class="learn-card">
+        <h3>🎲 What can you use it for?</h3>
+        <p>Pick a giveaway winner, roll dice, flip a coin, choose a restaurant, select a random team member, generate test data or make an unbiased everyday decision.</p>
+      </article>
+      <article class="learn-card">
+        <h3>⚠️ Not for regulated gambling</h3>
+        <p>This free utility is for general-purpose randomization and experimentation. High-stakes, regulated or auditable drawings need purpose-built systems and appropriate licensing.</p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">CloudByAlex Tools · Useful utilities with transparent technology.</div></footer>
+
+<script>
+(() => {
+  // After the Cloudflare Worker is deployed, replace the empty string below
+  // with the workers.dev URL, e.g. https://cloudbyalex-random.example.workers.dev
+  const ATMOSPHERIC_ENDPOINT = "https://cloudbyalex-random.alexdellsone.workers.dev";
+
+  const $ = id => document.getElementById(id);
+  let source = "browser";
+  let mode = "number";
+  let lastResult = "";
+  let history = [];
+
+  function secureInt(min,max){
+    min = Math.ceil(min); max = Math.floor(max);
+    const range = max - min + 1;
+    if(!Number.isSafeInteger(min)||!Number.isSafeInteger(max)||range<=0||range>4294967296) throw new Error("Range is too large.");
+    const maxUint = 0x100000000;
+    const limit = maxUint - (maxUint % range);
+    const a = new Uint32Array(1);
+    let x;
+    do { crypto.getRandomValues(a); x=a[0]; } while(x>=limit);
+    return min + (x % range);
+  }
+
+  function browserNumbers(min,max,count){
+    return Array.from({length:count},()=>secureInt(min,max));
+  }
+
+  async function atmosphericNumbers(min,max,count){
+    if(!ATMOSPHERIC_ENDPOINT){
+      throw new Error("Atmospheric mode needs the Cloudflare Worker URL. Browser Secure mode works now.");
+    }
+    const r = await fetch(ATMOSPHERIC_ENDPOINT,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({min,max,count})
+    });
+    const d = await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(d.error || "Atmospheric service is temporarily unavailable.");
+    if(!Array.isArray(d.numbers)) throw new Error("Invalid atmospheric response.");
+    return d.numbers;
+  }
+
+  function setStatus(text,type="good"){
+    $("status").textContent=text;
+    $("status").className="status "+type;
+  }
+
+  function updateSource(){
+    document.querySelectorAll(".source-btn").forEach(b=>b.classList.toggle("active",b.dataset.source===source));
+    if(source==="browser"){
+      $("sourceNote").innerHTML="<strong>Source:</strong> Browser Web Crypto (<code>crypto.getRandomValues</code>). Cryptographically strong pseudorandomness generated locally.";
+      setStatus("Browser Secure mode is ready.","good");
+    }else{
+      $("sourceNote").innerHTML="<strong>Source:</strong> RANDOM.ORG atmospheric noise through a Cloudflare Worker. Each click requests fresh physical randomness.";
+      if(ATMOSPHERIC_ENDPOINT) setStatus("Atmospheric Noise mode is ready.","good");
+      else setStatus("Atmospheric mode needs a one-time Cloudflare Worker setup. We'll connect it next.","warn");
+    }
+  }
+
+  function updateMode(){
+    document.querySelectorAll(".mode").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));
+    const picker = mode==="picker";
+    $("pickerFields").classList.toggle("active",picker);
+    $("numberFields").classList.toggle("hidden",picker);
+
+    if(mode==="dice"){ $("min").value=1; $("max").value=6; $("count").value=1; }
+    if(mode==="coin"){ $("min").value=0; $("max").value=1; $("count").value=1; }
+  }
+
+  async function generate(){
+    const btn=$("generateBtn");
+    btn.disabled=true; btn.textContent="Generating…";
+    try{
+      let min,max,count,values,display,kicker,meta;
+
+      if(mode==="picker"){
+        const options=$("pickerText").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+        if(options.length<2) throw new Error("Enter at least two options.");
+        min=0;max=options.length-1;count=1;
+        values = source==="browser" ? browserNumbers(min,max,count) : await atmosphericNumbers(min,max,count);
+        display=options[values[0]];
+        kicker="Random Pick";
+        meta=`Selected from ${options.length} options · ${source==="browser"?"Browser Secure":"Atmospheric Noise"}`;
+      }else{
+        min=Number($("min").value); max=Number($("max").value); count=Number($("count").value);
+        if(!Number.isInteger(min)||!Number.isInteger(max)||min>max) throw new Error("Check your minimum and maximum.");
+        if(!Number.isInteger(count)||count<1||count>20) throw new Error("Quantity must be between 1 and 20.");
+        values = source==="browser" ? browserNumbers(min,max,count) : await atmosphericNumbers(min,max,count);
+
+        if(mode==="coin"){
+          display=values[0]===0 ? "HEADS" : "TAILS";
+          kicker="Coin Flip";
+          meta=source==="browser"?"Secure browser randomness":"RANDOM.ORG atmospheric noise";
+        }else if(mode==="dice"){
+          display=String(values[0]);
+          kicker="Dice Roll";
+          meta=`1–6 · ${source==="browser"?"Browser Secure":"Atmospheric Noise"}`;
+        }else{
+          display=values.join(", ");
+          kicker=count===1?"Random Number":"Random Numbers";
+          meta=`Range ${min.toLocaleString()} to ${max.toLocaleString()} · ${source==="browser"?"Browser Secure":"Atmospheric Noise"}`;
+        }
+      }
+
+      lastResult=display;
+      $("resultValue").textContent=display;
+      $("resultValue").className="result-number"+(display.length>22?" small":"");
+      $("resultKicker").textContent=kicker;
+      $("resultMeta").textContent=meta;
+      addHistory(display,source==="browser"?"Browser":"Atmospheric");
+      setStatus(source==="browser"?"Generated locally with Web Crypto.":"Fresh atmospheric randomness received from RANDOM.ORG.","good");
+    }catch(e){
+      setStatus(e.message||"Generation failed.","error");
+    }finally{
+      btn.disabled=false;btn.textContent="Generate →";
+    }
+  }
+
+  function addHistory(value,label){
+    history.unshift({value,label,time:new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})});
+    history=history.slice(0,8);
+    $("historyList").innerHTML=history.map(x=>`<div class="history-item"><strong>${escapeHtml(x.value)}</strong><span>${x.label} · ${x.time}</span></div>`).join("");
+  }
+
+  function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+  document.querySelectorAll(".source-btn").forEach(b=>b.addEventListener("click",()=>{source=b.dataset.source;updateSource()}));
+  document.querySelectorAll(".mode").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;updateMode()}));
+
+  document.querySelectorAll("[data-quick]").forEach(b=>b.addEventListener("click",()=>{
+    const q=b.dataset.quick;
+    if(q==="dice"){mode="dice";}
+    else if(q==="coin"){mode="coin";}
+    else{
+      mode="number";
+      const [a,z]=q.split("-").map(Number);$("min").value=a;$("max").value=z;$("count").value=1;
+    }
+    updateMode();
+  }));
+
+  $("generateBtn").addEventListener("click",generate);
+  $("generateAgain").addEventListener("click",generate);
+  $("copyResult").addEventListener("click",async()=>{
+    if(!lastResult)return;
+    try{await navigator.clipboard.writeText(lastResult);const t=$("copyResult").textContent;$("copyResult").textContent="Copied ✓";setTimeout(()=>$("copyResult").textContent=t,1200)}catch{}
+  });
+
+  updateSource();updateMode();
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
