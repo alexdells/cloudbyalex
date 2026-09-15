@@ -1,6 +1,50 @@
 (() => {
   const lang = document.documentElement.lang === 'ru' ? 'ru' : 'en';
 
+  // Keep the IP checker visible in the compact mobile navigation.
+  // The desktop stylesheet hides most navigation links below 980px, but
+  // checking an IP is one of the most useful actions for phone visitors.
+  const ipButton = document.querySelector('.nav-pill[href*="my-ip"]');
+  if (ipButton) {
+    const icon = ipButton.querySelector('svg');
+    const fullLabel = document.createElement('span');
+    const shortLabel = document.createElement('span');
+    fullLabel.className = 'ip-label-full';
+    shortLabel.className = 'ip-label-short';
+    fullLabel.textContent = lang === 'ru' ? 'Мой IP' : 'What Is My IP?';
+    shortLabel.textContent = lang === 'ru' ? 'Мой IP' : 'My IP';
+    ipButton.replaceChildren();
+    if (icon) ipButton.appendChild(icon);
+    ipButton.append(fullLabel, shortLabel);
+
+    const mobileNavStyle = document.createElement('style');
+    mobileNavStyle.textContent = `
+      .ip-label-short{display:none}
+      @media(max-width:980px){
+        .nav-links .nav-pill{
+          display:inline-flex!important;
+          align-items:center;
+          justify-content:center;
+          gap:7px;
+          min-width:82px;
+          padding:8px 10px;
+          font-size:10px;
+          white-space:nowrap;
+          border-color:rgba(102,228,255,.24);
+          background:linear-gradient(135deg,rgba(102,228,255,.11),rgba(194,119,255,.08));
+          box-shadow:0 8px 24px rgba(102,228,255,.07);
+        }
+        .nav-links .nav-pill .ip-label-full{display:none}
+        .nav-links .nav-pill .ip-label-short{display:inline}
+        .nav-links .nav-pill svg{width:14px;height:14px;flex:0 0 auto}
+      }
+      @media(max-width:480px){
+        .nav-links .nav-pill{min-width:78px;padding:8px 9px}
+      }
+    `;
+    document.head.appendChild(mobileNavStyle);
+  }
+
   const statusBox = document.getElementById('liveSystemStatus');
   const statusLabel = document.getElementById('liveSystemStatusText');
   if (statusBox && statusLabel) {
