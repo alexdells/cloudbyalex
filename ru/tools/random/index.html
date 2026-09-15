@@ -1,367 +1,145 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Генератор случайных чисел — CloudByAlex</title>
-<meta content="Free random number generator with secure browser randomness, dice rolls, coin flips and random list picker. Optional true atmospheric randomness powered by RANDOM.ORG." name="description"/>
-<meta content="index,follow" name="robots"/>
-<link href="https://cloudbyalex.com/ru/tools/random/" rel="canonical"/>
-<link href="https://cloudbyalex.com/tools/random/" hreflang="en" rel="alternate"/>
-<link href="https://cloudbyalex.com/ru/tools/random/" hreflang="ru" rel="alternate"/>
-<link href="https://cloudbyalex.com/tools/random/" hreflang="x-default" rel="alternate"/>
-<style>
-    :root{
-      --bg:#070812;--text:#f5f7ff;--muted:#95a3bd;--cyan:#65dfff;--violet:#c36cff;
-      --green:#69edb5;--yellow:#ffd36b;--red:#ff7890;--line:rgba(255,255,255,.09);
-    }
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{
-      margin:0;min-height:100vh;color:var(--text);
-      font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
-      background:
-        radial-gradient(circle at 12% 5%,rgba(101,223,255,.12),transparent 25%),
-        radial-gradient(circle at 88% 2%,rgba(195,108,255,.13),transparent 24%),
-        radial-gradient(circle at 50% 58%,rgba(255,211,107,.035),transparent 26%),
-        linear-gradient(180deg,#060710,#090b16 48%,#070812);
-    }
-    body:before{
-      content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
-      background-size:52px 52px;
-      mask-image:linear-gradient(to bottom,#000,transparent 94%);
-    }
-    a{color:inherit;text-decoration:none} button,input,textarea,select{font:inherit}
-    .wrap{width:min(1160px,calc(100% - 34px));margin:auto}
-    nav{
-      position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.055);
-      background:rgba(7,8,18,.76);backdrop-filter:blur(18px)
-    }
-    .nav-inner{height:70px;display:flex;align-items:center;justify-content:space-between}
-    .brand{font-weight:850;letter-spacing:-.02em}
-    .back{padding:9px 12px;border:1px solid var(--line);border-radius:12px;color:#bec9dc;background:rgba(255,255,255,.035);font-size:13px;font-weight:750}
-    .hero{text-align:center;padding:58px 0 26px}
-    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 11px;border-radius:999px;border:1px solid rgba(101,223,255,.17);background:rgba(101,223,255,.055);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#c9f3ff}
-    .spark{width:7px;height:7px;border-radius:50%;background:var(--yellow);box-shadow:0 0 16px var(--yellow)}
-    h1{margin:18px auto 12px;font-size:clamp(44px,7vw,78px);line-height:.98;letter-spacing:-.055em}
-    .grad{background:linear-gradient(90deg,var(--cyan),#bcc6ff 50%,#e4a8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .lead{max-width:760px;margin:auto;color:var(--muted);font-size:15px;line-height:1.75}
-
-    .app{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;padding:28px 0 72px;align-items:start}
-    .panel{border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.023));box-shadow:0 28px 70px rgba(0,0,0,.20);overflow:hidden}
-    .panel-head{padding:18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .panel-title{font-size:14px;font-weight:850}.panel-sub{font-size:10px;color:#7f8da7;margin-top:4px}
-    .source-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px}
-    .source-btn{cursor:pointer;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);color:#aab6cc;padding:13px;text-align:left;transition:.18s}
-    .source-btn strong{display:block;color:#eaf1ff;font-size:12px;margin-bottom:4px}.source-btn span{display:block;font-size:9px;line-height:1.45}
-    .source-btn.active{border-color:rgba(101,223,255,.25);background:linear-gradient(135deg,rgba(101,223,255,.09),rgba(195,108,255,.055));box-shadow:0 10px 26px rgba(101,223,255,.055)}
-    .source-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;background:#72809a}
-    .source-btn.active .source-dot{background:var(--green);box-shadow:0 0 12px var(--green)}
-    .mode-row{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 14px}
-    .mode{border:1px solid var(--line);background:rgba(255,255,255,.03);color:#a8b4ca;border-radius:999px;padding:8px 11px;font-size:10px;font-weight:800;cursor:pointer}
-    .mode.active{color:#07101a;border-color:transparent;background:linear-gradient(135deg,#c8faff,#bfc8ff 56%,#e5b9ff)}
-    .form{padding:18px;border-top:1px solid var(--line)}
-    .fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-    label{display:block;color:#7e8da7;font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
-    input,textarea{width:100%;border:1px solid var(--line);outline:0;border-radius:12px;background:#090c16;color:#eef4ff;padding:12px}
-    textarea{min-height:150px;resize:vertical;line-height:1.5}
-    input:focus,textarea:focus{border-color:rgba(101,223,255,.28);box-shadow:0 0 0 3px rgba(101,223,255,.045)}
-    .picker-fields{display:none}.picker-fields.active{display:block}.number-fields.hidden{display:none}
-    .quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .quick button{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.028);color:#aab7cc;border-radius:10px;padding:8px 10px;font-size:10px}
-    .generate{width:100%;margin-top:14px;border:0;cursor:pointer;padding:14px;border-radius:14px;color:#061019;font-weight:900;background:linear-gradient(135deg,#c8faff,#bdc5ff 56%,#e6b8ff);box-shadow:0 18px 38px rgba(101,223,255,.10);transition:.2s}
-    .generate:hover{transform:translateY(-1px)}.generate:disabled{opacity:.5;cursor:not-allowed;transform:none}
-    .source-note{margin-top:11px;color:#73819a;font-size:9.5px;line-height:1.55}
-    .source-note strong{color:#aebbd0}
-
-    .result{padding:24px;text-align:center;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center}
-    .result-kicker{font-size:9px;color:#7f8ca5;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
-    .result-number{margin:11px 0 8px;font:900 clamp(52px,9vw,94px)/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-.06em;word-break:break-all;background:linear-gradient(90deg,#e8fbff,#bfe7ff 45%,#e4bcff);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .result-number.small{font-size:clamp(27px,5vw,52px);line-height:1.15}
-    .result-meta{color:#8290aa;font-size:10px;line-height:1.6}
-    .result-actions{display:flex;gap:8px;margin-top:15px}
-    .mini{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.035);color:#c0cbe0;border-radius:10px;padding:8px 10px;font-size:10px}
-    .status{margin:0 14px 14px;padding:10px 11px;border:1px solid var(--line);border-radius:11px;color:#8d9bb3;font-size:9.5px;line-height:1.5;background:rgba(255,255,255,.02)}
-    .status.good{border-color:rgba(105,237,181,.13);color:#a8cdbc;background:rgba(105,237,181,.035)}
-    .status.warn{border-color:rgba(255,211,107,.13);color:#c8b98a;background:rgba(255,211,107,.035)}
-    .status.error{border-color:rgba(255,120,144,.14);color:#d6a0ab;background:rgba(255,120,144,.035)}
-
-    .history{padding:14px;border-top:1px solid var(--line)}
-    .history-title{font-size:10px;color:#8b99b2;font-weight:850;text-transform:uppercase;letter-spacing:.08em;margin-bottom:9px}
-    .history-list{display:grid;gap:7px;max-height:230px;overflow:auto}
-    .history-item{display:flex;justify-content:space-between;gap:10px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);font-size:10px}
-    .history-item strong{word-break:break-all}.history-item span{color:#738099;white-space:nowrap}
-
-    .learn{padding:0 0 70px}.learn h2{font-size:31px;letter-spacing:-.035em;margin:0 0 15px}
-    .learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .learn-card{padding:20px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.024)}
-    .learn-card h3{margin:0 0 8px;font-size:15px}.learn-card p{margin:0;color:#91a0b9;font-size:11.5px;line-height:1.72}
-    .learn-card p+p{margin-top:9px}
-    footer{padding:26px 0 40px;border-top:1px solid rgba(255,255,255,.055);text-align:center;color:#71809a;font-size:11px}
-    @media(max-width:900px){.app{grid-template-columns:1fr}.learn-grid{grid-template-columns:1fr}}
-    @media(max-width:620px){.wrap{width:min(100% - 22px,1160px)}.hero{padding:44px 0 18px}.fields{grid-template-columns:1fr}.source-tabs{grid-template-columns:1fr}.result-number{font-size:58px}}
-  
-    .lang-switch{display:inline-flex;align-items:center;gap:4px;padding:5px;border:1px solid rgba(255,255,255,.10);border-radius:12px;background:rgba(255,255,255,.035);box-shadow:inset 0 0 18px rgba(255,255,255,.018);flex:0 0 auto}
-    .lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:27px;padding:0 7px;border-radius:8px;color:#93a2ba;font-size:10px;font-weight:900;letter-spacing:.08em;opacity:1 !important}
-    .lang-switch a.active{color:#07101a;background:linear-gradient(135deg,#c7f9ff,#c9c2ff)}
-    .lang-switch .globe{padding:0 2px 0 4px;color:#99a9c2;font-size:12px}
-    .nav-actions{display:flex;align-items:center;gap:10px}
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Генератор случайных чисел — онлайн | CloudByAlex</title>
+  <meta name="description" content="Бесплатный генератор случайных чисел: безопасный Web Crypto, кубик, монета, выбор из списка и атмосферная случайность RANDOM.ORG.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://cloudbyalex.com/ru/tools/random/">
+  <link rel="alternate" hreflang="en" href="https://cloudbyalex.com/tools/random/">
+  <link rel="alternate" hreflang="ru" href="https://cloudbyalex.com/ru/tools/random/">
+  <link rel="alternate" hreflang="x-default" href="https://cloudbyalex.com/tools/random/">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"CloudByAlex — генератор случайных чисел",
+    "url":"https://cloudbyalex.com/ru/tools/random/",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "browserRequirements":"Современный браузер с включённым JavaScript",
+    "description":"Бесплатный генератор случайных чисел с Web Crypto, кубиком, монетой, выбором из списка и атмосферной случайностью.",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Насколько безопасен этот генератор случайных чисел?","acceptedAnswer":{"@type":"Answer","text":"Режим «Безопасный браузер» использует Web Crypto API и crypto.getRandomValues(), предназначенную для криптографически стойкой псевдослучайности и более подходящую для таких задач, чем обычный Math.random()."}},
+      {"@type":"Question","name":"Что такое атмосферная случайность?","acceptedAnswer":{"@type":"Answer","text":"Дополнительный режим «Атмосферный шум» запрашивает случайные значения у RANDOM.ORG, который получает случайность из измерений атмосферного радиошума. CloudByAlex отправляет запрос через серверный Cloudflare Worker."}},
+      {"@type":"Question","name":"Можно ли задать свой диапазон чисел?","acceptedAnswer":{"@type":"Answer","text":"Да. Укажите целые минимум и максимум, выберите количество значений и нажмите «Сгенерировать». Режим Web Crypto преобразует криптографические случайные значения в выбранный диапазон."}},
+      {"@type":"Question","name":"Можно ли случайно выбрать имя или вариант из списка?","acceptedAnswer":{"@type":"Answer","text":"Да. Выберите «Выбор из списка», добавьте по одному варианту на строку и генератор случайно выберет один пункт с помощью выбранного источника случайности."}}
+    ]
+  }
+  </script>
+  <style>
+    :root{--bg:#070812;--text:#f5f7ff;--muted:#95a3bd;--cyan:#65dfff;--violet:#c36cff;--green:#69edb5;--yellow:#ffd36b;--red:#ff7890;--line:rgba(255,255,255,.09)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(circle at 12% 5%,rgba(101,223,255,.12),transparent 25%),radial-gradient(circle at 88% 2%,rgba(195,108,255,.13),transparent 24%),radial-gradient(circle at 50% 58%,rgba(255,211,107,.035),transparent 26%),linear-gradient(180deg,#060710,#090b16 48%,#070812)}
+    body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(to bottom,#000,transparent 94%)}
+    a{color:inherit;text-decoration:none}button,input,textarea,select{font:inherit}.wrap{width:min(1160px,calc(100% - 34px));margin:auto}
+    nav{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.055);background:rgba(7,8,18,.76);backdrop-filter:blur(18px)}.nav-inner{height:70px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:850;letter-spacing:-.02em}.back{padding:9px 12px;border:1px solid var(--line);border-radius:12px;color:#bec9dc;background:rgba(255,255,255,.035);font-size:13px;font-weight:750}
+    .hero{text-align:center;padding:58px 0 26px}.eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 11px;border-radius:999px;border:1px solid rgba(101,223,255,.17);background:rgba(101,223,255,.055);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#c9f3ff}.spark{width:7px;height:7px;border-radius:50%;background:var(--yellow);box-shadow:0 0 16px var(--yellow)}h1{margin:18px auto 12px;font-size:clamp(44px,7vw,78px);line-height:.98;letter-spacing:-.055em}.grad{background:linear-gradient(90deg,var(--cyan),#bcc6ff 50%,#e4a8ff);-webkit-background-clip:text;background-clip:text;color:transparent}.lead{max-width:760px;margin:auto;color:var(--muted);font-size:15px;line-height:1.75}
+    .app{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;padding:28px 0 64px;align-items:start}.panel{border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.023));box-shadow:0 28px 70px rgba(0,0,0,.20);overflow:hidden}.panel-head{padding:18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}.panel-title{font-size:14px;font-weight:850}.panel-sub{font-size:10px;color:#7f8da7;margin-top:4px}
+    .source-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px}.source-btn{cursor:pointer;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);color:#aab6cc;padding:13px;text-align:left;transition:.18s}.source-btn strong{display:block;color:#eaf1ff;font-size:12px;margin-bottom:4px}.source-btn span{display:block;font-size:9px;line-height:1.45}.source-btn.active{border-color:rgba(101,223,255,.25);background:linear-gradient(135deg,rgba(101,223,255,.09),rgba(195,108,255,.055));box-shadow:0 10px 26px rgba(101,223,255,.055)}.source-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;background:#72809a}.source-btn.active .source-dot{background:var(--green);box-shadow:0 0 12px var(--green)}
+    .mode-row{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 14px}.mode{border:1px solid var(--line);background:rgba(255,255,255,.03);color:#a8b4ca;border-radius:999px;padding:8px 11px;font-size:10px;font-weight:800;cursor:pointer}.mode.active{color:#07101a;border-color:transparent;background:linear-gradient(135deg,#c8faff,#bfc8ff 56%,#e5b9ff)}.form{padding:18px;border-top:1px solid var(--line)}.fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}label{display:block;color:#7e8da7;font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}input,textarea{width:100%;border:1px solid var(--line);outline:0;border-radius:12px;background:#090c16;color:#eef4ff;padding:12px}textarea{min-height:150px;resize:vertical;line-height:1.5}input:focus,textarea:focus{border-color:rgba(101,223,255,.28);box-shadow:0 0 0 3px rgba(101,223,255,.045)}.picker-fields{display:none}.picker-fields.active{display:block}.number-fields.hidden{display:none}.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.quick button{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.028);color:#aab7cc;border-radius:10px;padding:8px 10px;font-size:10px}.generate{width:100%;margin-top:14px;border:0;cursor:pointer;padding:14px;border-radius:14px;color:#061019;font-weight:900;background:linear-gradient(135deg,#c8faff,#bdc5ff 56%,#e6b8ff);box-shadow:0 18px 38px rgba(101,223,255,.10);transition:.2s}.generate:hover{transform:translateY(-1px)}.generate:disabled{opacity:.5;cursor:not-allowed;transform:none}.source-note{margin-top:11px;color:#73819a;font-size:9.5px;line-height:1.55}.source-note strong{color:#aebbd0}
+    .result{padding:24px;text-align:center;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center}.result-kicker{font-size:9px;color:#7f8ca5;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.result-number{margin:11px 0 8px;font:900 clamp(52px,9vw,94px)/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-.06em;word-break:break-all;background:linear-gradient(90deg,#e8fbff,#bfe7ff 45%,#e4bcff);-webkit-background-clip:text;background-clip:text;color:transparent}.result-number.small{font-size:clamp(27px,5vw,52px);line-height:1.15}.result-meta{color:#8290aa;font-size:10px;line-height:1.6}.result-actions{display:flex;gap:8px;margin-top:15px}.mini{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.035);color:#c0cbe0;border-radius:10px;padding:8px 10px;font-size:10px}.status{margin:0 14px 14px;padding:10px 11px;border:1px solid var(--line);border-radius:11px;color:#8d9bb3;font-size:9.5px;line-height:1.5;background:rgba(255,255,255,.02)}.status.good{border-color:rgba(105,237,181,.13);color:#a8cdbc;background:rgba(105,237,181,.035)}.status.warn{border-color:rgba(255,211,107,.13);color:#c8b98a;background:rgba(255,211,107,.035)}.status.error{border-color:rgba(255,120,144,.14);color:#d6a0ab;background:rgba(255,120,144,.035)}
+    .history{padding:14px;border-top:1px solid var(--line)}.history-title{font-size:10px;color:#8b99b2;font-weight:850;text-transform:uppercase;letter-spacing:.08em;margin-bottom:9px}.history-list{display:grid;gap:7px;max-height:230px;overflow:auto}.history-item{display:flex;justify-content:space-between;gap:10px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);font-size:10px}.history-item strong{word-break:break-all}.history-item span{color:#738099;white-space:nowrap}
+    .learn,.seo-section,.faq{padding:0 0 64px}.learn h2,.seo-section h2,.faq h2{font-size:clamp(28px,4vw,36px);letter-spacing:-.04em;margin:0 0 15px}.learn-grid,.guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.learn-card,.guide-card{padding:20px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.024)}.learn-card h3,.guide-card h3{margin:0 0 8px;font-size:15px}.learn-card p,.guide-card p,.seo-section>p{margin:0;color:#91a0b9;font-size:12.5px;line-height:1.78}.learn-card p+p,.guide-card p+p{margin-top:9px}.seo-section>p{max-width:900px;margin-bottom:16px}.faq-list{display:grid;gap:10px}.faq details{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.024);padding:0 17px}.faq summary{cursor:pointer;font-weight:800;font-size:13px;padding:16px 0;list-style:none}.faq summary::-webkit-details-marker{display:none}.faq summary:after{content:"+";float:right;color:var(--cyan);font-size:18px}.faq details[open] summary:after{content:"−"}.faq details p{margin:0;padding:0 0 16px;color:#91a0b9;font-size:12.5px;line-height:1.78}.note{margin-top:12px;padding:14px 16px;border:1px solid rgba(101,223,255,.12);background:rgba(101,223,255,.035);border-radius:14px;color:#9dacc3;font-size:11.5px;line-height:1.7}
+    footer{padding:26px 0 40px;border-top:1px solid rgba(255,255,255,.055);text-align:center;color:#71809a;font-size:11px}.lang-switch{display:inline-flex;align-items:center;gap:4px;padding:5px;border:1px solid rgba(255,255,255,.10);border-radius:12px;background:rgba(255,255,255,.035);box-shadow:inset 0 0 18px rgba(255,255,255,.018);flex:0 0 auto}.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:27px;padding:0 7px;border-radius:8px;color:#93a2ba;font-size:10px;font-weight:900;letter-spacing:.08em;opacity:1!important}.lang-switch a.active{color:#07101a;background:linear-gradient(135deg,#c7f9ff,#c9c2ff)}.lang-switch .globe{padding:0 2px 0 4px;color:#99a9c2;font-size:12px}.nav-actions{display:flex;align-items:center;gap:10px}
+    @media(max-width:900px){.app{grid-template-columns:1fr}.learn-grid,.guide-grid{grid-template-columns:1fr}}
+    @media(max-width:620px){.wrap{width:min(100% - 22px,1160px)}.hero{padding:44px 0 18px}.fields{grid-template-columns:1fr}.source-tabs{grid-template-columns:1fr}.result-number{font-size:58px}.back{font-size:0}.back:after{content:"← Инструменты";font-size:12px}}
   </style>
-<script>(()=>{try{if(localStorage.getItem("cloudbyalex-lang")==="en")location.replace("/tools/random/"+location.search+location.hash)}catch(e){}})();</script>
+  <script>(()=>{try{if(localStorage.getItem("cloudbyalex-lang")==="en")location.replace("/tools/random/"+location.search+location.hash)}catch(e){}})();</script>
 </head>
 <body>
-<nav><div class="wrap nav-inner"><a class="brand" href="../../">☁ cloudbyalex</a><div class="nav-actions"><span aria-label="Language selector" class="lang-switch"><span aria-hidden="true" class="globe">🌐</span><a href="/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" class="active" href="/ru/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a href="/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" href="/ru/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a><a class="back" href="../../#tools">← Назад к инструментам</a></div></div></nav>
+<nav><div class="wrap nav-inner"><a class="brand" href="../../../ru/">☁ cloudbyalex</a><div class="nav-actions"><span class="lang-switch" aria-label="Выбор языка"><span class="globe" aria-hidden="true">🌐</span><a href="/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" href="/ru/tools/random/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a class="back" href="../../../ru/#tools">← Назад к инструментам</a></div></div></nav>
 <header class="hero wrap">
-<div class="eyebrow"><span class="spark"></span> CloudByAlex Random Lab</div>
-<h1>Создайте что-нибудь <span class="grad">по-настоящему случайное.</span></h1>
-<p class="lead">Случайные числа, кубик, монета и случайный выбор из списка. Используйте безопасную случайность браузера или атмосферный шум RANDOM.ORG.</p>
+  <div class="eyebrow"><span class="spark"></span> CloudByAlex Random Lab</div>
+  <h1>Создайте что-нибудь <span class="grad">по-настоящему случайное.</span></h1>
+  <p class="lead">Сгенерируйте случайное число, бросьте кубик, подбросьте монету или выберите вариант из списка. Используйте безопасную случайность Web Crypto или атмосферный шум RANDOM.ORG.</p>
 </header>
 <main class="wrap">
-<section class="app">
-<div class="panel">
-<div class="panel-head">
-<div><div class="panel-title">Генератор случайностей</div><div class="panel-sub">Выберите источник и режим</div></div>
-</div>
-<div class="source-tabs">
-<button class="source-btn active" data-source="browser">
-<strong><span class="source-dot"></span>Безопасный браузер</strong>
-<span>Криптографическая случайность Web Crypto. Работает мгновенно.</span>
-</button>
-<button class="source-btn" data-source="atmospheric">
-<strong><span class="source-dot"></span>Атмосферный шум</strong>
-<span>Настоящая случайность RANDOM.ORG через Cloudflare Worker.</span>
-</button>
-</div>
-<div class="mode-row">
-<button class="mode active" data-mode="number">Число</button>
-<button class="mode" data-mode="dice">Кубик</button>
-<button class="mode" data-mode="coin">Монета</button>
-<button class="mode" data-mode="picker">Выбор из списка</button>
-</div>
-<div class="form">
-<div class="number-fields" id="numberFields">
-<div class="fields">
-<div><label for="min">Минимум</label><input id="min" max="1000000000" min="-1000000000" type="number" value="1"/></div>
-<div><label for="max">Максимум</label><input id="max" max="1000000000" min="-1000000000" type="number" value="100"/></div>
-<div><label for="count">Количество</label><input id="count" max="20" min="1" type="number" value="1"/></div>
-</div>
-</div>
-<div class="picker-fields" id="pickerFields">
-<label for="pickerText">По одному варианту на строку</label>
-<textarea id="pickerText" placeholder="Pizza
-Sushi
-Tacos
-Burgers"></textarea>
-</div>
-<div class="quick">
-<button data-quick="1-10" type="button">1–10</button>
-<button data-quick="1-100" type="button">1–100</button>
-<button data-quick="1-1000" type="button">1–1000</button>
-<button data-quick="dice" type="button">🎲 Бросить кубик</button>
-<button data-quick="coin" type="button">🪙 Подбросить монету</button>
-</div>
-<button class="generate" id="generateBtn" type="button">Сгенерировать →</button>
-<div class="source-note" id="sourceNote"><strong>Источник:</strong> Browser Web Crypto (`crypto.getRandomValues`). Это криптографически стойкая псевдослучайность, а не физический атмосферный шум.</div>
-</div>
-<div class="status good" id="status">Безопасный режим браузера готов.</div>
-</div>
-<aside class="panel">
-<div class="panel-head"><div><div class="panel-title">Результат</div><div class="panel-sub">Здесь появится новый случайный результат</div></div></div>
-<div class="result">
-<div class="result-kicker" id="resultKicker">Готово</div>
-<div class="result-number" id="resultValue">?</div>
-<div class="result-meta" id="resultMeta">Выберите режим и нажмите «Сгенерировать».</div>
-<div class="result-actions">
-<button class="mini" id="copyResult" type="button">Копировать результат</button>
-<button class="mini" id="generateAgain" type="button">Сгенерировать ещё раз</button>
-</div>
-</div>
-<div class="history">
-<div class="history-title">Недавние результаты</div>
-<div class="history-list" id="historyList"><div class="history-item"><strong>Результатов пока нет</strong><span>—</span></div></div>
-</div>
-</aside>
-</section>
-<section class="learn">
-<h2>Откуда берётся случайность?</h2>
-<div class="learn-grid">
-<article class="learn-card">
-<h3>⚡ Атмосферная случайность</h3>
-<p>RANDOM.ORG создаёт настоящие случайные значения на основе атмосферного радиошума. На него влияют грозы и другая естественная электрическая активность.</p>
-<p>CloudByAlex обращается к RANDOM.ORG через небольшой серверный Worker, чтобы безопасно использовать источник из браузера.</p>
-</article>
-<article class="learn-card">
-<h3>🔐 Безопасная случайность браузера</h3>
-<p>Современные браузеры используют Web Crypto API. Функция `crypto.getRandomValues()` предназначена для криптографических задач и значительно надёжнее обычного `Math.random()`.</p>
-<p>Этот режим полностью работает на вашем устройстве и не требует сетевого запроса.</p>
-</article>
-<article class="learn-card">
-<h3>🎲 Для чего это использовать?</h3>
-<p>Выберите победителя, бросьте кубик, подбросьте монету, выберите ресторан или случайного участника команды, создайте тестовые данные или примите нейтральное решение.</p>
-</article>
-<article class="learn-card">
-<h3>⚠️ Не для регулируемых азартных игр</h3>
-<p>Этот бесплатный инструмент предназначен для обычных случайных выборов и экспериментов. Для регулируемых розыгрышей нужны специализированные сертифицированные системы.</p>
-</article>
-</div>
-</section>
+  <section class="app">
+    <div class="panel">
+      <div class="panel-head"><div><div class="panel-title">Генератор случайностей</div><div class="panel-sub">Выберите источник и режим</div></div></div>
+      <div class="source-tabs">
+        <button class="source-btn active" data-source="browser"><strong><span class="source-dot"></span>Безопасный браузер</strong><span>Криптографическая случайность Web Crypto. Работает мгновенно.</span></button>
+        <button class="source-btn" data-source="atmospheric"><strong><span class="source-dot"></span>Атмосферный шум</strong><span>Физическая случайность RANDOM.ORG через Cloudflare Worker.</span></button>
+      </div>
+      <div class="mode-row"><button class="mode active" data-mode="number">Число</button><button class="mode" data-mode="dice">Кубик</button><button class="mode" data-mode="coin">Монета</button><button class="mode" data-mode="picker">Выбор из списка</button></div>
+      <div class="form">
+        <div class="number-fields" id="numberFields"><div class="fields"><div><label for="min">Минимум</label><input id="min" type="number" value="1" min="-1000000000" max="1000000000"></div><div><label for="max">Максимум</label><input id="max" type="number" value="100" min="-1000000000" max="1000000000"></div><div><label for="count">Количество</label><input id="count" type="number" value="1" min="1" max="20"></div></div></div>
+        <div class="picker-fields" id="pickerFields"><label for="pickerText">По одному варианту на строку</label><textarea id="pickerText" placeholder="Пицца&#10;Суши&#10;Тако&#10;Бургеры"></textarea></div>
+        <div class="quick"><button type="button" data-quick="1-10">1–10</button><button type="button" data-quick="1-100">1–100</button><button type="button" data-quick="1-1000">1–1000</button><button type="button" data-quick="dice">🎲 Бросить кубик</button><button type="button" data-quick="coin">🪙 Подбросить монету</button></div>
+        <button class="generate" id="generateBtn" type="button">Сгенерировать →</button>
+        <div class="source-note" id="sourceNote"><strong>Источник:</strong> Browser Web Crypto (<code>crypto.getRandomValues</code>). Криптографически стойкая псевдослучайность создаётся на вашем устройстве.</div>
+      </div>
+      <div class="status good" id="status" aria-live="polite">Безопасный режим браузера готов.</div>
+    </div>
+    <aside class="panel">
+      <div class="panel-head"><div><div class="panel-title">Результат</div><div class="panel-sub">Здесь появится новый случайный результат</div></div></div>
+      <div class="result"><div class="result-kicker" id="resultKicker">Готово</div><div class="result-number" id="resultValue">?</div><div class="result-meta" id="resultMeta">Выберите режим и нажмите «Сгенерировать».</div><div class="result-actions"><button class="mini" id="copyResult" type="button">Копировать</button><button class="mini" id="generateAgain" type="button">Ещё раз</button></div></div>
+      <div class="history"><div class="history-title">Недавние результаты</div><div class="history-list" id="historyList"><div class="history-item"><strong>Результатов пока нет</strong><span>—</span></div></div></div>
+    </aside>
+  </section>
+
+  <section class="learn">
+    <h2>Откуда берётся случайность?</h2>
+    <div class="learn-grid">
+      <article class="learn-card"><h3>⚡ Атмосферная случайность</h3><p>RANDOM.ORG получает случайные значения из атмосферного радиошума. В этот физический шум вносит вклад естественная электрическая активность атмосферы.</p><p>CloudByAlex обращается к RANDOM.ORG через серверный Cloudflare Worker, чтобы браузер мог использовать этот источник без раскрытия серверных данных доступа.</p></article>
+      <article class="learn-card"><h3>🔐 Безопасная случайность браузера</h3><p>Современные браузеры предоставляют Web Crypto API. Функция <code>crypto.getRandomValues()</code> предназначена для криптографически стойких псевдослучайных значений и значительно лучше подходит для таких задач, чем обычный <code>Math.random()</code>.</p><p>Этот режим работает локально на вашем устройстве и не требует сетевого запроса.</p></article>
+      <article class="learn-card"><h3>🎲 Для чего использовать?</h3><p>Выберите победителя, бросьте кубик, подбросьте монету, выберите ресторан, случайного участника команды, создайте тестовые данные или просто примите нейтральное решение.</p></article>
+      <article class="learn-card"><h3>⚠️ Не для регулируемых азартных игр</h3><p>Этот бесплатный инструмент предназначен для обычной рандомизации и экспериментов. Для регулируемых розыгрышей и других высокорисковых задач нужны специализированные системы и соответствующий контроль.</p></article>
+    </div>
+  </section>
+
+  <section class="seo-section">
+    <h2>Как работает генератор случайных чисел</h2>
+    <p>По умолчанию CloudByAlex не использует простой <code>Math.random()</code>. Режим «Безопасный браузер» получает 32-битные криптографические случайные значения через Web Crypto API, а затем переводит их в заданный вами диапазон методом rejection sampling. Такой подход избегает простой ошибки modulo bias, которая может появляться, если механически брать остаток от деления случайного числа на размер диапазона.</p>
+    <div class="guide-grid">
+      <article class="guide-card"><h3>Случайное число в своём диапазоне</h3><p>Укажите целые минимум и максимум, а затем количество результатов. Можно быстро выбрать диапазоны 1–10, 1–100 и 1–1000. Поддерживаются и отрицательные числа в пределах ограничений формы.</p></article>
+      <article class="guide-card"><h3>Случайный выбор из списка</h3><p>Откройте «Выбор из списка» и добавьте по одному варианту на строку. Генератор случайно выбирает индекс с помощью выбранного источника и возвращает соответствующее имя, ресторан, задачу, участника или другой пункт.</p></article>
+      <article class="guide-card"><h3>Кубик и монета</h3><p>Режим кубика генерирует целое число от 1 до 6. Монета выбирает один из двух исходов — «ОРЁЛ» или «РЕШКА». Оба режима используют тот же источник случайности, который вы выбрали выше.</p></article>
+      <article class="guide-card"><h3>Псевдослучайность и физическая случайность</h3><p>Криптографическая псевдослучайность создаётся безопасным алгоритмом с системной энтропией и подходит для множества программных задач. Атмосферный режим вместо этого запрашивает значения RANDOM.ORG, полученные из измерений физического шумового источника.</p></article>
+    </div>
+    <div class="note">О приватности: в режиме «Безопасный браузер» результат создаётся локально. Текст из «Выбора из списка» никуда не отправляется. В атмосферном режиме Worker получает только числовой диапазон, необходимый для случайного запроса.</div>
+  </section>
+
+  <section class="faq">
+    <h2>Частые вопросы о генераторе</h2>
+    <div class="faq-list">
+      <details><summary>Насколько безопасен этот генератор случайных чисел?</summary><p>Режим «Безопасный браузер» использует <code>crypto.getRandomValues()</code> из Web Crypto API. Эта функция предназначена для криптографически стойкой псевдослучайности и является более сильным источником, чем обычный <code>Math.random()</code>.</p></details>
+      <details><summary>Что такое атмосферная случайность?</summary><p>Дополнительный режим запрашивает значения у RANDOM.ORG, который получает случайность из атмосферного радиошума. CloudByAlex передаёт числовой запрос через Cloudflare Worker.</p></details>
+      <details><summary>Можно ли сгенерировать несколько чисел сразу?</summary><p>Да. Укажите минимум, максимум и количество. В этой версии интерфейса можно получить до 20 значений за один запуск.</p></details>
+      <details><summary>Можно ли выбрать случайное имя из списка?</summary><p>Да. Откройте «Выбор из списка», добавьте по одному варианту на строку и нажмите «Сгенерировать». Выбранный пункт появится справа и попадёт в историю последних результатов.</p></details>
+      <details><summary>Это то же самое, что Math.random()?</summary><p>Нет. Безопасный режим использует Web Crypto API вместо <code>Math.random()</code>. Web Crypto разработан для задач, где качество случайности важнее, чем в обычной псевдослучайной функции JavaScript.</p></details>
+      <details><summary>Можно ли использовать это для официальной лотереи?</summary><p>Инструмент не сертифицирован для регулируемых азартных игр, официальных лотерей или других высокорисковых розыгрышей. Для таких задач нужны специализированные системы, аудит и необходимые юридические разрешения.</p></details>
+    </div>
+  </section>
 </main>
 <footer><div class="wrap">CloudByAlex Tools · Полезные инструменты с понятной технологией.</div></footer>
 <script>
 (() => {
-  // After the Cloudflare Worker is deployed, replace the empty string below
-  // with the workers.dev URL, e.g. https://cloudbyalex-random.example.workers.dev
-  const ATMOSPHERIC_ENDPOINT = "https://cloudbyalex-random.alexdellsone.workers.dev";
-
-  const $ = id => document.getElementById(id);
-  let source = "browser";
-  let mode = "number";
-  let lastResult = "";
-  let history = [];
-
-  function secureInt(min,max){
-    min = Math.ceil(min); max = Math.floor(max);
-    const range = max - min + 1;
-    if(!Number.isSafeInteger(min)||!Number.isSafeInteger(max)||range<=0||range>4294967296) throw new Error("Диапазон слишком большой.");
-    const maxUint = 0x100000000;
-    const limit = maxUint - (maxUint % range);
-    const a = new Uint32Array(1);
-    let x;
-    do { crypto.getRandomValues(a); x=a[0]; } while(x>=limit);
-    return min + (x % range);
-  }
-
-  function browserNumbers(min,max,count){
-    return Array.from({length:count},()=>secureInt(min,max));
-  }
-
-  async function atmosphericNumbers(min,max,count){
-    if(!ATMOSPHERIC_ENDPOINT){
-      throw new Error("Для атмосферного режима нужен Cloudflare Worker. Безопасный режим браузера работает.");
-    }
-    const r = await fetch(ATMOSPHERIC_ENDPOINT,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({min,max,count})
-    });
-    const d = await r.json().catch(()=>({}));
-    if(!r.ok) throw new Error(d.error || "Атмосферный сервис временно недоступен.");
-    if(!Array.isArray(d.numbers)) throw new Error("Некорректный ответ атмосферного сервиса.");
-    return d.numbers;
-  }
-
-  function setStatus(text,type="good"){
-    $("status").textContent=text;
-    $("status").className="status "+type;
-  }
-
-  function updateSource(){
-    document.querySelectorAll(".source-btn").forEach(b=>b.classList.toggle("active",b.dataset.source===source));
-    if(source==="browser"){
-      $("sourceNote").innerHTML="<strong>Источник:</strong> Browser Web Crypto (<code>crypto.getRandomValues</code>). Криптографически стойкая псевдослучайность создаётся локально.";
-      setStatus("Безопасный режим браузера готов.","good");
-    }else{
-      $("sourceNote").innerHTML="<strong>Источник:</strong> атмосферный шум RANDOM.ORG через Cloudflare Worker. Каждый клик запрашивает новую физическую случайность.";
-      if(ATMOSPHERIC_ENDPOINT) setStatus("Режим атмосферного шума готов.","good");
-      else setStatus("Для атмосферного режима нужна настройка Cloudflare Worker.","warn");
-    }
-  }
-
-  function updateMode(){
-    document.querySelectorAll(".mode").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));
-    const picker = mode==="picker";
-    $("pickerFields").classList.toggle("active",picker);
-    $("numberFields").classList.toggle("hidden",picker);
-
-    if(mode==="dice"){ $("min").value=1; $("max").value=6; $("count").value=1; }
-    if(mode==="coin"){ $("min").value=0; $("max").value=1; $("count").value=1; }
-  }
-
-  async function generate(){
-    const btn=$("generateBtn");
-    btn.disabled=true; btn.textContent="Генерируем…";
-    try{
-      let min,max,count,values,display,kicker,meta;
-
-      if(mode==="picker"){
-        const options=$("pickerText").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
-        if(options.length<2) throw new Error("Введите минимум два варианта.");
-        min=0;max=options.length-1;count=1;
-        values = source==="browser" ? browserNumbers(min,max,count) : await atmosphericNumbers(min,max,count);
-        display=options[values[0]];
-        kicker="Случайный выбор";
-        meta=`Выбрано из ${options.length} вариантов · ${source==="browser"?"Безопасный браузер":"Атмосферный шум"}`;
-      }else{
-        min=Number($("min").value); max=Number($("max").value); count=Number($("count").value);
-        if(!Number.isInteger(min)||!Number.isInteger(max)||min>max) throw new Error("Проверьте минимум и максимум.");
-        if(!Number.isInteger(count)||count<1||count>20) throw new Error("Количество должно быть от 1 до 20.");
-        values = source==="browser" ? browserNumbers(min,max,count) : await atmosphericNumbers(min,max,count);
-
-        if(mode==="coin"){
-          display=values[0]===0 ? "HEADS" : "TAILS";
-          kicker="Монета";
-          meta=source==="browser"?"Безопасная случайность браузера":"Атмосферный шум RANDOM.ORG";
-        }else if(mode==="dice"){
-          display=String(values[0]);
-          kicker="Бросок кубика";
-          meta=`1–6 · ${source==="browser"?"Безопасный браузер":"Атмосферный шум"}`;
-        }else{
-          display=values.join(", ");
-          kicker=count===1?"Случайное число":"Случайные числа";
-          meta=`Диапазон ${min.toLocaleString()}–${max.toLocaleString()} · ${source==="browser"?"Безопасный браузер":"Атмосферный шум"}`;
-        }
-      }
-
-      lastResult=display;
-      $("resultValue").textContent=display;
-      $("resultValue").className="result-number"+(display.length>22?" small":"");
-      $("resultKicker").textContent=kicker;
-      $("resultMeta").textContent=meta;
-      addHistory(display,source==="browser"?"Browser":"Atmospheric");
-      setStatus(source==="browser"?"Создано локально с помощью Web Crypto.":"Получена новая атмосферная случайность от RANDOM.ORG.","good");
-    }catch(e){
-      setStatus(e.message||"Не удалось сгенерировать результат.","error");
-    }finally{
-      btn.disabled=false;btn.textContent="Сгенерировать →";
-    }
-  }
-
-  function addHistory(value,label){
-    history.unshift({value,label,time:new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})});
-    history=history.slice(0,8);
-    $("historyList").innerHTML=history.map(x=>`<div class="history-item"><strong>${escapeHtml(x.value)}</strong><span>${x.label} · ${x.time}</span></div>`).join("");
-  }
-
+  const ATMOSPHERIC_ENDPOINT="https://cloudbyalex-random.alexdellsone.workers.dev";
+  const $=id=>document.getElementById(id);
+  let source="browser",mode="number",lastResult="",history=[];
+  function secureInt(min,max){min=Math.ceil(min);max=Math.floor(max);const range=max-min+1;if(!Number.isSafeInteger(min)||!Number.isSafeInteger(max)||range<=0||range>4294967296)throw new Error("Диапазон слишком большой.");const maxUint=0x100000000;const limit=maxUint-(maxUint%range);const a=new Uint32Array(1);let x;do{crypto.getRandomValues(a);x=a[0];}while(x>=limit);return min+(x%range);}
+  function browserNumbers(min,max,count){return Array.from({length:count},()=>secureInt(min,max));}
+  async function atmosphericNumbers(min,max,count){if(!ATMOSPHERIC_ENDPOINT)throw new Error("Атмосферный режим временно недоступен.");const r=await fetch(ATMOSPHERIC_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({min,max,count})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||"Атмосферный сервис временно недоступен.");if(!Array.isArray(d.numbers))throw new Error("Некорректный ответ атмосферного сервиса.");return d.numbers;}
+  function setStatus(text,type="good"){$("status").textContent=text;$("status").className="status "+type;}
+  function updateSource(){document.querySelectorAll(".source-btn").forEach(b=>b.classList.toggle("active",b.dataset.source===source));if(source==="browser"){$("sourceNote").innerHTML="<strong>Источник:</strong> Browser Web Crypto (<code>crypto.getRandomValues</code>). Криптографически стойкая псевдослучайность создаётся локально.";setStatus("Безопасный режим браузера готов.","good");}else{$("sourceNote").innerHTML="<strong>Источник:</strong> атмосферный шум RANDOM.ORG через Cloudflare Worker. Каждый клик запрашивает новую физическую случайность.";setStatus("Режим атмосферного шума готов.","good");}}
+  function updateMode(){document.querySelectorAll(".mode").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));const picker=mode==="picker";$("pickerFields").classList.toggle("active",picker);$("numberFields").classList.toggle("hidden",picker);if(mode==="dice"){$("min").value=1;$("max").value=6;$("count").value=1;}if(mode==="coin"){$("min").value=0;$("max").value=1;$("count").value=1;}}
+  async function generate(){const btn=$("generateBtn");btn.disabled=true;btn.textContent="Генерируем…";try{let min,max,count,values,display,kicker,meta;if(mode==="picker"){const options=$("pickerText").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(options.length<2)throw new Error("Введите минимум два варианта.");min=0;max=options.length-1;count=1;values=source==="browser"?browserNumbers(min,max,count):await atmosphericNumbers(min,max,count);display=options[values[0]];kicker="Случайный выбор";meta=`Выбрано из ${options.length} вариантов · ${source==="browser"?"Безопасный браузер":"Атмосферный шум"}`;}else{min=Number($("min").value);max=Number($("max").value);count=Number($("count").value);if(!Number.isInteger(min)||!Number.isInteger(max)||min>max)throw new Error("Проверьте минимум и максимум.");if(!Number.isInteger(count)||count<1||count>20)throw new Error("Количество должно быть от 1 до 20.");values=source==="browser"?browserNumbers(min,max,count):await atmosphericNumbers(min,max,count);if(mode==="coin"){display=values[0]===0?"ОРЁЛ":"РЕШКА";kicker="Монета";meta=source==="browser"?"Безопасная случайность браузера":"Атмосферный шум RANDOM.ORG";}else if(mode==="dice"){display=String(values[0]);kicker="Бросок кубика";meta=`1–6 · ${source==="browser"?"Безопасный браузер":"Атмосферный шум"}`;}else{display=values.join(", ");kicker=count===1?"Случайное число":"Случайные числа";meta=`Диапазон ${min.toLocaleString()}–${max.toLocaleString()} · ${source==="browser"?"Безопасный браузер":"Атмосферный шум"}`;}}lastResult=display;$("resultValue").textContent=display;$("resultValue").className="result-number"+(display.length>22?" small":"");$("resultKicker").textContent=kicker;$("resultMeta").textContent=meta;addHistory(display,source==="browser"?"Браузер":"Атмосфера");setStatus(source==="browser"?"Создано локально с помощью Web Crypto.":"Получена новая атмосферная случайность от RANDOM.ORG.","good");}catch(e){setStatus(e.message||"Не удалось сгенерировать результат.","error");}finally{btn.disabled=false;btn.textContent="Сгенерировать →";}}
+  function addHistory(value,label){history.unshift({value,label,time:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})});history=history.slice(0,8);$("historyList").innerHTML=history.map(x=>`<div class="history-item"><strong>${escapeHtml(x.value)}</strong><span>${x.label} · ${x.time}</span></div>`).join("");}
   function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-
-  document.querySelectorAll(".source-btn").forEach(b=>b.addEventListener("click",()=>{source=b.dataset.source;updateSource()}));
-  document.querySelectorAll(".mode").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;updateMode()}));
-
-  document.querySelectorAll("[data-quick]").forEach(b=>b.addEventListener("click",()=>{
-    const q=b.dataset.quick;
-    if(q==="dice"){mode="dice";}
-    else if(q==="coin"){mode="coin";}
-    else{
-      mode="number";
-      const [a,z]=q.split("-").map(Number);$("min").value=a;$("max").value=z;$("count").value=1;
-    }
-    updateMode();
-  }));
-
-  $("generateBtn").addEventListener("click",generate);
-  $("generateAgain").addEventListener("click",generate);
-  $("copyResult").addEventListener("click",async()=>{
-    if(!lastResult)return;
-    try{await navigator.clipboard.writeText(lastResult);const t=$("copyResult").textContent;$("copyResult").textContent="Скопировано ✓";setTimeout(()=>$("copyResult").textContent=t,1200)}catch{}
-  });
-
-  updateSource();updateMode();
+  document.querySelectorAll(".source-btn").forEach(b=>b.addEventListener("click",()=>{source=b.dataset.source;updateSource();}));document.querySelectorAll(".mode").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;updateMode();}));document.querySelectorAll("[data-quick]").forEach(b=>b.addEventListener("click",()=>{const q=b.dataset.quick;if(q==="dice")mode="dice";else if(q==="coin")mode="coin";else{mode="number";const[a,z]=q.split("-").map(Number);$("min").value=a;$("max").value=z;$("count").value=1;}updateMode();}));
+  $("generateBtn").addEventListener("click",generate);$("generateAgain").addEventListener("click",generate);$("copyResult").addEventListener("click",async()=>{if(!lastResult)return;try{await navigator.clipboard.writeText(lastResult);const t=$("copyResult").textContent;$("copyResult").textContent="Скопировано ✓";setTimeout(()=>$("copyResult").textContent=t,1200);}catch{}});updateSource();updateMode();
 })();
 </script>
-<!-- Cloudflare Web Analytics --><script data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}' src="https://static.cloudflareinsights.com/beacon.min.js" type="module"></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token":"fc4b954acddd444a8d7d9673817d12ea"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
