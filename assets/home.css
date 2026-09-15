@@ -124,6 +124,25 @@ img{max-width:100%}
   background:radial-gradient(ellipse at center,rgba(100,220,255,.075),transparent 42%),radial-gradient(ellipse at 66% 38%,rgba(194,119,255,.075),transparent 40%);
   filter:blur(16px);
 }
+.hero::after{
+  content:"AWS   LINUX   K8s\A DOCKER   TERRAFORM\A JENKINS   EKS   CI/CD\A PROMETHEUS   GRAFANA";
+  position:absolute;
+  right:-175px;
+  top:57%;
+  transform:translateY(-50%) rotate(-6deg);
+  width:360px;
+  white-space:pre;
+  text-align:left;
+  pointer-events:none;
+  z-index:0;
+  color:rgba(175,207,255,.12);
+  font:900 24px/2.05 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  letter-spacing:.105em;
+  text-transform:uppercase;
+  text-shadow:0 0 22px rgba(102,228,255,.08),0 0 36px rgba(194,119,255,.055);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 18%,#000 82%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 18%,#000 82%,transparent 100%);
+}
 .hero-copy{position:relative;z-index:2;max-width:920px;display:flex;flex-direction:column;align-items:center}
 .eyebrow{
   display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border-radius:999px;
@@ -176,12 +195,36 @@ img{max-width:100%}
 .orbit.two::before{background:var(--violet);box-shadow:0 0 15px rgba(194,119,255,.85)}
 .orbit.three::before{background:var(--green);box-shadow:0 0 15px rgba(112,240,189,.85)}
 .portrait{
-  position:relative;z-index:3;width:250px;height:250px;border-radius:50%;overflow:hidden;
-  border:1px solid rgba(255,255,255,.16);
-  background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));
-  box-shadow:0 30px 80px rgba(0,0,0,.36),0 0 80px rgba(126,140,255,.12),inset 0 0 30px rgba(255,255,255,.03);
+  position:relative;
+  z-index:3;
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  overflow:visible;
+  border:0;
+  background:transparent;
 }
-.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait::before{
+  content:"";
+  position:absolute;
+  inset:-22px;
+  z-index:-1;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(102,228,255,.15) 0%,rgba(126,140,255,.10) 36%,rgba(194,119,255,.075) 50%,transparent 72%);
+  filter:blur(22px);
+  opacity:.95;
+}
+.portrait img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:50%;
+  filter:saturate(1.03) contrast(1.02);
+  box-shadow:0 28px 75px rgba(0,0,0,.28);
+  -webkit-mask-image:radial-gradient(circle at 50% 48%,#000 0 70%,rgba(0,0,0,.97) 77%,rgba(0,0,0,.76) 85%,rgba(0,0,0,.34) 93%,transparent 100%);
+  mask-image:radial-gradient(circle at 50% 48%,#000 0 70%,rgba(0,0,0,.97) 77%,rgba(0,0,0,.76) 85%,rgba(0,0,0,.34) 93%,transparent 100%);
+}
 .float-tag{
   position:absolute;z-index:4;display:flex;align-items:center;justify-content:center;
   min-width:64px;height:46px;padding:0 12px;border-radius:15px;
@@ -254,6 +297,7 @@ footer{position:relative;z-index:2;padding:12px 0 38px;text-align:center;color:#
 @keyframes bob{50%{transform:translateY(4px)}}
 @keyframes statusPulse{50%{opacity:.35;transform:scale(.75)}}
 
+@media(max-width:1180px){.hero::after{display:none}}
 @media(max-width:980px){
   .nav-links>a:not(.nav-pill),.nav-links .nav-pill{display:none}
   .about-intro{grid-template-columns:1fr}.about-actions{justify-content:flex-start}
