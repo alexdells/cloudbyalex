@@ -164,7 +164,58 @@
     .lang-switch .globe{padding:0 2px 0 4px;color:#99a9c2;font-size:12px}
     .nav-actions{display:flex;align-items:center;gap:10px}
 
-  </style>
+  
+/* IP address visual refresh: separate IPv4 / IPv6 dashboards */
+.network-dashboard{margin:34px 0 18px}
+.ip-dashboard-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
+.ip-dashboard-label{display:flex;align-items:center;gap:11px;font-size:12px;font-weight:850;letter-spacing:.14em;text-transform:uppercase;color:#e1eaf8}
+.ip-dashboard-label:before{content:"";width:8px;height:8px;border-radius:3px;background:#62dff5;box-shadow:0 0 15px #62dff580}
+.ip-dashboard-summary{color:#92a6bf;font-size:12px;line-height:1.5;text-align:right}
+.network-dashboard .ip-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:0}
+.network-dashboard .ip-box{min-width:0;min-height:365px;position:relative;display:flex;flex-direction:column;overflow:hidden;padding:30px;border:1px solid rgba(105,220,245,.3);border-radius:27px;background:linear-gradient(147deg,rgba(31,83,105,.30),rgba(13,24,40,.98) 48%,rgba(10,18,32,.97));box-shadow:0 25px 70px #0003,inset 0 1px #ffffff0d}
+.network-dashboard .ip-box.ipv6{border-color:rgba(190,159,255,.33);background:linear-gradient(147deg,rgba(76,48,129,.34),rgba(24,21,44,.98) 48%,rgba(15,18,34,.96))}
+.network-dashboard .ip-box:before{content:"";position:absolute;top:0;left:27px;right:27px;height:3px;border-radius:4px;background:linear-gradient(90deg,#66e6ff,#398cac,transparent)}
+.network-dashboard .ip-box.ipv6:before{background:linear-gradient(90deg,#cfb3ff,#805edb,transparent)}
+.network-dashboard .ip-box:after{content:"";position:absolute;top:-130px;right:-110px;width:260px;height:260px;border-radius:50%;background:#34cdff;filter:blur(85px);opacity:.15;pointer-events:none}
+.network-dashboard .ip-box.ipv6:after{background:#af89ff;opacity:.19}
+.ip-box-head,.ip-card-footer{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ip-protocol{display:flex;align-items:center;gap:12px;min-width:0}
+.ip-protocol-icon{height:48px;flex:0 0 48px;border:1px solid #6bdffd35;border-radius:15px;background:#45d0f618;color:#81edff;display:grid;place-items:center}
+.ip-box.ipv6 .ip-protocol-icon{border-color:#c09cfb33;background:#ae8cff20;color:#d1b8ff}
+.ip-protocol-name{font-size:25px;font-weight:800;letter-spacing:-.04em;line-height:1;color:#f5fbff}
+.ip-protocol-meta{font-size:10px;font-weight:800;letter-spacing:.13em;margin-top:8px;color:#8aa7bd}
+.ip-box.ipv6 .ip-protocol-meta{color:#b4a4d9}
+.ip-state{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;padding:8px 11px;border:1px solid #70e9b33d;border-radius:100px;background:#23805c30;color:#97f5cd;font-size:11px;line-height:1;font-weight:800}
+.ip-state:before{content:"";height:7px;width:7px;flex:0 0 7px;border-radius:50%;background:#75eeb9;box-shadow:0 0 10px #75eeb990}
+.ip-state.is-checking{color:#bccbe0;background:#7393bc18;border-color:#a5bad436}
+.ip-state.is-checking:before{background:#93a9c5;box-shadow:none}
+.ip-state.is-unavailable{color:#fac5cb;background:#ae465323;border-color:#f68a9b47}
+.ip-state.is-unavailable:before{background:#ec90a0;box-shadow:none}
+.network-dashboard .ip-box .ip-label{position:relative;z-index:1;margin:46px 0 12px;color:#9ab6ca;font-size:11px;letter-spacing:.14em;font-weight:800}
+.network-dashboard .ip-box.ipv6 .ip-label{color:#b7a8d8}
+.network-dashboard .ip-box .ip-value{position:relative;z-index:1;min-height:47px;font:750 clamp(27px,3.45vw,43px)/1.25 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-.05em;color:#f5fcff;overflow-wrap:anywhere;word-break:normal}
+.network-dashboard .ip-box.ipv6 .ip-value{font-size:clamp(20px,2.25vw,28px);letter-spacing:-.035em;line-height:1.4}
+.network-dashboard .ip-box.unavailable .ip-value{font-size:clamp(22px,2.2vw,28px);opacity:.75}
+.network-dashboard .ip-box .ip-status{position:relative;z-index:1;margin-top:9px;color:#90a6c0;font-size:11px;line-height:1.5}
+.ip-card-footer{margin-top:auto;padding-top:24px;align-items:flex-end}
+.ip-card-fact{color:#90a2b9;font-size:12px;line-height:1.65}
+.ip-card-fact strong{color:#d1e6f3;font-weight:750}
+.ip-box.ipv6 .ip-card-fact strong{color:#ded1ff}
+.network-dashboard .ip-box .copy-small{display:inline-flex;align-items:center;justify-content:center;gap:9px;flex:0 0 auto;margin:0;padding:13px 18px;border:0;border-radius:12px;color:#072634;font-size:12px;font-weight:850;white-space:nowrap;background:linear-gradient(125deg,#78edff,#54c9e5);box-shadow:0 8px 20px #37c4ec26}
+.network-dashboard .ip-box.ipv6 .copy-small{background:linear-gradient(125deg,#d9c4ff,#ad94f4);color:#291a41}
+.network-dashboard .ip-box .copy-small:disabled{cursor:not-allowed;opacity:.47;transform:none}
+.network-dashboard .ip-box .copy-small:not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.07)}
+.network-dashboard .ip-box .copy-small:focus-visible{outline:2px solid white;outline-offset:3px}
+.ip-dashboard-bottom{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-top:16px}
+.ip-dashboard-bottom .actions{gap:9px}
+.ip-dashboard-bottom .pills{margin:0;gap:8px}
+.ip-dashboard-bottom .pill{font-size:11px;border-radius:12px;padding:9px 12px;background:#101a2bc6;border-color:#8cadd12e}
+@media(max-width:900px){.network-dashboard .ip-list{grid-template-columns:1fr;gap:15px}.network-dashboard .ip-box{min-height:300px}}
+@media(max-width:620px){.network-dashboard{margin-top:27px}.ip-dashboard-head{flex-direction:column;align-items:flex-start;gap:8px}.ip-dashboard-summary{text-align:left}.network-dashboard .ip-box{padding:24px 21px;border-radius:23px;min-height:305px}.network-dashboard .ip-box .ip-label{margin-top:36px}.network-dashboard .ip-box .ip-value{font-size:clamp(27px,7vw,39px)}.network-dashboard .ip-box.ipv6 .ip-value{font-size:clamp(19px,5vw,26px)}.ip-protocol-icon{flex-basis:43px;height:43px}.ip-protocol-name{font-size:23px}.ip-card-fact{font-size:11px}.network-dashboard .ip-box .copy-small{padding:12px;font-size:11px}.ip-dashboard-bottom .actions{width:100%}.ip-dashboard-bottom .actions .btn{flex:1}.ip-state{padding:7px 8px;font-size:10px}}
+@media(max-width:360px){.ip-box-head{flex-wrap:wrap}.network-dashboard .ip-box .copy-small{font-size:10px;padding:11px 9px}.ip-card-fact{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.network-dashboard .ip-box .copy-small{transition:none}}
+
+</style>
 <script>(()=>{try{const s=localStorage.getItem("cloudbyalex-lang");const ls=navigator.languages?.length?navigator.languages:[navigator.language||""];const r=ls.some(x=>String(x).toLowerCase().startsWith("ru"));if(s==="ru"||(!s&&r))location.replace("/ru/tools/my-ip/"+location.search+location.hash)}catch(e){}})();</script>
 </head>
 <body>
@@ -177,32 +228,25 @@
   </header>
 
   <main class="wrap">
-    <section class="ip-shell"><div class="ip-card">
-      <div class="ip-top">
-        <div style="flex:1;min-width:0">
-          <div class="ip-label">Your public IP addresses</div>
-          <div class="ip-list">
-            <div class="ip-box primary">
-              <div class="ip-label">IPv4</div>
-              <div class="ip-value loading" id="ipv4Value">Detecting…</div>
-              <div class="ip-status" id="ipv4Status">Checking IPv4 connectivity</div>
-              <button class="btn copy-small" id="copyIpv4" type="button">Copy IPv4</button>
-            </div>
-            <div class="ip-box ipv6">
-              <div class="ip-label">IPv6</div>
-              <div class="ip-value loading" id="ipv6Value">Detecting…</div>
-              <div class="ip-status" id="ipv6Status">Checking IPv6 connectivity</div>
-              <button class="btn copy-small" id="copyIpv6" type="button">Copy IPv6</button>
-            </div>
-          </div>
-          <div class="ip-sub" id="ipSub">Checking both public internet protocols.</div>
-        </div>
-        <div class="actions"><button class="btn" id="refreshBtn">Refresh</button><button class="btn primary" id="copyAll">Copy all details</button></div>
-      </div>
-      <div class="pills"><div class="pill">IPv4: <b id="ipv4Pill">—</b></div><div class="pill">IPv6: <b id="ipv6Pill">—</b></div><div class="pill">Connection: <b id="secureState">HTTPS</b></div><div class="pill">Device: <b id="devicePill">—</b></div></div>
-    </div></section>
+    <section class="network-dashboard" aria-labelledby="ip-dashboard-title">
+<div class="ip-dashboard-head"><div class="ip-dashboard-label" id="ip-dashboard-title">Your public IP addresses</div><div class="ip-dashboard-summary" id="ipSub" aria-live="polite">Checking your connection</div></div>
+<div class="ip-list"><article class="ip-box primary" id="ipv4Card" aria-labelledby="ipv4Heading">
+<div class="ip-box-head"><div class="ip-protocol"><span class="ip-protocol-icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 12h17M12 3c5.4 5.4 5.4 12.6 0 18m0-18c-5.4 5.4-5.4 12.6 0 18" stroke="currentColor" stroke-width="1.4"/></svg></span><div><div class="ip-protocol-name" id="ipv4Heading">IPv4</div><div class="ip-protocol-meta">32-BIT PROTOCOL</div></div></div><span class="ip-state is-checking" id="ipv4State">Checking</span></div>
+<div class="ip-label">PUBLIC IPV4 ADDRESS</div>
+<div class="ip-value loading" id="ipv4Value" aria-live="polite">Detecting…</div>
+<div class="ip-status" id="ipv4Status" aria-live="polite">Checking IPv4 connectivity</div>
+<div class="ip-card-footer"><div class="ip-card-fact"><strong>Classic internet address</strong><div>4 number groups · widely supported</div></div><button type="button" class="btn copy-small" id="copyIpv4" aria-label="Copy IPv4" disabled><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="2"/></svg><span class="copy-label">Copy IPv4</span></button></div>
+</article><article class="ip-box ipv6" id="ipv6Card" aria-labelledby="ipv6Heading">
+<div class="ip-box-head"><div class="ip-protocol"><span class="ip-protocol-icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="5" cy="12" r="2" stroke="currentColor" stroke-width="1.7"/><circle cx="19" cy="5" r="2" stroke="currentColor" stroke-width="1.7"/><circle cx="19" cy="19" r="2" stroke="currentColor" stroke-width="1.7"/><path d="M7 11.1 17.1 5.9M7 12.9 17.1 18M19 7v10" stroke="currentColor" stroke-width="1.7"/></svg></span><div><div class="ip-protocol-name" id="ipv6Heading">IPv6</div><div class="ip-protocol-meta">128-BIT PROTOCOL</div></div></div><span class="ip-state is-checking" id="ipv6State">Checking</span></div>
+<div class="ip-label">PUBLIC IPV6 ADDRESS</div>
+<div class="ip-value loading" id="ipv6Value" aria-live="polite">Detecting…</div>
+<div class="ip-status" id="ipv6Status" aria-live="polite">Checking IPv6 connectivity</div>
+<div class="ip-card-footer"><div class="ip-card-fact"><strong>Next-generation internet address</strong><div>Expanded space · modern networks</div></div><button type="button" class="btn copy-small" id="copyIpv6" aria-label="Copy IPv6" disabled><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="2"/></svg><span class="copy-label">Copy IPv6</span></button></div>
+</article></div>
+<div class="ip-dashboard-bottom"><div class="pills"><div class="pill">IPv4: <b id="ipv4Pill">—</b></div><div class="pill">IPv6: <b id="ipv6Pill">—</b></div><div class="pill">Connection: <b id="secureState">HTTPS</b></div><div class="pill">Device: <b id="devicePill">—</b></div></div><div class="actions"><button class="btn" id="refreshBtn" type="button">Refresh</button><button class="btn primary" id="copyAll" type="button">Copy all details</button></div></div>
+</section>
 
-    <section>
+<section>
       <div class="section-head"><span class="kicker">Connection details</span><h2>Your internet & device at a glance</h2><p>IP-based location is approximate and may differ from your physical location.</p></div>
       <div class="grid">
         <article class="detail"><div class="detail-label">Approximate location</div><div class="detail-value" id="locationValue">Detecting…</div><div class="detail-small" id="locationSmall">IP-based estimate</div></article>
@@ -435,21 +479,17 @@
   }
 
   function setIpState(kind, ip){
-    const valueEl=$(kind+"Value");
-    const statusEl=$(kind+"Status");
-    const pillEl=$(kind+"Pill");
-
-    if(ip){
-      valueEl.textContent=ip;
-      valueEl.className="ip-value";
-      statusEl.textContent="Available on this connection";
-      pillEl.textContent="Available";
-    }else{
-      valueEl.textContent="Not available";
-      valueEl.className="ip-value";
-      statusEl.textContent=`${kind.toUpperCase()} is not available on this connection`;
-      pillEl.textContent="Unavailable";
-    }
+    const valueEl=$(kind+"Value"), statusEl=$(kind+"Status"), pillEl=$(kind+"Pill");
+    const stateEl=$(kind+"State"), cardEl=$(kind+"Card");
+    const copyBtn=$(kind==="ipv4"?"copyIpv4":"copyIpv6");
+    valueEl.textContent=ip || "Not available";
+    valueEl.className="ip-value";
+    statusEl.textContent=ip ? "Available on this connection" : `${kind.toUpperCase()} is not available on this connection`;
+    pillEl.textContent=ip ? "Available" : "Unavailable";
+    stateEl.textContent=ip ? "Available" : "Unavailable";
+    stateEl.className=ip ? "ip-state" : "ip-state is-unavailable";
+    cardEl.classList.toggle("unavailable",!ip);
+    copyBtn.disabled=!ip;
   }
 
   async function loadGeo(primaryIp){
@@ -493,6 +533,13 @@
     $("ipv6Value").textContent="Detecting…"; $("ipv6Value").className="ip-value loading";
     $("ipv4Status").textContent="Checking IPv4 connectivity";
     $("ipv6Status").textContent="Checking IPv6 connectivity";
+    for(const kind of ["ipv4","ipv6"]){
+      const stateEl=$(kind+"State");
+      stateEl.textContent="Checking";
+      stateEl.className="ip-state is-checking";
+      $(kind+"Card").classList.remove("unavailable");
+      $(kind==="ipv4"?"copyIpv4":"copyIpv6").disabled=true;
+    }
     $("ipv4Pill").textContent="Checking";
     $("ipv6Pill").textContent="Checking";
     $("ipSub").textContent="Checking both public internet protocols.";
@@ -532,9 +579,10 @@
     if(!text) return;
     try{
       await navigator.clipboard.writeText(text);
-      const t=btn.textContent;
-      btn.textContent="Copied ✓";
-      setTimeout(()=>btn.textContent=t,1200);
+      const label=btn.querySelector(".copy-label")||btn;
+      const original=label.textContent;
+      label.textContent="Copied ✓";
+      setTimeout(()=>label.textContent=original,1200);
     }catch{
       alert("Copy is blocked by this browser.");
     }
