@@ -198,6 +198,9 @@
     .ip-dashboard .ip-value{font:750 clamp(27px,3.2vw,43px)/1.24 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-.045em;overflow-wrap:anywhere;color:#f8fbff}
     .protocol-v6 .ip-value{font-size:clamp(17px,1.8vw,23px);line-height:1.38;letter-spacing:-.035em;word-break:break-word}
     .ip-dashboard .ip-value.loading{color:#b7c7df}
+    .protocol-card[data-state="loading"] .status-light{background:#9eafc7;box-shadow:none}
+    .protocol-card[data-state="unavailable"] .status-light{background:#e9b66b;box-shadow:0 0 10px rgba(233,182,107,.30)}
+    .ip-dashboard .copy-small:disabled{opacity:.48;cursor:not-allowed;transform:none}
     .protocol-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:auto}
     .status-line{display:flex;align-items:flex-start;gap:8px;min-width:0;flex:1 1 170px}
     .status-light{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(var(--accent-rgb),.35);flex:none;margin-top:6px}
@@ -554,6 +557,10 @@
     const valueEl=$(kind+"Value");
     const statusEl=$(kind+"Status");
     const pillEl=$(kind+"Pill");
+    const cardEl=valueEl.closest(".protocol-card");
+    const copyBtn=$("copyIpv"+kind.slice(-1));
+    if(cardEl) cardEl.dataset.state=ip?"available":"unavailable";
+    if(copyBtn) copyBtn.disabled=!ip;
 
     if(ip){
       valueEl.textContent=ip;
@@ -605,6 +612,11 @@
 
   async function load(){
     data.ipv4=null; data.ipv6=null; data.geo=null;
+    for(const kind of ["ipv4","ipv6"]){
+      const card=$((kind+"Value")).closest(".protocol-card");
+      if(card) card.dataset.state="loading";
+      $("copyIpv"+kind.slice(-1)).disabled=true;
+    }
     $("ipv4Value").textContent="Detecting…"; $("ipv4Value").className="ip-value loading";
     $("ipv6Value").textContent="Detecting…"; $("ipv6Value").className="ip-value loading";
     $("ipv4Status").textContent="Checking IPv4 connectivity";
