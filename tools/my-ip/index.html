@@ -165,6 +165,87 @@
     .lang-switch .globe{padding:0 2px 0 4px;color:#99a9c2;font-size:12px}
     .nav-actions{display:flex;align-items:center;gap:10px}
 
+
+    /* IP dashboard — two independent, readable protocol cards */
+    .hero{padding:50px 0 26px}
+    .hero h1{font-size:clamp(42px,6vw,72px);line-height:1.06}
+    .hero .lead{font-size:16px;max-width:760px}
+    .ip-dashboard{margin:32px 0 18px}
+    .dashboard-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:22px}
+    .dashboard-heading{min-width:0}
+    .dashboard-eyebrow{display:flex;align-items:center;gap:8px;font-weight:800;color:#8da2c2;letter-spacing:.14em;font-size:11px;text-transform:uppercase}
+    .dashboard-eyebrow:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#79eac1;box-shadow:0 0 15px rgba(121,234,193,.65)}
+    .dashboard-title{margin:8px 0;font-size:clamp(24px,3vw,33px);letter-spacing:-.035em;line-height:1.15}
+    .dashboard-caption{color:#9aacc6;font-size:14px;line-height:1.6;margin:0}
+    .ip-dashboard .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;border-radius:12px;font-size:13px}
+    .ip-dashboard .btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:0 0 16px}
+    .refresh-action{white-space:nowrap;padding:12px 17px;border-color:rgba(152,173,208,.26);background:rgba(255,255,255,.045)}
+    .refresh-action:focus-visible,.ip-dashboard .btn:focus-visible{outline:2px solid #8fdcff;outline-offset:4px}
+    .protocol-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+    .protocol-card{--accent:#6cdefb;--accent-rgb:108,222,251;min-width:0;min-height:325px;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:28px;border:1px solid rgba(var(--accent-rgb),.27);border-radius:25px;background:radial-gradient(ellipse at 100% 0%,rgba(var(--accent-rgb),.09),transparent 52%),linear-gradient(155deg,#141c2c,#0d1220 70%);box-shadow:0 14px 40px rgba(0,0,0,.22)}
+    .protocol-card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--accent),transparent 83%);opacity:.95}
+    .protocol-v6{--accent:#cbabff;--accent-rgb:203,171,255}
+    .protocol-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .protocol-title-group{display:flex;align-items:center;gap:15px;min-width:0}
+    .protocol-icon{width:54px;height:54px;display:grid;place-items:center;border-radius:16px;flex:0 0 54px;background:rgba(var(--accent-rgb),.10);border:1px solid rgba(var(--accent-rgb),.23);color:var(--accent)}
+    .protocol-icon svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .protocol-kicker{display:block;color:#8ea0bb;font-size:10px;font-weight:800;letter-spacing:.10em;text-transform:uppercase}
+    .protocol-name{margin:4px 0 0;font-size:clamp(22px,2.3vw,28px);font-weight:850;letter-spacing:-.035em;line-height:1.15}
+    .protocol-tag{font-size:10px;font-weight:750;color:var(--accent);border-radius:999px;border:1px solid rgba(var(--accent-rgb),.30);background:rgba(var(--accent-rgb),.09);padding:7px 10px;white-space:nowrap}
+    .protocol-description{font-size:13px;line-height:1.6;color:#91a4c0;margin:19px 0 0}
+    .protocol-readout{margin:25px 0 20px;padding:20px;border:1px solid rgba(var(--accent-rgb),.21);border-radius:18px;background:rgba(4,10,21,.48);min-height:111px}
+    .readout-label{display:block;color:#8f9fba;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+    .ip-dashboard .ip-value{font:750 clamp(27px,3.2vw,43px)/1.24 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-.045em;overflow-wrap:anywhere;color:#f8fbff}
+    .protocol-v6 .ip-value{font-size:clamp(17px,1.8vw,23px);line-height:1.38;letter-spacing:-.035em;word-break:break-word}
+    .ip-dashboard .ip-value.loading{color:#b7c7df}
+    .protocol-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:auto}
+    .status-line{display:flex;align-items:flex-start;gap:8px;min-width:0;flex:1 1 170px}
+    .status-light{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(var(--accent-rgb),.35);flex:none;margin-top:6px}
+    .ip-dashboard .ip-status{color:#9cacbf;font-size:12px;line-height:1.4;margin:0}
+    .ip-dashboard .copy-small{min-width:148px;margin:0;padding:12px 15px;border:1px solid rgba(var(--accent-rgb),.38);color:#e9f8ff;background:rgba(var(--accent-rgb),.12);font-weight:800}
+    .ip-dashboard .copy-small:hover{background:rgba(var(--accent-rgb),.20)}
+    .dashboard-toolbar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-top:18px;padding:17px 20px;border-radius:18px;border:1px solid rgba(150,171,203,.16);background:rgba(15,22,36,.72)}
+    .dashboard-summary{min-width:0;display:flex;align-items:center;gap:11px;color:#afbed5;font-size:13px;line-height:1.5}
+    .dashboard-summary svg{flex:none;width:20px;height:20px;fill:none;stroke:#79dfc5;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+    .dashboard-summary #ipSub{margin:0}
+    .dashboard-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .dashboard-controls .pill{display:inline-flex;gap:6px;margin:0;align-items:center;font-size:11px;padding:9px 10px;background:rgba(255,255,255,.03)}
+    .dashboard-controls .pill b{color:#e4efff}
+    .dashboard-controls .btn.primary{min-height:38px;padding:10px 15px}
+    .network-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+    .network-grid .detail{padding:23px;border-radius:20px;min-height:135px;background:linear-gradient(150deg,rgba(255,255,255,.052),rgba(255,255,255,.012))}
+    .network-grid .detail-label{font-size:11px;color:#9aaeca}
+    .network-grid .detail-value{font-size:18px;margin-top:13px}
+    .network-grid .detail-small{font-size:11px;margin-top:9px;line-height:1.5}
+    @media(max-width:950px){
+      .protocol-grid{grid-template-columns:1fr;gap:15px}
+      .protocol-card{min-height:285px}
+      .dashboard-toolbar{align-items:flex-start;flex-direction:column}
+      .dashboard-controls{justify-content:flex-start}
+    }
+    @media(max-width:650px){
+      .hero{padding:36px 0 14px}
+      .hero h1{font-size:clamp(40px,9vw,55px)}
+      .dashboard-head{align-items:stretch;flex-direction:column;gap:15px}
+      .refresh-action{align-self:flex-start}
+      .protocol-card{padding:21px;border-radius:22px;min-height:295px}
+      .protocol-icon{width:46px;height:46px;flex-basis:46px;border-radius:13px}
+      .protocol-icon svg{width:25px;height:25px}
+      .protocol-tag{font-size:9px;padding:6px 8px}
+      .protocol-name{font-size:25px}
+      .protocol-readout{padding:17px}
+      .ip-dashboard .ip-value{font-size:clamp(25px,6.6vw,36px)}
+      .protocol-v6 .ip-value{font-size:clamp(16px,4.1vw,21px)}
+      .protocol-foot{align-items:stretch}
+      .ip-dashboard .copy-small{width:100%}
+      .dashboard-toolbar{padding:17px}
+      .dashboard-controls{width:100%}
+      .dashboard-controls .btn.primary{width:100%}
+      .network-grid{grid-template-columns:1fr}
+    }
+    @media(min-width:651px) and (max-width:950px){.network-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(prefers-reduced-motion:reduce){.ip-dashboard .btn{transition:none}.ip-dashboard .btn:hover{transform:none}}
+
   </style>
 <script>(()=>{try{const s=localStorage.getItem("cloudbyalex-lang");const ls=navigator.languages?.length?navigator.languages:[navigator.language||""];const r=ls.some(x=>String(x).toLowerCase().startsWith("ru"));if(s==="ru"||(!s&&r))location.replace("/ru/tools/my-ip/"+location.search+location.hash)}catch(e){}})();</script>
 </head>
@@ -178,34 +259,68 @@
   </header>
 
   <main class="wrap">
-    <section class="ip-shell"><div class="ip-card">
-      <div class="ip-top">
-        <div style="flex:1;min-width:0">
-          <h2 class="ip-label ip-heading">Your public IPv4 and IPv6 addresses</h2>
-          <div class="ip-list">
-            <div class="ip-box primary">
-              <div class="ip-label">IPv4</div>
-              <div class="ip-value loading" id="ipv4Value">Detecting…</div>
-              <div class="ip-status" id="ipv4Status">Checking IPv4 connectivity</div>
-              <button class="btn copy-small" id="copyIpv4" type="button">Copy IPv4</button>
-            </div>
-            <div class="ip-box ipv6">
-              <div class="ip-label">IPv6</div>
-              <div class="ip-value loading" id="ipv6Value">Detecting…</div>
-              <div class="ip-status" id="ipv6Status">Checking IPv6 connectivity</div>
-              <button class="btn copy-small" id="copyIpv6" type="button">Copy IPv6</button>
-            </div>
-          </div>
-          <div class="ip-sub" id="ipSub">Checking both public internet protocols.</div>
-        </div>
-        <div class="actions"><button class="btn" id="refreshBtn">Refresh</button><button class="btn primary" id="copyAll">Copy all details</button></div>
+<section class="ip-dashboard" aria-labelledby="dashboard-title">
+    <div class="dashboard-head">
+      <div class="dashboard-heading">
+        <div class="dashboard-eyebrow">Live network snapshot</div>
+        <h2 class="dashboard-title" id="dashboard-title">Your public IP addresses</h2>
+        <p class="dashboard-caption">Two protocols, two clear results. Check your connection and copy an address in one click.</p>
       </div>
-      <div class="pills"><div class="pill">IPv4: <b id="ipv4Pill">—</b></div><div class="pill">IPv6: <b id="ipv6Pill">—</b></div><div class="pill">Connection: <b id="secureState">HTTPS</b></div><div class="pill">Device: <b id="devicePill">—</b></div></div>
-    </div></section>
+      <button class="btn refresh-action" id="refreshBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.8 10a7 7 0 0 1 12.7-2L20 12M4 12l1.6 4A7 7 0 0 0 18 14"/></svg><span>Refresh results</span></button>
+    </div>
+    <div class="protocol-grid">
+      <article class="protocol-card protocol-v4" aria-labelledby="ipv4-heading">
+        <div class="protocol-top">
+          <div class="protocol-title-group">
+            <div class="protocol-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4.5" y="6" width="23" height="20" rx="6"/><path d="M11 12h10M11 16h10M11 20h6"/></svg></div>
+            <div><span class="protocol-kicker">Internet Protocol v4</span><h3 class="protocol-name" id="ipv4-heading">IPv4 Address</h3></div>
+          </div>
+          <span class="protocol-tag">Classic protocol</span>
+        </div>
+        <p class="protocol-description">The address most commonly used to connect to websites and online services.</p>
+        <div class="protocol-readout">
+          <span class="readout-label">Your public IPv4</span>
+          <div class="ip-value loading" id="ipv4Value" aria-live="polite">Detecting…</div>
+        </div>
+        <div class="protocol-foot">
+          <div class="status-line"><span class="status-light" aria-hidden="true"></span><span class="ip-status" id="ipv4Status">Checking IPv4 connectivity</span></div>
+          <button class="btn copy-small" id="copyIpv4" type="button">Copy IPv4</button>
+        </div>
+      </article>
+      <article class="protocol-card protocol-v6" aria-labelledby="ipv6-heading">
+        <div class="protocol-top">
+          <div class="protocol-title-group">
+            <div class="protocol-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11"/><path d="M5 16h22M16 5c-7 6-7 16 0 22M16 5c7 6 7 16 0 22"/></svg></div>
+            <div><span class="protocol-kicker">Internet Protocol v6</span><h3 class="protocol-name" id="ipv6-heading">IPv6 Address</h3></div>
+          </div>
+          <span class="protocol-tag">Modern protocol</span>
+        </div>
+        <p class="protocol-description">The newer address format designed for modern internet networks.</p>
+        <div class="protocol-readout">
+          <span class="readout-label">Your public IPv6</span>
+          <div class="ip-value loading" id="ipv6Value" aria-live="polite">Detecting…</div>
+        </div>
+        <div class="protocol-foot">
+          <div class="status-line"><span class="status-light" aria-hidden="true"></span><span class="ip-status" id="ipv6Status">Checking IPv6 connectivity</span></div>
+          <button class="btn copy-small" id="copyIpv6" type="button">Copy IPv6</button>
+        </div>
+      </article>
+    </div>
+    <div class="dashboard-toolbar">
+      <div class="dashboard-summary"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg><span id="ipSub" role="status">Checking both public internet protocols.</span></div>
+      <div class="dashboard-controls">
+        <span class="pill">IPv4 <b id="ipv4Pill">—</b></span>
+        <span class="pill">IPv6 <b id="ipv6Pill">—</b></span>
+        <span class="pill">Connection <b id="secureState">HTTPS</b></span>
+        <span class="pill">Device <b id="devicePill">—</b></span>
+        <button class="btn primary" id="copyAll" type="button">Copy full report</button>
+      </div>
+    </div>
+  </section>
 
     <section>
       <div class="section-head"><span class="kicker">Connection details</span><h2>Your internet & device at a glance</h2><p>IP-based location is approximate and may differ from your physical location.</p></div>
-      <div class="grid">
+      <div class="grid network-grid">
         <article class="detail"><div class="detail-label">Approximate location</div><div class="detail-value" id="locationValue">Detecting…</div><div class="detail-small" id="locationSmall">IP-based estimate</div></article>
         <article class="detail"><div class="detail-label">ISP / network</div><div class="detail-value" id="ispValue">Detecting…</div><div class="detail-small" id="asnValue">Network provider</div></article>
         <article class="detail"><div class="detail-label">Timezone</div><div class="detail-value" id="timezoneValue">—</div><div class="detail-small" id="localTimeValue">Local browser time</div></article>
