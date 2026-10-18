@@ -168,6 +168,52 @@ h1 span{display:block} .accent{color:var(--cyan)}
 .main-nav .ip-cta:hover{color:#001b31;transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,176,250,.38)}
 .main-nav .ip-cta svg{width:17px;height:17px}
 @media(max-width:760px){.hero-visual img{bottom:0}.mobile-nav .mobile-ip-cta{display:block;margin-bottom:8px;background:linear-gradient(120deg,#1bd2f9,#289bff);color:#001b31;font-weight:800;text-align:center;border-radius:10px;box-shadow:0 8px 24px rgba(0,170,244,.2)}.mobile-nav .mobile-ip-cta:hover{color:#001b31;background:#53d9ff}}
+
+/* Approved hero mockup composition and orbital scroll horizon: preview only. */
+.hero{min-height:622px;padding-top:54px;padding-bottom:58px;align-items:start}
+.hero::after{display:none}
+.hero-copy{width:min(55%,650px)}
+.hero-visual img{top:10px;bottom:auto;height:min(87%,540px)}
+.hero-visual::after{background:linear-gradient(90deg,#020c1a 0%,rgba(2,12,26,.91) 8%,rgba(2,12,26,.65) 24%,rgba(2,12,26,.12) 57%,transparent 82%),linear-gradient(0deg,#020c1a 0%,rgba(2,12,26,.12) 17%,transparent 34%),linear-gradient(180deg,rgba(2,12,26,.12) 0%,transparent 25%),linear-gradient(270deg,rgba(2,12,26,.22),transparent 15%)}
+.technology-rail{position:relative;z-index:2;border-top:1px solid rgba(64,149,235,.2);border-bottom:1px solid rgba(64,149,235,.12);background:linear-gradient(180deg,#031429 0%,#020e20 100%)}
+.technology-rail-inner{min-height:128px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:center}
+.technology-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;color:#c8dbf1;font-size:12px;line-height:1.25;min-width:0}
+.technology-item+.technology-item{border-left:1px solid rgba(47,128,220,.28)}
+.technology-icon{width:45px;height:45px;border:1px solid rgba(38,146,248,.28);border-radius:12px;background:linear-gradient(155deg,#082748,#031429);display:grid;place-items:center;color:#50b8ff;font-size:27px;font-weight:800;box-shadow:inset 0 0 18px rgba(4,130,244,.12)}
+.aws-icon{font-family:Arial,sans-serif;font-weight:800;font-size:19px;letter-spacing:-.06em;color:#ffb64c}
+.k8s-icon{color:#64a5ff;font-size:29px}
+.tf-icon{color:#a57aff;font-size:28px}
+.docker-icon{color:#1bd5ff;font-size:29px}
+.linux-icon{color:#e3c67a;font-size:26px}
+.cicd-icon{color:#e8efff;font-size:30px}
+.earth-transition{position:relative;height:210px;isolation:isolate;overflow:hidden;background:linear-gradient(180deg,#020e20,#020c1a 90%)}
+.earth-globe{position:absolute;z-index:0;inset:0;pointer-events:none}
+.earth-globe svg{display:block;width:100%;height:100%;stroke:none;fill:none}
+.scroll-cue{position:absolute;z-index:2;top:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;flex-direction:column;gap:14px;color:#c5d9ff;text-decoration:none;text-transform:uppercase;font-size:10px;font-weight:750;letter-spacing:.27em;white-space:nowrap;text-shadow:0 0 10px rgba(0,30,86,.8)}
+.scroll-mouse{width:19px;height:31px;border:1.5px solid #19c9ff;border-radius:12px;display:flex;justify-content:center;padding-top:7px;box-shadow:0 0 18px rgba(20,162,255,.15)}
+.scroll-mouse span{width:3px;height:6px;border-radius:5px;background:#25cfff;animation:scroll-wheel 2.1s ease-in-out infinite}
+@keyframes scroll-wheel{0%,100%{opacity:.45;transform:translateY(0)}60%{opacity:1;transform:translateY(6px)}}
+.scroll-cue:hover{color:#fff}
+#about{padding-top:100px}
+@media (max-width:1130px) and (min-width:761px){
+ .hero{min-height:620px;padding-top:57px;padding-bottom:48px}
+ .hero-copy{width:min(57%,600px)}
+ .hero-visual img{top:27px;bottom:auto;height:min(77%,490px)}
+}
+@media (max-width:760px){
+ .hero{min-height:0;padding-top:46px;padding-bottom:8px}
+ .hero-copy{width:100%}
+ .hero-visual img{top:auto;bottom:0;height:88%}
+ .technology-rail-inner{min-height:0;grid-template-columns:repeat(3,minmax(0,1fr));padding-top:18px;padding-bottom:18px;row-gap:24px}
+ .technology-item{font-size:11px;gap:7px}
+ .technology-item:nth-child(4){border-left:0}
+ .technology-icon{height:39px;width:39px;font-size:24px}
+ .aws-icon{font-size:17px}
+ .earth-transition{height:158px}
+ .scroll-cue{top:13px;font-size:9px;gap:10px}
+ #about{padding-top:69px}
+}
+@media (prefers-reduced-motion:reduce){.scroll-mouse span{animation:none}}
 </style>
 </head>
 <body>
@@ -208,10 +254,48 @@ h1 span{display:block} .accent{color:var(--cyan)}
   <p class="hero-desc" data-i18n="heroDesc">I build reliable cloud infrastructure, automation workflows and modern delivery pipelines with a focus on AWS, Kubernetes, Terraform and CI/CD.</p>
   <div class="buttons"><a class="button primary" href="mailto:alexdellsone@gmail.com?subject=CloudByAlex%20Contact"><span data-i18n="connect">Let's Connect</span><svg><use href="#i-arrow"/></svg></a><a class="button secondary" href="https://github.com/alexdells" target="_blank" rel="noopener noreferrer"><svg><use href="#i-github"/></svg><span data-i18n="viewGitHub">View GitHub</span></a></div>
   <div class="hero-status"><span class="status-point" aria-hidden="true"></span><span data-i18n="status">Built for reliability</span><span class="status-line"></span><span data-i18n="status2">Cloud · Automation</span></div>
-  <div class="tags" aria-label="Core technologies"><span class="tag"><b>☁</b>AWS</span><span class="tag"><b>✦</b>Kubernetes</span><span class="tag"><b>◆</b>Terraform</span><span class="tag"><b>◈</b>CI/CD</span></div>
  </div>
  <div class="hero-visual" aria-label="Illustration of Alex working at a laptop in a futuristic cloud engineering environment"><img src="./cloudbyalex-approved-hero.webp" alt="Alex at a laptop, with glowing cloud systems and DevOps technology illustrations" width="794" height="940" decoding="async" fetchpriority="high"><span class="vertical-caption">Build · Automate · Improve</span></div>
 </section>
+
+<div class="technology-rail" aria-label="Core cloud technologies">
+ <div class="container technology-rail-inner">
+  <span class="technology-item"><span class="technology-icon aws-icon" aria-hidden="true">aws</span><span>AWS</span></span>
+  <span class="technology-item"><span class="technology-icon k8s-icon" aria-hidden="true">☸</span><span>Kubernetes</span></span>
+  <span class="technology-item"><span class="technology-icon tf-icon" aria-hidden="true">◆</span><span>Terraform</span></span>
+  <span class="technology-item"><span class="technology-icon docker-icon" aria-hidden="true">◈</span><span>Docker</span></span>
+  <span class="technology-item"><span class="technology-icon linux-icon" aria-hidden="true">⌘</span><span>Linux</span></span>
+  <span class="technology-item"><span class="technology-icon cicd-icon" aria-hidden="true">∞</span><span>CI/CD</span></span>
+ </div>
+</div>
+<div class="earth-transition">
+ <div class="earth-globe" aria-hidden="true">
+  <svg viewBox="0 0 1440 260" preserveAspectRatio="xMidYMid slice" focusable="false">
+   <defs>
+    <radialGradient id="earth-glow" cx="50%" cy="0%" r="83%"><stop offset="0%" stop-color="#0562d2" stop-opacity=".27"/><stop offset="55%" stop-color="#02326f" stop-opacity=".16"/><stop offset="100%" stop-color="#020c1a" stop-opacity=".05"/></radialGradient>
+    <linearGradient id="earth-horizon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#35d9ff" stop-opacity=".65"/><stop offset=".45" stop-color="#1378ff" stop-opacity=".30"/><stop offset="1" stop-color="#165aff" stop-opacity="0"/></linearGradient>
+    <pattern id="earth-dots" patternUnits="userSpaceOnUse" width="22" height="19"><circle cx="2" cy="2" r="1.1" fill="#168fff" opacity=".67"/><circle cx="13" cy="12" r=".55" fill="#2dcbff" opacity=".54"/></pattern>
+    <clipPath id="earth-disc"><ellipse cx="720" cy="530" rx="990" ry="452"/></clipPath>
+   </defs>
+   <g clip-path="url(#earth-disc)">
+    <ellipse cx="720" cy="530" rx="990" ry="452" fill="url(#earth-glow)"/>
+    <rect x="-300" y="75" width="2040" height="580" fill="url(#earth-dots)" opacity=".73"/>
+    <g stroke="#147cfb" stroke-opacity=".32" fill="none" stroke-width=".8">
+     <path d="M-270 151 Q720 52 1710 151"/><path d="M-270 211 Q720 105 1710 211"/><path d="M-270 279 Q720 163 1710 279"/>
+     <path d="M-270 359 Q720 234 1710 359"/><path d="M-270 462 Q720 336 1710 462"/>
+     <path d="M720 75 Q525 204 425 600"/><path d="M720 75 Q650 202 615 600"/><path d="M720 75 Q790 202 825 600"/><path d="M720 75 Q915 204 1015 600"/>
+     <path d="M720 75 Q341 225 125 600"/><path d="M720 75 Q1099 225 1315 600"/>
+    </g>
+   </g>
+   <ellipse cx="720" cy="530" rx="990" ry="452" stroke="url(#earth-horizon)" stroke-width="2" fill="none"/>
+   <path d="M-170 140 Q720 -12 1610 140" stroke="#0f77ff" stroke-opacity=".12" stroke-width="22" fill="none"/>
+  </svg>
+ </div>
+ <a class="scroll-cue" href="#about" aria-label="Scroll to explore the next section">
+  <span class="scroll-mouse" aria-hidden="true"><span></span></span>
+  <span data-i18n="scrollExplore">Scroll to explore</span>
+ </a>
+</div>
 <section class="section" id="about" aria-labelledby="about-title"><div class="container about-layout">
  <div><p class="eyebrow" data-i18n="aboutEyebrow">About me</p><h2 class="section-heading" id="about-title"><span data-i18n="aboutTitle">Cloud engineering with a </span><span class="accent" data-i18n="aboutTitleHighlight">reliability mindset.</span></h2><p class="section-lead" data-i18n="aboutText">I build understandable, repeatable infrastructure and automation workflows that are designed for real production environments. I care about reliability, security and maintainability.</p><div style="margin-top:32px"><a class="button secondary" href="https://www.linkedin.com/in/alexander-chertov/" target="_blank" rel="noopener noreferrer"><span data-i18n="moreAbout">More about me</span><svg><use href="#i-arrow"/></svg></a></div></div>
  <div class="about-side">
@@ -237,7 +321,7 @@ h1 span{display:block} .accent{color:var(--cyan)}
 <footer class="footer"><div class="container"><div class="footer-top"><div><a class="brand" href="#top"><svg><use href="#i-cloud"/></svg><span>Cloud by <strong>Alex</strong></span></a><p class="footer-brand-sub">DevOps · Cloud · Automation</p></div><div class="footer-links"><a href="#about" data-i18n="aboutNav">About</a><a href="#tools" data-i18n="toolsNav">Tools</a><a href="https://github.com/alexdells" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/alexander-chertov/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div><div class="footer-bottom"><span>© <span id="year"></span> Cloud by Alex.</span><span data-i18n="footerTag">Build. Automate. Improve. Repeat.</span></div></div></footer>
 <script>
 (()=>{
-const strings={en:{preview:'Design preview · not the live website',aboutNav:'About',toolsNav:'Tools',supportNav:'Support',welcome:'Welcome to my portfolio',heroHi:"Hi, I'm Alex —",heroRole:'Cloud & DevOps Engineer',heroDesc:'I build reliable cloud infrastructure, automation workflows and modern delivery pipelines with a focus on AWS, Kubernetes, Terraform and CI/CD.',connect:"Let's Connect",viewGitHub:'View GitHub',status:'Built for reliability',status2:'Cloud · Automation',aboutEyebrow:'About me',aboutTitle:'Cloud engineering with a ',aboutTitleHighlight:'reliability mindset.',aboutText:'I build understandable, repeatable infrastructure and automation workflows that are designed for real production environments. I care about reliability, security and maintainability.',moreAbout:'More about me',roleLabel:'Role',focusLabel:'Focus',specialtyLabel:'Specialty',specialtyValue:'Automation & Infrastructure',languagesLabel:'Languages',years:'Years of DevOps / Cloud experience',deployments:'Deployments, builds and platform improvements',toolsEyebrow:'CloudByAlex labs',toolsTitle:'Useful tools, ',toolsTitleHighlight:'without the clutter.',toolsIntro:'Small, practical tools for networking, everyday tasks and cloud engineering.',doctorDesc:'Scan GitHub Actions workflows for overly broad permissions, unpinned actions and risky shell patterns.',clientSide:'Client-side',noUploads:'No uploads',launchTool:'Launch tool',ipDesc:'Check your public IPv4 and IPv6, approximate location, ISP, browser and device details.',demoIp:'Demo IPv4 address',sampleData:'Illustration only · sample data',checkIp:'Check my IP',randomDesc:'Generate random numbers, roll dice, flip a coin or choose from a list with secure browser randomness.',numbers:'Numbers',diceCoin:'Dice & coin',openLab:'Open Random Lab',speedDesc:"Run a browser-based speed check for download, upload and ping through Cloudflare's edge network.",speedRun:'RUN',speedDemo:'Illustrative gauge · not a measurement',download:'Download',upload:'Upload',testSpeed:'Test my speed',coffeeTitle:'Enjoy my work?',coffeeDesc:'If you find these tools useful, consider supporting future CloudByAlex projects with a coffee.',buyCoffee:'Buy Me a Coffee',footerTag:'Build. Automate. Improve. Repeat.'},ru:{preview:'Тестовый дизайн · основной сайт не изменён',aboutNav:'Обо мне',toolsNav:'Инструменты',supportNav:'Поддержать',welcome:'Добро пожаловать в моё портфолио',heroHi:'Привет, я Алекс —',heroRole:'Cloud & DevOps инженер',heroDesc:'Я создаю надёжную облачную инфраструктуру, автоматизирую процессы и выстраиваю современные CI/CD-пайплайны на AWS, Kubernetes и Terraform.',connect:'Связаться со мной',viewGitHub:'Мой GitHub',status:'Надёжность прежде всего',status2:'Облако · Автоматизация',aboutEyebrow:'Обо мне',aboutTitle:'Облачная инженерия с акцентом на ',aboutTitleHighlight:'надёжность.',aboutText:'Я создаю понятную, воспроизводимую инфраструктуру и автоматизацию для реальных production-систем. Для меня важны надёжность, безопасность и поддерживаемость.',moreAbout:'Подробнее обо мне',roleLabel:'Роль',focusLabel:'Направления',specialtyLabel:'Специализация',specialtyValue:'Автоматизация и инфраструктура',languagesLabel:'Языки',years:'Лет опыта в DevOps и облачных технологиях',deployments:'Развёртываний, сборок и улучшений платформ',toolsEyebrow:'Инструменты CloudByAlex',toolsTitle:'Полезные инструменты ',toolsTitleHighlight:'без лишнего шума.',toolsIntro:'Простые и практичные инструменты для сетей, ежедневных задач и облачной инженерии.',doctorDesc:'Проверка GitHub Actions на избыточные права, незакреплённые версии и рискованные команды.',clientSide:'В браузере',noUploads:'Без загрузок',launchTool:'Открыть инструмент',ipDesc:'Узнай свой IPv4 и IPv6, примерное местоположение, провайдера, браузер и устройство.',demoIp:'Пример IPv4-адреса',sampleData:'Иллюстрация · не ваши данные',checkIp:'Проверить IP',randomDesc:'Генератор чисел, бросок кубика и монетки, выбор из списка с безопасной случайностью.',numbers:'Числа',diceCoin:'Кубик и монетка',openLab:'Открыть Random Lab',speedDesc:'Проверка скорости загрузки, отдачи и задержки через сеть Cloudflare.',speedRun:'ПУСК',speedDemo:'Декоративная шкала · не измерение',download:'Загрузка',upload:'Отдача',testSpeed:'Проверить скорость',coffeeTitle:'Нравится моя работа?',coffeeDesc:'Если эти инструменты полезны, поддержи развитие CloudByAlex чашечкой кофе.',buyCoffee:'Угостить кофе',footerTag:'Создавай. Автоматизируй. Улучшай.'}};
+const strings={en:{preview:'Design preview · not the live website',aboutNav:'About',toolsNav:'Tools',supportNav:'Support',welcome:'Welcome to my portfolio',scrollExplore:'Scroll to explore',heroHi:"Hi, I'm Alex —",heroRole:'Cloud & DevOps Engineer',heroDesc:'I build reliable cloud infrastructure, automation workflows and modern delivery pipelines with a focus on AWS, Kubernetes, Terraform and CI/CD.',connect:"Let's Connect",viewGitHub:'View GitHub',status:'Built for reliability',status2:'Cloud · Automation',aboutEyebrow:'About me',aboutTitle:'Cloud engineering with a ',aboutTitleHighlight:'reliability mindset.',aboutText:'I build understandable, repeatable infrastructure and automation workflows that are designed for real production environments. I care about reliability, security and maintainability.',moreAbout:'More about me',roleLabel:'Role',focusLabel:'Focus',specialtyLabel:'Specialty',specialtyValue:'Automation & Infrastructure',languagesLabel:'Languages',years:'Years of DevOps / Cloud experience',deployments:'Deployments, builds and platform improvements',toolsEyebrow:'CloudByAlex labs',toolsTitle:'Useful tools, ',toolsTitleHighlight:'without the clutter.',toolsIntro:'Small, practical tools for networking, everyday tasks and cloud engineering.',doctorDesc:'Scan GitHub Actions workflows for overly broad permissions, unpinned actions and risky shell patterns.',clientSide:'Client-side',noUploads:'No uploads',launchTool:'Launch tool',ipDesc:'Check your public IPv4 and IPv6, approximate location, ISP, browser and device details.',demoIp:'Demo IPv4 address',sampleData:'Illustration only · sample data',checkIp:'Check my IP',randomDesc:'Generate random numbers, roll dice, flip a coin or choose from a list with secure browser randomness.',numbers:'Numbers',diceCoin:'Dice & coin',openLab:'Open Random Lab',speedDesc:"Run a browser-based speed check for download, upload and ping through Cloudflare's edge network.",speedRun:'RUN',speedDemo:'Illustrative gauge · not a measurement',download:'Download',upload:'Upload',testSpeed:'Test my speed',coffeeTitle:'Enjoy my work?',coffeeDesc:'If you find these tools useful, consider supporting future CloudByAlex projects with a coffee.',buyCoffee:'Buy Me a Coffee',footerTag:'Build. Automate. Improve. Repeat.'},ru:{preview:'Тестовый дизайн · основной сайт не изменён',aboutNav:'Обо мне',toolsNav:'Инструменты',supportNav:'Поддержать',welcome:'Добро пожаловать в моё портфолио',scrollExplore:'Листай дальше',heroHi:'Привет, я Алекс —',heroRole:'Cloud & DevOps инженер',heroDesc:'Я создаю надёжную облачную инфраструктуру, автоматизирую процессы и выстраиваю современные CI/CD-пайплайны на AWS, Kubernetes и Terraform.',connect:'Связаться со мной',viewGitHub:'Мой GitHub',status:'Надёжность прежде всего',status2:'Облако · Автоматизация',aboutEyebrow:'Обо мне',aboutTitle:'Облачная инженерия с акцентом на ',aboutTitleHighlight:'надёжность.',aboutText:'Я создаю понятную, воспроизводимую инфраструктуру и автоматизацию для реальных production-систем. Для меня важны надёжность, безопасность и поддерживаемость.',moreAbout:'Подробнее обо мне',roleLabel:'Роль',focusLabel:'Направления',specialtyLabel:'Специализация',specialtyValue:'Автоматизация и инфраструктура',languagesLabel:'Языки',years:'Лет опыта в DevOps и облачных технологиях',deployments:'Развёртываний, сборок и улучшений платформ',toolsEyebrow:'Инструменты CloudByAlex',toolsTitle:'Полезные инструменты ',toolsTitleHighlight:'без лишнего шума.',toolsIntro:'Простые и практичные инструменты для сетей, ежедневных задач и облачной инженерии.',doctorDesc:'Проверка GitHub Actions на избыточные права, незакреплённые версии и рискованные команды.',clientSide:'В браузере',noUploads:'Без загрузок',launchTool:'Открыть инструмент',ipDesc:'Узнай свой IPv4 и IPv6, примерное местоположение, провайдера, браузер и устройство.',demoIp:'Пример IPv4-адреса',sampleData:'Иллюстрация · не ваши данные',checkIp:'Проверить IP',randomDesc:'Генератор чисел, бросок кубика и монетки, выбор из списка с безопасной случайностью.',numbers:'Числа',diceCoin:'Кубик и монетка',openLab:'Открыть Random Lab',speedDesc:'Проверка скорости загрузки, отдачи и задержки через сеть Cloudflare.',speedRun:'ПУСК',speedDemo:'Декоративная шкала · не измерение',download:'Загрузка',upload:'Отдача',testSpeed:'Проверить скорость',coffeeTitle:'Нравится моя работа?',coffeeDesc:'Если эти инструменты полезны, поддержи развитие CloudByAlex чашечкой кофе.',buyCoffee:'Угостить кофе',footerTag:'Создавай. Автоматизируй. Улучшай.'}};
 function setLanguage(lang){let d=strings[lang]||strings.en;document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.getAttribute('data-i18n');if(Object.hasOwn(d,key))el.textContent=d[key]});document.querySelectorAll('[data-lang]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.lang===lang)));try{localStorage.setItem('cloudbyalex-preview-language',lang)}catch(_){}}
 document.querySelectorAll('[data-lang]').forEach(el=>el.addEventListener('click',()=>setLanguage(el.dataset.lang)));
 let current='en';try{current=localStorage.getItem('cloudbyalex-preview-language')||'en'}catch(_){}setLanguage(current);
