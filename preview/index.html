@@ -186,9 +186,7 @@ h1 span{display:block} .accent{color:var(--cyan)}
 .docker-icon{color:#1bd5ff;font-size:29px}
 .linux-icon{color:#e3c67a;font-size:26px}
 .cicd-icon{color:#e8efff;font-size:30px}
-.earth-transition{position:relative;height:210px;isolation:isolate;overflow:hidden;background:linear-gradient(180deg,#020e20,#020c1a 90%)}
-.earth-globe{position:absolute;z-index:0;inset:0;pointer-events:none}
-.earth-globe svg{display:block;width:100%;height:100%;stroke:none;fill:none}
+.scroll-transition{position:relative;height:108px;overflow:hidden;background:linear-gradient(180deg,#020e20,#020c1a 90%)}
 .scroll-cue{position:absolute;z-index:2;top:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;flex-direction:column;gap:14px;color:#c5d9ff;text-decoration:none;text-transform:uppercase;font-size:10px;font-weight:750;letter-spacing:.27em;white-space:nowrap;text-shadow:0 0 10px rgba(0,30,86,.8)}
 .scroll-mouse{width:19px;height:31px;border:1.5px solid #19c9ff;border-radius:12px;display:flex;justify-content:center;padding-top:7px;box-shadow:0 0 18px rgba(20,162,255,.15)}
 .scroll-mouse span{width:3px;height:6px;border-radius:5px;background:#25cfff;animation:scroll-wheel 2.1s ease-in-out infinite}
@@ -209,7 +207,7 @@ h1 span{display:block} .accent{color:var(--cyan)}
  .technology-item:nth-child(4){border-left:0}
  .technology-icon{height:39px;width:39px;font-size:24px}
  .aws-icon{font-size:17px}
- .earth-transition{height:158px}
+ .scroll-transition{height:100px}
  .scroll-cue{top:13px;font-size:9px;gap:10px}
  #about{padding-top:69px}
 }
@@ -268,29 +266,7 @@ h1 span{display:block} .accent{color:var(--cyan)}
   <span class="technology-item"><span class="technology-icon cicd-icon" aria-hidden="true">∞</span><span>CI/CD</span></span>
  </div>
 </div>
-<div class="earth-transition">
- <div class="earth-globe" aria-hidden="true">
-  <svg viewBox="0 0 1440 260" preserveAspectRatio="xMidYMid slice" focusable="false">
-   <defs>
-    <radialGradient id="earth-glow" cx="50%" cy="0%" r="83%"><stop offset="0%" stop-color="#0562d2" stop-opacity=".27"/><stop offset="55%" stop-color="#02326f" stop-opacity=".16"/><stop offset="100%" stop-color="#020c1a" stop-opacity=".05"/></radialGradient>
-    <linearGradient id="earth-horizon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#35d9ff" stop-opacity=".65"/><stop offset=".45" stop-color="#1378ff" stop-opacity=".30"/><stop offset="1" stop-color="#165aff" stop-opacity="0"/></linearGradient>
-    <pattern id="earth-dots" patternUnits="userSpaceOnUse" width="22" height="19"><circle cx="2" cy="2" r="1.1" fill="#168fff" opacity=".67"/><circle cx="13" cy="12" r=".55" fill="#2dcbff" opacity=".54"/></pattern>
-    <clipPath id="earth-disc"><ellipse cx="720" cy="530" rx="990" ry="452"/></clipPath>
-   </defs>
-   <g clip-path="url(#earth-disc)">
-    <ellipse cx="720" cy="530" rx="990" ry="452" fill="url(#earth-glow)"/>
-    <rect x="-300" y="75" width="2040" height="580" fill="url(#earth-dots)" opacity=".73"/>
-    <g stroke="#147cfb" stroke-opacity=".32" fill="none" stroke-width=".8">
-     <path d="M-270 151 Q720 52 1710 151"/><path d="M-270 211 Q720 105 1710 211"/><path d="M-270 279 Q720 163 1710 279"/>
-     <path d="M-270 359 Q720 234 1710 359"/><path d="M-270 462 Q720 336 1710 462"/>
-     <path d="M720 75 Q525 204 425 600"/><path d="M720 75 Q650 202 615 600"/><path d="M720 75 Q790 202 825 600"/><path d="M720 75 Q915 204 1015 600"/>
-     <path d="M720 75 Q341 225 125 600"/><path d="M720 75 Q1099 225 1315 600"/>
-    </g>
-   </g>
-   <ellipse cx="720" cy="530" rx="990" ry="452" stroke="url(#earth-horizon)" stroke-width="2" fill="none"/>
-   <path d="M-170 140 Q720 -12 1610 140" stroke="#0f77ff" stroke-opacity=".12" stroke-width="22" fill="none"/>
-  </svg>
- </div>
+<div class="scroll-transition">
  <a class="scroll-cue" href="#about" aria-label="Scroll to explore the next section">
   <span class="scroll-mouse" aria-hidden="true"><span></span></span>
   <span data-i18n="scrollExplore">Scroll to explore</span>
