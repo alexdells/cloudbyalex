@@ -481,6 +481,49 @@ h1 span{display:block} .accent{color:var(--cyan)}
  .tool-card:nth-child(3) .dice-stage,.tool-card:nth-child(4) .speed-art{background-size:236% auto}
 }
 
+
+/* Approved canvas crops v2 — independently sized illustrations extracted from original artwork. */
+.tool-card:nth-child(3) .dice-stage{
+  background:url("./random-dice.svg") center center / contain no-repeat;
+  -webkit-mask-image:none;mask-image:none;
+  filter:drop-shadow(0 5px 15px rgba(0,0,25,.16));
+}
+.tool-card:nth-child(4) .speed-art{
+  background:url("./speed-gauge.svg") center center / contain no-repeat;
+  -webkit-mask-image:none;mask-image:none;
+  filter:drop-shadow(0 0 10px rgba(0,170,255,.14));
+}
+.coffee-card::after{
+  background:url("./cosmic-landscape.svg") center bottom / 100% auto no-repeat;
+}
+.approved-art-loaded .tool-card:nth-child(3) .dice-stage{
+  background-image:var(--approved-dice-url);
+  background-size:contain;
+  background-position:center center;
+  background-repeat:no-repeat;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 87%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 87%,transparent 100%);
+}
+.approved-art-loaded .tool-card:nth-child(4) .speed-art{
+  background-image:var(--approved-speed-url);
+  background-size:contain;
+  background-position:center center;
+  background-repeat:no-repeat;
+  -webkit-mask-image:none;mask-image:none;
+}
+.approved-art-loaded .coffee-card::after{
+  background-image:var(--approved-mountains-url);
+  background-position:center bottom;
+  background-repeat:no-repeat;
+  background-size:100% auto;
+}
+@media(max-width:760px){
+ .approved-art-loaded .tool-card:nth-child(3) .dice-stage{background-size:contain}
+ .approved-art-loaded .tool-card:nth-child(4) .speed-art{background-size:contain}
+ .approved-art-loaded .coffee-card::after{background-size:auto 160px}
+}
+@media(max-width:380px){.approved-art-loaded .coffee-card::after{background-size:auto 145px}}
+
 </style>
 </head>
 <body>
@@ -615,5 +658,35 @@ let current='en';try{current=localStorage.getItem('cloudbyalex-preview-language'
 const btn=document.getElementById('menuButton'),nav=document.getElementById('mobileNav');btn.addEventListener('click',()=>{let open=!nav.classList.contains('open');nav.classList.toggle('open',open);btn.setAttribute('aria-expanded',String(open));btn.setAttribute('aria-label',open?'Close navigation':'Open navigation')});nav.querySelectorAll('a').forEach(el=>el.addEventListener('click',()=>{nav.classList.remove('open');btn.setAttribute('aria-expanded','false')}));document.getElementById('year').textContent=String(new Date().getFullYear());
 })();
 </script>
+
+<script>
+/* Crop the approved mockup artwork into three independent in-memory images.
+   Avoids CSS sprites bleeding into neighboring tool cards on different screens. */
+(function(){
+ const source=new Image();
+ source.decoding='async';
+ source.onload=function(){
+   if(source.naturalWidth!==1000||source.naturalHeight!==500)return;
+   const pieces=[
+     ['--approved-dice-url',40,0,420,315],
+     ['--approved-speed-url',540,0,420,315],
+     ['--approved-mountains-url',0,345,1000,155]
+   ];
+   try{
+     for(const [name,x,y,w,h] of pieces){
+       const c=document.createElement('canvas');
+       c.width=w;c.height=h;
+       c.getContext('2d').drawImage(source,x,y,w,h,0,0,w,h);
+       const url=c.toDataURL('image/webp',.9);
+       document.documentElement.style.setProperty(name,'url("'+url+'")');
+     }
+     document.documentElement.classList.add('approved-art-loaded');
+   }catch(err){console.warn('Preview artwork fallback used',err)}
+ };
+ source.onerror=()=>console.warn('Preview artwork fallback used');
+ source.src='./approved-art-sprite.webp';
+})();
+</script>
+
 </body>
 </html>
