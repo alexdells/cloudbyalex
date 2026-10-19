@@ -407,6 +407,80 @@ h1 span{display:block} .accent{color:var(--cyan)}
  .coffee-card p{font-size:12px}
 }
 
+
+/* Original 3D artwork transfer — 2026-10-18. 
+   The WebP is cropped from the approved image, not redrawn as simple SVG. */
+.tool-card:nth-child(3) .dice-stage {
+  background-image:url("./approved-art-sprite.webp");
+  background-repeat:no-repeat;
+  background-size:245% auto;
+  background-position:3% top;
+  filter:drop-shadow(0 5px 9px rgba(0,4,23,.18));
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 96%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 96%);
+}
+.tool-card:nth-child(4) .speed-art {
+  background-image:url("./approved-art-sprite.webp");
+  background-repeat:no-repeat;
+  background-size:245% auto;
+  background-position:97% top;
+  filter:drop-shadow(0 0 8px rgba(0,178,255,.16));
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 75%,transparent 98%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 75%,transparent 98%);
+}
+.tool-card:nth-child(4) .speed-legend {
+  bottom:-2px;
+  z-index:2;
+  text-shadow:0 1px 4px #06132b;
+  font-size:9px;
+}
+.tool-card:nth-child(2) .ip-hologram {
+  filter:drop-shadow(0 18px 12px rgba(0,3,25,.5)) drop-shadow(0 0 27px rgba(9,162,255,.55));
+}
+.tool-card:nth-child(2) .ip-art::before {
+  background:radial-gradient(ellipse at 50% 50%,rgba(20,141,255,.32),transparent 75%);
+}
+.tool-card:nth-child(1) .workflow {
+  box-shadow:-12px 17px 0 rgba(4,15,62,.37),-23px 28px 35px rgba(0,0,0,.46),0 0 29px rgba(0,126,255,.26);
+}
+.coffee-card {
+  background:
+    radial-gradient(ellipse at 74% 86%,rgba(16,104,236,.48),transparent 65%),
+    radial-gradient(ellipse at 92% 34%,rgba(48,25,129,.33),transparent 60%),
+    linear-gradient(135deg,#061335 0%,#080e2d 58%,#101140 100%);
+}
+.coffee-card::before {
+  content:"";position:absolute;inset:0;height:100%;opacity:1;
+  background:
+    radial-gradient(circle at 74% 19%,rgba(179,228,255,.95) 0 1px,transparent 2px),
+    radial-gradient(circle at 84% 8%,rgba(149,180,255,.85) 0 1px,transparent 2px),
+    radial-gradient(circle at 64% 43%,rgba(132,217,255,.67) 0 1px,transparent 2px),
+    radial-gradient(circle at 92% 41%,rgba(199,167,255,.89) 0 1px,transparent 2px),
+    linear-gradient(90deg,rgba(2,8,27,.88),rgba(4,9,38,.34) 64%,rgba(5,11,41,.08));
+  pointer-events:none;z-index:0;
+}
+.coffee-card::after {
+  content:"";position:absolute;left:0;right:0;top:auto;bottom:0;
+  height:161px;z-index:0;pointer-events:none;border-radius:0;
+  background:url("./approved-art-sprite.webp") center bottom / 100% auto no-repeat;
+  opacity:.99;
+}
+.coffee-left,.coffee-btn {position:relative;z-index:2}
+@media(max-width:1100px){
+ .tool-card:nth-child(3) .dice-stage,.tool-card:nth-child(4) .speed-art{background-size:210% auto}
+ .coffee-card::after{height:150px;background-size:auto 350px}
+}
+@media(max-width:760px){
+ .tool-card:nth-child(3) .dice-stage,.tool-card:nth-child(4) .speed-art{background-size:225% auto}
+ .coffee-card::after{height:150px;background-size:auto 470px}
+ .coffee-card::before{
+  background:linear-gradient(180deg,rgba(4,12,32,.92) 0%,rgba(4,12,39,.6) 45%,rgba(5,11,36,.05) 100%);
+ }
+}
+@media(max-width:380px){
+ .tool-card:nth-child(3) .dice-stage,.tool-card:nth-child(4) .speed-art{background-size:236% auto}
+}
+
 </style>
 </head>
 <body>
