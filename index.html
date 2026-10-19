@@ -1,174 +1,886 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://cloudbyalex.com/">
-  <link rel="alternate" hreflang="en" href="https://cloudbyalex.com/">
-  <link rel="alternate" hreflang="ru" href="https://cloudbyalex.com/ru/">
-  <link rel="alternate" hreflang="x-default" href="https://cloudbyalex.com/">
-  <title>Cloud by Alex — Cloud & DevOps Engineer</title>
-  <meta name="description" content="Cloud by Alex — DevOps, cloud engineering, automation, AWS, Kubernetes, Terraform and modern infrastructure.">
-  <link rel="stylesheet" href="/assets/home.css">
-  <script>(()=>{try{const saved=localStorage.getItem('cloudbyalex-lang');const langs=navigator.languages?.length?navigator.languages:[navigator.language||''];const russian=langs.some(x=>String(x).toLowerCase().startsWith('ru'));if(saved==='ru'||(!saved&&russian))location.replace('/ru/'+location.search+location.hash)}catch(e){}})();</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#031225">
+<meta name="robots" content="index,follow">
+<title>Cloud by Alex — Cloud & DevOps Engineer</title>
+<link rel="canonical" href="https://cloudbyalex.com/">
+<link rel="alternate" hreflang="en" href="https://cloudbyalex.com/">
+<link rel="alternate" hreflang="ru" href="https://cloudbyalex.com/ru/">
+<link rel="alternate" hreflang="x-default" href="https://cloudbyalex.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cloud by Alex — Cloud & DevOps Engineer">
+<meta property="og:url" content="https://cloudbyalex.com/">
+<meta property="og:description" content="DevOps, cloud engineering, automation and useful online tools.">
+<meta name="description" content="Cloud by Alex: Cloud & DevOps engineering portfolio, AWS, Kubernetes, Terraform, CI/CD and practical online tools.">
+<style>
+:root{--bg:#020c1a;--deep:#031225;--surface:#071b31;--surface2:#08213a;--line:rgba(113,178,234,.16);--ink:#f2f7ff;--muted:#a2b8cd;--cyan:#18ccff;--blue:#278eff;--violet:#9059ff;--yellow:#ffcf46;--green:#4aeb9b;--max:1180px;--radius:22px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{margin:0;color:var(--ink);background:var(--bg);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.65;overflow-x:hidden}
+body::before{content:"";position:absolute;pointer-events:none;left:-15%;top:110px;width:55vw;height:650px;background:radial-gradient(ellipse,rgba(7,83,154,.19),transparent 65%);z-index:-1}
+a{color:inherit;text-decoration:none}button{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}::selection{background:rgba(16,197,255,.35)}
+svg{display:inline-block;vertical-align:middle;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.container{width:min(var(--max),calc(100% - 76px));margin:0 auto}
+.preview-flag{display:flex;justify-content:center;gap:7px;padding:7px 15px;align-items:center;background:linear-gradient(90deg,rgba(4,55,94,.45),rgba(4,34,63,.7),rgba(4,55,94,.45));border-bottom:1px solid rgba(106,172,229,.15);color:#a9c1d5;font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:center}
+.preview-flag svg{width:13px;height:13px;color:var(--cyan)}
+.header{height:78px;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(148,194,237,.13);background:rgba(3,14,29,.91);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px)}
+.header-inner{height:100%;display:flex;align-items:center;gap:32px}
+.brand{display:inline-flex;align-items:center;gap:13px;font-size:19px;font-weight:780;letter-spacing:-.04em;white-space:nowrap}
+.brand svg{width:32px;height:32px;color:var(--cyan);stroke-width:1.8;filter:drop-shadow(0 0 10px rgba(24,204,255,.25))}
+.brand strong{color:var(--cyan)}
+.main-nav{display:flex;align-items:center;gap:37px;margin-left:auto}
+.main-nav a{font-size:13px;color:#c9d5e6;transition:color .2s}
+.main-nav a:hover,.footer a:hover{color:var(--cyan)}
+.social-nav{display:flex;align-items:center;gap:24px;padding-left:35px;margin-left:18px;border-left:1px solid var(--line)}
+.social-nav a{display:flex;align-items:center;gap:8px;font-size:12px;color:#d0dded;white-space:nowrap}
+.social-nav svg{width:16px;height:16px}
+.language{display:flex;align-items:center;gap:9px;margin-left:8px}
+.language button{border:0;background:none;color:#738ba2;cursor:pointer;font-size:12px;padding:6px 3px}
+.language button[aria-pressed="true"]{color:var(--cyan);font-weight:800;border-bottom:2px solid var(--cyan)}
+.langbar{color:#527187}
+.menu-button{display:none;align-items:center;justify-content:center;width:42px;height:42px;background:#08233c;border:1px solid var(--line);border-radius:12px;color:var(--ink);margin-left:auto;cursor:pointer}
+.mobile-nav{display:none}
+.hero{position:relative;min-height:748px;display:grid;grid-template-columns:1.04fr .96fr;align-items:center;padding-block:96px 94px;gap:50px}
+.hero::after{content:"";position:absolute;inset:auto 0 12px;height:1px;background:linear-gradient(90deg,transparent,rgba(116,202,255,.22),transparent)}
+.eyebrow{display:flex;align-items:center;gap:14px;text-transform:uppercase;letter-spacing:.22em;font-weight:750;font-size:11px;color:#92b0c8;margin:0 0 26px}
+.eyebrow::before{content:"";width:6px;height:6px;border:1px solid var(--cyan);transform:rotate(45deg);background:var(--cyan);box-shadow:0 0 14px var(--cyan)}
+.eyebrow::after{content:"";width:46px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent)}
+h1,h2,h3,p{margin-top:0}h1,h2,h3{letter-spacing:-.042em;line-height:1.16}
+h1{font-size:clamp(44px,4.6vw,70px);font-weight:800;margin-bottom:26px;max-width:680px}
+h1 span{display:block} .accent{color:var(--cyan)}
+.hero-desc{color:#bfd0df;font-size:17px;line-height:1.85;max-width:520px;margin-bottom:33px}
+.buttons{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-height:50px;padding:13px 23px;border:1px solid #235580;border-radius:10px;font-weight:750;font-size:13px;transition:transform .2s,background .2s,box-shadow .2s;white-space:nowrap}
+.button:hover{transform:translateY(-2px)} .button svg{width:17px;height:17px}
+.button.primary{background:linear-gradient(125deg,#10cafa,#229cff);border-color:#19c5f0;color:#001528;box-shadow:0 9px 30px rgba(11,177,235,.2)}
+.button.primary:hover{box-shadow:0 12px 36px rgba(20,180,255,.34)}
+.button.secondary{background:rgba(8,28,50,.74)} .button.secondary:hover{border-color:var(--cyan);background:#0d2c49}
+.hero-status{display:flex;align-items:center;gap:12px;margin-top:35px;color:#aac4da;font-size:12px}
+.status-point{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(74,235,155,.08)}
+.status-line{height:1px;background:linear-gradient(90deg,rgba(13,204,255,.52),transparent);flex:1;max-width:84px}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.tag{display:flex;align-items:center;gap:9px;padding:8px 13px;border:1px solid rgba(137,190,238,.23);border-radius:100px;color:#dfebf5;background:rgba(3,22,42,.62);font-size:12px;font-weight:650}
+.tag b{font-size:14px}.tag:nth-child(2) b{color:#53a0ff}.tag:nth-child(3) b{color:#a476ff}.tag:nth-child(4) b{color:#f0a36b}
+.hero-visual{position:relative;width:100%;min-height:586px;align-self:stretch;display:flex;align-items:center;justify-content:flex-end;isolation:isolate}
+.hero-visual::before{content:"";position:absolute;right:-65px;top:12%;width:520px;height:540px;border-radius:50%;background:radial-gradient(circle,rgba(0,105,236,.26),rgba(0,60,152,.06) 53%,transparent 70%);filter:blur(18px);z-index:-2}
+.hero-visual::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#020c1a 0%,transparent 19%,transparent 80%,#020c1a 100%),linear-gradient(0deg,#020c1a 0%,transparent 19%,transparent 82%,#020c1a 100%);opacity:.36;z-index:1}
+.hero-visual img{height:min(610px,100%);width:100%;max-width:520px;object-fit:cover;object-position:center;border:0;mix-blend-mode:normal;filter:drop-shadow(0 0 45px rgba(0,97,227,.19));-webkit-mask-image:radial-gradient(ellipse 75% 75% at 53% 51%,#000 63%,transparent 100%);mask-image:radial-gradient(ellipse 75% 75% at 53% 51%,#000 63%,transparent 100%)}
+.vertical-caption{position:absolute;right:0;bottom:24px;z-index:2;font-size:11px;letter-spacing:.17em;color:#64b7e1;writing-mode:vertical-rl;text-transform:uppercase}
+.section{padding-block:136px 142px;position:relative}
+.section::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(102,187,255,.17),transparent)}
+.section-heading{font-size:clamp(33px,3.5vw,49px);font-weight:800;margin-bottom:24px;max-width:665px}
+.section-lead{color:#aebed0;line-height:1.9;font-size:16px;max-width:535px;margin-bottom:0}
+.about-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:92px;align-items:center}
+.about-side{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.info-card,.metric-card{border:1px solid var(--line);background:linear-gradient(140deg,rgba(9,35,60,.8),rgba(5,20,38,.92));border-radius:16px}
+.info-card{min-height:112px;padding:23px 22px;display:flex;gap:17px;align-items:flex-start}
+.info-card .icon-circle{color:#8bcaff;flex-shrink:0}
+.info-card .icon-circle svg{height:23px;width:23px}
+.info-label{display:block;font-size:11px;color:#8aa7bf;line-height:1.3;margin-bottom:6px}
+.info-value{font-size:14px;font-weight:650;line-height:1.4}
+.metric-card{min-height:178px;padding:29px 25px;background:linear-gradient(135deg,rgba(0,85,154,.25),rgba(3,20,40,.9));border-color:rgba(23,168,246,.39);position:relative;overflow:hidden}
+.metric-card::before{content:"";position:absolute;right:-40px;bottom:-55px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(11,121,222,.14),transparent 67%)}
+.metric-card svg{width:23px;height:23px;color:var(--cyan)}
+.metric-value{font-size:43px;font-weight:850;letter-spacing:-.06em;line-height:1.15;margin:12px 0 4px}
+.metric-desc{font-size:12px;color:#b4c9da;line-height:1.65;max-width:200px}
+.tools-section{background:linear-gradient(180deg,rgba(1,18,37,.5),rgba(2,15,32,.85),transparent)}
+.tools-header{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:52px}
+.tools-header .section-heading{margin-bottom:0}.tools-header .section-lead{max-width:305px;font-size:14px}
+.tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
+.tool-card{border:1px solid rgba(109,165,220,.24);border-radius:22px;min-height:440px;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:33px;background:radial-gradient(circle at 82% 83%,rgba(4,107,195,.13),transparent 56%),linear-gradient(145deg,#0a1c32,#061326);transition:transform .25s,border-color .25s,box-shadow .25s}
+.tool-card:hover{transform:translateY(-4px);border-color:rgba(31,191,255,.58);box-shadow:0 25px 70px rgba(0,0,0,.22)}
+.tool-card.purple{background:radial-gradient(circle at 78% 78%,rgba(84,58,181,.21),transparent 60%),linear-gradient(145deg,#0b1d36,#061326)}
+.card-head{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.tool-icon{width:53px;height:53px;border:1px solid rgba(36,187,255,.32);background:rgba(0,152,242,.1);border-radius:14px;display:grid;place-items:center;flex-shrink:0;color:var(--cyan)}
+.tool-icon svg{width:25px;height:25px}.purple .tool-icon{color:#bd96ff;border-color:rgba(157,90,255,.36);background:rgba(145,91,255,.1)}
+.tool-card h3{font-size:24px;margin:0;line-height:1.25;font-weight:760}
+.tool-desc{color:#a5bdd0;font-size:14px;line-height:1.8;max-width:425px;margin:20px 0 20px;position:relative;z-index:1}
+.tool-art{flex:1;min-height:160px;position:relative;margin-block:6px 18px}
+.card-bottom{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;gap:12px}
+.small-chips{display:flex;gap:7px;flex-wrap:wrap}.small-chips span{border:1px solid rgba(134,170,210,.18);background:rgba(10,32,56,.8);color:#91aac3;border-radius:6px;padding:5px 8px;font-size:10px}
+.tool-button{color:var(--cyan);white-space:nowrap;display:flex;align-items:center;gap:9px;font-size:13px;font-weight:750}.tool-button svg{width:17px;height:17px;transition:transform .2s}.tool-button:hover svg{transform:translateX(4px)}
+/* Individual tool visualizations: static illustrations, never fictional live measurements */
+.workflow{position:absolute;left:10px;top:2px;width:min(370px,96%);max-height:160px;border:1px solid #23435f;border-radius:12px;padding:14px 17px;background:linear-gradient(140deg,rgba(2,13,25,.95),rgba(8,27,48,.92));box-shadow:0 20px 45px rgba(0,0,0,.25);font:12px/1.9 ui-monospace,SFMono-Regular,Consolas,monospace;overflow:hidden;color:#90c5ed}
+.workflow::before{content:"●  ●  ●";color:#52718e;display:block;font-size:9px;padding-bottom:6px;border-bottom:1px solid rgba(136,187,240,.14);margin-bottom:7px}
+.workflow em{font-style:normal;color:#ff8282}.workflow i{font-style:normal;color:#a6ffcd}
+.code-shield{position:absolute;right:0;bottom:-8px;border:1px solid #d25768;color:#ff8890;background:#411c31;border-radius:14px;padding:14px;box-shadow:0 0 28px rgba(233,68,96,.18)}.code-shield svg{width:29px;height:29px}
+.ip-art{display:flex;align-items:center;justify-content:center}
+.globe{position:absolute;width:180px;height:180px;border-radius:50%;right:15px;top:-8px;background:radial-gradient(circle at 35% 32%,rgba(32,220,255,.46),rgba(3,75,162,.24) 46%,rgba(10,42,82,.12) 68%,transparent 74%);box-shadow:inset 0 0 0 1px rgba(30,198,255,.28),0 0 50px rgba(5,131,228,.15)}
+.globe::before,.globe::after{content:"";position:absolute;border:1px solid rgba(58,216,255,.26);border-radius:50%;inset:14px 57px;transform:rotate(-22deg)}.globe::after{inset:51px 10px;transform:rotate(12deg)}
+.ip-widget{position:absolute;left:8px;top:28px;width:min(255px,67%);border:1px solid #285273;background:rgba(4,19,36,.92);padding:19px 20px;border-radius:13px;box-shadow:0 18px 38px rgba(0,0,0,.3)}
+.ip-widget span{font-size:11px;color:#87a6c4}.ip-widget strong{display:block;white-space:nowrap;font-size:25px;letter-spacing:-.05em;line-height:1.45}.ip-widget small{display:block;font-size:11px;color:#65e0ff}
+.dice-scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.dice{display:grid;place-items:center;font-size:58px;width:100px;height:100px;border-radius:23px;background:linear-gradient(145deg,#8558f6,#37289e);box-shadow:15px 14px 0 #241b68,0 0 80px rgba(133,88,246,.29);transform:rotate(-13deg)}
+.dice span{transform:rotate(13deg);font-size:62px;color:white;text-shadow:0 3px 20px #100c32}
+.coin{position:absolute;right:20%;top:8%;border:3px solid #e1b867;color:#f3dca0;background:linear-gradient(120deg,#654e9c,#dbc777);display:grid;place-items:center;width:66px;height:66px;border-radius:50%;font-size:29px;font-weight:850;box-shadow:0 0 30px rgba(160,93,255,.3);transform:rotate(23deg)}
+.spark{position:absolute;width:6px;height:6px;box-shadow:0 0 13px #ab79ff;background:#b792ff;transform:rotate(45deg)}.spark.a{left:20%;top:20%}.spark.b{right:14%;bottom:22%}
+.speed-art{display:grid;place-items:center}
+.gauge{width:190px;height:190px;border-radius:50%;background:conic-gradient(from 220deg,#15d8fa 0deg,#347fff 155deg,#8b5bff 267deg,transparent 267deg 280deg,#0a2647 280deg);padding:17px;clip-path:polygon(0 0,100% 0,100% 85%,0 85%);filter:drop-shadow(0 0 22px rgba(25,159,246,.2))}
+.gauge-inner{height:100%;width:100%;border-radius:50%;background:#06182d;display:grid;place-items:center;color:white;position:relative}
+.gauge-inner::after{content:"";position:absolute;width:2px;height:58px;left:50%;top:17%;background:linear-gradient(#49ddff,transparent);transform-origin:50% 100%;transform:rotate(42deg);box-shadow:0 0 15px #1abfff}
+.gauge-inner strong{font-size:24px;font-weight:850;transform:translateY(28px)}
+.speed-legend{position:absolute;bottom:-3px;color:#87accc;font-size:10px;letter-spacing:.13em;text-transform:uppercase}
+.coffee-section{padding-top:20px;padding-bottom:128px}
+.coffee-card{position:relative;min-height:202px;overflow:hidden;border:1px solid rgba(111,162,221,.31);border-radius:21px;background:linear-gradient(115deg,rgba(22,39,72,.95),rgba(16,52,103,.9) 64%,rgba(5,23,46,.95));display:flex;align-items:center;justify-content:space-between;padding:43px 53px;gap:28px}
+.coffee-card:before{content:"";position:absolute;inset:auto 0 0;height:85%;background:radial-gradient(ellipse at 80% 100%,rgba(63,117,231,.2),transparent 45%),linear-gradient(150deg,transparent 55%,rgba(9,15,37,.8) 55.2%);opacity:.58;pointer-events:none}
+.coffee-left{display:flex;align-items:center;gap:26px;position:relative;z-index:1}
+.coffee-cup{width:72px;height:72px;display:grid;place-items:center;background:rgba(13,36,67,.7);border-radius:20px;flex-shrink:0;color:#ffd97a;font-size:48px}
+.coffee-card h2{font-size:26px;margin-bottom:8px}.coffee-card p{font-size:14px;color:#c0cce0;max-width:550px;margin:0;line-height:1.7}
+.coffee-btn{background:var(--yellow);color:#13151c;border:0;box-shadow:0 10px 35px rgba(255,195,28,.14);position:relative;z-index:1}
+.footer{border-top:1px solid var(--line);padding:44px 0 30px;background:#020b18}
+.footer-top{display:flex;justify-content:space-between;align-items:center;gap:22px}
+.footer .brand{font-size:17px}.footer .brand svg{width:29px;height:29px}
+.footer-brand-sub{color:#86a0b6;font-size:11px;margin:4px 0 0 44px}.footer-links{display:flex;gap:29px;color:#bdcde0;font-size:12px}
+.footer-bottom{display:flex;justify-content:space-between;gap:20px;color:#68839a;font-size:11px;border-top:1px solid rgba(105,157,217,.11);margin-top:38px;padding-top:22px}
+@media (max-width:1130px){.container{width:calc(100% - 64px)}.header-inner{gap:20px}.main-nav{gap:22px}.social-nav{gap:13px;padding-left:17px;margin-left:0}.social-nav a{font-size:0;gap:0}.social-nav svg{width:19px;height:19px}.hero{gap:15px}.hero-visual{min-height:510px}.hero h1{font-size:clamp(43px,5vw,60px)}.about-layout{gap:42px}.info-card{padding:20px 16px}.tool-card{padding:27px}}
+@media(max-width:760px){
+ html{scroll-padding-top:84px}.container{width:calc(100% - 38px)}.header{height:70px}.brand{font-size:18px}.brand svg{width:29px;height:29px}.main-nav,.social-nav{display:none}.language{margin-left:auto}.menu-button{display:flex;margin-left:4px}
+ .mobile-nav{position:absolute;display:none;left:0;right:0;top:70px;padding:14px 19px 22px;background:#06162a;border-bottom:1px solid #214361;box-shadow:0 22px 35px rgba(0,0,0,.3)}.mobile-nav.open{display:grid;gap:3px}.mobile-nav a{font-size:15px;padding:13px;border-radius:8px;color:#d5e6f5}.mobile-nav a:hover{background:#0b2c49}
+ .hero{display:flex;flex-direction:column;align-items:stretch;padding-top:67px;padding-bottom:78px;gap:26px;min-height:0}.eyebrow{font-size:10px;letter-spacing:.14em;margin-bottom:19px}.eyebrow::after{width:28px}h1{font-size:clamp(41px,9vw,58px);margin-bottom:20px}.hero-desc{font-size:15px;line-height:1.85;max-width:560px;margin-bottom:26px}.button{min-height:49px;padding:12px 18px}.buttons{gap:10px}.hero-status{margin-top:30px}.tags{gap:8px;margin-top:22px}.tag{padding:7px 10px;font-size:11px}.hero-visual{width:100%;height:425px;min-height:425px;justify-content:center}.hero-visual img{max-width:430px;width:100%;height:100%;object-fit:cover;object-position:center}.hero-visual::before{right:0;top:3%;width:100%;height:390px}.vertical-caption{right:2px;bottom:10px;font-size:9px}
+ .section{padding-block:93px 100px}.section-heading{font-size:clamp(32px,7.5vw,43px)}.section-lead{font-size:15px;line-height:1.85}.about-layout{grid-template-columns:1fr;gap:38px}.about-side{gap:11px}.info-card{min-height:111px;padding:18px 14px;gap:10px}.info-card .icon-circle svg{width:19px;height:19px}.info-value{font-size:12px}.metric-card{min-height:158px;padding:22px 18px}.metric-value{font-size:35px}.metric-desc{font-size:11px}.tools-header{display:block;margin-bottom:31px}.tools-header .section-heading{margin-bottom:17px}.tools-header .section-lead{max-width:530px}.tools-grid{grid-template-columns:1fr;gap:20px}.tool-card{min-height:410px;padding:26px}.tool-card h3{font-size:23px}.tool-desc{font-size:14px}.workflow{font-size:11px}.coffee-section{padding-top:0;padding-bottom:85px}.coffee-card{display:flex;flex-direction:column;align-items:stretch;padding:29px;gap:25px}.coffee-left{gap:16px}.coffee-cup{height:56px;width:56px;font-size:35px}.coffee-card h2{font-size:22px}.coffee-card p{font-size:13px}.coffee-btn{align-self:flex-start}.footer{padding-top:37px}.footer-top{flex-direction:column;align-items:flex-start;gap:27px}.footer-links{gap:22px;flex-wrap:wrap}.footer-bottom{flex-direction:column;gap:7px;margin-top:27px}
+}
+@media(max-width:380px){.container{width:calc(100% - 30px)}.hero{padding-top:51px}.hero h1{font-size:39px}.button{font-size:12px;padding-inline:14px}.tag{font-size:10px}.hero-visual{min-height:345px;height:345px}.section{padding-block:85px}.about-side{grid-template-columns:1fr 1fr}.info-card{padding:14px 11px;gap:8px}.tool-card{padding:22px}.ip-widget strong{font-size:20px}.footer-links{gap:14px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Seamless, full-bleed portrait: preserve the approved image asset exactly. */
+.hero{grid-template-columns:minmax(0,1fr);isolation:isolate;min-height:748px}
+.hero-copy{position:relative;z-index:3;width:min(56%,635px)}
+.hero-visual{position:absolute;z-index:0;left:25%;right:calc((100vw - 100%) / -2);top:0;bottom:0;width:auto;height:auto;min-height:0;display:block;align-self:auto;overflow:hidden;isolation:auto;pointer-events:none}
+.hero-visual::before{content:none}
+.hero-visual img{position:absolute;right:clamp(24px,5vw,92px);bottom:calc(3% + 105px);display:block;width:auto;height:min(62%,475px);max-width:none;object-fit:contain;object-position:center bottom;border:0;mix-blend-mode:normal;filter:none;-webkit-mask-image:radial-gradient(ellipse 80% 78% at 50% 51%,#000 48%,rgba(0,0,0,.88) 66%,transparent 100%);mask-image:radial-gradient(ellipse 80% 78% at 50% 51%,#000 48%,rgba(0,0,0,.88) 66%,transparent 100%)}
+.hero-visual::after{content:"";position:absolute;inset:0;z-index:1;opacity:1;pointer-events:none;background:linear-gradient(90deg,#020c1a 0%,rgba(2,12,26,.98) 8%,rgba(2,12,26,.8) 24%,rgba(2,12,26,.20) 53%,transparent 78%),linear-gradient(0deg,#020c1a 0%,rgba(2,12,26,.14) 17%,transparent 32%),linear-gradient(180deg,#020c1a 0%,rgba(2,12,26,.1) 15%,transparent 30%),linear-gradient(270deg,rgba(2,12,26,.23),transparent 15%)}
+.vertical-caption{right:32px;bottom:42px}
+@media(max-width:1130px) and (min-width:761px){
+ .hero-copy{width:min(57%,600px)}
+ .hero-visual{left:29%}
+ .hero-visual img{height:min(57%,430px);right:clamp(5px,2vw,35px);bottom:calc(3% + 68px)}
+}
+@media(max-width:760px){
+ .hero{display:flex;flex-direction:column;align-items:stretch;padding-top:61px;padding-bottom:0;gap:0;min-height:0}
+ .hero-copy{width:100%;max-width:none;z-index:3}
+ .hero-visual{position:relative;z-index:0;left:auto;right:auto;top:auto;bottom:auto;display:block;width:calc(100% + 38px);height:clamp(270px,78vw,380px);min-height:0;max-height:none;margin:-12px -19px -8px;align-self:auto}
+ .hero-visual img{right:8%;bottom:0;display:block;width:auto;height:88%;max-width:none;object-fit:contain;object-position:center bottom;-webkit-mask-image:radial-gradient(ellipse 80% 78% at 50% 51%,#000 48%,rgba(0,0,0,.88) 66%,transparent 100%);mask-image:radial-gradient(ellipse 80% 78% at 50% 51%,#000 48%,rgba(0,0,0,.88) 66%,transparent 100%)}
+ .hero-visual::after{opacity:1;background:linear-gradient(180deg,#020c1a 0%,rgba(2,12,26,.58) 12%,transparent 32%,transparent 65%,rgba(2,12,26,.45) 85%,#020c1a 100%),linear-gradient(90deg,#020c1a 0%,transparent 14%,transparent 86%,#020c1a 100%)}
+ .vertical-caption{display:none}
+}
+@media(max-width:380px){
+ .hero-visual{width:calc(100% + 30px);height:285px;min-height:0;margin-left:-15px;margin-right:-15px}
+}
+
+/* Preview-only: lift the approved portrait and make the IP tool easy to find. */
+.main-nav .ip-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:43px;padding:10px 19px;border:1px solid #39dcff;border-radius:999px;background:linear-gradient(120deg,#1bd2f9,#289bff);color:#001b31;font-size:13px;font-weight:800;white-space:nowrap;box-shadow:0 0 0 3px rgba(32,198,247,.08),0 8px 26px rgba(0,170,244,.25);transition:transform .2s,box-shadow .2s}
+.main-nav .ip-cta:hover{color:#001b31;transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,176,250,.38)}
+.main-nav .ip-cta svg{width:17px;height:17px}
+@media(max-width:760px){.hero-visual img{bottom:0}.mobile-nav .mobile-ip-cta{display:block;margin-bottom:8px;background:linear-gradient(120deg,#1bd2f9,#289bff);color:#001b31;font-weight:800;text-align:center;border-radius:10px;box-shadow:0 8px 24px rgba(0,170,244,.2)}.mobile-nav .mobile-ip-cta:hover{color:#001b31;background:#53d9ff}}
+
+/* Approved hero mockup composition and orbital scroll horizon: preview only. */
+.hero{min-height:622px;padding-top:54px;padding-bottom:58px;align-items:start}
+.hero::after{display:none}
+.hero-copy{width:min(55%,650px)}
+.hero-visual img{top:10px;bottom:auto;height:min(87%,540px)}
+.hero-visual::after{background:linear-gradient(90deg,#020c1a 0%,rgba(2,12,26,.91) 8%,rgba(2,12,26,.65) 24%,rgba(2,12,26,.12) 57%,transparent 82%),linear-gradient(0deg,#020c1a 0%,rgba(2,12,26,.12) 17%,transparent 34%),linear-gradient(180deg,rgba(2,12,26,.12) 0%,transparent 25%),linear-gradient(270deg,rgba(2,12,26,.22),transparent 15%)}
+.technology-rail{position:relative;z-index:2;border-top:1px solid rgba(64,149,235,.2);border-bottom:1px solid rgba(64,149,235,.12);background:linear-gradient(180deg,#031429 0%,#020e20 100%)}
+.technology-rail-inner{min-height:128px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:center}
+.technology-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;color:#c8dbf1;font-size:12px;line-height:1.25;min-width:0}
+.technology-item+.technology-item{border-left:1px solid rgba(47,128,220,.28)}
+.technology-icon{width:45px;height:45px;border:1px solid rgba(38,146,248,.28);border-radius:12px;background:linear-gradient(155deg,#082748,#031429);display:grid;place-items:center;color:#50b8ff;font-size:27px;font-weight:800;box-shadow:inset 0 0 18px rgba(4,130,244,.12)}
+.aws-icon{font-family:Arial,sans-serif;font-weight:800;font-size:19px;letter-spacing:-.06em;color:#ffb64c}
+.k8s-icon{color:#64a5ff;font-size:29px}
+.tf-icon{color:#a57aff;font-size:28px}
+.docker-icon{color:#1bd5ff;font-size:29px}
+.linux-icon{color:#e3c67a;font-size:26px}
+.cicd-icon{color:#e8efff;font-size:30px}
+.scroll-transition{position:relative;height:108px;overflow:hidden;background:linear-gradient(180deg,#020e20,#020c1a 90%)}
+.scroll-cue{position:absolute;z-index:2;top:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;flex-direction:column;gap:14px;color:#c5d9ff;text-decoration:none;text-transform:uppercase;font-size:10px;font-weight:750;letter-spacing:.27em;white-space:nowrap;text-shadow:0 0 10px rgba(0,30,86,.8)}
+.scroll-mouse{width:19px;height:31px;border:1.5px solid #19c9ff;border-radius:12px;display:flex;justify-content:center;padding-top:7px;box-shadow:0 0 18px rgba(20,162,255,.15)}
+.scroll-mouse span{width:3px;height:6px;border-radius:5px;background:#25cfff;animation:scroll-wheel 2.1s ease-in-out infinite}
+@keyframes scroll-wheel{0%,100%{opacity:.45;transform:translateY(0)}60%{opacity:1;transform:translateY(6px)}}
+.scroll-cue:hover{color:#fff}
+#about{padding-top:100px}
+@media (max-width:1130px) and (min-width:761px){
+ .hero{min-height:620px;padding-top:57px;padding-bottom:48px}
+ .hero-copy{width:min(57%,600px)}
+ .hero-visual img{top:27px;bottom:auto;height:min(77%,490px)}
+}
+@media (max-width:760px){
+ .hero{min-height:0;padding-top:46px;padding-bottom:8px}
+ .hero-copy{width:100%}
+ .hero-visual img{top:auto;bottom:0;height:88%}
+ .technology-rail-inner{min-height:0;grid-template-columns:repeat(3,minmax(0,1fr));padding-top:18px;padding-bottom:18px;row-gap:24px}
+ .technology-item{font-size:11px;gap:7px}
+ .technology-item:nth-child(4){border-left:0}
+ .technology-icon{height:39px;width:39px;font-size:24px}
+ .aws-icon{font-size:17px}
+ .scroll-transition{height:100px}
+ .scroll-cue{top:13px;font-size:9px;gap:10px}
+ #about{padding-top:69px}
+}
+@media (prefers-reduced-motion:reduce){.scroll-mouse span{animation:none}}
+
+/* Premium sculpted tool tiles: real layered CSS 3D illustrations, not flat boxes. */
+.tools-section{background:radial-gradient(ellipse at 30% 35%,rgba(9,80,156,.14),transparent 65%),linear-gradient(180deg,#020f21,#021020 85%,#020c1a)}
+.tools-header{margin-bottom:43px}
+.tools-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;perspective:1300px}
+.tool-card,.tool-card.purple{--tile-glow:rgba(25,161,255,.18);position:relative;isolation:isolate;min-height:465px;padding:22px 19px 20px;display:flex;flex-direction:column;border:1px solid rgba(108,178,253,.25);border-radius:25px;background:linear-gradient(144deg,rgba(17,48,85,.95) 0%,rgba(6,28,53,.95) 43%,rgba(3,15,32,.98) 100%);box-shadow:0 18px 34px rgba(0,3,14,.38),0 2px 1px rgba(138,220,255,.14) inset,0 -18px 36px rgba(0,7,20,.45) inset;transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease;transform:translateZ(0)}
+.tool-card:nth-child(2){--tile-glow:rgba(13,216,245,.23)}
+.tool-card:nth-child(3){--tile-glow:rgba(153,98,255,.24);background:linear-gradient(146deg,#1c1f4c 0%,#101734 48%,#070e24 100%);border-color:rgba(158,124,255,.32)}
+.tool-card:nth-child(4){--tile-glow:rgba(77,144,255,.27);background:linear-gradient(146deg,#13264b 0%,#0b1a38 48%,#070e24 100%);border-color:rgba(99,150,255,.32)}
+.tool-card::before{content:"";position:absolute;inset:1px 1px auto;height:55%;z-index:-1;pointer-events:none;border-radius:24px 24px 50% 50%;background:radial-gradient(ellipse at 50% 8%,rgba(154,221,255,.11),transparent 70%)}
+.tool-card::after{content:"";position:absolute;z-index:-1;pointer-events:none;left:15%;right:15%;bottom:31%;height:135px;border-radius:50%;background:radial-gradient(ellipse,var(--tile-glow),transparent 75%);filter:blur(22px)}
+.tool-card:hover{transform:translateY(-9px) rotateX(1.5deg);border-color:rgba(80,206,255,.66);box-shadow:0 30px 60px rgba(0,4,19,.52),0 3px 1px rgba(190,243,255,.18) inset,0 -18px 34px rgba(0,7,20,.45) inset}
+.tool-card:focus-within{border-color:rgba(80,206,255,.66)}
+.card-head{gap:10px;align-items:center}
+.tool-icon{width:44px;height:44px;border-radius:13px;box-shadow:inset 0 1px 0 rgba(173,242,255,.16),0 8px 15px rgba(0,0,0,.18)}
+.tool-icon svg{width:23px;height:23px}
+.tool-card h3{font-size:19px;line-height:1.22;letter-spacing:-.035em}
+.tool-desc{font-size:12px;line-height:1.67;color:#b2c9de;margin:18px 0 7px;min-height:83px;max-width:none}
+.tool-art{position:relative;min-height:198px;flex:1;margin:0 0 14px;overflow:visible;perspective:750px}
+.card-bottom{display:flex;flex-direction:column;align-items:stretch;gap:13px}
+.small-chips{gap:6px;justify-content:center}
+.small-chips span{font-size:9px;letter-spacing:.01em;border-radius:100px;padding:5px 9px;background:rgba(80,149,220,.08)}
+.tool-button{min-height:42px;padding:10px 9px;display:flex;justify-content:center;color:#dbf7ff;border:1px solid rgba(60,185,255,.37);border-radius:11px;background:linear-gradient(135deg,rgba(19,125,222,.38),rgba(10,69,137,.34));font-size:12px;box-shadow:inset 0 1px 0 rgba(174,235,255,.12),0 7px 17px rgba(0,6,20,.22);transition:background .2s,transform .2s,border-color .2s}
+.tool-button:hover{transform:translateY(-2px);border-color:#54d4ff;background:linear-gradient(135deg,rgba(19,159,240,.58),rgba(34,105,211,.49))}
+.tool-button svg{width:15px;height:15px}
+.workflow{left:3%;top:15px;width:92%;max-height:150px;padding:12px 14px;border:1px solid rgba(97,196,255,.45);border-radius:12px;background:linear-gradient(154deg,#0c2848 0%,#030d20 76%);font-size:10px;line-height:1.72;transform:rotateY(-12deg) rotateX(5deg) rotateZ(-2deg);transform-origin:center;box-shadow:-8px 11px 0 rgba(10,58,109,.32),-14px 22px 24px rgba(0,0,0,.4),inset 0 1px 0 rgba(182,227,255,.25)}
+.workflow::before{font-size:9px;padding-bottom:3px;margin-bottom:5px}
+.code-shield{right:-2px;bottom:7px;border-radius:13px;padding:12px;background:linear-gradient(135deg,#72304a,#241c3b);border-color:#fb8496;box-shadow:0 10px 29px rgba(0,0,0,.46),inset 0 1px rgba(255,255,255,.15);transform:rotate(8deg) translateZ(18px)}
+.code-shield svg{height:25px;width:25px}
+.ip-art{display:block}
+.globe{width:178px;height:178px;right:calc(50% - 89px);top:0;box-shadow:inset -23px -24px 32px rgba(0,9,39,.88),inset 10px 9px 23px rgba(88,234,255,.4),0 0 0 1px rgba(65,201,255,.4),0 18px 37px rgba(2,33,96,.46),0 0 30px rgba(18,179,255,.14);background:radial-gradient(circle at 31% 25%,rgba(131,250,255,.95),rgba(34,171,237,.66) 17%,rgba(11,91,180,.94) 42%,#052750 67%,#010d2b 89%);transform:rotate(-14deg)}
+.globe::before{inset:5px 51px;transform:rotate(20deg);border:1px solid rgba(162,247,255,.38)}
+.globe::after{inset:53px 6px;transform:rotate(-9deg);border:1px solid rgba(162,247,255,.29)}
+.ip-art::before{content:"";position:absolute;width:207px;height:81px;left:calc(50% - 104px);top:47px;transform:rotate(-24deg);border:1px solid rgba(79,202,255,.52);border-radius:50%;box-shadow:0 0 18px rgba(33,182,255,.16)}
+.ip-widget{top:auto;bottom:5px;left:6%;width:88%;padding:12px 15px;border:1px solid rgba(85,206,255,.37);background:linear-gradient(140deg,rgba(5,29,58,.92),rgba(2,15,36,.96));border-radius:12px;box-shadow:0 16px 28px rgba(0,0,0,.42),inset 0 1px rgba(152,236,255,.12);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transform:rotate(-3deg)}
+.ip-widget span{font-size:9px}
+.ip-widget strong{font-size:20px;color:#e9fbff}
+.ip-widget small{font-size:9px;color:#8ae8ff}
+.dice-scene{transform-style:preserve-3d}
+.dice-scene::before{content:"";position:absolute;left:24%;right:12%;top:52px;height:135px;border-radius:50%;background:radial-gradient(ellipse,rgba(134,82,255,.27),transparent 72%);filter:blur(20px)}
+.dice-3d{position:absolute;left:calc(50% - 50px);top:48px;width:100px;height:100px;transform-style:preserve-3d;transform:rotateX(-22deg) rotateY(-33deg) rotateZ(-7deg);filter:drop-shadow(13px 21px 19px rgba(7,2,31,.55));transition:transform .35s}
+.tool-card:hover .dice-3d{transform:rotateX(-17deg) rotateY(-40deg) rotateZ(-7deg) translateY(-5px)}
+.die-face{position:absolute;inset:0;display:grid;place-items:center;width:100px;height:100px;border:1px solid rgba(228,208,255,.42);border-radius:16px;background:linear-gradient(140deg,#c29bff 0%,#7044e8 43%,#382496 100%);box-shadow:inset 6px 7px 11px rgba(255,255,255,.22),inset -10px -13px 18px rgba(19,7,78,.38);color:#fff;font-size:67px;font-family:Arial,sans-serif;line-height:1;text-shadow:0 3px 5px rgba(18,6,55,.26);backface-visibility:hidden}
+.die-front{transform:translateZ(50px)}
+.die-back{transform:rotateY(180deg) translateZ(50px)}
+.die-right{transform:rotateY(90deg) translateZ(50px);background:linear-gradient(155deg,#8459f1,#322095)}
+.die-left{transform:rotateY(-90deg) translateZ(50px)}
+.die-top{transform:rotateX(90deg) translateZ(50px);background:linear-gradient(125deg,#d2b4ff,#8059ff)}
+.die-bottom{transform:rotateX(-90deg) translateZ(50px)}
+.coin{right:3%;top:1%;width:56px;height:56px;font-size:23px;border-width:3px;background:linear-gradient(135deg,#f4e2a5,#d6a94e 45%,#69449e 75%);color:#734a1c;box-shadow:5px 8px 0 #694c42,0 13px 22px rgba(0,0,0,.24);transform:rotate(28deg)}
+.spark.a{left:13%;top:15%}.spark.b{right:4%;bottom:17%}
+.speed-art{min-height:210px;display:flex;align-items:center;justify-content:center}
+.speedometer{position:relative;width:210px;height:210px;padding:11px;border-radius:50%;background:conic-gradient(from 25deg,#677b9e,#e2f5ff 24%,#4b6696 43%,#14264b 56%,#a5c7ee 81%,#6d84ad);box-shadow:0 23px 30px rgba(0,0,0,.48),0 0 34px rgba(54,138,244,.18),inset 0 2px 3px rgba(255,255,255,.47);transform:rotateX(10deg);transform-style:preserve-3d}
+.speedometer::before{content:"";position:absolute;inset:5px;border-radius:50%;border:2px solid rgba(9,25,51,.9);box-shadow:inset 0 0 0 1px rgba(228,246,255,.22)}
+.speedometer-face{position:relative;overflow:hidden;border-radius:50%;width:100%;height:100%;background:radial-gradient(circle at 42% 38%,#173e71 0%,#071a38 49%,#030d22 75%);border:3px solid #0a2143;box-shadow:inset 0 0 0 1px rgba(80,163,255,.27),inset 0 0 42px rgba(2,10,30,.8)}
+.speedometer-svg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 0 4px rgba(44,196,255,.23))}
+.speedometer-needle{position:absolute;left:calc(50% - 2px);top:calc(50% - 69px);height:69px;width:4px;transform-origin:50% 100%;transform:rotate(48deg);border-radius:9px 9px 0 0;background:linear-gradient(90deg,#fff,#36e3ff);filter:drop-shadow(0 0 7px #13c9ff)}
+.speedometer-hub{position:absolute;left:calc(50% - 9px);top:calc(50% - 9px);width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 32%,#e8ffff,#2679c6 47%,#092043 74%);box-shadow:0 0 9px rgba(62,174,255,.5)}
+.speedometer-label{position:absolute;bottom:43px;left:0;right:0;text-align:center;font-size:17px;font-weight:900;letter-spacing:.15em;color:#e0f8ff;text-shadow:0 0 13px rgba(31,209,255,.4)}
+.speedometer-sub{position:absolute;bottom:29px;left:0;right:0;font-size:8px;letter-spacing:.12em;text-transform:uppercase;text-align:center;color:#699dc8}
+.speed-legend{bottom:-7px;font-size:9px;letter-spacing:.10em}
+@media (max-width:1100px){.tools-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.tool-card,.tool-card.purple{min-height:444px;padding:25px}.tool-card h3{font-size:21px}.tool-desc{font-size:13px;min-height:45px}.tool-art{min-height:218px}.workflow{max-width:345px;left:10%;width:80%}.ip-widget{left:19%;width:62%}}
+@media (max-width:760px){.tools-grid{grid-template-columns:1fr;gap:22px}.tool-card,.tool-card.purple{min-height:440px;padding:25px}.tool-desc{font-size:13px;min-height:0}.tool-art{min-height:218px}.card-head{gap:13px}.tool-card h3{font-size:22px}.workflow{left:8%;width:84%}.ip-widget{width:70%;left:15%}}
+@media (max-width:380px){.tool-card,.tool-card.purple{padding:22px 18px}.workflow{width:90%;left:3%}.ip-widget{width:82%;left:9%}}
+@media (prefers-reduced-motion:reduce){.tool-card,.dice-3d,.tool-button{transition:none!important}}
+
+/* Refined IP illustration — holographic geodesic globe with satellite orbit and non-live HUD. */
+.ip-art{display:block;position:relative;min-height:206px;isolation:isolate;overflow:visible}
+.ip-art::before{content:"";position:absolute;left:5%;right:5%;top:2px;height:170px;border:0;border-radius:50%;background:radial-gradient(ellipse,rgba(6,123,232,.31),transparent 69%);filter:blur(17px);transform:none;box-shadow:none}
+.ip-hologram{position:absolute;z-index:1;top:-8px;left:50%;width:230px;max-width:100%;transform:translateX(-50%);filter:drop-shadow(0 16px 19px rgba(0,4,24,.54)) drop-shadow(0 0 14px rgba(0,142,255,.18));transition:transform .35s ease}
+.ip-orbit-svg{display:block;width:100%;height:auto;overflow:visible;stroke:none}
+.tool-card:nth-child(2):hover .ip-hologram{transform:translateX(-50%) translateY(-5px) rotate(2deg)}
+.ip-hud{position:absolute;z-index:3;bottom:1px;left:4%;width:92%;min-height:65px;display:flex;flex-direction:column;justify-content:center;gap:2px;border:1px solid rgba(136,224,255,.42);border-radius:12px;padding:8px 14px;background:linear-gradient(112deg,rgba(7,32,64,.95),rgba(8,58,93,.77));box-shadow:inset 0 1px rgba(193,243,255,.23),0 13px 25px rgba(0,2,17,.48),0 0 24px rgba(9,174,255,.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transform:perspective(380px) rotateX(4deg) rotateZ(-3deg)}
+.ip-hud-eyebrow{display:flex;align-items:center;gap:5px;color:#75badd;font-size:8px;letter-spacing:.15em;font-weight:750}
+.ip-hud-point{width:5px;height:5px;background:#44efc6;border-radius:50%;box-shadow:0 0 9px #44efc6}
+.ip-hud strong{font-size:14px;letter-spacing:.11em;color:#f0fdff;font-weight:800;line-height:1.3}
+.ip-hud-versions{display:flex;align-items:center;gap:8px;color:#69d9ff;font-size:10px;font-weight:750;letter-spacing:.04em}
+.ip-separator{height:10px;width:1px;background:#38769d}
+.ip-hud-arrow{margin-left:auto;color:#8cefff;font-size:15px}
+
+/* Two physically modeled six-sided dice with beveled faces and recessed pips. */
+.dice-stage{position:absolute;inset:0;perspective:800px;transform-style:preserve-3d;isolation:isolate}
+.dice-stage::before{content:"";position:absolute;z-index:-1;inset:9px 1%;border-radius:50%;background:radial-gradient(ellipse,rgba(123,57,239,.22),transparent 72%);filter:blur(9px)}
+.dice-floor{position:absolute;left:50%;top:155px;transform:translateX(-50%);width:min(210px,94%);height:32px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.63),rgba(66,43,135,.22) 48%,transparent 74%);filter:blur(6px)}
+.dice-object{--edge:90px;position:absolute;left:calc(50% - 95px);top:63px;width:var(--edge);height:var(--edge);transform-style:preserve-3d;transform:rotateX(-23deg) rotateY(-35deg) rotateZ(-8deg);transition:transform .36s ease;filter:drop-shadow(0 11px 13px rgba(4,1,25,.4))}
+.dice-lavender{--die-main:#9974ec;--die-light:#dec6ff;--die-dark:#492aa4;--pip-tone:#f8f2ff;z-index:2}
+.dice-pearl{--edge:75px;--die-main:#c7ecff;--die-light:#fff;--die-dark:#4c8fca;--pip-tone:#1a4c80;left:calc(50% + 29px);top:37px;z-index:1;transform:rotateX(-24deg) rotateY(-28deg) rotateZ(13deg)}
+.tool-card:nth-child(3):hover .dice-lavender{transform:rotateX(-19deg) rotateY(-42deg) rotateZ(-7deg) translateY(-5px)}
+.tool-card:nth-child(3):hover .dice-pearl{transform:rotateX(-21deg) rotateY(-37deg) rotateZ(13deg) translateY(-4px)}
+.dice-face{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:1px;padding:15%;width:var(--edge);height:var(--edge);border-radius:15%;border:1px solid rgba(255,255,255,.43);background:linear-gradient(139deg,var(--die-light) 0%,var(--die-main) 44%,var(--die-dark) 100%);box-shadow:inset 3px 3px 7px rgba(255,255,255,.43),inset -5px -5px 9px rgba(12,7,53,.30),0 0 1px rgba(255,255,255,.55);backface-visibility:hidden}
+.dice-face-right,.dice-face-left,.dice-face-bottom{background:linear-gradient(125deg,var(--die-main),var(--die-dark))}
+.dice-face-top{background:linear-gradient(145deg,var(--die-light) 0%,var(--die-main) 83%)}
+.dice-face-front{transform:translateZ(calc(var(--edge) / 2))}
+.dice-face-back{transform:rotateY(180deg) translateZ(calc(var(--edge) / 2))}
+.dice-face-right{transform:rotateY(90deg) translateZ(calc(var(--edge) / 2))}
+.dice-face-left{transform:rotateY(-90deg) translateZ(calc(var(--edge) / 2))}
+.dice-face-top{transform:rotateX(90deg) translateZ(calc(var(--edge) / 2))}
+.dice-face-bottom{transform:rotateX(-90deg) translateZ(calc(var(--edge) / 2))}
+.die-pip{display:grid;place-self:center;width:52%;aspect-ratio:1;border-radius:50%;visibility:hidden;background:radial-gradient(circle at 30% 26%,var(--pip-tone),var(--pip-tone) 40%,rgba(7,9,52,.33) 94%);box-shadow:inset 1px 2px 3px rgba(0,0,0,.30),0 1px 1px rgba(255,255,255,.29)}
+.dice-pearl .die-pip{background:radial-gradient(circle at 29% 24%,#668cb9,#12385e 66%,#091e35 90%);box-shadow:inset 0 1px 2px rgba(0,0,0,.42),0 1px 1px rgba(255,255,255,.62)}
+.dice-face[data-pips="1"] .die-pip:nth-child(5),
+.dice-face[data-pips="2"] .die-pip:nth-child(1),.dice-face[data-pips="2"] .die-pip:nth-child(9),
+.dice-face[data-pips="3"] .die-pip:nth-child(1),.dice-face[data-pips="3"] .die-pip:nth-child(5),.dice-face[data-pips="3"] .die-pip:nth-child(9),
+.dice-face[data-pips="4"] .die-pip:nth-child(1),.dice-face[data-pips="4"] .die-pip:nth-child(3),.dice-face[data-pips="4"] .die-pip:nth-child(7),.dice-face[data-pips="4"] .die-pip:nth-child(9),
+.dice-face[data-pips="5"] .die-pip:nth-child(1),.dice-face[data-pips="5"] .die-pip:nth-child(3),.dice-face[data-pips="5"] .die-pip:nth-child(5),.dice-face[data-pips="5"] .die-pip:nth-child(7),.dice-face[data-pips="5"] .die-pip:nth-child(9),
+.dice-face[data-pips="6"] .die-pip:nth-child(1),.dice-face[data-pips="6"] .die-pip:nth-child(3),.dice-face[data-pips="6"] .die-pip:nth-child(4),.dice-face[data-pips="6"] .die-pip:nth-child(6),.dice-face[data-pips="6"] .die-pip:nth-child(7),.dice-face[data-pips="6"] .die-pip:nth-child(9){visibility:visible}
+.dice-flare{position:absolute;color:#e0bcff;filter:drop-shadow(0 0 7px #ae68ff);font-size:16px}
+.flare-left{left:8%;top:46px}.flare-right{right:6%;top:127px;font-size:10px}
+@media(max-width:1100px){.ip-hologram{width:225px}.ip-hud{left:12%;width:76%}.dice-object{left:calc(50% - 92px)}.dice-pearl{left:calc(50% + 30px)}}
+@media(max-width:760px){.ip-art{min-height:228px}.ip-hologram{width:235px}.ip-hud{left:18%;width:64%;bottom:0}.dice-object{left:calc(50% - 93px)}.dice-pearl{left:calc(50% + 30px)}}
+@media(max-width:380px){.ip-hud{left:11%;width:78%}}
+@media(prefers-reduced-motion:reduce){.dice-object,.ip-hologram{transition:none}}
+
+/* Approved sketch styling 2026-10-18: 3D tool illustrations and cosmic coffee landscape.
+   Changes intentionally limited to /preview/, never the public homepage. */
+.tools-section{padding-bottom:75px;background:radial-gradient(ellipse at 50% 42%,rgba(26,62,133,.2),transparent 68%),linear-gradient(180deg,#020e20,#040c21)}
+.tools-grid{gap:17px;align-items:stretch}
+.tool-card,.tool-card.purple{
+ min-height:558px;padding:25px 19px 21px;overflow:hidden;
+ border-radius:23px;border:1px solid rgba(78,137,242,.38);
+ background:radial-gradient(ellipse at 50% -15%,rgba(42,104,228,.19),transparent 70%),linear-gradient(160deg,#0b1c43 0%,#081334 60%,#060d28 100%);
+ box-shadow:0 15px 30px rgba(0,0,0,.23),inset 0 1px 0 rgba(143,204,255,.2),inset 0 -1px 0 rgba(61,106,216,.2)
+}
+.tool-card:nth-child(3){border-color:rgba(118,98,243,.48);background:radial-gradient(ellipse at 57% 54%,rgba(104,49,192,.2),transparent 75%),linear-gradient(160deg,#151941,#0a1032 55%,#090d27)}
+.tool-card:nth-child(4){background:radial-gradient(ellipse at 56% 49%,rgba(34,79,185,.2),transparent 75%),linear-gradient(160deg,#101f4a,#08102e 65%,#090e29)}
+.tool-card::before{background:linear-gradient(180deg,rgba(95,178,255,.065),transparent);height:44%}
+.tool-card::after{opacity:.7;bottom:20%;height:185px}
+.tool-card:hover{transform:translateY(-6px);box-shadow:0 29px 55px rgba(0,3,20,.51),inset 0 1px 0 rgba(156,224,255,.25),0 0 28px rgba(49,122,249,.08)}
+.card-head{min-height:47px;gap:12px}
+.tool-icon{width:46px;height:46px;border-radius:12px;background:linear-gradient(150deg,rgba(17,121,224,.22),rgba(11,42,108,.22));border:1px solid rgba(66,166,242,.27)}
+.tool-card:nth-child(3) .tool-icon{box-shadow:0 0 22px rgba(151,64,254,.17),inset 0 1px rgba(255,255,255,.17)}
+.tool-card h3{font-size:19px;letter-spacing:-.025em;line-height:1.25;color:#f0f7ff}
+.tool-desc{font-size:12px;line-height:1.68;min-height:85px;margin:19px 0 5px;color:#c5d2eb}
+.tool-art{min-height:232px;flex:1;position:relative;margin:5px -8px 9px}
+.card-bottom{margin-top:auto;gap:13px}
+.small-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:7px}
+.small-chips span{font-size:10px;font-weight:650;color:#d0e9ff;background:linear-gradient(135deg,rgba(28,78,155,.6),rgba(17,42,96,.56));border:1px solid rgba(65,125,222,.36);border-radius:9px;min-height:32px;padding:7px 10px;text-align:center;display:inline-flex;align-items:center;justify-content:center}
+.tool-button{min-height:48px;border:1px solid #15b8fd;color:#e9fbff;font-size:12px;border-radius:12px;box-shadow:0 0 0 1px rgba(24,180,254,.1),inset 0 1px 0 rgba(170,232,255,.14),0 8px 20px rgba(0,4,25,.28)}
+.tool-button:hover{border-color:#8bedff;box-shadow:0 0 24px rgba(27,176,248,.28)}
+.tool-card:nth-child(1) .workflow{top:24px;left:6%;width:87%;max-width:none;max-height:181px;background:linear-gradient(150deg,#0e3665,#071632 80%);font-size:10px;line-height:1.75;transform:perspective(520px) rotateY(-9deg) rotateX(3deg) rotateZ(-4deg);box-shadow:-12px 17px 0 rgba(4,15,62,.37),-23px 28px 35px rgba(0,0,0,.46),0 0 24px rgba(0,126,255,.14)}
+.tool-card:nth-child(1) .code-shield{right:1%;bottom:14px;box-shadow:0 8px 24px rgba(0,0,0,.5),0 0 28px rgba(255,68,132,.2)}
+.tool-card:nth-child(2) .ip-hologram{top:3px;width:min(100%,244px);filter:drop-shadow(0 10px 18px rgba(3,9,48,.58)) drop-shadow(0 0 21px rgba(11,207,255,.25))}
+.tool-card:nth-child(2) .ip-hud{bottom:2px;left:7%;width:86%;min-height:70px;box-shadow:0 13px 29px rgba(0,0,0,.46),0 0 20px rgba(45,209,255,.19)}
+.tool-card:nth-child(3) .dice-stage{background:url("/assets/showcase/random-dice.svg") center center / contain no-repeat;transform:none;inset:-3px -10px -2px}
+.tool-card:nth-child(3) .dice-stage>*{display:none!important}
+.tool-card:nth-child(3) .small-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.tool-card:nth-child(3) .small-chips span{font-size:11px;min-height:36px;padding:7px 5px}
+.tool-card:nth-child(4) .speed-art{min-height:250px;background:url("/assets/showcase/speed-gauge.svg") center center / contain no-repeat;display:flex;align-items:center;justify-content:center;margin:-5px -11px 6px}
+.tool-card:nth-child(4) .speedometer{display:none}
+.tool-card:nth-child(4) .speed-legend{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-size:9px;color:#aac6e4;letter-spacing:.04em;text-transform:none}
+.tool-card:nth-child(4) .small-chips span{min-width:0;flex:1}
+.coffee-section{padding-top:18px;padding-bottom:115px}
+.coffee-card{min-height:330px;display:flex;align-items:flex-start;justify-content:space-between;gap:30px;padding:42px 47px 34px;position:relative;isolation:isolate;border:1px solid rgba(70,133,232,.56);border-radius:23px;background:#09152e url("/assets/showcase/cosmic-landscape.svg") right center / cover no-repeat;box-shadow:0 24px 65px rgba(0,3,25,.52),inset 0 1px 0 rgba(171,204,255,.17)}
+.coffee-card::before{content:"";position:absolute;inset:0;height:100%;opacity:1;background:linear-gradient(90deg,rgba(3,12,34,.97) 0%,rgba(3,14,39,.91) 29%,rgba(6,16,48,.36) 68%,rgba(7,12,36,.12) 100%),linear-gradient(0deg,rgba(4,8,26,.43),transparent 61%);pointer-events:none}
+.coffee-card::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse at 67% 100%,rgba(79,81,228,.2),transparent 54%)}
+.coffee-left{display:flex;align-items:flex-start;gap:18px;max-width:450px;position:relative;z-index:1}
+.coffee-cup{font-size:44px;width:68px;height:68px;border-radius:16px;background:linear-gradient(155deg,rgba(27,59,137,.7),rgba(15,28,79,.62));border:1px solid rgba(115,171,236,.26);box-shadow:inset 0 1px rgba(215,236,255,.12),0 13px 26px rgba(0,0,0,.34)}
+.coffee-card h2{font-size:28px;font-weight:780;color:#fff;line-height:1.2;margin-bottom:10px}
+.coffee-card p{font-size:13px;max-width:355px;line-height:1.75;color:#e1e7f4;text-shadow:0 1px 8px #030e25}
+.coffee-btn{align-self:flex-end;margin-left:auto;position:relative;z-index:2;white-space:nowrap;font-weight:800;padding-inline:22px;min-height:52px;border:1px solid rgba(255,231,105,.4);border-radius:11px;background:linear-gradient(180deg,#ffe15b,#ffcb21);box-shadow:0 9px 32px rgba(3,6,31,.38),0 0 30px rgba(253,203,33,.23)}
+.coffee-btn:hover{background:linear-gradient(180deg,#ffeb8e,#ffcf27);transform:translateY(-2px)}
+@media(max-width:1100px){
+ .tool-card,.tool-card.purple{min-height:535px;padding:26px}
+ .tool-desc{min-height:65px;font-size:13px}
+ .tool-art{min-height:244px}
+ .tool-card:nth-child(3) .dice-stage{background-size:auto 100%}
+ .tool-card:nth-child(4) .speed-art{background-size:contain}
+ .coffee-card{min-height:300px}
+}
+@media(max-width:760px){
+ .tools-grid{grid-template-columns:1fr;gap:22px}
+ .tool-card,.tool-card.purple{min-height:490px;padding:25px}
+ .tool-card h3{font-size:22px}
+ .tool-desc{min-height:auto;font-size:13px}
+ .tool-art{min-height:236px;margin:5px -4px 8px}
+ .tool-card:nth-child(3) .dice-stage{background-size:contain}
+ .tool-card:nth-child(3) .small-chips{max-width:100%}
+ .tool-card:nth-child(4) .speed-art{min-height:242px}
+ .coffee-section{padding-bottom:83px}
+ .coffee-card{min-height:385px;display:flex;flex-direction:column;justify-content:space-between;padding:27px 24px 23px;gap:30px;background-position:63% center}
+ .coffee-card::before{background:linear-gradient(180deg,rgba(4,13,39,.89) 0%,rgba(4,11,34,.78) 38%,rgba(5,13,42,.13) 100%)}
+ .coffee-left{gap:12px;max-width:none}
+ .coffee-cup{width:53px;height:53px;font-size:34px}
+ .coffee-card h2{font-size:24px}
+ .coffee-card p{font-size:12px}
+ .coffee-btn{align-self:flex-start;margin-left:0}
+}
+@media(max-width:380px){
+ .tool-card,.tool-card.purple{padding:22px 17px}
+ .coffee-card{padding:23px 17px;min-height:390px}
+ .coffee-left{gap:9px}
+ .coffee-card h2{font-size:21px}
+ .coffee-card p{font-size:12px}
+}
+
+
+/* Original 3D artwork transfer — 2026-10-18. 
+   The WebP is cropped from the approved image, not redrawn as simple SVG. */
+.tool-card:nth-child(3) .dice-stage {
+  background-image:url("/assets/showcase/approved-art-sprite.webp");
+  background-repeat:no-repeat;
+  background-size:245% auto;
+  background-position:3% top;
+  filter:drop-shadow(0 5px 9px rgba(0,4,23,.18));
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 96%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 96%);
+}
+.tool-card:nth-child(4) .speed-art {
+  background-image:url("/assets/showcase/approved-art-sprite.webp");
+  background-repeat:no-repeat;
+  background-size:245% auto;
+  background-position:97% top;
+  filter:drop-shadow(0 0 8px rgba(0,178,255,.16));
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 75%,transparent 98%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 75%,transparent 98%);
+}
+.tool-card:nth-child(4) .speed-legend {
+  bottom:-2px;
+  z-index:2;
+  text-shadow:0 1px 4px #06132b;
+  font-size:9px;
+}
+.tool-card:nth-child(2) .ip-hologram {
+  filter:drop-shadow(0 18px 12px rgba(0,3,25,.5)) drop-shadow(0 0 27px rgba(9,162,255,.55));
+}
+.tool-card:nth-child(2) .ip-art::before {
+  background:radial-gradient(ellipse at 50% 50%,rgba(20,141,255,.32),transparent 75%);
+}
+.tool-card:nth-child(1) .workflow {
+  box-shadow:-12px 17px 0 rgba(4,15,62,.37),-23px 28px 35px rgba(0,0,0,.46),0 0 29px rgba(0,126,255,.26);
+}
+.coffee-card {
+  background:
+    radial-gradient(ellipse at 74% 86%,rgba(16,104,236,.48),transparent 65%),
+    radial-gradient(ellipse at 92% 34%,rgba(48,25,129,.33),transparent 60%),
+    linear-gradient(135deg,#061335 0%,#080e2d 58%,#101140 100%);
+}
+.coffee-card::before {
+  content:"";position:absolute;inset:0;height:100%;opacity:1;
+  background:
+    radial-gradient(circle at 74% 19%,rgba(179,228,255,.95) 0 1px,transparent 2px),
+    radial-gradient(circle at 84% 8%,rgba(149,180,255,.85) 0 1px,transparent 2px),
+    radial-gradient(circle at 64% 43%,rgba(132,217,255,.67) 0 1px,transparent 2px),
+    radial-gradient(circle at 92% 41%,rgba(199,167,255,.89) 0 1px,transparent 2px),
+    linear-gradient(90deg,rgba(2,8,27,.88),rgba(4,9,38,.34) 64%,rgba(5,11,41,.08));
+  pointer-events:none;z-index:0;
+}
+.coffee-card::after {
+  content:"";position:absolute;left:0;right:0;top:auto;bottom:0;
+  height:161px;z-index:0;pointer-events:none;border-radius:0;
+  background:url("/assets/showcase/approved-art-sprite.webp") center bottom / 100% auto no-repeat;
+  opacity:.99;
+}
+.coffee-left,.coffee-btn {position:relative;z-index:2}
+@media(max-width:1100px){
+ .tool-card:nth-child(3) .dice-stage,.tool-card:nth-child(4) .speed-art{background-size:210% auto}
+ .coffee-card::after{height:150px;background-size:auto 350px}
+}
+@media(max-width:760px){
+ .tool-card:nth-child(3) .dice-stage,.tool-card:nth-child(4) .speed-art{background-size:225% auto}
+ .coffee-card::after{height:150px;background-size:auto 470px}
+ .coffee-card::before{
+  background:linear-gradient(180deg,rgba(4,12,32,.92) 0%,rgba(4,12,39,.6) 45%,rgba(5,11,36,.05) 100%);
+ }
+}
+@media(max-width:380px){
+ .tool-card:nth-child(3) .dice-stage,.tool-card:nth-child(4) .speed-art{background-size:236% auto}
+}
+
+
+/* Approved canvas crops v2 — independently sized illustrations extracted from original artwork. */
+.tool-card:nth-child(3) .dice-stage{
+  background:url("/assets/showcase/random-dice.svg") center center / contain no-repeat;
+  -webkit-mask-image:none;mask-image:none;
+  filter:drop-shadow(0 5px 15px rgba(0,0,25,.16));
+}
+.tool-card:nth-child(4) .speed-art{
+  background:url("/assets/showcase/speed-gauge.svg") center center / contain no-repeat;
+  -webkit-mask-image:none;mask-image:none;
+  filter:drop-shadow(0 0 10px rgba(0,170,255,.14));
+}
+.coffee-card::after{
+  background:url("/assets/showcase/cosmic-landscape.svg") center bottom / 100% auto no-repeat;
+}
+.approved-art-loaded .tool-card:nth-child(3) .dice-stage{
+  background-image:var(--approved-dice-url);
+  background-size:contain;
+  background-position:center center;
+  background-repeat:no-repeat;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 87%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 87%,transparent 100%);
+}
+.approved-art-loaded .tool-card:nth-child(4) .speed-art{
+  background-image:var(--approved-speed-url);
+  background-size:contain;
+  background-position:center center;
+  background-repeat:no-repeat;
+  -webkit-mask-image:none;mask-image:none;
+}
+.approved-art-loaded .coffee-card::after{
+  background-image:var(--approved-mountains-url);
+  background-position:center bottom;
+  background-repeat:no-repeat;
+  background-size:100% auto;
+}
+@media(max-width:760px){
+ .approved-art-loaded .tool-card:nth-child(3) .dice-stage{background-size:contain}
+ .approved-art-loaded .tool-card:nth-child(4) .speed-art{background-size:contain}
+ .approved-art-loaded .coffee-card::after{background-size:auto 160px}
+}
+@media(max-width:380px){.approved-art-loaded .coffee-card::after{background-size:auto 145px}}
+
+
+/* Full-bleed coffee panorama fix 2026-10-18.
+   Sky, stars and original mountain artwork blend throughout the whole banner.
+   The original cropped photo is no longer confined to a 155px-high stripe. */
+.coffee-card {
+  background:
+    radial-gradient(ellipse at 73% 100%,rgba(39,88,245,.53),transparent 70%),
+    radial-gradient(ellipse at 84% 10%,rgba(25,47,133,.68),transparent 62%),
+    linear-gradient(125deg,#040e29 0%,#06143b 43%,#0a1650 100%);
+}
+.coffee-card::before {
+  content:"";
+  position:absolute;inset:0;height:100%;z-index:0;opacity:1;pointer-events:none;
+  background:
+    radial-gradient(circle at 78% 17%,rgba(205,237,255,.8) 0 1px,transparent 2px),
+    radial-gradient(circle at 93% 33%,rgba(153,210,255,.75) 0 1px,transparent 2px),
+    radial-gradient(circle at 53% 12%,rgba(140,208,255,.88) 0 1px,transparent 2px),
+    radial-gradient(circle at 65% 35%,rgba(193,236,255,.75) 0 1px,transparent 2px),
+    radial-gradient(circle at 81% 52%,rgba(169,204,255,.85) 0 1px,transparent 2px),
+    radial-gradient(circle at 58% 64%,rgba(181,239,255,.87) 0 1px,transparent 2px),
+    radial-gradient(circle at 97% 8%,rgba(206,176,255,.8) 0 1px,transparent 2px),
+    linear-gradient(90deg,rgba(3,12,35,.93) 0%,rgba(3,12,35,.65) 28%,rgba(4,15,42,.18) 68%,rgba(5,11,33,.08) 100%);
+}
+.coffee-card::after {
+  content:"";
+  position:absolute;inset:0;top:0;bottom:0;height:100%;width:100%;z-index:0;opacity:1;pointer-events:none;
+  background:url("/assets/showcase/cosmic-landscape.svg") center bottom / cover no-repeat;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,transparent 32%,rgba(0,0,0,.32) 52%,#000 80%);
+  mask-image:linear-gradient(to bottom,transparent 0%,transparent 32%,rgba(0,0,0,.32) 52%,#000 80%);
+}
+.approved-art-loaded .coffee-card::after {
+  height:100%;
+  background-image:var(--approved-mountains-url);
+  background-size:100% auto;
+  background-position:center bottom;
+  background-repeat:no-repeat;
+}
+.coffee-left,.coffee-btn {position:relative;z-index:2}
+@media(max-width:760px) {
+  .coffee-card::before {
+    background:linear-gradient(180deg,rgba(3,11,32,.91),rgba(5,13,40,.46) 45%,rgba(6,12,39,.1) 100%);
+  }
+  .coffee-card::after,.approved-art-loaded .coffee-card::after {
+    height:100%;
+    background-position:63% bottom;
+    background-size:auto 45%;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 8%,transparent 38%,black 82%);
+    mask-image:linear-gradient(to bottom,transparent 8%,transparent 38%,black 82%);
+  }
+}
+
+
+/* Compact coffee banner refinement 2026-10-18 */
+.coffee-section {
+  width:min(950px,calc(100% - 76px));
+  padding-top:18px;
+  padding-bottom:95px;
+}
+.coffee-card {
+  min-height:248px;
+  padding:29px 36px 26px;
+  gap:22px;
+}
+.coffee-left {
+  gap:15px;
+  max-width:440px;
+}
+.coffee-cup {
+  width:58px;
+  height:58px;
+  font-size:37px;
+}
+.coffee-card h2 {
+  font-size:25px;
+  margin-bottom:8px;
+}
+.coffee-card p {
+  font-size:12px;
+  line-height:1.6;
+  max-width:340px;
+}
+.coffee-btn {
+  min-height:49px;
+  padding:12px 19px;
+}
+@media (max-width:760px) {
+  .coffee-section {
+    width:calc(100% - 38px);
+    max-width:440px;
+    padding-bottom:72px;
+  }
+  .coffee-card {
+    min-height:305px;
+    padding:23px 22px 20px;
+    gap:18px;
+  }
+  .coffee-left {gap:11px}
+  .coffee-cup {width:48px;height:48px;font-size:30px;flex-shrink:0}
+  .coffee-card h2 {font-size:22px;margin-bottom:6px}
+  .coffee-card p {font-size:12px;line-height:1.55}
+  .coffee-btn {min-height:48px;padding:12px 19px}
+  .coffee-card::after,
+  .approved-art-loaded .coffee-card::after {
+    background-size:auto 54%;
+    background-position:61% bottom;
+  }
+}
+@media (max-width:380px) {
+  .coffee-section {width:calc(100% - 30px)}
+  .coffee-card {min-height:310px;padding:20px 17px 19px}
+  .coffee-card h2 {font-size:20px}
+}
+
+
+/* Original neon illustrations: DevOps Doctor + IP globe (approved reference) */
+.tool-card:nth-child(1) .tool-art {
+  min-height:250px;
+  margin:0 -11px 12px;
+  isolation:isolate;
+  background:
+    url("/assets/showcase/doctor-3d-art.webp") center 50% / min(107%,276px) auto no-repeat,
+    radial-gradient(ellipse 75% 58% at 50% 54%,rgba(42,78,217,.22),transparent 80%);
+}
+.tool-card:nth-child(1) .workflow,
+.tool-card:nth-child(1) .code-shield { display:none; }
+.tool-card:nth-child(1) .tool-art::before {
+  content:"";
+  position:absolute;inset:3% 8% 4%;
+  pointer-events:none;
+  border-radius:50%;
+  background:radial-gradient(ellipse,rgba(48,84,235,.13),transparent 71%);
+  filter:blur(16px);
+  z-index:-1;
+}
+.tool-card:nth-child(2) .ip-art {
+  min-height:250px;
+  margin:0 -10px 12px;
+}
+.tool-card:nth-child(2) .ip-hologram {
+  position:absolute;
+  top:0;
+  left:50%;
+  width:min(100%,260px);
+  height:200px;
+  transform:translateX(-50%);
+  background:
+    url("/assets/showcase/ip-3d-art.webp") center -29px / 100% auto no-repeat;
+  filter:drop-shadow(0 12px 14px rgba(1,8,37,.42)) drop-shadow(0 0 16px rgba(6,156,255,.28));
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 70%,transparent 98%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 70%,transparent 98%);
+  transition:transform .35s ease;
+}
+.tool-card:nth-child(2) .ip-hologram .ip-orbit-svg{display:none}
+.tool-card:nth-child(2) .ip-art::before{
+  width:100%;height:220px;top:0;left:0;right:0;
+  background:radial-gradient(ellipse at center,rgba(28,125,245,.28),transparent 66%);
+}
+.tool-card:nth-child(2) .ip-hud{
+  bottom:4px;left:7%;width:86%;
+  min-height:77px;
+  transform:perspective(420px) rotateX(3deg) rotateZ(-1.5deg);
+  background:linear-gradient(120deg,rgba(6,28,73,.91),rgba(10,47,111,.78));
+  border:1px solid rgba(44,169,255,.58);
+  box-shadow:0 13px 26px rgba(0,4,28,.44),0 0 25px rgba(18,157,255,.17),inset 0 1px rgba(163,224,255,.22);
+}
+.tool-card:nth-child(2):hover .ip-hologram{
+  transform:translateX(-50%) translateY(-4px);
+}
+@media(max-width:1100px){
+ .tool-card:nth-child(1) .tool-art{background-size:min(92%,310px) auto}
+ .tool-card:nth-child(2) .ip-hologram{width:min(93%,275px)}
+}
+@media(max-width:760px){
+ .tool-card:nth-child(1) .tool-art{min-height:245px;background-size:min(93%,282px) auto}
+ .tool-card:nth-child(2) .ip-art{min-height:255px}
+ .tool-card:nth-child(2) .ip-hologram{width:min(85%,254px);top:0}
+ .tool-card:nth-child(2) .ip-hud{bottom:1px;width:82%;left:9%}
+}
+@media(max-width:380px){
+ .tool-card:nth-child(1) .tool-art{min-height:232px;background-size:min(96%,260px) auto}
+ .tool-card:nth-child(2) .ip-art{min-height:240px}
+ .tool-card:nth-child(2) .ip-hologram{width:min(93%,242px)}
+}
+
+</style>
+<script>(()=>{try{const saved=localStorage.getItem('cloudbyalex-lang');const langs=navigator.languages?.length?navigator.languages:[navigator.language||''];const russian=langs.some(x=>String(x).toLowerCase().startsWith('ru'));if(saved==='ru'||(!saved&&russian))location.replace('/ru/'+location.search+location.hash)}catch(e){}})();</script>
 </head>
 <body>
-  <div class="bg-code" aria-hidden="true">terraform apply
-kubectl get pods
-helm upgrade --install
-aws eks update-kubeconfig
-docker build -t app .
-git push origin main
-prometheus up == 1
-ci/cd    automation    cloud
-reliability    infrastructure</div>
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 17h10a4 4 0 0 0 .5-8A6 6 0 0 0 6.2 10 3.5 3.5 0 0 0 7 17Z"/><path d="M7.5 15.5v-2l2-2 2 2 2-3.5 2 2"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-4 .9-4-2-5-2.4M15 21v-3.4a3 3 0 0 0-.8-2.4c3-.3 6.2-1.4 6.2-7a5.4 5.4 0 0 0-1.5-3.8 5 5 0 0 0-.1-3.8S17.8.7 15 2.7a13 13 0 0 0-6 0C6.2.7 5.2.6 5.2.6a5 5 0 0 0-.1 3.8 5.4 5.4 0 0 0-1.5 3.8c0 5.6 3.2 6.7 6.2 7A3 3 0 0 0 9 17.6V21"/></symbol>
+<symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7m0-10v.2m5 9.8v-7m0 3a3 3 0 0 1 6 0v4"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m19 13 2 1-2 4-2-1-2 1v2H9v-2l-2-1-2 1-2-4 2-1v-2l-2-1 2-4 2 1 2-1V4h6v2l2 1 2-1 2 4-2 1z"/></symbol>
+<symbol id="i-world" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18m-9-9a15 15 0 0 0 0 18m0-18a15 15 0 0 1 0 18"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V9m6 11V4m6 16v-7m4 7V7"/></symbol>
+<symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4 15c2-1 3-1 5 0 4-8 7-10 12-11-1 5-3 8-11 12 1 2 1 3 0 5l-3-4zm6-5 4 4"/><circle cx="16" cy="8" r="1"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 4.5 3 8.2 8 10 5-1.8 8-5.5 8-10V6z"/><path d="m8 12 3 3 5-6"/></symbol>
+<symbol id="i-dice" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1"/><circle cx="16" cy="8" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="8" cy="16" r="1"/><circle cx="16" cy="16" r="1"/></symbol>
+<symbol id="i-speed" viewBox="0 0 24 24"><path d="M4 18a9 9 0 1 1 16 0H4zm8-4 4-5"/></symbol>
+<symbol id="i-warning" viewBox="0 0 24 24"><path d="m12 3 10 18H2zM12 9v5m0 4v.1"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+</defs></svg>
 
-  <nav class="site-nav">
-    <div class="wrap nav-inner">
-      <a class="brand" href="/" aria-label="Cloud by Alex home">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17h10a4 4 0 0 0 .5-8A6 6 0 0 0 6.2 10 3.5 3.5 0 0 0 7 17Z"/></svg>
-        </span>
-        <span class="brand-text">cloudbyalex</span>
-      </a>
+<header class="header">
+ <div class="container header-inner">
+  <a class="brand" href="#top" aria-label="Cloud by Alex — top"><svg><use href="#i-cloud"/></svg><span>Cloud by <strong>Alex</strong></span></a>
+  <nav class="main-nav" aria-label="Main navigation"><a class="ip-cta" href="/tools/my-ip/"><svg aria-hidden="true"><use href="#i-world"/></svg><span data-i18n="checkIp">Check my IP</span></a></nav>
+  <div class="social-nav"><a href="https://github.com/alexdells" target="_blank" rel="noopener noreferrer" aria-label="Alex on GitHub"><svg><use href="#i-github"/></svg> GitHub</a><a href="https://www.linkedin.com/in/alexander-chertov/" target="_blank" rel="noopener noreferrer" aria-label="Alex on LinkedIn"><svg><use href="#i-linkedin"/></svg> LinkedIn</a></div>
+  <div class="language" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><span class="langbar">|</span><button type="button" data-lang="ru" aria-pressed="false">RU</button></div>
+  <button class="menu-button" id="menuButton" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileNav"><svg><use href="#i-menu"/></svg></button>
+ </div>
+ <nav id="mobileNav" class="mobile-nav" aria-label="Mobile navigation"><a class="mobile-ip-cta" href="/tools/my-ip/" data-i18n="checkIp">Check my IP</a><a href="https://github.com/alexdells" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/alexander-chertov/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></nav>
+</header>
+<main id="top">
+<section class="container hero" aria-labelledby="hero-title">
+ <div class="hero-copy">
+  <p class="eyebrow" data-i18n="welcome">Welcome to my portfolio</p>
+  <h1 id="hero-title"><span data-i18n="heroHi">Hi, I'm Alex —</span><span class="accent" data-i18n="heroRole">Cloud &amp; DevOps Engineer</span></h1>
+  <p class="hero-desc" data-i18n="heroDesc">I build reliable cloud infrastructure, automation workflows and modern delivery pipelines with a focus on AWS, Kubernetes, Terraform and CI/CD.</p>
+  <div class="buttons"><a class="button primary" href="mailto:alexdellsone@gmail.com?subject=CloudByAlex%20Contact"><span data-i18n="connect">Let's Connect</span><svg><use href="#i-arrow"/></svg></a><a class="button secondary" href="https://github.com/alexdells" target="_blank" rel="noopener noreferrer"><svg><use href="#i-github"/></svg><span data-i18n="viewGitHub">View GitHub</span></a></div>
+  <div class="hero-status"><span class="status-point" aria-hidden="true"></span><span data-i18n="status">Built for reliability</span><span class="status-line"></span><span data-i18n="status2">Cloud · Automation</span></div>
+ </div>
+ <div class="hero-visual" aria-label="Illustration of Alex working at a laptop in a futuristic cloud engineering environment"><img src="/assets/showcase/cloudbyalex-approved-hero.webp" alt="Alex at a laptop, with glowing cloud systems and DevOps technology illustrations" width="794" height="940" decoding="async" fetchpriority="high"><span class="vertical-caption">Build · Automate · Improve</span></div>
+</section>
 
-      <div class="nav-links">
-        <a class="nav-pill" href="/tools/my-ip/" aria-label="Check my IP">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
-          What Is My IP?
-        </a>
-        <a href="#about">About</a>
-        <a href="#tools">Tools</a>
-        <a href="https://github.com/alexdells" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://www.linkedin.com/in/alexander-chertov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <span class="lang-switch" aria-label="Language selector"><a class="active" href="/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><a href="/ru/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span>
-      </div>
-    </div>
-  </nav>
+<div class="technology-rail" aria-label="Core cloud technologies">
+ <div class="container technology-rail-inner">
+  <span class="technology-item"><span class="technology-icon aws-icon" aria-hidden="true">aws</span><span>AWS</span></span>
+  <span class="technology-item"><span class="technology-icon k8s-icon" aria-hidden="true">☸</span><span>Kubernetes</span></span>
+  <span class="technology-item"><span class="technology-icon tf-icon" aria-hidden="true">◆</span><span>Terraform</span></span>
+  <span class="technology-item"><span class="technology-icon docker-icon" aria-hidden="true">◈</span><span>Docker</span></span>
+  <span class="technology-item"><span class="technology-icon linux-icon" aria-hidden="true">⌘</span><span>Linux</span></span>
+  <span class="technology-item"><span class="technology-icon cicd-icon" aria-hidden="true">∞</span><span>CI/CD</span></span>
+ </div>
+</div>
+<div class="scroll-transition">
+ <a class="scroll-cue" href="#about" aria-label="Scroll to explore the next section">
+  <span class="scroll-mouse" aria-hidden="true"><span></span></span>
+  <span data-i18n="scrollExplore">Scroll to explore</span>
+ </a>
+</div>
+<section class="section" id="about" aria-labelledby="about-title"><div class="container about-layout">
+ <div><p class="eyebrow" data-i18n="aboutEyebrow">About me</p><h2 class="section-heading" id="about-title"><span data-i18n="aboutTitle">Cloud engineering with a </span><span class="accent" data-i18n="aboutTitleHighlight">reliability mindset.</span></h2><p class="section-lead" data-i18n="aboutText">I build understandable, repeatable infrastructure and automation workflows that are designed for real production environments. I care about reliability, security and maintainability.</p><div style="margin-top:32px"><a class="button secondary" href="https://www.linkedin.com/in/alexander-chertov/" target="_blank" rel="noopener noreferrer"><span data-i18n="moreAbout">More about me</span><svg><use href="#i-arrow"/></svg></a></div></div>
+ <div class="about-side">
+  <div class="info-card"><div class="icon-circle"><svg><use href="#i-user"/></svg></div><div><span class="info-label" data-i18n="roleLabel">Role</span><div class="info-value">Cloud / DevOps Engineer</div></div></div>
+  <div class="info-card"><div class="icon-circle"><svg><use href="#i-target"/></svg></div><div><span class="info-label" data-i18n="focusLabel">Focus</span><div class="info-value">AWS · Kubernetes · Terraform</div></div></div>
+  <div class="info-card"><div class="icon-circle"><svg><use href="#i-settings"/></svg></div><div><span class="info-label" data-i18n="specialtyLabel">Specialty</span><div class="info-value" data-i18n="specialtyValue">Automation & Infrastructure</div></div></div>
+  <div class="info-card"><div class="icon-circle"><svg><use href="#i-world"/></svg></div><div><span class="info-label" data-i18n="languagesLabel">Languages</span><div class="info-value">English / Русский</div></div></div>
+  <div class="metric-card"><svg><use href="#i-chart"/></svg><div class="metric-value">5+</div><div class="metric-desc" data-i18n="years">Years of DevOps / Cloud experience</div></div>
+  <div class="metric-card"><svg><use href="#i-rocket"/></svg><div class="metric-value">99+</div><div class="metric-desc" data-i18n="deployments">Deployments, builds and platform improvements</div></div>
+ </div>
+</div></section>
+<section class="section tools-section" id="tools" aria-labelledby="tools-title"><div class="container">
+ <div class="tools-header"><div><p class="eyebrow" data-i18n="toolsEyebrow">CloudByAlex labs</p><h2 class="section-heading" id="tools-title"><span data-i18n="toolsTitle">Useful tools, </span><span class="accent" data-i18n="toolsTitleHighlight">without the clutter.</span></h2></div><p class="section-lead" data-i18n="toolsIntro">Small, practical tools for networking, everyday tasks and cloud engineering.</p></div>
+ <div class="tools-grid">
+  <article class="tool-card"><div class="card-head"><div class="tool-icon"><svg><use href="#i-shield"/></svg></div><h3>DevOps Doctor</h3></div><p class="tool-desc" data-i18n="doctorDesc">Scan GitHub Actions workflows for overly broad permissions, unpinned actions and risky shell patterns.</p><div class="tool-art"><div class="workflow">name: CI<br>on: push<br>jobs:<br>&nbsp; build:<br>&nbsp;&nbsp; permissions: <em>write-all</em><br>&nbsp;&nbsp; steps: <i># check workflow security</i></div><div class="code-shield" aria-label="Example risk warning"><svg><use href="#i-warning"/></svg></div></div><div class="card-bottom"><div class="small-chips"><span data-i18n="clientSide">Client-side</span><span data-i18n="noUploads">No uploads</span></div><a class="tool-button" href="https://cloudbyalex.com/tools/devops-doctor/" target="_blank" rel="noopener noreferrer"><span data-i18n="launchTool">Launch tool</span><svg><use href="#i-arrow"/></svg></a></div></article>
+  <article class="tool-card"><div class="card-head"><div class="tool-icon"><svg><use href="#i-world"/></svg></div><h3>What Is My IP?</h3></div><p class="tool-desc" data-i18n="ipDesc">Check your public IPv4 and IPv6, approximate location, ISP, browser and device details.</p><div class="tool-art ip-art">
+ <div class="ip-hologram" aria-hidden="true">
+  <svg class="ip-orbit-svg" viewBox="0 0 240 205" role="presentation">
+   <defs>
+    <radialGradient id="ip-sphere-glow" cx="31%" cy="26%" r="73%">
+     <stop offset="0" stop-color="#8bf9ff"/><stop offset=".19" stop-color="#27b8eb"/><stop offset=".5" stop-color="#0969bb"/><stop offset=".77" stop-color="#082b70"/><stop offset="1" stop-color="#040e30"/>
+    </radialGradient>
+    <radialGradient id="ip-sphere-shade" cx="28%" cy="27%" r="73%"><stop offset=".3" stop-color="#dbffff" stop-opacity=".18"/><stop offset=".8" stop-color="#02132c" stop-opacity=".18"/><stop offset="1" stop-color="#000619" stop-opacity=".68"/></radialGradient>
+    <linearGradient id="ip-orbit-line" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#73f6ff" stop-opacity=".08"/><stop offset=".45" stop-color="#42ecff" stop-opacity=".85"/><stop offset="1" stop-color="#4792ff" stop-opacity=".12"/></linearGradient>
+    <clipPath id="ip-sphere-clip"><circle cx="120" cy="100" r="73"/></clipPath>
+   </defs>
+   <ellipse cx="120" cy="104" rx="111" ry="39" transform="rotate(-24 120 104)" stroke="#1cdcff" stroke-opacity=".32" stroke-width="3" fill="none"/>
+   <circle cx="120" cy="100" r="78" fill="#137dd9" opacity=".15"/>
+   <circle cx="120" cy="100" r="73" fill="url(#ip-sphere-glow)"/>
+   <g clip-path="url(#ip-sphere-clip)">
+    <g fill="none" stroke="#abf6ff" stroke-opacity=".30" stroke-width=".9">
+     <ellipse cx="120" cy="100" rx="27" ry="73"/><ellipse cx="120" cy="100" rx="52" ry="73"/>
+     <path d="M48 100h144"/><path d="M52 78q68-27 136 0"/><path d="M52 122q68 27 136 0"/><path d="M70 52q50-17 100 0"/><path d="M70 148q50 17 100 0"/>
+    </g>
+    <g fill="#42e4ef" fill-opacity=".61" stroke="#a8fbff" stroke-opacity=".32" stroke-width=".8">
+     <path d="M63 51l16-11 20-3 11 6-7 13-13 5-3 13-10 3-4 16-9 7-9-13 3-15-8-10z"/>
+     <path d="M92 102l12 9 2 16-9 20-9 14-7-8 1-18-7-16 8-13z"/>
+     <path d="M124 44l12-8 14 5 3 9 20 0 17 13-12 16-14 4-10 20-14-5-4-16-13-6-10-18z"/>
+     <path d="M130 107l16-4 18 9 2 17-9 24-13 11-10-18-9-23z"/>
+     <path d="M176 135l12 3 8 12-11 10-15-8z"/>
+     <path d="M149 77l10-3 12 10-10 11-12-5z"/>
+    </g>
+    <circle cx="120" cy="100" r="73" fill="url(#ip-sphere-shade)"/>
+    <path d="M65 67q20-48 72-43" stroke="#d8ffff" stroke-opacity=".26" stroke-width="7" stroke-linecap="round" fill="none"/>
+   </g>
+   <circle cx="120" cy="100" r="73" stroke="#76e7ff" stroke-opacity=".57" stroke-width="1.5" fill="none"/>
+   <path d="M19 137q89-82 201-62" stroke="url(#ip-orbit-line)" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+   <circle cx="46" cy="150" r="5.3" fill="#9dfbff"/><circle cx="46" cy="150" r="9" fill="#35dcff" opacity=".16"/>
+   <circle cx="196" cy="61" r="4.5" fill="#92faff"/><circle cx="196" cy="61" r="8" fill="#3cdcff" opacity=".21"/>
+   <circle cx="119" cy="14" r="2" fill="#6fdbff"/><circle cx="27" cy="85" r="2.3" fill="#55c9ff"/>
+  </svg>
+ </div>
+ <div class="ip-hud" aria-hidden="true">
+  <span class="ip-hud-eyebrow"><span class="ip-hud-point"></span> NETWORK TOOLS</span>
+  <strong>YOUR PUBLIC IP</strong>
+  <span class="ip-hud-versions"><span>IPv4</span><span class="ip-separator"></span><span>IPv6</span><span class="ip-hud-arrow">↗</span></span>
+ </div>
+</div><div class="card-bottom"><div class="small-chips"><span>IPv4 / IPv6</span><span>ISP</span></div><a class="tool-button" href="https://cloudbyalex.com/tools/my-ip/" target="_blank" rel="noopener noreferrer"><span data-i18n="checkIp">Check my IP</span><svg><use href="#i-arrow"/></svg></a></div></article>
+  <article class="tool-card purple"><div class="card-head"><div class="tool-icon"><svg><use href="#i-dice"/></svg></div><h3>Random Lab</h3></div><p class="tool-desc" data-i18n="randomDesc">Generate random numbers, roll dice, flip a coin or choose from a list with secure browser randomness.</p><div class="tool-art"><div class="dice-stage" aria-hidden="true"><span class="dice-floor"></span><span class="dice-flare flare-left">✦</span><span class="dice-flare flare-right">✦</span><div class="dice-object dice-lavender" aria-hidden="true"><span class="dice-face dice-face-front" data-pips="5"><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i></span><span class="dice-face dice-face-back" data-pips="2"><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i></span><span class="dice-face dice-face-right" data-pips="3"><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i></span><span class="dice-face dice-face-left" data-pips="4"><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i></span><span class="dice-face dice-face-top" data-pips="1"><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i></span><span class="dice-face dice-face-bottom" data-pips="6"><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i></span></div><div class="dice-object dice-pearl" aria-hidden="true"><span class="dice-face dice-face-front" data-pips="4"><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i></span><span class="dice-face dice-face-back" data-pips="3"><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i></span><span class="dice-face dice-face-right" data-pips="2"><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i></span><span class="dice-face dice-face-left" data-pips="5"><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i></span><span class="dice-face dice-face-top" data-pips="6"><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i></span><span class="dice-face dice-face-bottom" data-pips="1"><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i><i class="die-pip" aria-hidden="true"></i></span></div></div></div><div class="card-bottom"><div class="small-chips"><span data-i18n="numbers">Numbers</span><span data-i18n="diceOnly">Dice</span><span data-i18n="coinFlip">Coin flip</span><span data-i18n="listPick">List pick</span></div><a class="tool-button" href="https://cloudbyalex.com/tools/random/" target="_blank" rel="noopener noreferrer"><span data-i18n="openLab">Open Random Lab</span><svg><use href="#i-arrow"/></svg></a></div></article>
+  <article class="tool-card purple"><div class="card-head"><div class="tool-icon"><svg><use href="#i-speed"/></svg></div><h3>My Speed</h3></div><p class="tool-desc" data-i18n="speedDesc">Run a browser-based speed check for download, upload and ping through Cloudflare's edge network.</p><div class="tool-art speed-art"><div class="speedometer" aria-hidden="true"><div class="speedometer-face"><svg class="speedometer-svg" viewBox="0 0 240 240" fill="none"><defs><linearGradient id="speed-gauge-gradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1de8ff"/><stop offset="60%" stop-color="#438aff"/><stop offset="100%" stop-color="#b26aff"/></linearGradient></defs><path d="M 64.14 175.86 A 79 79 0 1 1 175.86 175.86" stroke="#123052" stroke-width="13" stroke-linecap="round"/><path d="M 64.14 175.86 A 79 79 0 1 1 180.52 69.22" stroke="url(#speed-gauge-gradient)" stroke-width="13" stroke-linecap="round"/><path d="M 44.34 195.66 A 107 107 0 1 1 195.66 195.66" stroke="#245c96" stroke-opacity=".36" stroke-width="1"/><path d="M58.48 181.52 L52.12 187.88" stroke="#70cfff" stroke-opacity="0.86" stroke-width="2" stroke-linecap="round"/><path d="M46.28 171.62 L41.36 175.06" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M38.43 158.04 L32.99 160.57" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M35.96 142.52 L27.27 144.85" stroke="#70cfff" stroke-opacity="0.86" stroke-width="2" stroke-linecap="round"/><path d="M30.34 127.84 L24.37 128.37" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M30.34 112.16 L24.37 111.63" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M35.96 97.48 L27.27 95.15" stroke="#70cfff" stroke-opacity="0.86" stroke-width="2" stroke-linecap="round"/><path d="M38.43 81.96 L32.99 79.43" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M46.28 68.38 L41.36 64.94" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M58.48 58.48 L52.12 52.12" stroke="#70cfff" stroke-opacity="0.86" stroke-width="2" stroke-linecap="round"/><path d="M68.38 46.28 L64.94 41.36" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M81.96 38.43 L79.43 32.99" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M97.48 35.96 L95.15 27.27" stroke="#70cfff" stroke-opacity="0.86" stroke-width="2" stroke-linecap="round"/><path d="M112.16 30.34 L111.63 24.37" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M127.84 30.34 L128.37 24.37" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M142.52 35.96 L144.85 27.27" stroke="#70cfff" stroke-opacity="0.86" stroke-width="2" stroke-linecap="round"/><path d="M158.04 38.43 L160.57 32.99" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M171.62 46.28 L175.06 41.36" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M181.52 58.48 L187.88 52.12" stroke="#70cfff" stroke-opacity="0.86" stroke-width="2" stroke-linecap="round"/><path d="M193.72 68.38 L198.64 64.94" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M201.57 81.96 L207.01 79.43" stroke="#70cfff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M204.04 97.48 L212.73 95.15" stroke="#70cfff" stroke-opacity="0.86" stroke-width="2" stroke-linecap="round"/><path d="M209.66 112.16 L215.63 111.63" stroke="#c190ff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M209.66 127.84 L215.63 128.37" stroke="#c190ff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M204.04 142.52 L212.73 144.85" stroke="#c190ff" stroke-opacity="0.86" stroke-width="2" stroke-linecap="round"/><path d="M201.57 158.04 L207.01 160.57" stroke="#c190ff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M193.72 171.62 L198.64 175.06" stroke="#c190ff" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/><path d="M181.52 181.52 L187.88 187.88" stroke="#c190ff" stroke-opacity="0.86" stroke-width="2" stroke-linecap="round"/></svg><span class="speedometer-needle"></span><span class="speedometer-hub"></span><span class="speedometer-label">SPEED</span><span class="speedometer-sub">visual demo</span></div></div><span class="speed-legend" data-i18n="speedDemo">Illustrative gauge · not a measurement</span></div><div class="card-bottom"><div class="small-chips"><span data-i18n="download">Download</span><span data-i18n="upload">Upload</span><span>Ping</span></div><a class="tool-button" href="https://cloudbyalex.com/tools/speed/" target="_blank" rel="noopener noreferrer"><span data-i18n="testSpeed">Test my speed</span><svg><use href="#i-arrow"/></svg></a></div></article>
+ </div>
+</div></section>
+<section class="container coffee-section" id="support" aria-label="Support"><div class="coffee-card"><div class="coffee-left"><div class="coffee-cup" aria-hidden="true">☕</div><div><h2 data-i18n="coffeeTitle">Enjoy my work?</h2><p data-i18n="coffeeDesc">If you find these tools useful, consider supporting future CloudByAlex projects with a coffee.</p></div></div><a class="button coffee-btn" href="https://buy.stripe.com/28E3cx50yagq1ky1sX7Vm00" target="_blank" rel="noopener noreferrer"><span data-i18n="buyCoffee">Buy Me a Coffee</span><svg><use href="#i-arrow"/></svg></a></div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-top"><div><a class="brand" href="#top"><svg><use href="#i-cloud"/></svg><span>Cloud by <strong>Alex</strong></span></a><p class="footer-brand-sub">DevOps · Cloud · Automation</p></div><div class="footer-links"><a href="#about" data-i18n="aboutNav">About</a><a href="#tools" data-i18n="toolsNav">Tools</a><a href="https://github.com/alexdells" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/alexander-chertov/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div><div class="footer-bottom"><span>© <span id="year"></span> Cloud by Alex.</span><span data-i18n="footerTag">Build. Automate. Improve. Repeat.</span></div></div></footer>
+<script>
+(()=>{
+const strings={en:{preview:'Design preview · not the live website',aboutNav:'About',toolsNav:'Tools',supportNav:'Support',welcome:'Welcome to my portfolio',scrollExplore:'Scroll to explore',heroHi:"Hi, I'm Alex —",heroRole:'Cloud & DevOps Engineer',heroDesc:'I build reliable cloud infrastructure, automation workflows and modern delivery pipelines with a focus on AWS, Kubernetes, Terraform and CI/CD.',connect:"Let's Connect",viewGitHub:'View GitHub',status:'Built for reliability',status2:'Cloud · Automation',aboutEyebrow:'About me',aboutTitle:'Cloud engineering with a ',aboutTitleHighlight:'reliability mindset.',aboutText:'I build understandable, repeatable infrastructure and automation workflows that are designed for real production environments. I care about reliability, security and maintainability.',moreAbout:'More about me',roleLabel:'Role',focusLabel:'Focus',specialtyLabel:'Specialty',specialtyValue:'Automation & Infrastructure',languagesLabel:'Languages',years:'Years of DevOps / Cloud experience',deployments:'Deployments, builds and platform improvements',toolsEyebrow:'CloudByAlex labs',toolsTitle:'Useful tools, ',toolsTitleHighlight:'without the clutter.',toolsIntro:'Small, practical tools for networking, everyday tasks and cloud engineering.',doctorDesc:'Scan GitHub Actions workflows for overly broad permissions, unpinned actions and risky shell patterns.',clientSide:'Client-side',noUploads:'No uploads',launchTool:'Launch tool',ipDesc:'Check your public IPv4 and IPv6, approximate location, ISP, browser and device details.',demoIp:'Demo IPv4 address',sampleData:'Illustration only · sample data',checkIp:'Check my IP',randomDesc:'Generate random numbers, roll dice, flip a coin or choose from a list with secure browser randomness.',numbers:'Numbers',diceCoin:'Dice & coin',diceOnly:'Dice',coinFlip:'Coin flip',listPick:'List pick',openLab:'Open Random Lab',speedDesc:"Run a browser-based speed check for download, upload and ping through Cloudflare's edge network.",speedRun:'RUN',speedDemo:'Illustrative gauge · not a measurement',download:'Download',upload:'Upload',testSpeed:'Test my speed',coffeeTitle:'Enjoy my work?',coffeeDesc:'If you find these tools useful, consider supporting future CloudByAlex projects with a coffee.',buyCoffee:'Buy Me a Coffee',footerTag:'Build. Automate. Improve. Repeat.'},ru:{preview:'Тестовый дизайн · основной сайт не изменён',aboutNav:'Обо мне',toolsNav:'Инструменты',supportNav:'Поддержать',welcome:'Добро пожаловать в моё портфолио',scrollExplore:'Листай дальше',heroHi:'Привет, я Алекс —',heroRole:'Cloud & DevOps инженер',heroDesc:'Я создаю надёжную облачную инфраструктуру, автоматизирую процессы и выстраиваю современные CI/CD-пайплайны на AWS, Kubernetes и Terraform.',connect:'Связаться со мной',viewGitHub:'Мой GitHub',status:'Надёжность прежде всего',status2:'Облако · Автоматизация',aboutEyebrow:'Обо мне',aboutTitle:'Облачная инженерия с акцентом на ',aboutTitleHighlight:'надёжность.',aboutText:'Я создаю понятную, воспроизводимую инфраструктуру и автоматизацию для реальных production-систем. Для меня важны надёжность, безопасность и поддерживаемость.',moreAbout:'Подробнее обо мне',roleLabel:'Роль',focusLabel:'Направления',specialtyLabel:'Специализация',specialtyValue:'Автоматизация и инфраструктура',languagesLabel:'Языки',years:'Лет опыта в DevOps и облачных технологиях',deployments:'Развёртываний, сборок и улучшений платформ',toolsEyebrow:'Инструменты CloudByAlex',toolsTitle:'Полезные инструменты ',toolsTitleHighlight:'без лишнего шума.',toolsIntro:'Простые и практичные инструменты для сетей, ежедневных задач и облачной инженерии.',doctorDesc:'Проверка GitHub Actions на избыточные права, незакреплённые версии и рискованные команды.',clientSide:'В браузере',noUploads:'Без загрузок',launchTool:'Открыть инструмент',ipDesc:'Узнай свой IPv4 и IPv6, примерное местоположение, провайдера, браузер и устройство.',demoIp:'Пример IPv4-адреса',sampleData:'Иллюстрация · не ваши данные',checkIp:'Проверить IP',randomDesc:'Генератор чисел, бросок кубика и монетки, выбор из списка с безопасной случайностью.',numbers:'Числа',diceCoin:'Кубик и монетка',diceOnly:'Кубики',coinFlip:'Монетка',listPick:'Из списка',openLab:'Открыть Random Lab',speedDesc:'Проверка скорости загрузки, отдачи и задержки через сеть Cloudflare.',speedRun:'ПУСК',speedDemo:'Декоративная шкала · не измерение',download:'Загрузка',upload:'Отдача',testSpeed:'Проверить скорость',coffeeTitle:'Нравится моя работа?',coffeeDesc:'Если эти инструменты полезны, поддержи развитие CloudByAlex чашечкой кофе.',buyCoffee:'Угостить кофе',footerTag:'Создавай. Автоматизируй. Улучшай.'}};
+function setLanguage(lang){let d=strings[lang]||strings.en;document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.getAttribute('data-i18n');if(Object.hasOwn(d,key))el.textContent=d[key]});document.querySelectorAll('[data-lang]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.lang===lang)));try{localStorage.setItem('cloudbyalex-lang',lang)}catch(_){}}
+document.querySelectorAll('[data-lang]').forEach(el=>el.addEventListener('click',()=>{const next=el.dataset.lang;try{localStorage.setItem('cloudbyalex-lang',next)}catch(_){}if(next!==document.documentElement.lang)location.assign((next==='ru'?'/ru/':'/')+location.search+location.hash)}));
+let current=document.documentElement.lang==='ru'?'ru':'en';setLanguage(current);
+const btn=document.getElementById('menuButton'),nav=document.getElementById('mobileNav');btn.addEventListener('click',()=>{let open=!nav.classList.contains('open');nav.classList.toggle('open',open);btn.setAttribute('aria-expanded',String(open));btn.setAttribute('aria-label',open?'Close navigation':'Open navigation')});nav.querySelectorAll('a').forEach(el=>el.addEventListener('click',()=>{nav.classList.remove('open');btn.setAttribute('aria-expanded','false')}));document.getElementById('year').textContent=String(new Date().getFullYear());
+})();
+</script>
 
-  <main>
-    <section class="hero wrap">
-      <div class="hero-copy reveal is-visible">
-        <div class="eyebrow">Welcome to my portfolio</div>
-        <h1>Hi, I'm <span class="name">Alex</span><span class="role">Cloud & DevOps Engineer</span></h1>
-        <p class="hero-sub">I build reliable cloud infrastructure, automation workflows and modern delivery pipelines with a focus on AWS, Kubernetes, Terraform and CI/CD.</p>
+<script>
+/* Crop the approved mockup artwork into three independent in-memory images.
+   Avoids CSS sprites bleeding into neighboring tool cards on different screens. */
+(function(){
+ const source=new Image();
+ source.decoding='async';
+ source.onload=function(){
+   if(source.naturalWidth!==1000||source.naturalHeight!==500)return;
+   const pieces=[
+     ['--approved-dice-url',40,0,420,315],
+     ['--approved-speed-url',540,0,420,315],
+     ['--approved-mountains-url',0,345,1000,155]
+   ];
+   try{
+     for(const [name,x,y,w,h] of pieces){
+       const c=document.createElement('canvas');
+       c.width=w;c.height=h;
+       c.getContext('2d').drawImage(source,x,y,w,h,0,0,w,h);
+       const url=c.toDataURL('image/webp',.9);
+       document.documentElement.style.setProperty(name,'url("'+url+'")');
+     }
+     document.documentElement.classList.add('approved-art-loaded');
+   }catch(err){console.warn('Preview artwork fallback used',err)}
+ };
+ source.onerror=()=>console.warn('Preview artwork fallback used');
+ source.src='/assets/showcase/approved-art-sprite.webp';
+})();
+</script>
 
-        <div class="cta-row">
-          <a class="btn primary" href="https://mail.google.com/mail/?view=cm&fs=1&to=alexdellsone%40gmail.com&su=CloudByAlex%20Contact" target="_blank" rel="noopener noreferrer">
-            Let's Connect
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a class="btn secondary" href="https://github.com/alexdells" target="_blank" rel="noopener noreferrer">View GitHub</a>
-        </div>
-
-        <a class="live-status" id="liveSystemStatus" data-state="checking" href="/status/">
-          <span class="live-status-dot" aria-hidden="true"></span>
-          <span id="liveSystemStatusText">Checking system status…</span>
-        </a>
-
-        <div class="hero-meta" aria-label="Core technologies">
-          <span class="skill-chip">AWS</span><span class="skill-chip">Kubernetes</span><span class="skill-chip">Terraform</span><span class="skill-chip">CI/CD</span>
-        </div>
-      </div>
-
-      <div class="portrait-stage reveal reveal-delay-1">
-        <div class="orbit one"></div><div class="orbit two"></div><div class="orbit three"></div>
-        <span class="float-tag aws">AWS</span><span class="float-tag k8s">K8s</span><span class="float-tag iac">IaC</span><span class="float-tag ci">CI/CD</span>
-        <div class="portrait"><img src="https://avatars.githubusercontent.com/u/128103821?v=4&size=512" alt="Alex — Cloud and DevOps Engineer" width="512" height="512"></div>
-      </div>
-      <a class="scroll-cue" href="#about">Scroll to explore</a>
-    </section>
-
-    <section id="about" class="section wrap">
-      <div class="section-head reveal">
-        <span class="kicker">About me</span>
-        <h2 class="section-title">Cloud engineering with a <span class="gradient">reliability mindset.</span></h2>
-        <p class="section-lead">I focus on infrastructure that is understandable, repeatable and built for real production work — from provisioning to observability and delivery.</p>
-      </div>
-
-      <div class="about-shell">
-        <div class="about-card reveal reveal-delay-1">
-          <div class="about-intro">
-            <div class="about-copy">
-              <h3>Cloud / DevOps Engineer</h3>
-              <p>My work centers on AWS infrastructure, Kubernetes platforms, Infrastructure as Code and CI/CD automation. I care about clean architecture, practical monitoring and removing repetitive manual work.</p>
-            </div>
-            <div class="about-actions">
-              <a class="btn secondary" href="https://www.linkedin.com/in/alexander-chertov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a class="btn secondary" href="https://github.com/alexdells" target="_blank" rel="noopener noreferrer">GitHub</a>
-            </div>
-          </div>
-
-          <div class="facts">
-            <div class="fact"><small>Role</small><strong>Cloud / DevOps Engineer</strong></div>
-            <div class="fact"><small>Focus</small><strong>AWS • Kubernetes • Terraform</strong></div>
-            <div class="fact"><small>Specialty</small><strong>Automation & Infrastructure</strong></div>
-            <div class="fact"><small>Languages</small><strong>English / Russian</strong></div>
-          </div>
-
-          <div class="stats-grid">
-            <div class="stat"><strong>5+</strong><span>Years of DevOps / Cloud experience</span></div>
-            <div class="stat"><strong>99+</strong><span>Deployments, builds and platform improvements</span></div>
-            <div class="stat"><strong>AWS</strong><span>Infrastructure, automation and cloud operations</span></div>
-            <div class="stat"><strong>24/7</strong><span>Reliability mindset and production support thinking</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="tools" class="section compact wrap">
-      <div class="section-head reveal">
-        <span class="kicker">CloudByAlex Labs</span>
-        <h2 class="section-title">Useful tools, <span class="gradient">without the clutter.</span></h2>
-        <p class="section-lead">Small browser-based utilities built around practical cloud, networking and everyday engineering tasks.</p>
-      </div>
-
-      <div class="tools-grid">
-        <article class="tool-card reveal">
-          <div class="tool-top"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.6 2.8 8.2 7 10 4.2-1.8 7-5.4 7-10V6l-7-3Z"/><path d="m9.5 12 1.6 1.6 3.7-4"/></svg></div><h3 class="tool-name">DevOps Doctor</h3></div>
-          <p class="tool-desc">Scan GitHub Actions workflows for broad permissions, unpinned actions, risky shell patterns and other CI/CD security issues.</p>
-          <div class="tool-badges"><span class="tool-badge">Client-side</span><span class="tool-badge">No uploads</span><span class="tool-badge">GitHub Actions</span></div>
-          <a class="tool-link" href="/tools/devops-doctor/">Launch tool <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </article>
-
-        <article class="tool-card reveal reveal-delay-1">
-          <div class="tool-top"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></div><h3 class="tool-name">What Is My IP?</h3></div>
-          <p class="tool-desc">Check your public IPv4 and IPv6, approximate location, ISP, browser, operating system and device details in one clean view.</p>
-          <div class="tool-badges"><span class="tool-badge">IPv4 / IPv6</span><span class="tool-badge">ISP</span><span class="tool-badge">Device info</span></div>
-          <a class="tool-link" href="/tools/my-ip/">Check my IP <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </article>
-
-        <article class="tool-card reveal">
-          <div class="tool-top"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-2 8h6l-8 12 2-9H5l8-11Z"/></svg></div><h3 class="tool-name">Random Lab</h3></div>
-          <p class="tool-desc">Generate random numbers, dice rolls, coin flips and list picks with secure browser randomness and an optional atmospheric source.</p>
-          <div class="tool-badges"><span class="tool-badge">Numbers</span><span class="tool-badge">Dice & coin</span><span class="tool-badge">Picker</span></div>
-          <a class="tool-link" href="/tools/random/">Open Random Lab <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </article>
-
-        <article class="tool-card reveal reveal-delay-1">
-          <div class="tool-top"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17a8 8 0 1 1 16 0"/><path d="m12 13 4-4M6 17h12"/></svg></div><h3 class="tool-name">My Speed</h3></div>
-          <p class="tool-desc">Run a quick browser-based internet speed check for download, upload and ping to Cloudflare's edge network.</p>
-          <div class="tool-badges"><span class="tool-badge">Download</span><span class="tool-badge">Upload</span><span class="tool-badge">Ping</span></div>
-          <a class="tool-link" href="/tools/speed/">Test my speed <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </article>
-      </div>
-    </section>
-
-    <section class="section compact wrap" aria-label="Support Cloud by Alex">
-      <div class="support-card reveal">
-        <div class="support-copy">
-          <div class="coffee-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h11v5.5A4.5 4.5 0 0 1 11.5 18h-2A4.5 4.5 0 0 1 5 13.5V8Z"/><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 4c0 1 .8 1.4.8 2.2M12 4c0 1 .8 1.4.8 2.2"/></svg></div>
-          <div class="support-text"><small>Support</small><strong>Enjoyed the work?</strong><span>You can buy me a coffee and support future CloudByAlex projects.</span></div>
-        </div>
-        <a class="btn primary" href="https://buy.stripe.com/28E3cx50yagq1ky1sX7Vm00" target="_blank" rel="noopener noreferrer">Buy Me a Coffee</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="wrap">Cloud by Alex — DevOps • Cloud • Automation</footer>
-
-  <script src="/assets/home.js" defer></script>
-  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"fc4b954acddd444a8d7d9673817d12ea"}'></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"fc4b954acddd444a8d7d9673817d12ea"}'></script>
 </body>
 </html>

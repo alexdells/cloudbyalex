@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="475" viewBox="0 0 720 475" role="img" aria-label="Floating three-dimensional dice and a luminous coin">
+<defs>
+<radialGradient id="neb"><stop stop-color="#9352fc" stop-opacity=".54"/><stop offset="1" stop-color="#382a8b" stop-opacity="0"/></radialGradient>
+<linearGradient id="violetTop" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4baff"/><stop offset=".45" stop-color="#b779ff"/><stop offset="1" stop-color="#744de7"/></linearGradient>
+<linearGradient id="violetLeft" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#bb89ff"/><stop offset=".6" stop-color="#6e40cb"/><stop offset="1" stop-color="#34239b"/></linearGradient>
+<linearGradient id="violetRight" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9d5eff"/><stop offset="1" stop-color="#3d237f"/></linearGradient>
+<linearGradient id="blueTop" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d6f9ff"/><stop offset="1" stop-color="#729cfb"/></linearGradient>
+<linearGradient id="blueSide" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#86caff"/><stop offset="1" stop-color="#3656c5"/></linearGradient>
+<linearGradient id="coin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e6fdff"/><stop offset=".25" stop-color="#86d5ff"/><stop offset=".6" stop-color="#587fe2"/><stop offset="1" stop-color="#eefaff"/></linearGradient>
+<filter id="dshadow" x="-60%" y="-65%" width="220%" height="260%"><feGaussianBlur stdDeviation="14"/></filter>
+<filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="soft"><feGaussianBlur stdDeviation="2"/></filter>
+</defs>
+<ellipse cx="350" cy="265" rx="320" ry="170" fill="url(#neb)"/>
+<ellipse cx="300" cy="389" rx="218" ry="29" fill="#010418" opacity=".58" filter="url(#dshadow)"/>
+<g stroke="#a9eaff" fill="none" stroke-linecap="round" filter="url(#glow)">
+<path d="M90 86v24m-12-12h24M614 118v26m-13-13h26M578 375v24m-12-12h24M127 355v22m-11-11h22" stroke-width="3" opacity=".85"/>
+<path d="M354 70v15m-7-7h14M644 272v12m-6-6h12" stroke="#d7b3ff" stroke-width="2" opacity=".85"/>
+</g>
+<g fill="#abf3ff"><circle cx="88" cy="244" r="2"/><circle cx="354" cy="145" r="2.2"/><circle cx="550" cy="67" r="2"/><circle cx="644" cy="320" r="2"/><circle cx="290" cy="370" r="1.8"/></g>
+<!-- Purple die, three visible shaded faces -->
+<g stroke-linejoin="round" stroke-linecap="round">
+<path d="M123 140 L226 81 L334 141 L232 202 Z" fill="url(#violetTop)" stroke="#eed8ff" stroke-width="4"/>
+<path d="M123 140 L232 202 L232 342 L123 274 Z" fill="url(#violetLeft)" stroke="#b98dff" stroke-width="4"/>
+<path d="M232 202 L334 141 L334 275 L232 342 Z" fill="url(#violetRight)" stroke="#a880ff" stroke-width="4"/>
+<path d="M136 153 L225 98 L317 148" fill="none" stroke="#fff" stroke-opacity=".38" stroke-width="7"/>
+<path d="M133 161v106" stroke="#eed3ff" stroke-opacity=".42" stroke-width="6"/>
+<path d="M244 209l78-46v109l-78 51" fill="none" stroke="#2b176c" stroke-opacity=".23" stroke-width="4"/>
+</g>
+<g fill="#f4eaff" stroke="#dbbaff" stroke-width="1.4">
+<ellipse cx="197" cy="139" rx="12" ry="7" transform="rotate(-28 197 139)"/>
+<ellipse cx="239" cy="118" rx="12" ry="7" transform="rotate(-28 239 118)"/>
+<ellipse cx="279" cy="143" rx="12" ry="7" transform="rotate(-28 279 143)"/>
+<ellipse cx="236" cy="169" rx="12" ry="7" transform="rotate(-28 236 169)"/>
+</g>
+<g fill="#f8f2ff" stroke="#d8beff" stroke-width="1">
+<ellipse cx="153" cy="189" rx="8" ry="11" transform="rotate(-17 153 189)"/>
+<ellipse cx="197" cy="218" rx="8" ry="11" transform="rotate(-17 197 218)"/>
+<ellipse cx="149" cy="253" rx="8" ry="11" transform="rotate(-17 149 253)"/>
+<ellipse cx="193" cy="279" rx="8" ry="11" transform="rotate(-17 193 279)"/>
+<ellipse cx="174" cy="237" rx="8" ry="11" transform="rotate(-17 174 237)"/>
+</g>
+<g fill="#dfc2ff"><ellipse cx="268" cy="225" rx="7" ry="10" transform="rotate(25 268 225)"/><ellipse cx="305" cy="204" rx="7" ry="10" transform="rotate(25 305 204)"/><ellipse cx="267" cy="284" rx="7" ry="10" transform="rotate(25 267 284)"/></g>
+<!-- Coin, with thickness and chamfer -->
+<g transform="translate(432 182) rotate(23)">
+<ellipse cx="9" cy="12" rx="80" ry="95" fill="#0a1a61" opacity=".65" filter="url(#dshadow)"/>
+<ellipse cx="11" cy="9" rx="73" ry="91" fill="#3353ab" stroke="#abd8ff" stroke-width="8"/>
+<ellipse cx="0" cy="0" rx="72" ry="90" fill="url(#coin)" stroke="#e1f8ff" stroke-width="7"/>
+<ellipse cx="0" cy="0" rx="58" ry="74" fill="none" stroke="#376ac2" stroke-opacity=".8" stroke-width="4"/>
+<path d="M-24-28c24-13 57 5 56 29 0 29-42 51-67 25" fill="none" stroke="#4d80dd" stroke-width="9" opacity=".48"/>
+<path d="M-34-10c23-16 54-3 54 19M-17-36c19-2 39 9 43 22" fill="none" stroke="#efffff" stroke-opacity=".56" stroke-width="4"/>
+<path d="M0-43v85M-25-24h37M-22 24h41" stroke="#3569b7" stroke-opacity=".45" stroke-width="4"/>
+</g>
+<!-- Smaller blue die -->
+<g stroke-linejoin="round" stroke-linecap="round">
+<path d="M491 264 L559 226 L630 264 L560 307 Z" fill="url(#blueTop)" stroke="#e5fbff" stroke-width="3.5"/>
+<path d="M491 264 L560 307 L560 395 L491 353 Z" fill="url(#blueSide)" stroke="#c6f3ff" stroke-width="3"/>
+<path d="M560 307 L630 264 L630 354 L560 395 Z" fill="#4d62d2" stroke="#a3caff" stroke-width="3"/>
+<path d="M503 276v72M570 313l49-31v69" stroke="#fff" stroke-opacity=".28" stroke-width="5" fill="none"/>
+</g>
+<g fill="#f1fdff"><ellipse cx="525" cy="269" rx="8" ry="5" transform="rotate(-25 525 269)"/><ellipse cx="555" cy="251" rx="8" ry="5" transform="rotate(-25 555 251)"/><ellipse cx="582" cy="269" rx="8" ry="5" transform="rotate(-25 582 269)"/><ellipse cx="554" cy="288" rx="8" ry="5" transform="rotate(-25 554 288)"/></g>
+<g fill="#d9faff"><ellipse cx="512" cy="303" rx="5" ry="7" transform="rotate(-19 512 303)"/><ellipse cx="544" cy="321" rx="5" ry="7" transform="rotate(-19 544 321)"/><ellipse cx="512" cy="338" rx="5" ry="7" transform="rotate(-19 512 338)"/><ellipse cx="540" cy="355" rx="5" ry="7" transform="rotate(-19 540 355)"/><ellipse cx="583" cy="334" rx="5" ry="8" transform="rotate(28 583 334)"/><ellipse cx="610" cy="313" rx="5" ry="8" transform="rotate(28 610 313)"/></g>
+</svg>

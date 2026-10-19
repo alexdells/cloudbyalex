@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="470" viewBox="0 0 1600 470" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Starry cosmic mountain landscape">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#030c29"/><stop offset=".48" stop-color="#13265e"/><stop offset=".74" stop-color="#402b7f"/><stop offset="1" stop-color="#d4786a"/></linearGradient>
+<radialGradient id="light"><stop stop-color="#ef8b9b" stop-opacity=".83"/><stop offset=".43" stop-color="#935fd1" stop-opacity=".35"/><stop offset="1" stop-color="#151b59" stop-opacity="0"/></radialGradient>
+<radialGradient id="neb"><stop stop-color="#477be2" stop-opacity=".55"/><stop offset="1" stop-color="#162955" stop-opacity="0"/></radialGradient>
+<linearGradient id="mount" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#293b80"/><stop offset=".45" stop-color="#182b65"/><stop offset="1" stop-color="#090e31"/></linearGradient>
+<linearGradient id="snow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e5e7fa"/><stop offset=".45" stop-color="#8fa4db"/><stop offset="1" stop-color="#4772b0"/></linearGradient>
+<filter id="blur"><feGaussianBlur stdDeviation="22"/></filter>
+</defs>
+<path fill="url(#sky)" d="M0 0h1600v470H0z"/>
+<ellipse cx="1040" cy="235" rx="680" ry="305" fill="url(#light)"/>
+<ellipse cx="1270" cy="76" rx="340" ry="140" fill="url(#neb)" transform="rotate(-18 1270 76)" opacity=".64"/>
+<ellipse cx="963" cy="270" rx="440" ry="24" fill="#ff9f89" opacity=".45" filter="url(#blur)"/>
+<g fill="#f7f5ff"><circle cx="490" cy="42" r="1.8"/><circle cx="550" cy="148" r="2"/><circle cx="642" cy="42" r="1.5"/><circle cx="740" cy="97" r="1.3"/><circle cx="795" cy="31" r="2"/><circle cx="894" cy="112" r="1.5"/><circle cx="1010" cy="44" r="1.8"/><circle cx="1130" cy="150" r="1.6"/><circle cx="1223" cy="56" r="2.2"/><circle cx="1377" cy="74" r="1.9"/><circle cx="1498" cy="123" r="1.6"/><circle cx="1540" cy="37" r="1.7"/><circle cx="705" cy="178" r="1.4"/><circle cx="865" cy="204" r="1.3"/><circle cx="1320" cy="163" r="1.3"/><circle cx="1420" cy="24" r="1"/></g>
+<g stroke="#dfeeff" stroke-width="2" stroke-linecap="round" opacity=".68"><path d="M958 56v20m-10-10h20M1354 136v16m-8-8h16M1120 39v10m-5-5h10"/></g>
+<circle cx="1280" cy="111" r="74" fill="#c5dafc" opacity=".25"/>
+<circle cx="1275" cy="104" r="57" fill="#93b8ef" opacity=".28" stroke="#d2e9ff" stroke-opacity=".2" stroke-width="2"/>
+<path d="M0 363 L176 339 L278 280 L354 331 L492 304 L604 345 L723 300 L808 339 L951 230 L1030 292 L1134 190 L1224 268 L1350 98 L1438 222 L1510 192 L1600 249V470H0Z" fill="url(#mount)"/>
+<path d="M895 287L951 230L982 258L1016 291L965 273L952 251L933 278L913 291Z M1066 246L1134 190L1191 244L1153 226L1132 209L1113 241L1093 253Z M1263 196L1350 98L1438 222L1386 185L1361 141L1339 161L1318 186L1290 203Z M1468 217L1510 192L1566 241L1513 210L1491 225Z" fill="url(#snow)" opacity=".95"/>
+<path d="M1350 98L1386 186L1359 168L1339 161L1315 187Z" fill="#f0e4f6" opacity=".77"/>
+<path d="M954 236L966 273L934 278Z M1134 190L1151 232L1130 211Z" fill="#fff4fc" opacity=".56"/>
+<path d="M0 414L162 382L320 392L425 328L516 406L642 350L801 390L909 329L1089 402L1248 316L1389 375L1549 279L1600 291V470H0Z" fill="#11163f"/>
+<path d="M0 443L110 419L210 445L318 399L425 437L562 415L729 463L852 419L1003 456L1167 405L1320 458L1460 390L1600 421V470H0Z" fill="#070d2c"/>
+<path d="M1251 316L1281 338L1326 360L1316 335L1345 354M1550 280L1522 318L1494 320" fill="none" stroke="#a9c8ed" stroke-opacity=".43" stroke-width="3"/>
+</svg>
