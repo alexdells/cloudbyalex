@@ -524,6 +524,57 @@ h1 span{display:block} .accent{color:var(--cyan)}
 }
 @media(max-width:380px){.approved-art-loaded .coffee-card::after{background-size:auto 145px}}
 
+
+/* Full-bleed coffee panorama fix 2026-10-18.
+   Sky, stars and original mountain artwork blend throughout the whole banner.
+   The original cropped photo is no longer confined to a 155px-high stripe. */
+.coffee-card {
+  background:
+    radial-gradient(ellipse at 73% 100%,rgba(39,88,245,.53),transparent 70%),
+    radial-gradient(ellipse at 84% 10%,rgba(25,47,133,.68),transparent 62%),
+    linear-gradient(125deg,#040e29 0%,#06143b 43%,#0a1650 100%);
+}
+.coffee-card::before {
+  content:"";
+  position:absolute;inset:0;height:100%;z-index:0;opacity:1;pointer-events:none;
+  background:
+    radial-gradient(circle at 78% 17%,rgba(205,237,255,.8) 0 1px,transparent 2px),
+    radial-gradient(circle at 93% 33%,rgba(153,210,255,.75) 0 1px,transparent 2px),
+    radial-gradient(circle at 53% 12%,rgba(140,208,255,.88) 0 1px,transparent 2px),
+    radial-gradient(circle at 65% 35%,rgba(193,236,255,.75) 0 1px,transparent 2px),
+    radial-gradient(circle at 81% 52%,rgba(169,204,255,.85) 0 1px,transparent 2px),
+    radial-gradient(circle at 58% 64%,rgba(181,239,255,.87) 0 1px,transparent 2px),
+    radial-gradient(circle at 97% 8%,rgba(206,176,255,.8) 0 1px,transparent 2px),
+    linear-gradient(90deg,rgba(3,12,35,.93) 0%,rgba(3,12,35,.65) 28%,rgba(4,15,42,.18) 68%,rgba(5,11,33,.08) 100%);
+}
+.coffee-card::after {
+  content:"";
+  position:absolute;inset:0;top:0;bottom:0;height:100%;width:100%;z-index:0;opacity:1;pointer-events:none;
+  background:url("./cosmic-landscape.svg") center bottom / cover no-repeat;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,transparent 32%,rgba(0,0,0,.32) 52%,#000 80%);
+  mask-image:linear-gradient(to bottom,transparent 0%,transparent 32%,rgba(0,0,0,.32) 52%,#000 80%);
+}
+.approved-art-loaded .coffee-card::after {
+  height:100%;
+  background-image:var(--approved-mountains-url);
+  background-size:100% auto;
+  background-position:center bottom;
+  background-repeat:no-repeat;
+}
+.coffee-left,.coffee-btn {position:relative;z-index:2}
+@media(max-width:760px) {
+  .coffee-card::before {
+    background:linear-gradient(180deg,rgba(3,11,32,.91),rgba(5,13,40,.46) 45%,rgba(6,12,39,.1) 100%);
+  }
+  .coffee-card::after,.approved-art-loaded .coffee-card::after {
+    height:100%;
+    background-position:63% bottom;
+    background-size:auto 45%;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 8%,transparent 38%,black 82%);
+    mask-image:linear-gradient(to bottom,transparent 8%,transparent 38%,black 82%);
+  }
+}
+
 </style>
 </head>
 <body>
