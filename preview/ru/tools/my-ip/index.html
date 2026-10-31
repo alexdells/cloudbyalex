@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Какой у меня IP? Проверить IPv4 и IPv6 | CloudByAlex</title>
+<meta content="Узнайте свой публичный IPv4 и IPv6, провайдера, примерное местоположение и данные браузера. Бесплатная проверка IP-адреса онлайн." name="description"/>
+<meta content="noindex,follow" name="robots"/>
+<link href="https://cloudbyalex.com/ru/tools/my-ip/" rel="canonical"/>
+<link href="https://cloudbyalex.com/tools/my-ip/" hreflang="en" rel="alternate"/>
+<link href="https://cloudbyalex.com/ru/tools/my-ip/" hreflang="ru" rel="alternate"/>
+<link href="https://cloudbyalex.com/tools/my-ip/" hreflang="x-default" rel="alternate"/>
+<script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Какой у меня IP? — CloudByAlex","url":"https://cloudbyalex.com/ru/tools/my-ip/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any"}
+  </script>
+<style>
+    :root{--bg:#070812;--text:#f5f7ff;--muted:#96a4be;--cyan:#65dfff;--violet:#c36cff;--green:#69edb5;--line:rgba(255,255,255,.09)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:
+      radial-gradient(circle at 12% 5%,rgba(101,223,255,.12),transparent 25%),
+      radial-gradient(circle at 88% 2%,rgba(195,108,255,.12),transparent 24%),
+      linear-gradient(180deg,#060710,#090b16 48%,#070812);min-height:100vh}
+    body:before{content:"";position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(to bottom,#000,transparent 94%)}
+    a{color:inherit;text-decoration:none}.wrap{width:min(1160px,calc(100% - 34px));margin:auto}
+    nav{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.055);background:rgba(7,8,18,.76);backdrop-filter:blur(18px)}
+    .nav-inner{height:70px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:850;letter-spacing:-.02em}
+    .back{padding:9px 12px;border:1px solid var(--line);border-radius:12px;color:#bec9dc;background:rgba(255,255,255,.035);font-size:13px;font-weight:750}
+    .hero{text-align:center;padding:60px 0 28px}.eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 11px;border-radius:999px;border:1px solid rgba(101,223,255,.17);background:rgba(101,223,255,.055);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#c9f3ff}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+    h1{margin:18px auto 12px;font-size:clamp(44px,7vw,78px);line-height:.98;letter-spacing:-.055em}
+    .grad{background:linear-gradient(90deg,var(--cyan),#b7c3ff 52%,#e2a8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{max-width:720px;margin:auto;color:var(--muted);font-size:15px;line-height:1.75}
+    .ip-shell{margin:28px 0 18px;padding:1px;border-radius:30px;background:linear-gradient(120deg,rgba(101,223,255,.34),rgba(255,255,255,.07) 38%,rgba(195,108,255,.26));box-shadow:0 30px 90px rgba(0,0,0,.28)}
+    .ip-card{border-radius:29px;padding:34px;background:radial-gradient(circle at 0 0,rgba(101,223,255,.09),transparent 32%),radial-gradient(circle at 100% 0,rgba(195,108,255,.08),transparent 29%),rgba(10,13,24,.96)}
+    .ip-top{display:flex;justify-content:space-between;gap:22px;align-items:flex-start}
+    .ip-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+    .ip-box{padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.025);min-width:0}
+    .ip-box.primary{background:linear-gradient(135deg,rgba(101,223,255,.07),rgba(255,255,255,.025));border-color:rgba(101,223,255,.16)}
+    .ip-label{color:#91a0ba;font-size:10px;font-weight:850;letter-spacing:.11em;text-transform:uppercase;margin-bottom:9px}
+    .ip-value{font:800 clamp(20px,3.2vw,38px)/1.12 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-.045em;word-break:break-all}
+    .ip-box.ipv6 .ip-value{font-size:clamp(15px,2vw,24px);line-height:1.25}
+    .ip-status{margin-top:8px;color:#7686a2;font-size:10px}
+    .ip-sub{margin-top:11px;color:#7f8ea9;font-size:12px}.actions{display:flex;gap:9px;flex-wrap:wrap}
+    .copy-small{margin-top:12px;padding:8px 10px;font-size:10px}
+    button{font:inherit}.btn{border:1px solid var(--line);cursor:pointer;padding:11px 14px;border-radius:13px;color:#dce5f7;background:rgba(255,255,255,.045);font-size:12px;font-weight:820;transition:.18s}
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.075)}.btn.primary{border:0;color:#07101a;background:linear-gradient(135deg,#c7f9ff,#bdc6ff 57%,#e5b9ff)}
+    .pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:25px}.pill{padding:8px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.025);color:#aebad0;font-size:11px}.pill b{color:#eff5ff}
+    .section-head{margin:54px 0 17px}.kicker{color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:.15em;text-transform:uppercase}.section-head h2{font-size:31px;margin:7px 0 0;letter-spacing:-.035em}.section-head p{margin:8px 0 0;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.detail{padding:18px;border-radius:19px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.022));min-height:126px}
+    .detail-label{color:#7f8da8;font-size:10px;font-weight:850;letter-spacing:.09em;text-transform:uppercase}.detail-value{margin-top:10px;font-size:16px;font-weight:820;line-height:1.35;word-break:break-word}.detail-small{margin-top:5px;color:#71809a;font-size:10px}
+    .insights{display:grid;grid-template-columns:1fr 1fr;gap:13px}.insight{padding:21px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.028)}.insight h3{margin:0 0 12px;font-size:16px}.insight ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}.insight li{color:#9ba9c1;font-size:12px;line-height:1.55}
+    .privacy{margin-top:13px;padding:18px 20px;border-radius:18px;border:1px solid rgba(101,223,255,.12);background:rgba(101,223,255,.035);color:#8fa0ba;font-size:11px;line-height:1.65}.privacy strong{color:#eaf5ff}
+
+    .learn-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:13px;
+    }
+    .learn-card{
+      padding:22px;
+      border-radius:20px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.038),rgba(255,255,255,.018));
+    }
+    .learn-card h3{
+      margin:0 0 10px;
+      font-size:17px;
+      letter-spacing:-.022em;
+    }
+    .learn-card p{
+      margin:0;
+      color:#95a3bc;
+      font-size:12px;
+      line-height:1.75;
+    }
+    .learn-card p + p{margin-top:10px}
+    .compare-table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.022);
+      font-size:12px;
+    }
+    .compare-table th,
+    .compare-table td{
+      padding:14px 15px;
+      text-align:left;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+    }
+    .compare-table th{
+      color:#dce9fb;
+      font-size:11px;
+      letter-spacing:.04em;
+      background:rgba(255,255,255,.025);
+    }
+    .compare-table td{
+      color:#93a1ba;
+      line-height:1.55;
+    }
+    .compare-table tr:last-child td{border-bottom:0}
+    .howto-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+    .howto{
+      padding:19px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.024);
+    }
+    .howto span{
+      display:inline-flex;
+      width:30px;
+      height:30px;
+      align-items:center;
+      justify-content:center;
+      border-radius:9px;
+      margin-bottom:12px;
+      background:linear-gradient(135deg,rgba(101,223,255,.10),rgba(195,108,255,.08));
+      border:1px solid rgba(255,255,255,.075);
+      font-size:15px;
+    }
+    .howto h3{
+      margin:0 0 7px;
+      font-size:15px;
+      letter-spacing:-.018em;
+    }
+    .howto p{
+      margin:0;
+      color:#8f9db6;
+      font-size:11.5px;
+      line-height:1.7;
+    }
+    .internal-link{
+      color:#c9f5ff;
+      text-decoration:underline;
+      text-decoration-color:rgba(101,223,255,.35);
+      text-underline-offset:3px;
+    }
+    @media(max-width:800px){
+      .learn-grid{grid-template-columns:1fr}
+      .howto-grid{grid-template-columns:1fr}
+      .compare-table{
+        display:block;
+        overflow-x:auto;
+        white-space:normal;
+      }
+    }
+
+    details{border-bottom:1px solid var(--line)}summary{cursor:pointer;list-style:none;padding:18px 2px;font-size:14px;font-weight:820}details p{margin:-4px 0 18px;color:#8f9db6;font-size:12px;line-height:1.75;max-width:880px}
+    footer{margin-top:54px;padding:26px 0 40px;border-top:1px solid rgba(255,255,255,.055);text-align:center;color:#71809a;font-size:11px}
+    .loading{opacity:.65}.error{color:#ff9aac}
+    @media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.ip-top{flex-direction:column}.ip-list{width:100%}}
+    @media(max-width:620px){.wrap{width:min(100% - 22px,1160px)}.hero{padding:44px 0 20px}.grid,.insights,.ip-list{grid-template-columns:1fr}.ip-card{padding:23px}.actions{width:100%}.btn{flex:1}.ip-value{font-size:26px}.ip-box.ipv6 .ip-value{font-size:17px}}
+  
+    .lang-switch{display:inline-flex;align-items:center;gap:4px;padding:5px;border:1px solid rgba(255,255,255,.10);border-radius:12px;background:rgba(255,255,255,.035);box-shadow:inset 0 0 18px rgba(255,255,255,.018);flex:0 0 auto}
+    .lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:27px;padding:0 7px;border-radius:8px;color:#93a2ba;font-size:10px;font-weight:900;letter-spacing:.08em;opacity:1 !important}
+    .lang-switch a.active{color:#07101a;background:linear-gradient(135deg,#c7f9ff,#c9c2ff)}
+    .lang-switch .globe{padding:0 2px 0 4px;color:#99a9c2;font-size:12px}
+    .nav-actions{display:flex;align-items:center;gap:10px}
+
+  
+/* IP address visual refresh: separate IPv4 / IPv6 dashboards */
+.network-dashboard{margin:34px 0 18px}
+.ip-dashboard-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
+.ip-dashboard-label{display:flex;align-items:center;gap:11px;font-size:12px;font-weight:850;letter-spacing:.14em;text-transform:uppercase;color:#e1eaf8}
+.ip-dashboard-label:before{content:"";width:8px;height:8px;border-radius:3px;background:#62dff5;box-shadow:0 0 15px #62dff580}
+.ip-dashboard-summary{color:#92a6bf;font-size:12px;line-height:1.5;text-align:right}
+.network-dashboard .ip-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:0}
+.network-dashboard .ip-box{min-width:0;min-height:365px;position:relative;display:flex;flex-direction:column;overflow:hidden;padding:30px;border:1px solid rgba(105,220,245,.3);border-radius:27px;background:linear-gradient(147deg,rgba(31,83,105,.30),rgba(13,24,40,.98) 48%,rgba(10,18,32,.97));box-shadow:0 25px 70px #0003,inset 0 1px #ffffff0d}
+.network-dashboard .ip-box.ipv6{border-color:rgba(190,159,255,.33);background:linear-gradient(147deg,rgba(76,48,129,.34),rgba(24,21,44,.98) 48%,rgba(15,18,34,.96))}
+.network-dashboard .ip-box:before{content:"";position:absolute;top:0;left:27px;right:27px;height:3px;border-radius:4px;background:linear-gradient(90deg,#66e6ff,#398cac,transparent)}
+.network-dashboard .ip-box.ipv6:before{background:linear-gradient(90deg,#cfb3ff,#805edb,transparent)}
+.network-dashboard .ip-box:after{content:"";position:absolute;top:-130px;right:-110px;width:260px;height:260px;border-radius:50%;background:#34cdff;filter:blur(85px);opacity:.15;pointer-events:none}
+.network-dashboard .ip-box.ipv6:after{background:#af89ff;opacity:.19}
+.ip-box-head,.ip-card-footer{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ip-protocol{display:flex;align-items:center;gap:12px;min-width:0}
+.ip-protocol-icon{height:48px;flex:0 0 48px;border:1px solid #6bdffd35;border-radius:15px;background:#45d0f618;color:#81edff;display:grid;place-items:center}
+.ip-box.ipv6 .ip-protocol-icon{border-color:#c09cfb33;background:#ae8cff20;color:#d1b8ff}
+.ip-protocol-name{font-size:25px;font-weight:800;letter-spacing:-.04em;line-height:1;color:#f5fbff}
+.ip-protocol-meta{font-size:10px;font-weight:800;letter-spacing:.13em;margin-top:8px;color:#8aa7bd}
+.ip-box.ipv6 .ip-protocol-meta{color:#b4a4d9}
+.ip-state{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;padding:8px 11px;border:1px solid #70e9b33d;border-radius:100px;background:#23805c30;color:#97f5cd;font-size:11px;line-height:1;font-weight:800}
+.ip-state:before{content:"";height:7px;width:7px;flex:0 0 7px;border-radius:50%;background:#75eeb9;box-shadow:0 0 10px #75eeb990}
+.ip-state.is-checking{color:#bccbe0;background:#7393bc18;border-color:#a5bad436}
+.ip-state.is-checking:before{background:#93a9c5;box-shadow:none}
+.ip-state.is-unavailable{color:#fac5cb;background:#ae465323;border-color:#f68a9b47}
+.ip-state.is-unavailable:before{background:#ec90a0;box-shadow:none}
+.network-dashboard .ip-box .ip-label{position:relative;z-index:1;margin:46px 0 12px;color:#9ab6ca;font-size:11px;letter-spacing:.14em;font-weight:800}
+.network-dashboard .ip-box.ipv6 .ip-label{color:#b7a8d8}
+.network-dashboard .ip-box .ip-value{position:relative;z-index:1;min-height:47px;font:750 clamp(27px,3.45vw,43px)/1.25 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-.05em;color:#f5fcff;overflow-wrap:anywhere;word-break:normal}
+.network-dashboard .ip-box.ipv6 .ip-value{font-size:clamp(20px,2.25vw,28px);letter-spacing:-.035em;line-height:1.4}
+.network-dashboard .ip-box.unavailable .ip-value{font-size:clamp(22px,2.2vw,28px);opacity:.75}
+.network-dashboard .ip-box .ip-status{position:relative;z-index:1;margin-top:9px;color:#90a6c0;font-size:11px;line-height:1.5}
+.ip-card-footer{margin-top:auto;padding-top:24px;align-items:flex-end}
+.ip-card-fact{color:#90a2b9;font-size:12px;line-height:1.65}
+.ip-card-fact strong{color:#d1e6f3;font-weight:750}
+.ip-box.ipv6 .ip-card-fact strong{color:#ded1ff}
+.network-dashboard .ip-box .copy-small{display:inline-flex;align-items:center;justify-content:center;gap:9px;flex:0 0 auto;margin:0;padding:13px 18px;border:0;border-radius:12px;color:#072634;font-size:12px;font-weight:850;white-space:nowrap;background:linear-gradient(125deg,#78edff,#54c9e5);box-shadow:0 8px 20px #37c4ec26}
+.network-dashboard .ip-box.ipv6 .copy-small{background:linear-gradient(125deg,#d9c4ff,#ad94f4);color:#291a41}
+.network-dashboard .ip-box .copy-small:disabled{cursor:not-allowed;opacity:.47;transform:none}
+.network-dashboard .ip-box .copy-small:not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.07)}
+.network-dashboard .ip-box .copy-small:focus-visible{outline:2px solid white;outline-offset:3px}
+.ip-dashboard-bottom{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-top:16px}
+.ip-dashboard-bottom .actions{gap:9px}
+.ip-dashboard-bottom .pills{margin:0;gap:8px}
+.ip-dashboard-bottom .pill{font-size:11px;border-radius:12px;padding:9px 12px;background:#101a2bc6;border-color:#8cadd12e}
+@media(max-width:900px){.network-dashboard .ip-list{grid-template-columns:1fr;gap:15px}.network-dashboard .ip-box{min-height:300px}}
+@media(max-width:620px){.network-dashboard{margin-top:27px}.ip-dashboard-head{flex-direction:column;align-items:flex-start;gap:8px}.ip-dashboard-summary{text-align:left}.network-dashboard .ip-box{padding:24px 21px;border-radius:23px;min-height:305px}.network-dashboard .ip-box .ip-label{margin-top:36px}.network-dashboard .ip-box .ip-value{font-size:clamp(27px,7vw,39px)}.network-dashboard .ip-box.ipv6 .ip-value{font-size:clamp(19px,5vw,26px)}.ip-protocol-icon{flex-basis:43px;height:43px}.ip-protocol-name{font-size:23px}.ip-card-fact{font-size:11px}.network-dashboard .ip-box .copy-small{padding:12px;font-size:11px}.ip-dashboard-bottom .actions{width:100%}.ip-dashboard-bottom .actions .btn{flex:1}.ip-state{padding:7px 8px;font-size:10px}}
+@media(max-width:360px){.ip-box-head{flex-wrap:wrap}.network-dashboard .ip-box .copy-small{font-size:10px;padding:11px 9px}.ip-card-fact{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.network-dashboard .ip-box .copy-small{transition:none}}
+
+
+/* Related network tool – easy to discover on desktop and mobile. */
+.ip-dashboard-bottom .speed-cta{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid rgba(77,210,255,.6);color:#93ecff;background:rgba(25,105,155,.15);font-weight:800;white-space:nowrap}
+.ip-dashboard-bottom .speed-cta:hover{background:rgba(30,143,208,.28)}
+@media(max-width:620px){.ip-dashboard-bottom .actions{display:flex;flex-wrap:wrap}.ip-dashboard-bottom .speed-cta{flex:1 1 100%;min-height:43px}}
+</style>
+<script>(()=>{try{if(localStorage.getItem("cloudbyalex-lang")==="en")location.replace("/tools/my-ip/"+location.search+location.hash)}catch(e){}})();</script>
+<meta name="color-scheme" content="dark">
+</head>
+<body>
+<nav><div class="wrap nav-inner"><a class="brand" href="/preview/">☁ cloudbyalex</a><div class="nav-actions"><span aria-label="Language selector" class="lang-switch"><span aria-hidden="true" class="globe">🌐</span><a href="/preview/tools/my-ip/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" class="active" href="/preview/ru/tools/my-ip/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a></span><a href="/preview/tools/my-ip/" onclick="localStorage.setItem('cloudbyalex-lang','en')">EN</a><span aria-hidden="true" style="color:#56637a;font-size:10px">·</span><a class="active" href="/preview/ru/tools/my-ip/" onclick="localStorage.setItem('cloudbyalex-lang','ru')">RU</a><a class="back" href="/preview/#tools">← Назад к инструментам</a></div></div></nav>
+<header class="hero wrap">
+<div class="eyebrow"><span class="dot"></span> Бесплатный сетевой инструмент</div>
+<h1>Какой у меня <span class="grad">IP?</span></h1>
+<p class="lead">Узнайте свой публичный IP и посмотрите, какую информацию показывает ваше интернет-соединение — быстро и на одной странице.</p>
+</header>
+<main class="wrap">
+<section class="network-dashboard" aria-labelledby="ip-dashboard-title">
+<div class="ip-dashboard-head"><div class="ip-dashboard-label" id="ip-dashboard-title">Ваши публичные IP-адреса</div><div class="ip-dashboard-summary" id="ipSub" aria-live="polite">Проверяем ваше соединение</div></div>
+<div class="ip-list"><article class="ip-box primary" id="ipv4Card" aria-labelledby="ipv4Heading">
+<div class="ip-box-head"><div class="ip-protocol"><span class="ip-protocol-icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 12h17M12 3c5.4 5.4 5.4 12.6 0 18m0-18c-5.4 5.4-5.4 12.6 0 18" stroke="currentColor" stroke-width="1.4"/></svg></span><div><div class="ip-protocol-name" id="ipv4Heading">IPv4</div><div class="ip-protocol-meta">32-BIT PROTOCOL</div></div></div><span class="ip-state is-checking" id="ipv4State">Проверяем</span></div>
+<div class="ip-label">ПУБЛИЧНЫЙ IPV4-АДРЕС</div>
+<div class="ip-value loading" id="ipv4Value" aria-live="polite">Определяем…</div>
+<div class="ip-status" id="ipv4Status" aria-live="polite">Проверяем IPv4</div>
+<div class="ip-card-footer"><div class="ip-card-fact"><strong>Классический интернет-адрес</strong><div>4 группы цифр · широкая поддержка</div></div><button type="button" class="btn copy-small" id="copyIpv4" aria-label="Копировать IPv4" disabled><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="2"/></svg><span class="copy-label">Копировать IPv4</span></button></div>
+</article><article class="ip-box ipv6" id="ipv6Card" aria-labelledby="ipv6Heading">
+<div class="ip-box-head"><div class="ip-protocol"><span class="ip-protocol-icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="5" cy="12" r="2" stroke="currentColor" stroke-width="1.7"/><circle cx="19" cy="5" r="2" stroke="currentColor" stroke-width="1.7"/><circle cx="19" cy="19" r="2" stroke="currentColor" stroke-width="1.7"/><path d="M7 11.1 17.1 5.9M7 12.9 17.1 18M19 7v10" stroke="currentColor" stroke-width="1.7"/></svg></span><div><div class="ip-protocol-name" id="ipv6Heading">IPv6</div><div class="ip-protocol-meta">128-BIT PROTOCOL</div></div></div><span class="ip-state is-checking" id="ipv6State">Проверяем</span></div>
+<div class="ip-label">ПУБЛИЧНЫЙ IPV6-АДРЕС</div>
+<div class="ip-value loading" id="ipv6Value" aria-live="polite">Определяем…</div>
+<div class="ip-status" id="ipv6Status" aria-live="polite">Проверяем IPv6</div>
+<div class="ip-card-footer"><div class="ip-card-fact"><strong>Современный интернет-протокол</strong><div>Большое адресное пространство</div></div><button type="button" class="btn copy-small" id="copyIpv6" aria-label="Копировать IPv6" disabled><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="2"/></svg><span class="copy-label">Копировать IPv6</span></button></div>
+</article></div>
+<div class="ip-dashboard-bottom"><div class="pills"><div class="pill">IPv4: <b id="ipv4Pill">—</b></div><div class="pill">IPv6: <b id="ipv6Pill">—</b></div><div class="pill">Соединение: <b id="secureState">HTTPS</b></div><div class="pill">Устройство: <b id="devicePill">—</b></div></div><div class="actions"><button class="btn" id="refreshBtn" type="button">Обновить</button><button class="btn primary" id="copyAll" type="button">Копировать всё</button><a class="btn speed-cta" href="../speed/" aria-label="Проверить скорость загрузки, отдачи и пинг">Проверить скорость ↗</a></div></div>
+</section>
+
+<section>
+<div class="section-head"><span class="kicker">Параметры соединения</span><h2>Интернет и устройство одним взглядом</h2><p>Местоположение по IP приблизительное и может отличаться от реального.</p></div>
+<div class="grid">
+<article class="detail"><div class="detail-label">Примерное местоположение</div><div class="detail-value" id="locationValue">Определяем…</div><div class="detail-small" id="locationSmall">Оценка по IP</div></article>
+<article class="detail"><div class="detail-label">Провайдер / сеть</div><div class="detail-value" id="ispValue">Определяем…</div><div class="detail-small" id="asnValue">Сетевой провайдер</div></article>
+<article class="detail"><div class="detail-label">Часовой пояс</div><div class="detail-value" id="timezoneValue">—</div><div class="detail-small" id="localTimeValue">Локальное время браузера</div></article>
+<article class="detail"><div class="detail-label">Браузер</div><div class="detail-value" id="browserValue">—</div><div class="detail-small">Примерное определение браузера</div></article>
+<article class="detail"><div class="detail-label">Операционная система</div><div class="detail-value" id="osValue">—</div><div class="detail-small" id="deviceValue">Тип устройства</div></article>
+<article class="detail"><div class="detail-label">Экран</div><div class="detail-value" id="screenValue">—</div><div class="detail-small" id="pixelValue">Информация об экране</div></article>
+<article class="detail"><div class="detail-label">Язык</div><div class="detail-value" id="languageValue">—</div><div class="detail-small">Язык браузера</div></article>
+<article class="detail"><div class="detail-label">Параметры сети</div><div class="detail-value" id="networkValue">Не сообщается</div><div class="detail-small" id="networkSmall">Network Information API браузера</div></article>
+<article class="detail"><div class="detail-label">Безопасность соединения</div><div class="detail-value" id="httpsValue">Защищённый HTTPS</div><div class="detail-small">Протокол этой страницы</div></article>
+</div>
+</section>
+<section>
+<div class="section-head"><span class="kicker">О приватности</span><h2>Что может показать IP-адрес?</h2></div>
+<div class="insights">
+<article class="insight"><h3>Часто можно определить</h3><ul><li>✓ Ваш публичный IP-адрес</li><li>✓ Примерный город, регион или страну</li><li>✓ Провайдера или сетевую организацию</li><li>✓ Вероятный часовой пояс или регион сети</li></ul></article>
+<article class="insight"><h3>Нельзя надёжно определить</h3><ul><li>— Точный домашний адрес</li><li>— Ваше имя, пароли или личные файлы</li><li>— Точные GPS-координаты</li><li>— Город с гарантированной точностью</li></ul></article>
+</div>
+<div class="privacy"><strong>Прозрачность по умолчанию.</strong> CloudByAlex не сохраняет параметры вашего соединения. IPv4 и IPv6 проверяются прямо в браузере через ipify, приблизительная геолокация — через ipapi.co. Cloudflare Web Analytics используется для общей статистики посещений.</div>
+</section>
+<section aria-labelledby="ip-guide-title">
+<div class="section-head">
+<span class="kicker">Гид по IP-адресам</span>
+<h2 id="ip-guide-title">IPv4, IPv6 и публичный IP простыми словами</h2>
+<p>Короткие ответы на частые вопросы после проверки публичного IP.</p>
+</div>
+<div class="learn-grid">
+<article class="learn-card">
+<h3>Что такое мой IPv4-адрес?</h3>
+<p>Публичный IPv4 — традиционный интернет-адрес, который используют сайты, приложения и домашние сети. Обычно это четыре группы цифр через точки, например <strong>73.44.120.18</strong>.</p>
+<p>Количество IPv4 ограничено, поэтому провайдеры используют NAT и carrier-grade NAT. Несколько устройств, а иногда и клиентов, могут использовать общую публичную IPv4-инфраструктуру.</p>
+</article>
+<article class="learn-card">
+<h3>Что такое мой IPv6-адрес?</h3>
+<p>IPv6 — более новая система интернет-адресации. Такой адрес длиннее и содержит шестнадцатеричные символы через двоеточия, например <strong>2601:abcd:1234::1</strong>.</p>
+<p>IPv6 создан с гораздо большим адресным пространством. Многие современные мобильные, кабельные и оптоволоконные сети одновременно поддерживают IPv4 и IPv6.</p>
+</article>
+<article class="learn-card">
+<h3>Почему у меня одновременно IPv4 и IPv6?</h3>
+<p>Если инструмент показывает оба адреса, ваше соединение, вероятно, работает в режиме <strong>dual-stack</strong>. Это означает, что сеть поддерживает оба протокола. Сайт может использовать IPv6, а при необходимости переключаться на IPv4.</p>
+<p>Это нормально. IPv4 и IPv6 не обязаны быть похожи, потому что относятся к разным системам адресации.</p>
+</article>
+<article class="learn-card">
+<h3>Почему один из IP-адресов недоступен?</h3>
+<p>Некоторые сети предоставляют только IPv4, другие предпочитают IPv6 или используют трансляцию. VPN, мобильные операторы, корпоративные сети и роутеры тоже могут влиять на видимый протокол.</p>
+<p>Если IPv4 или IPv6 недоступен, это не означает, что интернет сломан. Обычно этот протокол просто недоступен напрямую из текущего соединения браузера.</p>
+</article>
+</div>
+</section>
+<section aria-labelledby="ipv4-vs-ipv6-title">
+<div class="section-head">
+<span class="kicker">IPv4 и IPv6</span>
+<h2 id="ipv4-vs-ipv6-title">В чём разница между IPv4 и IPv6?</h2>
+</div>
+<table class="compare-table">
+<thead>
+<tr>
+<th>Характеристика</th>
+<th>IPv4</th>
+<th>IPv6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Типичный формат</td>
+<td>192.0.2.25</td>
+<td>2001:db8::25</td>
+</tr>
+<tr>
+<td>Размер адреса</td>
+<td>32-bit</td>
+<td>128-bit</td>
+</tr>
+<tr>
+<td>Распространён сегодня?</td>
+<td>Да — по-прежнему очень распространён</td>
+<td>Да — всё чаще используется в современных сетях</td>
+</tr>
+<tr>
+<td>Могут работать одновременно?</td>
+<td colspan="2">Да. Dual-stack соединение может одновременно использовать IPv4 и IPv6.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section aria-labelledby="find-ip-title">
+<div class="section-head">
+<span class="kicker">Как проверить</span>
+<h2 id="find-ip-title">Как найти IP-адрес на популярных устройствах</h2>
+<p>Адрес вверху страницы — ваш публичный интернет-IP. Устройство также имеет локальный/private IP внутри домашней или офисной сети.</p>
+</div>
+<div class="howto-grid">
+<article class="howto">
+<span>⊞</span>
+<h3>Windows</h3>
+<p>Чтобы узнать локальный IP, откройте Command Prompt и выполните <strong>ipconfig</strong>. Найдите “IPv4 Address” или “IPv6 Address” у активного сетевого адаптера. Публичный IP показан вверху страницы.</p>
+</article>
+<article class="howto">
+<span></span>
+<h3>iPhone / iPad</h3>
+<p>Чтобы узнать локальный Wi-Fi адрес, откройте <strong>Настройки → Wi-Fi → нажмите ⓘ</strong> рядом с подключённой сетью. Публичный IP, который видят сайты, показан вверху страницы.</p>
+</article>
+<article class="howto">
+<span>◆</span>
+<h3>Android</h3>
+<p>Локальный IP обычно находится в <strong>Настройки → Сеть и интернет → Wi-Fi → подключённая сеть</strong>. Названия пунктов зависят от производителя. Публичный IP показан на этой странице.</p>
+</article>
+</div>
+</section>
+<section aria-labelledby="vpn-ip-title">
+<div class="section-head">
+<span class="kicker">VPN и приватность</span>
+<h2 id="vpn-ip-title">Меняет ли VPN мой публичный IP?</h2>
+</div>
+<div class="learn-grid">
+<article class="learn-card">
+<h3>Обычно — да</h3>
+<p>Когда VPN активен, трафик проходит через сервер VPN-провайдера. Сайты видят публичный IP VPN-сервера вместо адреса вашего обычного провайдера.</p>
+<p>Поэтому проверка IP до и после подключения VPN — простой способ убедиться, что видимый публичный адрес изменился.</p>
+</article>
+<article class="learn-card">
+<h3>IP-адрес — это не точное местоположение</h3>
+<p>Геолокация по IP может определить страну, регион или город, но это не GPS. Результат может указывать на инфраструктуру провайдера, соседний город, мобильный шлюз или VPN-сервер.</p>
+<p>Проверяете интернет-соединение? После просмотра публичного IP можно также <a class="internal-link" href="../speed/">проверить скорость загрузки, отдачи и пинг</a>, чтобы разобраться с медленным Wi-Fi или сетью.</p>
+</article>
+</div>
+</section>
+<section>
+<div class="section-head"><span class="kicker">Короткие ответы</span><h2>FAQ по IP-адресам</h2></div>
+<details><summary>Что такое мой публичный IP?</summary><p>Публичный IP — интернет-адрес, который ваше соединение использует для общения с сайтами и онлайн-сервисами.</p></details>
+<details><summary>Почему мой IP меняется?</summary><p>Многие провайдеры используют динамические IP. Адрес может измениться после переподключения, смены сети, оборудования или изменений у провайдера.</p></details>
+<details><summary>Город здесь — моё точное местоположение?</summary><p>Нет. Геолокация по IP — только оценка и может указывать соседний город или узел сети провайдера.</p></details>
+<details><summary>Как изменить IP, который видят сайты?</summary><p>Смена сети меняет публичное соединение. VPN может направить трафик через другой сервер, поэтому сайты обычно видят публичный IP VPN-сервера.</p></details>
+<details><summary>Публичный IP и локальный IP — одно и то же?</summary><p>Нет. Публичный IP виден интернет-сервисам. Локальный/private IP определяет устройство внутри дома, офиса или Wi-Fi сети.</p></details>
+<details><summary>Могут ли два устройства иметь один публичный IP?</summary><p>Да. Устройства за одним домашним роутером часто используют один публичный IPv4. Провайдеры также применяют carrier-grade NAT.</p></details>
+<details><summary>Почему сайт показывает другой IP, чем роутер?</summary><p>Роутер может показывать локальный, WAN или назначенный провайдером адрес, который отличается от того, что видят сайты. VPN, NAT, proxy и трансляция IPv4/IPv6 тоже могут влиять.</p></details>
+</section>
+</main>
+<footer><div class="wrap">CloudByAlex Tools · Простые инструменты для реальных задач.</div></footer>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let data = { ipv4: null, ipv6: null, geo: null };
+
+  function browser(){
+    const u=navigator.userAgent; let m;
+    if((m=u.match(/Edg\/([\d.]+)/))) return "Microsoft Edge "+m[1].split(".")[0];
+    if((m=u.match(/Chrome\/([\d.]+)/))&&!/Edg|OPR/.test(u)) return "Google Chrome "+m[1].split(".")[0];
+    if((m=u.match(/Firefox\/([\d.]+)/))) return "Mozilla Firefox "+m[1].split(".")[0];
+    if((m=u.match(/Version\/([\d.]+).*Safari/))) return "Safari "+m[1].split(".")[0];
+    return "Неизвестный браузер";
+  }
+
+  function os(){
+    const u=navigator.userAgent;
+    if(/Windows NT 10.0/.test(u)) return "Windows 10 / 11";
+    if(/iPhone|iPad|iPod/.test(u)) return "iOS";
+    if(/Android/.test(u)) return "Android";
+    if(/Mac OS X/.test(u)) return "macOS";
+    if(/Linux/.test(u)) return "Linux";
+    return navigator.platform||"Неизвестная ОС";
+  }
+
+  function device(){
+    const u=navigator.userAgent;
+    if(/iPad|Tablet|Android(?!.*Mobile)/i.test(u)) return "Планшет";
+    if(/Mobi|iPhone|Android/i.test(u)) return "Телефон";
+    return "Компьютер";
+  }
+
+  function local(){
+    $("browserValue").textContent=browser();
+    $("osValue").textContent=os();
+    $("deviceValue").textContent=device();
+    $("devicePill").textContent=device();
+    $("screenValue").textContent=`${screen.width} × ${screen.height}`;
+    $("pixelValue").textContent=`Плотность пикселей: ${devicePixelRatio||1}`;
+    $("languageValue").textContent=navigator.language||"Не сообщается";
+
+    const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"Not reported";
+    $("timezoneValue").textContent=tz;
+    $("localTimeValue").textContent=new Intl.DateTimeFormat(undefined,{hour:"numeric",minute:"2-digit",timeZoneName:"short"}).format(new Date());
+
+    const c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
+    if(c){
+      const p=[];
+      if(c.effectiveType)p.push(c.effectiveType.toUpperCase());
+      if(typeof c.downlink==="number")p.push(`~${c.downlink} Mbps`);
+      $("networkValue").textContent=p.join(" · ")||"Доступно";
+      if(typeof c.rtt==="number")$("networkSmall").textContent=`Примерный RTT: ${c.rtt} мс`;
+    }
+
+    const secure=location.protocol==="https:";
+    $("httpsValue").textContent=secure?"Защищённый HTTPS":"Не HTTPS";
+    $("secureState").textContent=secure?"HTTPS":"HTTP";
+  }
+
+  async function fetchJson(url, timeoutMs=5000){
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),timeoutMs);
+    try{
+      const r=await fetch(url,{cache:"no-store",signal:controller.signal});
+      if(!r.ok) throw new Error("HTTP "+r.status);
+      return await r.json();
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  function setIpState(kind, ip){
+    const valueEl=$(kind+"Value"), statusEl=$(kind+"Status"), pillEl=$(kind+"Pill");
+    const stateEl=$(kind+"State"), cardEl=$(kind+"Card");
+    const copyBtn=$(kind==="ipv4"?"copyIpv4":"copyIpv6");
+    valueEl.textContent=ip || "Недоступен";
+    valueEl.className="ip-value";
+    statusEl.textContent=ip ? "Доступен в этом соединении" : `${kind.toUpperCase()} недоступен в этом соединении`;
+    pillEl.textContent=ip ? "Доступен" : "Недоступен";
+    stateEl.textContent=ip ? "Доступен" : "Недоступен";
+    stateEl.className=ip ? "ip-state" : "ip-state is-unavailable";
+    cardEl.classList.toggle("unavailable",!ip);
+    copyBtn.disabled=!ip;
+  }
+
+  async function loadGeo(primaryIp){
+    if(!primaryIp){
+      $("locationValue").textContent="Недоступен";
+      $("ispValue").textContent="Недоступен";
+      return;
+    }
+
+    try{
+      const encoded=encodeURIComponent(primaryIp);
+      let d;
+      try {
+        d=await fetchJson(`https://ipapi.co/${encoded}/json/`,5000);
+      } catch {
+        d=await fetchJson("https://ipapi.co/json/",5000);
+      }
+      if(d.error) throw new Error(d.reason||"Не удалось определить геолокацию");
+      data.geo=d;
+
+      const place=[d.city,d.region,d.country_name].filter(Boolean).join(", ");
+      $("locationValue").textContent=place||"Недоступен";
+      $("locationSmall").textContent=d.postal?`Почтовый индекс: ${d.postal} · оценка по IP`:"Оценка по IP";
+      $("ispValue").textContent=d.org||"Недоступен";
+      $("asnValue").textContent=[d.asn,d.country_code].filter(Boolean).join(" · ")||"Сетевой провайдер";
+
+      if(d.timezone){
+        $("timezoneValue").textContent=d.timezone;
+      }
+      $("ipSub").textContent=place?`Примерное сетевое местоположение: ${place}`:"Проверка обоих протоколов завершена.";
+    }catch{
+      $("locationValue").textContent="Временно недоступно";
+      $("ispValue").textContent="Временно недоступно";
+      $("ipSub").textContent="IP-адреса определены. Геолокация временно недоступна.";
+    }
+  }
+
+  async function load(){
+    data.ipv4=null; data.ipv6=null; data.geo=null;
+    $("ipv4Value").textContent="Определяем…"; $("ipv4Value").className="ip-value loading";
+    $("ipv6Value").textContent="Определяем…"; $("ipv6Value").className="ip-value loading";
+    $("ipv4Status").textContent="Проверяем IPv4";
+    $("ipv6Status").textContent="Проверяем IPv6";
+    for(const kind of ["ipv4","ipv6"]){
+      const stateEl=$(kind+"State");
+      stateEl.textContent="Проверяем";
+      stateEl.className="ip-state is-checking";
+      $(kind+"Card").classList.remove("unavailable");
+      $(kind==="ipv4"?"copyIpv4":"copyIpv6").disabled=true;
+    }
+    $("ipv4Pill").textContent="Проверяем";
+    $("ipv6Pill").textContent="Проверяем";
+    $("ipSub").textContent="Проверяем IPv4 и IPv6.";
+
+    const [v4Result,v6Result]=await Promise.allSettled([
+      fetchJson("https://api.ipify.org?format=json",5000),
+      fetchJson("https://api6.ipify.org?format=json",5000)
+    ]);
+
+    if(v4Result.status==="fulfilled" && v4Result.value?.ip){
+      data.ipv4=v4Result.value.ip;
+    }
+    if(v6Result.status==="fulfilled" && v6Result.value?.ip){
+      data.ipv6=v6Result.value.ip;
+    }
+
+    setIpState("ipv4",data.ipv4);
+    setIpState("ipv6",data.ipv6);
+
+    const primary=data.ipv4||data.ipv6;
+    await loadGeo(primary);
+
+    if(data.ipv4 && data.ipv6){
+      $("ipSub").textContent = $("locationValue").textContent!=="Временно недоступно"
+        ? `Обнаружено dual-stack соединение · IPv4 + IPv6 доступны`
+        : `Обнаружено dual-stack соединение · IPv4 + IPv6 доступны`;
+    }else if(data.ipv4){
+      $("ipSub").textContent="IPv4 доступен; публичный IPv6 не обнаружен.";
+    }else if(data.ipv6){
+      $("ipSub").textContent="IPv6 доступен; публичный IPv4 не обнаружен.";
+    }else{
+      $("ipSub").textContent="Не удалось определить публичный IPv4 или IPv6. Нажмите «Обновить».";
+    }
+  }
+
+  async function copy(text,btn){
+    if(!text) return;
+    try{
+      await navigator.clipboard.writeText(text);
+      const label=btn.querySelector(".copy-label")||btn;
+      const original=label.textContent;
+      label.textContent="Скопировано ✓";
+      setTimeout(()=>label.textContent=original,1200);
+    }catch{
+      alert("Браузер заблокировал копирование.");
+    }
+  }
+
+  $("copyIpv4").onclick=()=>copy(data.ipv4,$("copyIpv4"));
+  $("copyIpv6").onclick=()=>copy(data.ipv6,$("copyIpv6"));
+
+  $("copyAll").onclick=()=>copy([
+    `Public IPv4: ${data.ipv4||"Недоступен"}`,
+    `Public IPv6: ${data.ipv6||"Недоступен"}`,
+    `Примерное местоположение: ${$("locationValue").textContent}`,
+    `Провайдер / сеть: ${$("ispValue").textContent}`,
+    `Часовой пояс: ${$("timezoneValue").textContent}`,
+    `Браузер: ${$("browserValue").textContent}`,
+    `Операционная система: ${$("osValue").textContent}`,
+    `Устройство: ${$("deviceValue").textContent}`,
+    `Экран: ${$("screenValue").textContent}`,
+    `Язык: ${$("languageValue").textContent}`,
+    `Параметры сети: ${$("networkValue").textContent}`
+  ].join("\n"),$("copyAll"));
+
+  $("refreshBtn").onclick=load;
+
+  local();
+  load();
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script data-cf-beacon='{"token": "fc4b954acddd444a8d7d9673817d12ea"}' src="https://static.cloudflareinsights.com/beacon.min.js" type="module"></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
