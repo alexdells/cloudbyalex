@@ -216,6 +216,11 @@
 @media(max-width:360px){.ip-box-head{flex-wrap:wrap}.network-dashboard .ip-box .copy-small{font-size:10px;padding:11px 9px}.ip-card-fact{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.network-dashboard .ip-box .copy-small{transition:none}}
 
+
+/* Related network tool – easy to discover on desktop and mobile. */
+.ip-dashboard-bottom .speed-cta{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid rgba(77,210,255,.6);color:#93ecff;background:rgba(25,105,155,.15);font-weight:800;white-space:nowrap}
+.ip-dashboard-bottom .speed-cta:hover{background:rgba(30,143,208,.28)}
+@media(max-width:620px){.ip-dashboard-bottom .actions{display:flex;flex-wrap:wrap}.ip-dashboard-bottom .speed-cta{flex:1 1 100%;min-height:43px}}
 </style>
 <script>(()=>{try{if(localStorage.getItem("cloudbyalex-lang")==="en")location.replace("/tools/my-ip/"+location.search+location.hash)}catch(e){}})();</script>
 </head>
@@ -242,7 +247,7 @@
 <div class="ip-status" id="ipv6Status" aria-live="polite">Проверяем IPv6</div>
 <div class="ip-card-footer"><div class="ip-card-fact"><strong>Современный интернет-протокол</strong><div>Большое адресное пространство</div></div><button type="button" class="btn copy-small" id="copyIpv6" aria-label="Копировать IPv6" disabled><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="2"/></svg><span class="copy-label">Копировать IPv6</span></button></div>
 </article></div>
-<div class="ip-dashboard-bottom"><div class="pills"><div class="pill">IPv4: <b id="ipv4Pill">—</b></div><div class="pill">IPv6: <b id="ipv6Pill">—</b></div><div class="pill">Соединение: <b id="secureState">HTTPS</b></div><div class="pill">Устройство: <b id="devicePill">—</b></div></div><div class="actions"><button class="btn" id="refreshBtn" type="button">Обновить</button><button class="btn primary" id="copyAll" type="button">Копировать всё</button></div></div>
+<div class="ip-dashboard-bottom"><div class="pills"><div class="pill">IPv4: <b id="ipv4Pill">—</b></div><div class="pill">IPv6: <b id="ipv6Pill">—</b></div><div class="pill">Соединение: <b id="secureState">HTTPS</b></div><div class="pill">Устройство: <b id="devicePill">—</b></div></div><div class="actions"><button class="btn" id="refreshBtn" type="button">Обновить</button><button class="btn primary" id="copyAll" type="button">Копировать всё</button><a class="btn speed-cta" href="../speed/" aria-label="Проверить скорость загрузки, отдачи и пинг">Проверить скорость ↗</a></div></div>
 </section>
 
 <section>
@@ -370,7 +375,7 @@
 <article class="learn-card">
 <h3>IP-адрес — это не точное местоположение</h3>
 <p>Геолокация по IP может определить страну, регион или город, но это не GPS. Результат может указывать на инфраструктуру провайдера, соседний город, мобильный шлюз или VPN-сервер.</p>
-<p>Если вы диагностируете сеть или CI/CD-среду, попробуйте также <a class="internal-link" href="../devops-doctor/">CloudByAlex DevOps Doctor</a>.</p>
+<p>Проверяете интернет-соединение? После просмотра публичного IP можно также <a class="internal-link" href="../speed/">проверить скорость загрузки, отдачи и пинг</a>, чтобы разобраться с медленным Wi-Fi или сетью.</p>
 </article>
 </div>
 </section>

@@ -53,7 +53,16 @@
     footer{padding:26px 0 40px;border-top:1px solid rgba(255,255,255,.055);text-align:center;color:#71809a;font-size:11px}
     .lang-switch{display:inline-flex;align-items:center;gap:4px;padding:5px;border:1px solid rgba(255,255,255,.10);border-radius:12px;background:rgba(255,255,255,.035);box-shadow:inset 0 0 18px rgba(255,255,255,.018);flex:0 0 auto}.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:27px;padding:0 7px;border-radius:8px;color:#93a2ba;font-size:10px;font-weight:900;letter-spacing:.08em;opacity:1!important}.lang-switch a.active{color:#07101a;background:linear-gradient(135deg,#c7f9ff,#c9c2ff)}.lang-switch .globe{padding:0 2px 0 4px;color:#99a9c2;font-size:12px}.nav-actions{display:flex;align-items:center;gap:10px}
     @media(max-width:650px){.wrap{width:min(100% - 22px,1080px)}.metrics,.info-grid,.guide-grid{grid-template-columns:1fr}.gauge{width:205px;height:205px}.back{font-size:0}.back:after{content:"← Tools";font-size:12px}.hero{padding-top:44px}}
-  </style>
+  
+/* 2026 growth experiment: ping stability and copyable diagnostics */
+.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}
+.metric{min-width:0}
+.copy-results{display:block;width:max-content;max-width:100%;margin:13px auto 0;padding:10px 18px;border-radius:12px;border:1px solid rgba(95,220,255,.48);color:#b6efff;background:rgba(28,113,169,.18);cursor:pointer;font-weight:750;font-size:12px}
+.copy-results:hover{background:rgba(37,159,211,.26)}
+.copy-results[hidden]{display:none}
+.note a{color:#88e7ff;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:650px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.metric{padding:14px 8px}.copy-results{width:100%}}
+</style>
   <script>(()=>{try{const s=localStorage.getItem("cloudbyalex-lang");const ls=navigator.languages?.length?navigator.languages:[navigator.language||""];const r=ls.some(x=>String(x).toLowerCase().startsWith("ru"));if(s==="ru"||(!s&&r))location.replace("/ru/tools/speed/"+location.search+location.hash)}catch(e){}})();</script>
 </head>
 <body>
@@ -70,10 +79,12 @@
       <div class="metric"><div class="metric-label">Download</div><div class="metric-value" id="download">—</div><div class="metric-unit">Mbps</div></div>
       <div class="metric"><div class="metric-label">Upload</div><div class="metric-value" id="upload">—</div><div class="metric-unit">Mbps</div></div>
       <div class="metric"><div class="metric-label">Ping</div><div class="metric-value" id="ping">—</div><div class="metric-unit">ms</div></div>
+      <div class="metric"><div class="metric-label">Jitter (est.)</div><div class="metric-value" id="jitter">—</div><div class="metric-unit">ms · approximate</div></div>
     </div>
     <button class="start" id="startBtn" type="button">Start Speed Test →</button>
     <div class="progress"><span id="progressBar"></span></div>
-    <div class="status" id="status" aria-live="polite">The test uses a small amount of data and usually finishes in a few seconds.</div>
+    <div class="status" id="status" aria-live="polite">Uses test traffic (often several MB) and measures performance to the Cloudflare edge.</div>
+    <button class="copy-results" id="copyResults" type="button" hidden>Copy speed test results</button>
     <div class="quality" id="quality"><strong id="qualityTitle"></strong><span id="qualityText"></span></div>
   </div></section>
 
@@ -83,6 +94,7 @@
       <article class="info-card"><h3>↓ Download speed</h3><p>Download speed is how quickly data reaches your device. It affects website loading, streaming, app downloads and large file transfers. It is normally shown in megabits per second (Mbps).</p></article>
       <article class="info-card"><h3>↑ Upload speed</h3><p>Upload speed is how quickly your device sends data. It matters for video calls, cloud backups, uploading videos and sharing large files.</p></article>
       <article class="info-card"><h3>↔ Ping / latency</h3><p>Ping is the round-trip response time, measured in milliseconds. Lower latency usually feels more responsive in online games, calls and interactive applications.</p></article>
+      <article class="info-card"><h3>Jitter (est.)</h3><p>Median change between five browser ping samples. This is an approximate stability indicator, not a certified packet-jitter measurement.</p></article>
       <article class="info-card"><h3>Why results can vary</h3><p>Wi-Fi quality, VPNs, device load, browser limits and nearby network traffic can change the result. Run the test more than once if a number looks unusual.</p></article>
     </div>
   </section>
@@ -96,7 +108,7 @@
       <article class="guide-card"><h3>Wi-Fi vs. Ethernet</h3><p>If you want to troubleshoot a slow connection, compare a Wi-Fi test with a wired Ethernet test when possible. A large difference often points to Wi-Fi range, interference or router placement rather than the ISP connection.</p></article>
       <article class="guide-card"><h3>Mbps is not MB/s</h3><p>Internet plans are usually advertised in megabits per second (Mbps), while file sizes are often shown in megabytes (MB). Eight bits make one byte, so a 100 Mbps connection has a theoretical maximum near 12.5 MB/s before protocol overhead and real-world limits.</p></article>
     </div>
-    <div class="note">Tip: for a cleaner comparison, pause large downloads and cloud backups, disconnect a VPN if you are testing your normal ISP path, and run two or three tests at different times of day.</div>
+    <div class="note">Tip: for a cleaner comparison, pause large downloads and cloud backups, disconnect a VPN if you are testing your normal ISP path, and run two or three tests at different times of day. You can also <a href="../my-ip/">check your public IPv4 and IPv6 addresses</a> to see which network you are using.</div>
   </section>
 
   <section class="faq">
@@ -118,17 +130,33 @@
   const $ = id => document.getElementById(id);
   const gauge = $("gauge");
   let running = false;
+  let lastResult = null;
   function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
   function median(arr){const a=[...arr].sort((x,y)=>x-y);const m=Math.floor(a.length/2);return a.length%2?a[m]:(a[m-1]+a[m])/2;}
   function mbps(bytes,ms){return (bytes*8)/(ms/1000)/1_000_000;}
   function showGauge(value,unit,phase){$("gaugeValue").textContent=Number.isFinite(value)?(value>=100?Math.round(value):value.toFixed(value>=10?1:2)):"0";$("gaugeUnit").textContent=unit;$("phase").textContent=phase;const normalized=unit==="ms"?Math.max(0,100-Math.min(value,100)):Math.min(value,100);gauge.style.setProperty("--p",normalized);}
   async function timedFetch(url,options={}){const t0=performance.now();const r=await fetch(url,{...options,cache:"no-store"});const buf=await r.arrayBuffer();const t1=performance.now();if(!r.ok)throw new Error("Network test endpoint returned an error.");return {ms:t1-t0,bytes:buf.byteLength};}
-  async function testPing(){const samples=[];for(let i=0;i<5;i++){const t0=performance.now();const r=await fetch(`${ENDPOINT}/speed/ping?t=${Date.now()}-${i}`,{cache:"no-store"});if(!r.ok)throw new Error("Ping test failed.");await r.text();samples.push(performance.now()-t0);showGauge(samples[samples.length-1],"ms","Testing ping");$("progressBar").style.width=`${10+i*6}%`;await sleep(70);}return median(samples);}
+  async function testPing(){const samples=[];for(let i=0;i<5;i++){const t0=performance.now();const r=await fetch(`${ENDPOINT}/speed/ping?t=${Date.now()}-${i}`,{cache:"no-store"});if(!r.ok)throw new Error("Ping test failed.");await r.text();samples.push(performance.now()-t0);showGauge(samples[samples.length-1],"ms","Testing ping");$("progressBar").style.width=`${10+i*6}%`;await sleep(70);}return {ping:median(samples),jitter:median(samples.slice(1).map((ms,i)=>Math.abs(ms-samples[i])))};}
   async function testDownload(){const warm=await timedFetch(`${ENDPOINT}/speed/download?bytes=500000&t=${Date.now()}`);const warmMbps=mbps(warm.bytes,warm.ms);const size=warmMbps>120?8_000_000:warmMbps>40?5_000_000:3_000_000;const results=[];for(let i=0;i<2;i++){const r=await timedFetch(`${ENDPOINT}/speed/download?bytes=${size}&t=${Date.now()}-${i}`);const speed=mbps(r.bytes,r.ms);results.push(speed);showGauge(speed,"Mbps","Testing download");$("progressBar").style.width=`${45+i*15}%`;}return Math.max(...results);}
   async function testUpload(){const bytes=2_000_000;const payload=new Uint8Array(bytes);crypto.getRandomValues(payload.subarray(0,65536));for(let i=65536;i<bytes;i+=65536){payload.set(payload.subarray(0,Math.min(65536,bytes-i)),i);}const speeds=[];for(let i=0;i<2;i++){const t0=performance.now();const r=await fetch(`${ENDPOINT}/speed/upload?t=${Date.now()}-${i}`,{method:"POST",headers:{"Content-Type":"application/octet-stream"},body:payload,cache:"no-store"});const t1=performance.now();if(!r.ok)throw new Error("Upload test failed.");await r.json();const speed=mbps(bytes,t1-t0);speeds.push(speed);showGauge(speed,"Mbps","Testing upload");$("progressBar").style.width=`${78+i*10}%`;}return Math.max(...speeds);}
   function quality(download,ping){if(download>=100&&ping<40)return ["Excellent connection","Great for 4K streaming, video calls and most gaming."];if(download>=40&&ping<70)return ["Very good connection","Comfortable for HD/4K streaming, work and everyday use."];if(download>=15)return ["Good everyday connection","Fine for browsing, HD streaming and typical video calls."];if(download>=5)return ["Basic connection","Usable for browsing and lighter streaming, but large downloads may feel slow."];return ["Slow connection","You may notice delays with streaming, calls and large downloads."];}
-  async function run(){if(running)return;running=true;$("startBtn").disabled=true;$("startBtn").textContent="Testing…";$("download").textContent="—";$("upload").textContent="—";$("ping").textContent="—";$("quality").style.display="none";$("progressBar").style.width="4%";$("status").textContent="Connecting to the Cloudflare edge…";try{const p=await testPing();$("ping").textContent=Math.round(p);$("status").textContent="Ping complete. Measuring download…";const d=await testDownload();$("download").textContent=d>=100?Math.round(d):d.toFixed(1);$("status").textContent="Download complete. Measuring upload…";const u=await testUpload();$("upload").textContent=u>=100?Math.round(u):u.toFixed(1);$("progressBar").style.width="100%";showGauge(d,"Mbps","Complete");const [title,text]=quality(d,p);$("qualityTitle").textContent=title;$("qualityText").textContent=text;$("quality").style.display="block";$("status").textContent="Test complete · measured to Cloudflare edge · results can vary between runs.";}catch(e){$("status").textContent=e.message||"Speed test failed. Please try again.";$("progressBar").style.width="0%";$("phase").textContent="Try again";}finally{$("startBtn").disabled=false;$("startBtn").textContent="Run Again →";running=false;}}
+  async function run(){if(running)return;running=true;lastResult=null;$("copyResults").hidden=true;$("jitter").textContent="—";$("startBtn").disabled=true;$("startBtn").textContent="Testing…";$("download").textContent="—";$("upload").textContent="—";$("ping").textContent="—";$("quality").style.display="none";$("progressBar").style.width="4%";$("status").textContent="Connecting to the Cloudflare edge…";try{const latency=await testPing();const p=latency.ping;$("ping").textContent=Math.round(p);$("jitter").textContent=latency.jitter.toFixed(1);$("status").textContent="Ping complete. Measuring download…";const d=await testDownload();$("download").textContent=d>=100?Math.round(d):d.toFixed(1);$("status").textContent="Download complete. Measuring upload…";const u=await testUpload();$("upload").textContent=u>=100?Math.round(u):u.toFixed(1);$("progressBar").style.width="100%";lastResult={download:d,upload:u,ping:p,jitter:latency.jitter};$("copyResults").hidden=false;showGauge(d,"Mbps","Complete");const [title,text]=quality(d,p);$("qualityTitle").textContent=title;$("qualityText").textContent=text;$("quality").style.display="block";$("status").textContent="Test complete · measured to Cloudflare edge · results can vary between runs.";}catch(e){$("status").textContent=e.message||"Speed test failed. Please try again.";$("progressBar").style.width="0%";$("phase").textContent="Try again";}finally{$("startBtn").disabled=false;$("startBtn").textContent="Run Again →";running=false;}}
   $("startBtn").addEventListener("click",run);
+  $("copyResults").addEventListener("click",async()=>{
+    if(!lastResult) return;
+    const r=lastResult;
+    const report=[
+      "Internet speed test – CloudByAlex",
+      "Download"+": "+r.download.toFixed(1)+" Mbps",
+      "Upload"+": "+r.upload.toFixed(1)+" Mbps",
+      "Ping"+": "+r.ping.toFixed(1)+" ms",
+      "Jitter (estimated)"+": "+r.jitter.toFixed(1)+" ms",
+      "Measured at"+": "+new Date().toLocaleString()
+    ].join("\n");
+    try { await navigator.clipboard.writeText(report); $("status").textContent="Results copied to clipboard."; }
+    catch(_) { $("status").textContent="Clipboard unavailable. You can still read the results above."; }
+  });
+
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token":"fc4b954acddd444a8d7d9673817d12ea"}'></script><!-- End Cloudflare Web Analytics -->
